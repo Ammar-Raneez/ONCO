@@ -7,6 +7,11 @@ import pandas as pd               # used to create dataframes for data processin
 import seaborn as sns             # used for visualization
 import matplotlib.pyplot as plt   # used for plotting data
 
+from sklearn.model_selection import cross_val_score, KFold, train_test_split
+from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, precision_score
+from sklearn.model_selection import train_test_split
+
+
 # Reading the CSV data file
 dataset = pd.read_csv("LungDataSet.csv")
 
@@ -71,4 +76,12 @@ print(dataset.isnull().values.any())
 dataset['Gender'] = dataset['Gender'].replace(2, 0)   # 0 means Female and 1 means Male
 
 # Data Visulization
-sns.pairplot(dataset)
+# sns.pairplot(dataset)
+
+# Creating the dependent and independent variables with their labels
+X = dataset.drop(['Level','Patient Id'], axis=1)
+y = dataset['Level']
+
+# Performing Train Test Split
+# dividing X, y into train and test data
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 101)
