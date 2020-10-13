@@ -64,3 +64,8 @@ plt.xlabel("Level of risk")
 plt.bar(x,y)
 plt.show()
 
+# Checking for any null values in the data
+print(dataset.isnull().values.any())
+
+# Cleaning data process
+dataset['Gender'] = dataset['Gender'].replace(2, 0)   # 0 means Female and 1 means Male
