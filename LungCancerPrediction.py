@@ -113,27 +113,69 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 101)
 #
 # print("Sensitivity: {} | Specifictity: {}".format(sensitivity, specificity))
 
-# Predicting using Support Vector Machine Classification ( Accuracy score: 100.0 % )
-from sklearn.svm import SVC
 
-## training a SVM classifier
-svm_model_linear = SVC(kernel='linear', C=1).fit(X_train, y_train)
 
-## Prediction using SVM
-svm_predictions = svm_model_linear.predict(X_test)
-print(svm_predictions)
 
-# model accuracy for X_test
-accuracy = svm_model_linear.score(X_test, y_test)
+# # Predicting using Support Vector Machine Classification ( Accuracy score: 100.0 % )
+# from sklearn.svm import SVC
+#
+# ## training a SVM classifier
+# svm_model_linear = SVC(kernel='linear', C=1).fit(X_train, y_train)
+#
+# ## Prediction using SVM
+# svm_predictions = svm_model_linear.predict(X_test)
+# print(svm_predictions)
+#
+# # model accuracy for X_test
+# accuracy = svm_model_linear.score(X_test, y_test)
+#
+# # creating a confusion matrix, calculating accuracy, calculating score, calculating precision
+# cm = confusion_matrix(y_test, svm_predictions)
+# ac = accuracy_score(y_test, svm_predictions)
+# rs = recall_score(y_test, svm_predictions, average=None)
+# ps = precision_score(y_test, svm_predictions, average=None)
+#
+# print("Confusion matrix: " + str(cm))
+# print("Accuracy score: " + str(ac * 100))
+# print("Recall score: " + str(rs))
+# print("Precision score: " + str(ps))
+#
+# TP = cm[1, 1]
+# TN = cm[0, 0]
+# FP = cm[0, 1]
+# FN = cm[1, 0]
+#
+# sensitivity = TP / (TP + FN)
+# specificity = TN / (TN + FP)
+#
+# print("Sensitivity: {} | Specifictity: {}".format(sensitivity, specificity))
 
-# creating a confusion matrix, calculating accuracy, calculating score, calculating precision
-cm = confusion_matrix(y_test, svm_predictions)
-ac = accuracy_score(y_test, svm_predictions)
-rs = recall_score(y_test, svm_predictions, average=None)
-ps = precision_score(y_test, svm_predictions, average=None)
 
+
+
+
+# Predicting using KNN Classifier ( Accuracy score: 99.2 % )
+from sklearn.neighbors import KNeighborsClassifier
+
+## training a KNN classifier
+knn = KNeighborsClassifier(n_neighbors = 7).fit(X_train, y_train)
+
+## Prediction using KNN
+knn_predictions = knn.predict(X_test)
+print(knn.predict(X_test))
+
+## Accuracy on X_test
+accuracy = knn.score(X_test, y_test)
+
+## Creating a confusion matrix
+cm = confusion_matrix(y_test, knn_predictions)
+ac = accuracy_score(y_test, knn_predictions)
+rs = recall_score(y_test, knn_predictions, average=None)
+ps = precision_score(y_test, knn_predictions, average=None)
+
+## Displaying the content
 print("Confusion matrix: " + str(cm))
-print("Accuracy score: " + str(ac * 100))
+print("Accuracy score: " + str(ac*100))
 print("Recall score: " + str(rs))
 print("Precision score: " + str(ps))
 
@@ -142,7 +184,7 @@ TN = cm[0, 0]
 FP = cm[0, 1]
 FN = cm[1, 0]
 
-sensitivity = TP / (TP + FN)
-specificity = TN / (TN + FP)
+sensitivity = TP/(TP+FN)
+specificity = TN/(TN+FP)
 
 print("Sensitivity: {} | Specifictity: {}".format(sensitivity, specificity))
