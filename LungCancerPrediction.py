@@ -85,3 +85,30 @@ y = dataset['Level']
 # Performing Train Test Split
 # dividing X, y into train and test data
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 101)
+
+# Predicting using the Decision Tree Classifier ( Accuracy score:  87.2 )
+from sklearn.tree import DecisionTreeClassifier
+
+dtree_model = DecisionTreeClassifier(max_depth = 2).fit(X_train, y_train)
+dtree_predictions = dtree_model.predict(X_test)
+
+# creating a confusion matrix
+confusion_mat = confusion_matrix(y_test, dtree_predictions)
+accuracy_sc = accuracy_score(y_test, dtree_predictions)
+recall_sc = recall_score(y_test, dtree_predictions, average=None)
+precision_sc = precision_score(y_test, dtree_predictions, average=None)
+
+print("Confusion matrix: " + str(confusion_mat))
+print("Accuracy score: " + str(accuracy_sc*100))
+print("Recall score: " + str(recall_sc))
+print("Precision score: " + str(precision_sc))
+
+TP = confusion_mat[1, 1]
+TN = confusion_mat[0, 0]
+FP = confusion_mat[0, 1]
+FN = confusion_mat[1, 0]
+
+sensitivity = TP/(TP+FN)
+specificity = TN/(TN+FP)
+
+print("Sensitivity: {} | Specifictity: {}".format(sensitivity, specificity))
