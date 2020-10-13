@@ -69,3 +69,6 @@ print(dataset.isnull().values.any())
 
 # Cleaning data process
 dataset['Gender'] = dataset['Gender'].replace(2, 0)   # 0 means Female and 1 means Male
+
+# Data Visulization
+sns.pairplot(dataset)
