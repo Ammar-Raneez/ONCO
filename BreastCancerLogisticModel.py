@@ -8,35 +8,49 @@ from keras.callbacks import EarlyStopping
 from keras.utils import to_categorical
 import keras
 
-import numpy as np
-
 from keras.layers import BatchNormalization
 from keras.layers import Dropout
 from keras import regularizers
 
-import pandas as pd
-
 import sklearn
-from sklearn import preprocessing
+from sklearn import preprocessing, datasets, metrics
 from sklearn.model_selection import train_test_split
 
+import numpy as np
+import pandas as pd
+
+import seaborn as sns
 import matplotlib
 from matplotlib import pyplot as plt
+get_ipython().run_line_magic('matplotlib', 'inline')
+get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'retina'")
 
 
-#import input and output data
-#input data (X)
-df1 = pd.read_csv("X_breast_data.csv")
-#output data (Y)
-df2 = pd.read_csv("Y_breast_data.csv")
+cancer_data = pd.read_csv("breast-cancer.csv")
+#drop unnamed column that has all missing values
+cancer_data = cancer_data.dropna(axis=1)
+
+
+#encode the diagnosis column to 1/0 from M/B
+labelencoder_Y = preprocessing.LabelEncoder()
+#encode the values of the second column
+cancer_data.iloc[:,1] = labelencoder_Y.fit_transform(cancer_data.iloc[:,1].values)
+#Remove unnecessary id column
+cancer_data.drop("id", axis='columns', inplace=True)
+
+
+#Split datasets into x and y
+X = cancer_data.iloc[:,1:]
+Y = cancer_data.iloc[:,0]
 
 
 #scale input data - bring all data to similar scale
-df1 = preprocessing.scale(df1)
+X = preprocessing.scale(X)
+
 
 #split input into training and testing as well as output
-#splitting with 80% training and 20% testing
-X_train, X_test, y_train, y_test = train_test_split(df1, df2, test_size=0.2)
+#splitting with 85% training and 20% testing
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
 
 
 #define a sequence of layers
@@ -55,9 +69,9 @@ model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.001), metrics=['ac
 #early stopping monitors the training epochs and stops the training b4 any overfitting
 earlystopper = EarlyStopping(monitor='val_loss', min_delta=0, patience=15, verbose=1, mode='auto')
 
+
 #train model for 2000 epochs
 history = model.fit(X_train, y_train, epochs=2000, validation_split=0.15, verbose=1, callbacks=[earlystopper])
-
 history_performance = history.history
 
 
@@ -78,4 +92,9 @@ fps, tps, thresholds = roc_curve(y_test, y_test_pred)
 
 auc_keras = auc(fps, tps)
 print("Testing data AUC", auc_keras)
-# # The area is almost perfect - now we know that our model is good
+
+
+
+
+
+# %%
