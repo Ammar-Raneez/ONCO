@@ -84,33 +84,5 @@ dataset['Gender'] = dataset['Gender'].replace(2, 0)   # 0 means Female and 1 mea
 
 
 
-# Performing Train Test Split
-
-from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, precision_score
-from sklearn.model_selection import train_test_split 
-
-# dividing X, y into train and test data 
-X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 101)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
