@@ -86,29 +86,63 @@ y = dataset['Level']
 # dividing X, y into train and test data
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 101)
 
-# Predicting using the Decision Tree Classifier ( Accuracy score:  87.2 )
-from sklearn.tree import DecisionTreeClassifier
+# # Predicting using the Decision Tree Classifier ( Accuracy score:  87.2 )
+# from sklearn.tree import DecisionTreeClassifier
+#
+# dtree_model = DecisionTreeClassifier(max_depth = 2).fit(X_train, y_train)
+# dtree_predictions = dtree_model.predict(X_test)
+#
+# # creating a confusion matrix
+# confusion_mat = confusion_matrix(y_test, dtree_predictions)
+# accuracy_sc = accuracy_score(y_test, dtree_predictions)
+# recall_sc = recall_score(y_test, dtree_predictions, average=None)
+# precision_sc = precision_score(y_test, dtree_predictions, average=None)
+#
+# print("Confusion matrix: " + str(confusion_mat))
+# print("Accuracy score: " + str(accuracy_sc*100))
+# print("Recall score: " + str(recall_sc))
+# print("Precision score: " + str(precision_sc))
+#
+# TP = confusion_mat[1, 1]
+# TN = confusion_mat[0, 0]
+# FP = confusion_mat[0, 1]
+# FN = confusion_mat[1, 0]
+#
+# sensitivity = TP/(TP+FN)
+# specificity = TN/(TN+FP)
+#
+# print("Sensitivity: {} | Specifictity: {}".format(sensitivity, specificity))
 
-dtree_model = DecisionTreeClassifier(max_depth = 2).fit(X_train, y_train)
-dtree_predictions = dtree_model.predict(X_test)
+# Predicting using Support Vector Machine Classification ( Accuracy score: 100.0 % )
+from sklearn.svm import SVC
 
-# creating a confusion matrix
-confusion_mat = confusion_matrix(y_test, dtree_predictions)
-accuracy_sc = accuracy_score(y_test, dtree_predictions)
-recall_sc = recall_score(y_test, dtree_predictions, average=None)
-precision_sc = precision_score(y_test, dtree_predictions, average=None)
+## training a SVM classifier
+svm_model_linear = SVC(kernel='linear', C=1).fit(X_train, y_train)
 
-print("Confusion matrix: " + str(confusion_mat))
-print("Accuracy score: " + str(accuracy_sc*100))
-print("Recall score: " + str(recall_sc))
-print("Precision score: " + str(precision_sc))
+## Prediction using SVM
+svm_predictions = svm_model_linear.predict(X_test)
+print(svm_predictions)
 
-TP = confusion_mat[1, 1]
-TN = confusion_mat[0, 0]
-FP = confusion_mat[0, 1]
-FN = confusion_mat[1, 0]
+# model accuracy for X_test
+accuracy = svm_model_linear.score(X_test, y_test)
 
-sensitivity = TP/(TP+FN)
-specificity = TN/(TN+FP)
+# creating a confusion matrix, calculating accuracy, calculating score, calculating precision
+cm = confusion_matrix(y_test, svm_predictions)
+ac = accuracy_score(y_test, svm_predictions)
+rs = recall_score(y_test, svm_predictions, average=None)
+ps = precision_score(y_test, svm_predictions, average=None)
+
+print("Confusion matrix: " + str(cm))
+print("Accuracy score: " + str(ac * 100))
+print("Recall score: " + str(rs))
+print("Precision score: " + str(ps))
+
+TP = cm[1, 1]
+TN = cm[0, 0]
+FP = cm[0, 1]
+FN = cm[1, 0]
+
+sensitivity = TP / (TP + FN)
+specificity = TN / (TN + FP)
 
 print("Sensitivity: {} | Specifictity: {}".format(sensitivity, specificity))
