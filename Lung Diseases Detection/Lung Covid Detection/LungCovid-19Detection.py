@@ -60,7 +60,7 @@ print(f"Shape of train data : {train_data.shape}")  # training data 5286 rows
 print(f"Shape of test data : {test_data.shape}")    # testing data 624 rows
 test_data.sample(10)
 
-## c
+## Exploratory Data Analysis
 # Null value calculation
 print(f"Count of null values in train :\n{train_data.isnull().sum()}")
 print(f"Count of null values in test :\n{test_data.isnull().sum()}")
@@ -105,6 +105,23 @@ ax1.axis('equal')
 plt.tight_layout()
 plt.title('Percentage of "unknown" values present in Label_2_Virus_category')
 plt.show()
+
+# Count plot for 3 target variables without the "unknown" used instead of the NaN value present(so NaN value are present)
+fig, ax = plt.subplots(2, 2, figsize=(20, 10))
+sns.countplot(x=targets[0], data=train_data, ax=ax[0, 0]) # this targets the feature 'label'
+sns.countplot(x=targets[1], data=train_data, ax=ax[0, 1]) # this targets the feature 'Label_2_Virus_category'
+sns.countplot(x=targets[2], data=train_data, ax=ax[1, 0]) # this targets the feature 'Label_1_Virus_category'
+plt.show()
+
+# Displaying the results.
+
+print(f"Label = Normal Cases : {train_data[train_data['Label'] == 'Normal'].shape[0]}") # normal cases
+
+print(f"""Label = Pnemonia + Label_2_Virus_category = COVID-19 cases : {train_data[(train_data['Label'] == 'Pnemonia')
+      & (train_data['Label_2_Virus_category'] == 'COVID-19')].shape[0]}""")     # Pnemonia and COVID-19 cases
+
+print(f"""Label = Normal + Label_2_Virus_category = COVID-19 cases : {train_data[(train_data['Label'] == 'Normal')
+      & (train_data['Label_2_Virus_category'] == 'COVID-19')].shape[0]}""")     # Normal and COVID-19 cases
 
 
 
