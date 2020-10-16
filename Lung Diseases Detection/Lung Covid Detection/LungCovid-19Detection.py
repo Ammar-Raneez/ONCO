@@ -124,9 +124,17 @@ print(f"""Label = Normal + Label_2_Virus_category = COVID-19 cases : {train_data
       & (train_data['Label_2_Virus_category'] == 'COVID-19')].shape[0]}""")     # Normal and COVID-19 cases
 
 
+## Analysis of Image files
 
+# setting the path of the test and the train dataset folders from my local pc in root folder
+TEST_FOLDER = 'dataset/test'
+TRAIN_FOLDER = 'dataset/train'
 
+# Taking sample train images from the folder location specified
+sample_train_images = list(os.walk(TRAIN_FOLDER))[0][2][:8]
+sample_train_images = list(map(lambda x: os.path.join(TRAIN_FOLDER, x), sample_train_images))
 
-
-
+# Taking sample test images from the folder location specified
+sample_test_images = list(os.walk(TEST_FOLDER))[0][2][:8]
+sample_test_images = list(map(lambda x: os.path.join(TEST_FOLDER, x), sample_test_images))  # Taking sample test images
 
