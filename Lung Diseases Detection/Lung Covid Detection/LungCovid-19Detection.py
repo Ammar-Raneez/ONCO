@@ -60,3 +60,32 @@ print(f"Shape of train data : {train_data.shape}")  # training data 5286 rows
 print(f"Shape of test data : {test_data.shape}")    # testing data 624 rows
 test_data.sample(10)
 
+## c
+# Null value calculation
+print(f"Count of null values in train :\n{train_data.isnull().sum()}")
+print(f"Count of null values in test :\n{test_data.isnull().sum()}")
+
+# Substitute null values with string unknown
+train_fill = train_data.fillna('unknown')  # train_fill contains new train data with null replace to 'unknown'
+test_fill = test_data.fillna('unknown')    # test_fill contains new test data with null replace to 'unknown'
+
+train_fill.sample(10)  # displaying the train_fill data
+
+# Count plot for 3 attributes with the addition of "unknown"
+targets = ['Label', 'Label_2_Virus_category', 'Label_1_Virus_category']
+
+fig, ax = plt.subplots(2, 2, figsize=(20, 10))
+sns.countplot(x=targets[0], data=train_fill, ax=ax[0, 0]) # this targets the feature 'label'
+sns.countplot(x=targets[1], data=train_fill, ax=ax[0, 1]) # this targets the feature 'Label_2_Virus_category'
+sns.countplot(x=targets[2], data=train_fill, ax=ax[1, 0]) # this targets the feature 'Label_1_Virus_category'
+plt.show()
+
+
+
+
+
+
+
+
+
+
