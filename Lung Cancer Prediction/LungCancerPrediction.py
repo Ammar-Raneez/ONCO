@@ -237,3 +237,28 @@ print("Sensitivity: {} | Specifictity: {}".format(sensitivity, specificity))
 # specificity = TN / (TN + FP)
 #
 # print("Sensitivity: {} | Specifictity: {}".format(sensitivity, specificity))
+
+
+# Saving the Model using joblib
+
+#import joblib
+#joblib.dump(svm_model_linear, 'lung-cancer-pred-model')
+
+#loadedModel = joblib.load('lung-cancer-pred-model')
+#loadedModel.predict(X_test)[0]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
