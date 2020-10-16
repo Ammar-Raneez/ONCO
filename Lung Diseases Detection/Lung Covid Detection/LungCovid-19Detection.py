@@ -518,3 +518,29 @@ ax[1, 0].set_title('True Negatives of Models')
 ax[1, 1].set_title('False Negatives of Models')
 fig.suptitle('Confusion Matrix comparision of Models', size=16)
 plt.show()
+
+## Predicting using the saved model
+
+import cv2
+
+CATRGORIES = ["COVID-19", "Normal"]
+
+def prepare(filepath):
+    IMG_SIZE = 224
+    img_array = cv2.imread(filepath)
+    new_array = cv2.resize(img_array, (IMG_SIZE,IMG_SIZE), 3)
+    return new_array.reshape(1, 224, 224, 3)
+
+
+productionModel = tf.keras.models.load_model('covid19_xray_resnet_50.h5')
+pred = productionModel.predict([prepare('dataset/test/NORMAL2-IM-0374-0001-0001.jpeg')])
+print(CATRGORIES[int(round(pred[0][0]))]) #Normal
+
+pred = productionModel.predict([prepare('dataset/test/person76_virus_138.jpeg')])
+print(CATRGORIES[int(round(pred[0][0]))])  #COVID-19
+
+pred = productionModel.predict([prepare('dataset/test/IM-0091-0001.jpeg')])
+print(CATRGORIES[int(round(pred[0][0]))]) #Normal
+
+pred = productionModel.predict([prepare('dataset/test/person1668_virus_2882.jpeg')])
+print(CATRGORIES[int(round(pred[0][0]))])  #COVID-19
