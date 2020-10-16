@@ -165,7 +165,7 @@ plt.tight_layout()
 
 ## Image Histograms
 
-# Plot black/white image histograms of "Label_2_Virus_category" type "COVID-19" patients 
+# Plot black/white image histograms of "Label_2_Virus_category" type "COVID-19" patients
 fig, ax = plt.subplots(4, 2, figsize=(20, 20))
 
 covid19_type_file_paths = train_data[train_data['Label_2_Virus_category'] == 'COVID-19']['X_ray_image_name'].values
@@ -183,7 +183,23 @@ for row, file_path in enumerate(sample_covid19_file_paths):
 fig.suptitle('Label 2 Virus Category = COVID-19', size=16)
 plt.show()
 
+# Plot black/white image histograms of Label type "Normal" patients 
+fig, ax = plt.subplots(4, 2, figsize=(20, 20))
 
+other_type_file_paths = train_data[train_data['Label'] == 'Normal']['X_ray_image_name'].values
+sample_other_file_paths = other_type_file_paths[:4]
+sample_other_file_paths = list(map(lambda x: os.path.join(TRAIN_FOLDER, x), sample_other_file_paths))
+
+for row, file_path in enumerate(sample_other_file_paths):
+    image = plt.imread(file_path)
+    ax[row, 0].imshow(image)
+    ax[row, 1].hist(image.ravel(), 256, [0,256])
+    ax[row, 0].axis('off')
+    if row == 0:
+        ax[row, 0].set_title('Images')
+        ax[row, 1].set_title('Histograms')
+fig.suptitle('Label = Normal', size=16)
+plt.show()
 
 
 
