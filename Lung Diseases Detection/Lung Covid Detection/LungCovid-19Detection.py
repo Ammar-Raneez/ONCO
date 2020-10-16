@@ -149,3 +149,15 @@ for iterator, filename in enumerate(sample_train_images):
 
 
 plt.tight_layout()
+
+# Plotting the sample test data (test images)
+plt.figure(figsize=(20, 20))
+
+for iterator, filename in enumerate(sample_test_images):
+    image = Image.open(filename)
+    plt.subplot(4, 2, iterator+1)
+    plt.axis('off')
+    plt.imshow(image)
+
+
+plt.tight_layout()
