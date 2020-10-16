@@ -482,4 +482,19 @@ ax[1, 1].set_title('Validation AUC vs Epochs')
 fig.suptitle('ResNet 50 model', size=16)
 plt.show()
 
-# 
+### Binary Accuracy and AUC score comparision
+ACCURACY_LIST = np.array(ACCURACY_LIST)
+model_names = ACCURACY_LIST[:, 0]
+histories = ACCURACY_LIST[:, 1]
+
+fig, ax = plt.subplots(2, 2, figsize=(20, 20))
+sns.barplot(x=model_names, y=list(map(lambda x: x.history.get('auc')[-1], histories)), ax=ax[0, 0], palette='Spectral')
+sns.barplot(x=model_names, y=list(map(lambda x: x.history.get('val_auc')[-1], histories)), ax=ax[0, 1], palette='gist_yarg')
+sns.barplot(x=model_names, y=list(map(lambda x: x.history.get('accuracy')[-1], histories)), ax=ax[1, 0], palette='rocket')
+sns.barplot(x=model_names, y=list(map(lambda x: x.history.get('val_accuracy')[-1], histories)), ax=ax[1, 1], palette='ocean_r')
+ax[0, 0].set_title('Model Training AUC scores')
+ax[0, 1].set_title('Model Validation AUC scores')
+ax[1, 0].set_title('Model Training Accuracies')
+ax[1, 1].set_title('Model Validation Accuracies')
+fig.suptitle('Model Comparisions')
+plt.show()
