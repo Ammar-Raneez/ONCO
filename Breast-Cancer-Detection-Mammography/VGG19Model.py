@@ -17,7 +17,7 @@ def finetuned_vgg19():
     )
     
     #freeze previous "general" layers except last 4
-    for layer in pretrained_vgg.layersyers[:-4]:
+    for layer in pretrained_vgg.layers[:-4]:
         layer.trainable = False
         
     #Create our fine=tuned model
