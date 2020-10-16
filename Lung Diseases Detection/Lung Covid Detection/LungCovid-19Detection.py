@@ -221,7 +221,7 @@ final_train_data = final_train_data.iloc[:1000, :]
 print(f"Final train data shape : {final_train_data.shape}")
 final_train_data.sample(10)
 
-# We perform Image Agumentation 
+# We perform Image Agumentation
 
 # train_image_generator
 train_image_generator = ImageDataGenerator(
@@ -275,13 +275,56 @@ test_generator = test_image_generator.flow_from_dataframe(
     class_mode=None
 )
 
+# Base CNN model accuracy calculation
+def scheduler(epoch):
+    if epoch < 5:
+        return 0.0001
+    else:
+        print(f"Learning rate reduced to {0.0001 * np.exp(0.5 * (5 - epoch))}")
+        return 0.0001 * np.exp(0.5 * (5 - epoch))
 
 
+custom_callback = LearningRateScheduler(scheduler)
 
+# Metrics
+METRICS = [
+    TruePositives(name='tp'),
+    FalsePositives(name='fp'),
+    TrueNegatives(name='tn'),
+    FalseNegatives(name='fn'),
+    BinaryAccuracy(name='accuracy'),
+    Precision(name='precision'),
+    Recall(name='recall'),
+    AUC(name='auc'),
+]
 
+# creating the model
+model = Sequential([
+    Conv2D(64, (3, 3), input_shape=(224, 224, 3), activation='relu'),
+    MaxPooling2D((3, 3)),
+    Conv2D(32, (3, 3), activation='relu'),
+    MaxPooling2D((3, 3)),
+    Conv2D(32, (3, 3), activation='relu'),
+    MaxPooling2D((3, 3)),
+    Flatten(),
+    Dense(128, activation='relu'),
+    Dropout(0.4),
+    Dense(32, activation='relu'),
+    Dropout(0.4),
+    Dense(1, activation='sigmoid')
+])
 
+model.compile(optimizer=Adam(), loss=binary_crossentropy,
+             metrics=METRICS)
 
+history = model.fit_generator(train_generator,
+                   validation_data=validation_generator,
+                   epochs=20,
+                   callbacks=[custom_callback])
 
+model.save('covid19_xray_base_cnn_model.h5')
+
+ACCURACY_LIST.append(['Base CNN Model', history])
 
 
 
