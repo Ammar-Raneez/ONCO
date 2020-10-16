@@ -498,3 +498,23 @@ ax[1, 0].set_title('Model Training Accuracies')
 ax[1, 1].set_title('Model Validation Accuracies')
 fig.suptitle('Model Comparisions')
 plt.show()
+
+### TP, FP, TN, FN model comparisions
+metric_dataframe = pd.DataFrame({
+    'Model Names': model_names,
+    'True Positives': list(map(lambda x: x.history.get('tp')[-1], histories)),
+    'False Positives': list(map(lambda x: x.history.get('fp')[-1], histories)),
+    'True Negatives': list(map(lambda x: x.history.get('tn')[-1], histories)),
+    'False Negatives': list(map(lambda x: x.history.get('fn')[-1], histories))
+})
+fig, ax = plt.subplots(2, 2, figsize=(20, 20))
+sns.barplot(x='Model Names', y='True Positives', data=metric_dataframe, ax=ax[0, 0], palette='BrBG')
+sns.barplot(x='Model Names', y='False Positives', data=metric_dataframe, ax=ax[0, 1], palette='icefire_r')
+sns.barplot(x='Model Names', y='True Negatives', data=metric_dataframe, ax=ax[1, 0], palette='PuBu_r')
+sns.barplot(x='Model Names', y='False Negatives', data=metric_dataframe, ax=ax[1, 1], palette='YlOrBr')
+ax[0, 0].set_title('True Positives of Models')
+ax[0, 1].set_title('False Positives of Models')
+ax[1, 0].set_title('True Negatives of Models')
+ax[1, 1].set_title('False Negatives of Models')
+fig.suptitle('Confusion Matrix comparision of Models', size=16)
+plt.show()
