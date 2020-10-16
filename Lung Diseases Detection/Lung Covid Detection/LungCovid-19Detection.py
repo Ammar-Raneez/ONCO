@@ -340,3 +340,80 @@ fig.suptitle('Base CNN model', size=16)
 plt.show()
 
 
+
+balanced_data = train_data[(train_data['Label'] == 'Normal') |
+                              ((train_data['Label'] == 'Pnemonia') & (train_data['Label_2_Virus_category'] == 'COVID-19'))]
+
+balanced_data['target'] = ['negative' if holder == 'Normal' else 'positive' for holder in balanced_data['Label']]
+
+balanced_data_subset_normal = balanced_data[balanced_data['target'] == 'negative']
+balanced_data_subset_covid = balanced_data[balanced_data['target'] == 'positive']
+balanced_data_frac_normal = balanced_data_subset_normal.sample(frac=(1/5))
+
+balanced_data_concat = pd.concat([balanced_data_frac_normal, balanced_data_subset_covid], axis=0)
+balanced_data_concat = shuffle(balanced_data_concat, random_state=0)
+balanced_data_train = balanced_data_concat[:240]
+balanced_data_validation = balanced_data_concat[240:]
+
+print(f"Balanced train data shape {balanced_data_train.shape}")
+print(f"Balanced validation data shape {balanced_data_validation.shape}")
+
+
+balanced_train_generator = train_image_generator.flow_from_dataframe(
+    dataframe=balanced_data_train,
+    directory=TRAIN_FOLDER,
+    x_col='X_ray_image_name',
+    y_col='target',
+    target_size=(224, 224),
+    batch_size=64,
+    class_mode='binary'
+)
+
+balanced_validation_generator = train_image_generator.flow_from_dataframe(
+    dataframe=balanced_data_validation,
+    directory=TRAIN_FOLDER,
+    x_col='X_ray_image_name',
+    y_col='target',
+    target_size=(224, 224),
+    batch_size=64,
+    class_mode='binary'
+)
+
+METRICS = [
+      TruePositives(name='tp'),
+      FalsePositives(name='fp'),
+      TrueNegatives(name='tn'),
+      FalseNegatives(name='fn'),
+      BinaryAccuracy(name='accuracy'),
+      Precision(name='precision'),
+      Recall(name='recall'),
+      AUC(name='auc'),
+]
+
+balanced_model = Sequential([
+    Conv2D(64, (3, 3), input_shape=(224, 224, 3), activation='relu'),
+    MaxPooling2D((3, 3)),
+    Conv2D(32, (3, 3), activation='relu'),
+    MaxPooling2D((3, 3)),
+    Conv2D(32, (3, 3), activation='relu'),
+    MaxPooling2D((3, 3)),
+    Flatten(),
+    Dense(128, activation='relu'),
+    Dropout(0.4),
+    Dense(32, activation='relu'),
+    Dropout(0.4),
+    Dense(1, activation='sigmoid')
+])
+
+balanced_model.compile(optimizer=Adam(), loss=binary_crossentropy,
+             metrics=METRICS)
+
+balanced_model.summary()
+
+balanced_history = balanced_model.fit_generator(balanced_train_generator,
+                                               epochs=30,
+                                               validation_data=balanced_validation_generator,
+                                               callbacks=[custom_callback])
+
+balanced_model.save('covid19_xray_base_cnn_model_balanced.h5')
+ACCURACY_LIST.append(['Balanced Base Model', balanced_history])
