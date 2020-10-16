@@ -430,3 +430,39 @@ ax[1, 0].set_title('Validation Loss vs Epochs')
 ax[1, 1].set_title('Validation AUC vs Epochs')
 fig.suptitle('Balanced base CNN model', size=16)
 plt.show()
+
+
+## Training ResNet 50 on data
+
+METRICS = [
+      TruePositives(name='tp'),
+      FalsePositives(name='fp'),
+      TrueNegatives(name='tn'),
+      FalseNegatives(name='fn'),
+      BinaryAccuracy(name='accuracy'),
+      Precision(name='precision'),
+      Recall(name='recall'),
+      AUC(name='auc'),
+]
+
+def output_custom_model(prebuilt_model):
+    print(f"Processing {prebuilt_model}")
+    prebuilt = prebuilt_model(include_top=False,
+                            input_shape=(224, 224, 3),
+                            weights='imagenet')
+    output = prebuilt.output
+    output = GlobalMaxPooling2D()(output)
+    output = Dense(128, activation='relu')(output)
+    output = Dropout(0.2)(output)
+    output = Dense(1, activation='sigmoid')(output)
+
+    model = Model(inputs=prebuilt.input, outputs=output)
+    model.compile(optimizer='sgd', loss=binary_crossentropy,
+              metrics=METRICS)
+    return model
+
+resnet_custom_model = output_custom_model(ResNet50)
+resnet_history = resnet_custom_model.fit_generator(train_generator,
+                                 epochs=20,
+                                 validation_data=validation_generator,
+                                 callbacks=[custom_callback])
