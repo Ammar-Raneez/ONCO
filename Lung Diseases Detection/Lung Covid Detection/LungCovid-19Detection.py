@@ -466,3 +466,20 @@ resnet_history = resnet_custom_model.fit_generator(train_generator,
                                  epochs=20,
                                  validation_data=validation_generator,
                                  callbacks=[custom_callback])
+
+resnet_custom_model.save('covid19_xray_resnet_50.h5')  # saving the model
+ACCURACY_LIST.append(['ResNet 50', resnet_history])
+
+fig, ax = plt.subplots(2, 2, figsize=(10, 10))
+sns.lineplot(x=np.arange(1, 21), y=resnet_history.history.get('loss'), ax=ax[0, 0])
+sns.lineplot(x=np.arange(1, 21), y=resnet_history.history.get('auc'), ax=ax[0, 1])
+sns.lineplot(x=np.arange(1, 21), y=resnet_history.history.get('val_loss'), ax=ax[1, 0])
+sns.lineplot(x=np.arange(1, 21), y=resnet_history.history.get('val_auc'), ax=ax[1, 1])
+ax[0, 0].set_title('Training Loss vs Epochs')
+ax[0, 1].set_title('Training AUC vs Epochs')
+ax[1, 0].set_title('Validation Loss vs Epochs')
+ax[1, 1].set_title('Validation AUC vs Epochs')
+fig.suptitle('ResNet 50 model', size=16)
+plt.show()
+
+# 
