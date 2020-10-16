@@ -53,3 +53,10 @@ summary = pd.read_csv('Chest_xray_Corona_dataset_Summary.csv')
 
 metadata.sample(10)   # reads randomly 10 data samples
 
+train_data = metadata[metadata['Dataset_type'] == 'TRAIN'] # Extracting all the 'Train' data
+test_data = metadata[metadata['Dataset_type'] == 'TEST']   # Extarcting all the 'Test' data
+
+print(f"Shape of train data : {train_data.shape}")  # training data 5286 rows
+print(f"Shape of test data : {test_data.shape}")    # testing data 624 rows
+test_data.sample(10)
+
