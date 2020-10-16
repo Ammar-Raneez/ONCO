@@ -52,3 +52,4 @@ metadata = pd.read_csv('Chest_xray_Corona_Metadata.csv')
 summary = pd.read_csv('Chest_xray_Corona_dataset_Summary.csv')
 
 metadata.sample(10)   # reads randomly 10 data samples
+
