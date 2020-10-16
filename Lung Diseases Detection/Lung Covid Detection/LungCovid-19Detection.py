@@ -80,7 +80,31 @@ sns.countplot(x=targets[1], data=train_fill, ax=ax[0, 1]) # this targets the fea
 sns.countplot(x=targets[2], data=train_fill, ax=ax[1, 0]) # this targets the feature 'Label_1_Virus_category'
 plt.show()
 
+# Pie chart representation of Label_2_Virus_category values
 
+colors = ['#ff5733', '#33ff57']   # colors for the representation used
+explode = [0.02, 0.02]            # Giving the shape for the pie chart
+
+values = ['unknown', 'other']
+
+# getting the percentage of "unknown" and not unknown values from the 'Label_2_Virus_category' feature from the data
+percentages = [100 * (train_fill[train_fill[targets[1]] == 'unknown'].shape[0]) / train_fill.shape[0],
+              100 * (train_fill[train_fill[targets[1]] != 'unknown'].shape[0]) / train_fill.shape[0]]
+
+fig1, ax1 = plt.subplots(figsize=(7, 7))   # setting the chart size
+
+# plotting the pie chart
+plt.pie(percentages, colors=colors, labels=values,
+        autopct='%1.1f%%', startangle=0, explode=explode)
+
+fig = plt.gcf()
+centre_circle = plt.Circle((0,0),0.70,fc='white')
+fig.gca().add_artist(centre_circle)
+
+ax1.axis('equal')
+plt.tight_layout()
+plt.title('Percentage of "unknown" values present in Label_2_Virus_category')
+plt.show()
 
 
 
