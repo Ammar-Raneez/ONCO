@@ -138,3 +138,14 @@ sample_train_images = list(map(lambda x: os.path.join(TRAIN_FOLDER, x), sample_t
 sample_test_images = list(os.walk(TEST_FOLDER))[0][2][:8]
 sample_test_images = list(map(lambda x: os.path.join(TEST_FOLDER, x), sample_test_images))  # Taking sample test images
 
+# Plotting the sample training data (train images)
+plt.figure(figsize=(20, 20))
+
+for iterator, filename in enumerate(sample_train_images):
+    image = Image.open(filename)
+    plt.subplot(4, 2, iterator+1)
+    plt.axis('off')
+    plt.imshow(image)
+
+
+plt.tight_layout()
