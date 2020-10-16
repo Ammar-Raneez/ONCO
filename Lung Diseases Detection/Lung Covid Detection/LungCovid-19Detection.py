@@ -183,7 +183,7 @@ for row, file_path in enumerate(sample_covid19_file_paths):
 fig.suptitle('Label 2 Virus Category = COVID-19', size=16)
 plt.show()
 
-# Plot black/white image histograms of Label type "Normal" patients 
+# Plot black/white image histograms of Label type "Normal" patients
 fig, ax = plt.subplots(4, 2, figsize=(20, 20))
 
 other_type_file_paths = train_data[train_data['Label'] == 'Normal']['X_ray_image_name'].values
@@ -201,9 +201,79 @@ for row, file_path in enumerate(sample_other_file_paths):
 fig.suptitle('Label = Normal', size=16)
 plt.show()
 
+## Image Agumentation
+
+# Sort out the file names to be worked on
+# Generate the final train data from original train data with conditions refered from EDA inference
+# We are classifying 'normal' and '(Pnemonia & COVID-19)'
+final_train_data = train_data[(train_data['Label'] == 'Normal') |
+                              ((train_data['Label'] == 'Pnemonia') & (train_data['Label_2_Virus_category'] == 'COVID-19'))]
 
 
+# Create a target attribute where value = positive if 'Pnemonia + COVID-19' or value = negative if 'Normal'
+final_train_data['target'] = ['negative' if holder == 'Normal' else 'positive' for holder in final_train_data['Label']]
 
+final_train_data = shuffle(final_train_data, random_state=1)
+
+final_validation_data = final_train_data.iloc[1000:, :]
+final_train_data = final_train_data.iloc[:1000, :]
+
+print(f"Final train data shape : {final_train_data.shape}")
+final_train_data.sample(10)
+
+# We perform Image Agumentation 
+
+# train_image_generator
+train_image_generator = ImageDataGenerator(
+    rescale=1./255,
+    featurewise_center=True,
+    featurewise_std_normalization=True,
+    rotation_range=90,
+    width_shift_range=0.15,
+    height_shift_range=0.15,
+    horizontal_flip=True,
+    zoom_range=[0.9, 1.25],
+    brightness_range=[0.5, 1.5]
+)
+
+# test_image_generator
+test_image_generator = ImageDataGenerator(
+    rescale=1./255
+)
+
+train_generator = train_image_generator.flow_from_dataframe(
+    dataframe=final_train_data,
+    directory=TRAIN_FOLDER,
+    x_col='X_ray_image_name',
+    y_col='target',
+    target_size=(224, 224),
+    batch_size=8,
+    seed=2020,
+    shuffle=True,
+    class_mode='binary'
+)
+
+validation_generator = train_image_generator.flow_from_dataframe(
+    dataframe=final_validation_data,
+    directory=TRAIN_FOLDER,
+    x_col='X_ray_image_name',
+    y_col='target',
+    target_size=(224, 224),
+    batch_size=8,
+    seed=2020,
+    shuffle=True,
+    class_mode='binary'
+)
+
+test_generator = test_image_generator.flow_from_dataframe(
+    dataframe=test_data,
+    directory=TEST_FOLDER,
+    x_col='X_ray_image_name',
+    target_size=(224, 224),
+    shuffle=False,
+    batch_size=16,
+    class_mode=None
+)
 
 
 
