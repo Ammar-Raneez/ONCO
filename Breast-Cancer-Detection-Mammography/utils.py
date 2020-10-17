@@ -8,7 +8,7 @@ IMAGE_SIZE = 224
 TEST_BATCH = 16
 TRAIN_BATCH = 9
 VALID_BATCH = 8
-EPOCHS = 30
+EPOCHS = 20
 
 TRAIN_DIR = 'proper-dataset/train/'
 VALIDATION_DIR = 'proper-dataset/valid/'

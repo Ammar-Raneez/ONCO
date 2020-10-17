@@ -3,10 +3,10 @@ from keras import models
 from keras import layers
 from keras import optimizers
 
-IMAGE_SIZE = 224
-
 #VGG19 - a deep CNN that achieves high accuracy with imagenet
 def finetuned_vgg19():
+    IMAGE_SIZE = 224
+    
     #load pretraind vgg19
     pretrained_vgg = VGG19(
         weights='imagenet',
