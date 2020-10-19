@@ -467,6 +467,9 @@ resnet_history = resnet_custom_model.fit_generator(train_generator,
                                  validation_data=validation_generator,
                                  callbacks=[custom_callback])
 
+# accuracy: 0.9690
+# val_accuracy: 0.9800
+
 resnet_custom_model.save('covid19_xray_resnet_50.h5')  # saving the model
 ACCURACY_LIST.append(['ResNet 50', resnet_history])
 
