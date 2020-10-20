@@ -1,0 +1,15 @@
+Base CNN Model
+ accuracy : 96.5%
+ val_accuracy : 94.3%
+
+Balanced Base Model
+ accuracy : 84.6%
+ val_accuracy : 75.6%
+
+ResNet 50 Model
+ accuracy : 96.9%
+ val_accuracy : 98.0%
+
+Xception Model
+ accuracy : 96.4%
+ val_accuracy : 94.3%

@@ -6,7 +6,7 @@
 # 3. Base CNN model accuracy calculation
 # 4. Base CNN model with lower imbalance data
 # 5. RESNET 50 model accuracy calculation
-# 6. EfficientNet B4 accuracy calculation
+# 6. Xception accuracy calculation
 # 7. AUC Score comparision
 # 8. Final result
 
@@ -467,9 +467,6 @@ resnet_history = resnet_custom_model.fit_generator(train_generator,
                                  validation_data=validation_generator,
                                  callbacks=[custom_callback])
 
-# accuracy: 0.9690
-# val_accuracy: 0.9800
-
 resnet_custom_model.save('covid19_xray_resnet_50.h5')  # saving the model
 ACCURACY_LIST.append(['ResNet 50', resnet_history])
 
@@ -484,6 +481,32 @@ ax[1, 0].set_title('Validation Loss vs Epochs')
 ax[1, 1].set_title('Validation AUC vs Epochs')
 fig.suptitle('ResNet 50 model', size=16)
 plt.show()
+
+## Training Xception on data
+METRICS = [
+      TruePositives(name='tp'),
+      FalsePositives(name='fp'),
+      TrueNegatives(name='tn'),
+      FalseNegatives(name='fn'), 
+      BinaryAccuracy(name='accuracy'),
+      Precision(name='precision'),
+      Recall(name='recall'),
+      AUC(name='auc'),
+]
+
+
+xception_custom_model = output_custom_model(Xception)
+xception_history = xception_custom_model.fit_generator(train_generator,
+                                 epochs=5,
+                                 validation_data=validation_generator,
+                                 callbacks=[custom_callback])
+
+xception_custom_model.save('covid19_xray_xception_custom_model.h5')
+# ACCURACY_LIST.append(['Xception', xception_history])
+# accuracy: 0.9640 
+# val_accuracy: 0.9425
+
+
 
 ### Binary Accuracy and AUC score comparision
 ACCURACY_LIST = np.array(ACCURACY_LIST)
