@@ -3,4 +3,5 @@ Breast-Cancer-Detection-Mammography/all-mias
 Breast-Cancer-Detection-Mammography/proper-dataset
 
 Skin-Cancer-Detection/data
-Skin-Cancer-Detection/TrainedModel.h5
+Skin-Cancer-Detection/InceptionModel.h5
+Skin-Cancer-Detection/ResnetModel.h5
