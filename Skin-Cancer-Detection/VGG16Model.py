@@ -9,20 +9,6 @@ from PIL import Image
 from ImageSplit import *
 from keras.utils.np_utils import to_categorical
 
-# figure = plt.figure(figsize=(15, 15))
-
-# columns = 5
-# rows = 3
-
-# for i in range(1, columns*rows +1):
-#     ax = figure.add_subplot(rows, columns, i)
-#     if y_train[i] == 0:
-#         ax.title.set_text('Benign')
-#     else:
-#         ax.title.set_text('Malignant')
-#     plt.imshow(X_train[i], interpolation='nearest')
-# plt.show()
-
 #Normalize (Rescale data to same range)
 X_train, X_test = X_train/255, X_test/255
 
@@ -53,3 +39,7 @@ def fine_tuned_vgg():
     
     return ft_vgg
 
+#VGG16 model
+#Accuracy ==> 85.6
+#Sensitivity ==> 87.1
+#Specificity ==> 83.8

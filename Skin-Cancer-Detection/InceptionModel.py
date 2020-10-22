@@ -55,3 +55,8 @@ def fine_tuned_inception():
     
     return ft_inception
 
+
+#InceptionV3 model
+#Accuracy ==> 83.6
+#Sensitivity ==> 85
+#Specificity ==> 82
