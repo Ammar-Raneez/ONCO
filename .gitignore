@@ -2,7 +2,7 @@ Breast-Cancer-Detection-CSV-data/.ipynb_checkpoints
 Breast-Cancer-Detection-Mammography/all-mias
 Breast-Cancer-Detection-Mammography/proper-dataset
 
-Skin-Cancer-Detection/data
-Skin-Cancer-Detection/InceptionModel.h5
-Skin-Cancer-Detection/ResnetModel.h5
-Skin-Cancer-Detection/VGGModel.h5
+Skin-Cancer-MalignantvsBenign/data
+Skin-Cancer-MalignantvsBenign/InceptionModel.h5
+Skin-Cancer-MalignantvsBenign/ResnetModel.h5
+Skin-Cancer-MalignantvsBenign/VGGModel.h5
