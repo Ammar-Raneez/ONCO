@@ -74,3 +74,31 @@ x = Flatten()(vgg.output)
 
 
 prediction = Dense(len(folders), activation='softmax')(x)
+
+# ### Creating a model object
+
+# In[21]:
+
+
+model = Model(inputs=vgg.input, outputs=prediction)
+
+
+# ### View the structure of the model
+
+# In[22]:
+
+
+model.summary()
+
+
+
+# ### Telling the model what cost and optimization method to use
+
+# In[23]:
+
+
+model.compile(
+    loss='categorical_crossentropy',
+    optimizer = 'adam',
+    metrics = ['accuracy']
+)
