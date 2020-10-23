@@ -102,3 +102,27 @@ model.compile(
     optimizer = 'adam',
     metrics = ['accuracy']
 )
+
+# ### Use the Image Data Generator to import the images from the dataset
+
+# In[24]:
+
+
+train_datagen = ImageDataGenerator(rescale=1./255, shear_range=0.2, zoom_range=0.2, horizontal_flip=True)
+test_datagen = ImageDataGenerator(rescale=1./255)
+
+
+# In[25]:
+
+
+training_set = train_datagen.flow_from_directory(train_path, target_size=(224,224), batch_size=32, class_mode='categorical')
+
+
+# In[26]:
+
+
+testing_set = test_datagen.flow_from_directory(test_path, target_size=(224,224), batch_size=32, class_mode='categorical')
+
+
+
+
