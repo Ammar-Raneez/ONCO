@@ -257,4 +257,48 @@ plt.legend()
 plt.show()
 plt.savefig('AccVal_acc')
 
+# ## Using ResNet50 to create the model
+
+# In[50]:
+
+
+from keras.applications.resnet50 import ResNet50
+
+
+# In[51]:
+
+
+resnet = ResNet50(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top = False)
+
+
+# In[52]:
+
+
+for layer in resnet.layers:
+    layer.trainable = False
+
+
+# In[53]:
+
+
+x3 = Flatten()(resnet.output)
+
+
+# In[54]:
+
+
+prediction = Dense(len(folders), activation='softmax')(x3)
+
+
+# In[55]:
+
+
+model3 = Model(inputs=resnet.input, outputs=prediction)
+
+
+# In[56]:
+
+
+model3.summary()
+
 
