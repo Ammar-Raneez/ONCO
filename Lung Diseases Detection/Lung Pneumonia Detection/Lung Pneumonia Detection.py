@@ -123,6 +123,19 @@ training_set = train_datagen.flow_from_directory(train_path, target_size=(224,22
 
 testing_set = test_datagen.flow_from_directory(test_path, target_size=(224,224), batch_size=32, class_mode='categorical')
 
+# ### Fit the model 
 
+# In[28]:
+
+
+result = model.fit_generator(
+    training_set,
+    validation_data=testing_set,
+    epochs=5,
+    steps_per_epoch=len(training_set),
+    validation_steps=len(testing_set)
+)
+# val_accuracy: 0.9135
+# accuracy: 0.9680
 
 
