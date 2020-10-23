@@ -138,4 +138,26 @@ result = model.fit_generator(
 # val_accuracy: 0.9135
 # accuracy: 0.9680
 
+# ### Plot the loss
+
+# In[29]:
+
+
+plt.plot(result.history['loss'], label='train loss')
+plt.plot(result.history['val_loss'], label='val loss')
+plt.legend()
+plt.show()
+plt.savefig('LossVal_loss')
+
+
+# ### Plot the accuracy
+
+# In[34]:
+
+
+plt.plot(result.history['accuracy'], label='train acc')
+plt.plot(result.history['val_accuracy'], label='val acc')
+plt.legend()
+plt.show()
+plt.savefig('AccVal_acc')
 
