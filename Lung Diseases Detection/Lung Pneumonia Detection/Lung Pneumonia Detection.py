@@ -173,3 +173,50 @@ import tensorflow as tf
 from keras.models import load_model
 
 model.save('model_vgg16.h5')
+
+
+# ## Using Xception to create the model
+
+# In[35]:
+
+
+from keras.applications.xception import Xception
+
+
+# In[36]:
+
+
+xcep = Xception(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top = False)
+
+
+# In[37]:
+
+
+for layer in xcep.layers:
+    layer.trainable = False
+
+
+# In[38]:
+
+
+x2 = Flatten()(xcep.output)
+
+
+# In[39]:
+
+
+prediction = Dense(len(folders), activation='softmax')(x2)
+
+
+# In[40]:
+
+
+model2 = Model(inputs=xcep.input, outputs=prediction)
+
+
+# In[41]:
+
+
+model2.summary()
+
+
