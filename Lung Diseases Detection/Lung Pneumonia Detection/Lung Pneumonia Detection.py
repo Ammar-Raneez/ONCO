@@ -161,3 +161,15 @@ plt.legend()
 plt.show()
 plt.savefig('AccVal_acc')
 
+result.history
+
+
+# ### Saving the model which used VGG16
+
+# In[44]:
+
+
+import tensorflow as tf
+from keras.models import load_model
+
+model.save('model_vgg16.h5')
