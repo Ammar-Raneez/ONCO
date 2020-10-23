@@ -219,4 +219,22 @@ model2 = Model(inputs=xcep.input, outputs=prediction)
 
 model2.summary()
 
+model2.compile(
+    loss='categorical_crossentropy',
+    optimizer = 'adam',
+    metrics = ['accuracy']
+)
 
+
+# In[43]:
+
+
+result2 = model2.fit_generator(
+    training_set,
+    validation_data=testing_set,
+    epochs=5,
+    steps_per_epoch=len(training_set),
+    validation_steps=len(testing_set)
+)
+# val_accuracy: 0.8782
+# accuracy: 0.9479
