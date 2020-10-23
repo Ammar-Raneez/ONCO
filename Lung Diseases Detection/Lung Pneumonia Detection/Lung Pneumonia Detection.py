@@ -322,3 +322,24 @@ result3 = model3.fit_generator(
 # val_accuracy: 0.8301
 # accuracy: 0.8915
 
+
+# plot the loss
+plt.plot(result3.history['loss'], label='train loss')
+plt.plot(result3.history['val_loss'], label='val loss')
+plt.legend()
+plt.show()
+plt.savefig('LossVal_loss')
+
+
+# In[60]:
+
+
+# plot the accuaracy
+plt.plot(result3.history['accuracy'], label='train acc')
+plt.plot(result3.history['val_accuracy'], label='val acc')
+plt.legend()
+plt.show()
+plt.savefig('AccVal_acc')
+
+
+# ### Out of the 3 models trained VGG16 gave the best result hence VGG16 model is saved
