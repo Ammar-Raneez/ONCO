@@ -365,3 +365,81 @@ img_data = preprocess_input(x) # preprocess the image
 
 classes = model.predict(img_data)  # predict
 
+import cv2
+
+CATRGORIES = ["Pneumonia", "Normal"]
+
+def prepare(filepath):
+    IMG_SIZE = 224
+    img_array = cv2.imread(filepath)
+    new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE), 3)
+    return new_array.reshape(1, 224, 224, 3)
+
+load_modal = tf.keras.models.load_model('model_vgg16.h5')
+
+
+# In[117]:
+
+
+predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1946_bacteria_4874.jpeg')])
+print(CATRGORIES[int(round(predict[0][0]))])
+
+
+# In[116]:
+
+
+predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1946_bacteria_4875.jpeg')])
+print(CATRGORIES[int(round(predict[0][0]))])
+
+
+# In[115]:
+
+
+predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1946_bacteria_4875.jpeg')])
+print(CATRGORIES[int(round(predict[0][0]))])
+
+
+# In[114]:
+
+
+predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1947_bacteria_4876.jpeg')])
+print(CATRGORIES[int(round(predict[0][0]))])
+
+
+# In[113]:
+
+
+predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1950_bacteria_4881.jpeg')])
+print(CATRGORIES[int(round(predict[0][0]))])
+
+
+# In[112]:
+
+
+predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1951_bacteria_4882.jpeg')])
+print(CATRGORIES[int(round(predict[0][0]))])
+
+
+# In[111]:
+
+
+predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1954_bacteria_4886.jpeg')])
+print(CATRGORIES[int(round(predict[0][0]))])
+
+
+# In[109]:
+
+
+predict = load_modal.predict([prepare('../../../../chest_xray/val/NORMAL/NORMAL2-IM-1436-0001.jpeg')])
+print(CATRGORIES[int(round(predict[0][0]))])
+
+
+# In[110]:
+
+
+predict = load_modal.predict([prepare('../../../../chest_xray/val/NORMAL/NORMAL2-IM-1430-0001.jpeg')])
+print(CATRGORIES[int(round(predict[0][0]))])
+
+
+# In[ ]:
+
