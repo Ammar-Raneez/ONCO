@@ -343,3 +343,25 @@ plt.savefig('AccVal_acc')
 
 
 # ### Out of the 3 models trained VGG16 gave the best result hence VGG16 model is saved
+
+# ## Using the saved model for prediction
+
+# In[66]:
+
+
+from keras.models import load_model
+from keras.preprocessing import image
+from keras.applications.vgg16 import preprocess_input
+import numpy as np
+
+
+# In[68]:
+
+
+img = image.load_img('../../../../chest_xray/val/PNEUMONIA/person1946_bacteria_4874.jpeg', target_size=(224, 224))
+x = image.img_to_array(img)  # convert to array
+x = np.expand_dims(x, axis=0) # expanding the dimensions
+img_data = preprocess_input(x) # preprocess the image
+
+classes = model.predict(img_data)  # predict
+
