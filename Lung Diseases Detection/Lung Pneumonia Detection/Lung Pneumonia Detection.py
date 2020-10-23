@@ -302,3 +302,23 @@ model3 = Model(inputs=resnet.input, outputs=prediction)
 model3.summary()
 
 
+model3.compile(
+    loss='categorical_crossentropy',
+    optimizer = 'adam',
+    metrics = ['accuracy']
+)
+
+
+# In[58]:
+
+
+result3 = model3.fit_generator(
+    training_set,
+    validation_data=testing_set,
+    epochs=5,
+    steps_per_epoch=len(training_set),
+    validation_steps=len(testing_set)
+)
+# val_accuracy: 0.8301
+# accuracy: 0.8915
+
