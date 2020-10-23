@@ -3,7 +3,10 @@
 import os
 os.listdir('../../../../chest_xray')
 
+
 # ## Importing libraries
+
+# In[9]:
 
 
 from keras.layers import Input, Lambda, Dense, Flatten 
@@ -18,7 +21,11 @@ from glob import glob
 import matplotlib.pyplot as plt
 
 
+
+
 # ## Re-sizing all the images
+
+# In[15]:
 
 
 IMAGE_SIZE = [224, 224]
@@ -29,12 +36,15 @@ test_path = '../../../../chest_xray/test'
 
 # ## Using VGG16 to create the model
 
+# In[16]:
 
 
 vgg = VGG16(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top = False)
 
 
 # ### Don't train existing weights
+
+# In[17]:
 
 
 for layer in vgg.layers:
@@ -43,6 +53,8 @@ for layer in vgg.layers:
 
 # ### Getting the number of folders which are my output classes
 
+# In[18]:
+
 
 folders = glob(train_path + '/*')
 folders
@@ -50,22 +62,30 @@ folders
 
 # ### Creating a flatten layer to flatten the vgg output what ever we got 
 
+# In[19]:
+
+
 x = Flatten()(vgg.output)
 
 
 # ### Adding our last layer
 
+# In[20]:
 
 
 prediction = Dense(len(folders), activation='softmax')(x)
 
 # ### Creating a model object
 
+# In[21]:
+
 
 model = Model(inputs=vgg.input, outputs=prediction)
 
 
 # ### View the structure of the model
+
+# In[22]:
 
 
 model.summary()
@@ -74,6 +94,7 @@ model.summary()
 
 # ### Telling the model what cost and optimization method to use
 
+# In[23]:
 
 
 model.compile(
@@ -84,19 +105,27 @@ model.compile(
 
 # ### Use the Image Data Generator to import the images from the dataset
 
+# In[24]:
+
 
 train_datagen = ImageDataGenerator(rescale=1./255, shear_range=0.2, zoom_range=0.2, horizontal_flip=True)
 test_datagen = ImageDataGenerator(rescale=1./255)
 
 
+# In[25]:
+
+
 training_set = train_datagen.flow_from_directory(train_path, target_size=(224,224), batch_size=32, class_mode='categorical')
 
+
+# In[26]:
 
 
 testing_set = test_datagen.flow_from_directory(test_path, target_size=(224,224), batch_size=32, class_mode='categorical')
 
 # ### Fit the model 
 
+# In[28]:
 
 
 result = model.fit_generator(
@@ -111,6 +140,8 @@ result = model.fit_generator(
 
 # ### Plot the loss
 
+# In[29]:
+
 
 plt.plot(result.history['loss'], label='train loss')
 plt.plot(result.history['val_loss'], label='val loss')
@@ -121,6 +152,7 @@ plt.savefig('LossVal_loss')
 
 # ### Plot the accuracy
 
+# In[34]:
 
 
 plt.plot(result.history['accuracy'], label='train acc')
@@ -134,6 +166,8 @@ result.history
 
 # ### Saving the model which used VGG16
 
+# In[44]:
+
 
 import tensorflow as tf
 from keras.models import load_model
@@ -143,27 +177,44 @@ model.save('model_vgg16.h5')
 
 # ## Using Xception to create the model
 
+# In[35]:
 
 
 from keras.applications.xception import Xception
 
 
+# In[36]:
+
 
 xcep = Xception(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top = False)
+
+
+# In[37]:
 
 
 for layer in xcep.layers:
     layer.trainable = False
 
 
+# In[38]:
+
 
 x2 = Flatten()(xcep.output)
+
+
+# In[39]:
 
 
 prediction = Dense(len(folders), activation='softmax')(x2)
 
 
+# In[40]:
+
+
 model2 = Model(inputs=xcep.input, outputs=prediction)
+
+
+# In[41]:
 
 
 model2.summary()
@@ -174,6 +225,8 @@ model2.compile(
     metrics = ['accuracy']
 )
 
+
+# In[43]:
 
 
 result2 = model2.fit_generator(
@@ -194,6 +247,9 @@ plt.show()
 plt.savefig('LossVal_loss')
 
 
+# In[46]:
+
+
 # plot the accuaracy
 plt.plot(result2.history['accuracy'], label='train acc')
 plt.plot(result2.history['val_accuracy'], label='val acc')
@@ -203,28 +259,44 @@ plt.savefig('AccVal_acc')
 
 # ## Using ResNet50 to create the model
 
+# In[50]:
+
 
 from keras.applications.resnet50 import ResNet50
 
 
+# In[51]:
+
 
 resnet = ResNet50(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top = False)
+
+
+# In[52]:
 
 
 for layer in resnet.layers:
     layer.trainable = False
 
 
+# In[53]:
+
 
 x3 = Flatten()(resnet.output)
+
+
+# In[54]:
 
 
 prediction = Dense(len(folders), activation='softmax')(x3)
 
 
+# In[55]:
+
 
 model3 = Model(inputs=resnet.input, outputs=prediction)
 
+
+# In[56]:
 
 
 model3.summary()
@@ -236,6 +308,8 @@ model3.compile(
     metrics = ['accuracy']
 )
 
+
+# In[58]:
 
 
 result3 = model3.fit_generator(
@@ -257,6 +331,8 @@ plt.show()
 plt.savefig('LossVal_loss')
 
 
+# In[60]:
+
 
 # plot the accuaracy
 plt.plot(result3.history['accuracy'], label='train acc')
@@ -270,6 +346,7 @@ plt.savefig('AccVal_acc')
 
 # ## Using the saved model for prediction
 
+# In[66]:
 
 
 from keras.models import load_model
@@ -278,6 +355,7 @@ from keras.applications.vgg16 import preprocess_input
 import numpy as np
 
 
+# In[68]:
 
 
 img = image.load_img('../../../../chest_xray/val/PNEUMONIA/person1946_bacteria_4874.jpeg', target_size=(224, 224))
@@ -300,56 +378,68 @@ def prepare(filepath):
 load_modal = tf.keras.models.load_model('model_vgg16.h5')
 
 
-
+# In[117]:
 
 
 predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1946_bacteria_4874.jpeg')])
 print(CATRGORIES[int(round(predict[0][0]))])
 
 
+# In[116]:
 
 
 predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1946_bacteria_4875.jpeg')])
 print(CATRGORIES[int(round(predict[0][0]))])
 
 
-
+# In[115]:
 
 
 predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1946_bacteria_4875.jpeg')])
 print(CATRGORIES[int(round(predict[0][0]))])
 
 
+# In[114]:
 
 
 predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1947_bacteria_4876.jpeg')])
 print(CATRGORIES[int(round(predict[0][0]))])
 
 
+# In[113]:
+
 
 predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1950_bacteria_4881.jpeg')])
 print(CATRGORIES[int(round(predict[0][0]))])
 
 
-
+# In[112]:
 
 
 predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1951_bacteria_4882.jpeg')])
 print(CATRGORIES[int(round(predict[0][0]))])
 
 
+# In[111]:
+
 
 predict = load_modal.predict([prepare('../../../../chest_xray/val/PNEUMONIA/person1954_bacteria_4886.jpeg')])
 print(CATRGORIES[int(round(predict[0][0]))])
 
 
+# In[109]:
 
 
 predict = load_modal.predict([prepare('../../../../chest_xray/val/NORMAL/NORMAL2-IM-1436-0001.jpeg')])
 print(CATRGORIES[int(round(predict[0][0]))])
 
 
+# In[110]:
+
 
 predict = load_modal.predict([prepare('../../../../chest_xray/val/NORMAL/NORMAL2-IM-1430-0001.jpeg')])
 print(CATRGORIES[int(round(predict[0][0]))])
+
+
+# In[ ]:
 
