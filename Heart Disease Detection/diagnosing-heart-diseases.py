@@ -33,3 +33,26 @@ numberOfPosPatients = data.loc[data.target == 1].count()
 numberOfNegPatients = data.loc[data.target == 0].count()
 print("Positive count " + str(numberOfPosPatients))
 print("Negative count " + str(numberOfNegPatients))
+
+
+#Plotting a bar graph against the number
+x = [0,1]
+y = [138, 165]
+​
+plt.title("Distribution")
+plt.ylabel("Number of records")
+plt.xlabel("Targets")
+plt.bar(x,y)
+plt.show()
+
+
+#Creating the dependent and independent variables with their labels
+X_train, X_test, y_train, y_test = train_test_split(data.drop('target', 1), data['target'], test_size = .2, random_state=10) #split the data
+X_train.shape, y_train.shape, X_test.shape, y_test.shape     # 303 rows
+
+#Implementing Oversampling for handling Imbalanced data
+from imblearn.combine import SMOTETomek
+smk = SMOTETomek(random_state=69)
+X_train, y_train = smk.fit_sample(X_train, y_train)
+X_test, y_test = smk.fit_sample(X_test, y_test)
+X_train.shape, y_train.shape, X_test.shape, y_test.shape
