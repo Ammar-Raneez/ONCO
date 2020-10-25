@@ -118,10 +118,37 @@ specificity = TN/(TN+FP)
 
 
 
+#Predicting using the Descision Tree Classifier
 
 
+#
+# Results (Accuracy score: 73.3%, Sensitivity: 73.3%, Specifictity: 73.3% )
+#
+from sklearn.tree import DecisionTreeClassifier 
 
+dtree_model = DecisionTreeClassifier(max_depth = 2).fit(X_train, y_train) 
+dtree_predictions = dtree_model.predict(X_test) 
 
+# creating a confusion matrix 
+cm = confusion_matrix(y_test, dtree_predictions) 
+ac = accuracy_score(y_test, dtree_predictions)
+rs = recall_score(y_test, dtree_predictions, average=None)
+ps = precision_score(y_test, dtree_predictions, average=None)
+
+print("Confusion matrix: " + str(cm))
+print("Accuracy score: " + str(ac*100))
+print("Recall score: " + str(rs))
+print("Precision score: " + str(ps))
+
+TP = cm[1, 1]
+TN = cm[0, 0]
+FP = cm[0, 1]
+FN = cm[1, 0]
+
+sensitivity = TP/(TP+FN)
+specificity = TN/(TN+FP)
+
+"Sensitivity: {}% | Specifictity: {}%".format(sensitivity*100, specificity*100)
 
 
 
