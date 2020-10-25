@@ -326,14 +326,17 @@ specificity = TN/(TN+FP)
 "Sensitivity: {}% | Specifictity: {}%".format(sensitivity*100, specificity*100)
 
 
-# saving the random forest model becuase it gave the best result
+# saving the knn model becuase it gave the best result
 import joblib
 joblib.dump(knn, 'heart-diagnosing-model-knn')
 
 
 
+#Testing with saved model (using knn algo)
 
-
+loadedModel = joblib.load('heart-diagnosing-model')
+X_test_New = [[61,1,0,140,207,0,0,138,1,1.9,2,1,3]]
+loadedModel.predict(X_test_New)[0]
 
 
 
