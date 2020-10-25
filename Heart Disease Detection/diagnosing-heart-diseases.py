@@ -84,8 +84,37 @@ from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, prec
 from sklearn.model_selection import train_test_split
 
 
+#Predicting using Random forest model
 
+#
+# Results (Accuracy score: 87.8%, Sensitivity: 93.9%, Specifictity: 81.8% )
+#
+modelRF = RandomForestClassifier(max_depth=5)
+modelRF.fit(X_train, y_train)
 
+y_predictRF = modelRF.predict(X_test)
+print(y_predictRF)
+
+# creating a confusion matrix 
+cm = confusion_matrix(y_test, y_predictRF) 
+ac = accuracy_score(y_test, y_predictRF)
+rs = recall_score(y_test, y_predictRF, average=None)
+ps = precision_score(y_test, y_predictRF, average=None)
+
+print("Confusion matrix: " + str(cm))
+print("Accuracy score: " + str(ac*100)+"%")
+print("Recall score: " + str(rs))
+print("Precision score: " + str(ps))
+
+TP = cm[1, 1]
+TN = cm[0, 0]
+FP = cm[0, 1]
+FN = cm[1, 0]
+
+sensitivity = TP/(TP+FN)
+specificity = TN/(TN+FP)
+
+"Sensitivity: {}% | Specifictity: {}%".format(sensitivity*100, specificity*100)
 
 
 
