@@ -77,6 +77,11 @@ plt.show()
 
 sns.pairplot(data)
 
+#Checking for null values
+data.isnull().values.any()
+
+from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, precision_score
+from sklearn.model_selection import train_test_split
 
 
 
