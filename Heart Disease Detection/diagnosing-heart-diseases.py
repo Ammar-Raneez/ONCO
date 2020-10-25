@@ -206,6 +206,47 @@ plt.title('Error Rate vs K value')
 plt.xlabel('K')
 plt.ylabel('Error Rate')
 
+#
+# Results (Accuracy score: 89.4%, Sensitivity:  93.9%, Specifictity: 84.8% )
+#
+from sklearn.neighbors import KNeighborsClassifier 
+
+## training a KNN classifier 
+knn = KNeighborsClassifier(n_neighbors = 14).fit(X_train, y_train) 
+
+## Prediction using KNN
+knn_predictions = knn.predict(X_test)  
+print(knn.predict(X_test))
+
+## Accuracy on X_test 
+accuracy = knn.score(X_test, y_test) 
+
+## Creating a confusion matrix 
+cm = confusion_matrix(y_test, knn_predictions) 
+ac = accuracy_score(y_test, knn_predictions)
+rs = recall_score(y_test, knn_predictions, average=None)
+ps = precision_score(y_test, knn_predictions, average=None)
+
+## Displaying the content
+print("Confusion matrix: " + str(cm))
+print("Accuracy score: " + str(ac*100))
+print("Recall score: " + str(rs))
+print("Precision score: " + str(ps))
+
+TP = cm[1, 1]
+TN = cm[0, 0]
+FP = cm[0, 1]
+FN = cm[1, 0]
+
+sensitivity = TP/(TP+FN)
+specificity = TN/(TN+FP)
+
+"Sensitivity: {}% | Specifictity: {}%".format(sensitivity*100, specificity*100)
+
+
+
+
+
 
 
 
