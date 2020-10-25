@@ -246,8 +246,38 @@ specificity = TN/(TN+FP)
 
 
 
+#Predicting using Navie Bayes Classifier¶
 
+#
+# Results (Accuracy score: 81.6%, Sensitivity: 83.3%, Specifictity: 80.0% )
+#
+from sklearn.naive_bayes import GaussianNB 
+gnb = GaussianNB().fit(X_train, y_train) 
+gnb_predictions = gnb.predict(X_test) 
+  
+# accuracy on X_test 
+accuracy = gnb.score(X_test, y_test) 
+  
+# creating a confusion matrix 
+cm = confusion_matrix(y_test, gnb_predictions) 
+ac = accuracy_score(y_test, gnb_predictions)
+rs = recall_score(y_test, gnb_predictions, average=None)
+ps = precision_score(y_test, gnb_predictions, average=None)
 
+print("Confusion matrix: " + str(cm))
+print("Accuracy score: " + str(ac*100))
+print("Recall score: " + str(rs))
+print("Precision score: " + str(ps))
+
+TP = cm[1, 1]
+TN = cm[0, 0]
+FP = cm[0, 1]
+FN = cm[1, 0]
+
+sensitivity = TP/(TP+FN)
+specificity = TN/(TN+FP)
+
+"Sensitivity: {}% | Specifictity: {}%".format(sensitivity*100, specificity*100)
 
 
 
