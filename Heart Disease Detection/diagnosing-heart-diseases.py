@@ -189,6 +189,39 @@ specificity = TN/(TN+FP)
 
 "Sensitivity: {}% | Specifictity: {}%".format(sensitivity*100, specificity*100)
 
+#Predicting using KNN Classifier
+# Choosing the best K value for KNN
+from sklearn.neighbors import KNeighborsClassifier 
+error_rate = []
+
+for i in range(1,40):  #checking from 1 to 40 for the K value
+    knn = KNeighborsClassifier(n_neighbors=i)
+    knn.fit(X_train, y_train)
+    pred_i = knn.predict(X_test)
+    error_rate.append(np.mean(pred_i != y_test)) # when the 'pred' value doesn't match with the 'y value' I get the mean of that
+    
+plt.figure(figsize=(10, 6))
+plt.plot(range(1, 40), error_rate, color='blue', linestyle='dashed', marker='o', markerfacecolor='red' ,markersize=10)
+plt.title('Error Rate vs K value')
+plt.xlabel('K')
+plt.ylabel('Error Rate')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
