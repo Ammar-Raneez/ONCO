@@ -326,7 +326,9 @@ specificity = TN/(TN+FP)
 "Sensitivity: {}% | Specifictity: {}%".format(sensitivity*100, specificity*100)
 
 
-
+# saving the random forest model becuase it gave the best result
+import joblib
+joblib.dump(knn, 'heart-diagnosing-model-knn')
 
 
 
