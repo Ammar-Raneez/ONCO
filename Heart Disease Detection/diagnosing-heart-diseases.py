@@ -56,3 +56,59 @@ smk = SMOTETomek(random_state=69)
 X_train, y_train = smk.fit_sample(X_train, y_train)
 X_test, y_test = smk.fit_sample(X_test, y_test)
 X_train.shape, y_train.shape, X_test.shape, y_test.shape
+
+
+#Changing the column names to a more clearer name
+data.columns = ['age', 'sex', 'chest_pain_type', 'resting_blood_pressure', 'cholesterol', 'fasting_blood_sugar', 'rest_ecg', 'max_heart_rate_achived',
+       'exercise_induced_angina', 'st_depression', 'st_slope', 'num_major_vessels', 'thalassemia', 'target']
+data.columns  # columns are now changed to a meaningful set of columns
+
+
+data.sample(10)
+
+data.dtypes
+
+#Exploratory Data Analysis
+
+plt.plot(data['age'].value_counts().sort_index())
+plt.figure(figsize=(15,4))
+plt.show()
+
+
+sns.pairplot(data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
