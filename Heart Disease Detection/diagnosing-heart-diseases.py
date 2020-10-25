@@ -281,6 +281,51 @@ specificity = TN/(TN+FP)
 
 
 
+# Predicting using Logistic Regression Classifier
+
+#
+# Results (Accuracy score: 81.6%, Sensitivity:83.3%, Specifictity: 80.0% )
+#
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+sc = StandardScaler()
+
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
+
+LogRegClassi = LogisticRegression(random_state=101)
+
+LogRegClassi.fit(X_train, y_train)
+
+y_predLg = LogRegClassi.predict(X_test)
+
+## Accuracy on X_test 
+accuracy = LogRegClassi.score(X_test, y_test) 
+
+## Creating a confusion matrix 
+cm = confusion_matrix(y_test, y_predLg) 
+ac = accuracy_score(y_test, y_predLg)
+rs = recall_score(y_test, y_predLg, average=None)
+ps = precision_score(y_test, y_predLg, average=None)
+
+## Displaying the content
+print("Confusion matrix: " + str(cm))
+print("Accuracy score: " + str(ac*100))
+print("Recall score: " + str(rs))
+print("Precision score: " + str(ps))
+
+TP = cm[1, 1]
+TN = cm[0, 0]
+FP = cm[0, 1]
+FN = cm[1, 0]
+
+sensitivity = TP/(TP+FN)
+specificity = TN/(TN+FP)
+
+"Sensitivity: {}% | Specifictity: {}%".format(sensitivity*100, specificity*100)
+
+
 
 
 
