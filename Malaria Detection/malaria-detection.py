@@ -36,3 +36,34 @@ vgg = VGG19(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top=False)
 for layer in vgg.layers:
     layer.trainable = False
 
+# Getting the number of classes from our dataset
+folders = glob('cell_images/Train/*')
+folders
+
+
+# Flattening all the previous layers
+x = Flatten()(vgg.output)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
