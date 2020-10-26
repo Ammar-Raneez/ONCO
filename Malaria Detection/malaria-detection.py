@@ -92,7 +92,14 @@ test_set = test_datagen.flow_from_directory('cell_images/Test/',
 
 
 
-
+# Fit the model
+result = model.fit_generator(
+    training_set,
+    validation_data=test_set,
+    epochs=10,
+    steps_per_epoch=len(training_set),
+    validation_steps = len(test_set)
+)
 
 
 
