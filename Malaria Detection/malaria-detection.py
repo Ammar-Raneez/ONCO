@@ -24,3 +24,4 @@ import matplotlib.pyplot as plt
 
 # re-size all the images
 IMAGE_SIZE = [224, 224]
+
