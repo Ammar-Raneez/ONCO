@@ -117,6 +117,41 @@ plt.legend()
 plt.show()
 
 
+# USING XCEPTION TO CREATE THE MODEL
+from keras.applications.xception import Xception
+
+xcep = Xception(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top = False)
+
+for layer in xcep.layers:
+    layer.trainable = False
+
+x2 = Flatten()(xcep.output)
+
+prediction = Dense(len(folders), activation='softmax')(x2)
+
+model2 = Model(inputs=xcep.input, outputs=prediction)
+
+model2.summary()
+
+model2.compile(
+    loss='categorical_crossentropy',
+    optimizer = 'adam',
+    metrics = ['accuracy']
+)
+
+result2 = model2.fit_generator(
+    training_set,
+    validation_data=test_set,
+    epochs=20,
+    steps_per_epoch=len(training_set),
+    validation_steps=len(test_set)
+)
+
+# result for the 10 epoch
+# loss: 0.5618 - accuracy: 0.9390 - val_loss: 0.7285 - val_accuracy: 0.9200
+
+# result for the 20 epoch
+# 
 
 
 
