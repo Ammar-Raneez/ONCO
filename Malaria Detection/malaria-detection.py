@@ -103,7 +103,18 @@ result = model.fit_generator(
 
 
 
+# Plotting the loss values with the validation loss values
+plt.plot(result.history['loss'], label='train loss')
+plt.plot(result.history['val_loss'], label='val loss')
+plt.legend()
+plt.show()
 
+
+# Plotting the accuracy values with the validation accuracy values
+plt.plot(result.history['accuracy'], label='train acc')
+plt.plot(result.history['val_accuracy'], label='val acc')
+plt.legend()
+plt.show()
 
 
 
