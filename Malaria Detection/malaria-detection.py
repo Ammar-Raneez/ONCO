@@ -154,7 +154,19 @@ result2 = model2.fit_generator(
 # 
 
 
+plt.plot(result.history['loss'], label='train loss')
+plt.plot(result.history['val_loss'], label='val loss')
+plt.legend()
+plt.show()
+plt.savefig('LossVal_loss')
 
+
+
+plt.plot(result.history['accuracy'], label='train acc')
+plt.plot(result.history['val_accuracy'], label='val acc')
+plt.legend()
+plt.show()
+plt.savefig('AccVal_acc')
 
 
     
