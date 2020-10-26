@@ -45,7 +45,7 @@ folders
 x = Flatten()(vgg.output)
 
 
-# Adding my 2 categories into the last layer (The variable folders contain the location of my 2 categories)
+# Adding my 2 categories dense layers into the last layer of the vgg19 (The variable folders contain the location of my 2 categories)
 prediction = Dense(len(folders), activation='softmax')(x) 
 
 # softmax activation function is just like a sigmod activation function which will make your value fall between 0 to 1 
@@ -55,6 +55,17 @@ prediction = Dense(len(folders), activation='softmax')(x)
 # create a model object
 model = Model(inputs=vgg.input, outputs=prediction)
 
+
+# view the structure of the model
+model.summary()
+
+
+# telling the model what loss and optimization functions has to be used along with the type of metrics
+model.compile(
+    loss = 'categorical_crossentropy',
+    optimizer = 'adam',
+    metrics = ['accuracy']
+)
 
 
 
