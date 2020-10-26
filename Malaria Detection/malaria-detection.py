@@ -151,7 +151,7 @@ result2 = model2.fit_generator(
 # loss: 0.5618 - accuracy: 0.9390 - val_loss: 0.7285 - val_accuracy: 0.9200
 
 # result for the 20 epoch
-# 
+# loss: 0.5789 - accuracy: 0.9420 - val_loss: 0.7598 - val_accuracy: 0.9300
 
 
 plt.plot(result.history['loss'], label='train loss')
@@ -167,6 +167,43 @@ plt.plot(result.history['val_accuracy'], label='val acc')
 plt.legend()
 plt.show()
 plt.savefig('AccVal_acc')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     
