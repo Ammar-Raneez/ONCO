@@ -45,7 +45,15 @@ folders
 x = Flatten()(vgg.output)
 
 
+# Adding my 2 categories into the last layer (The variable folders contain the location of my 2 categories)
+prediction = Dense(len(folders), activation='softmax')(x) 
 
+# softmax activation function is just like a sigmod activation function which will make your value fall between 0 to 1 
+
+
+
+# create a model object
+model = Model(inputs=vgg.input, outputs=prediction)
 
 
 
