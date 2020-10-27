@@ -170,6 +170,38 @@ plt.savefig('AccVal_acc')
 
 
 
+# USING ResNet50 CREATE THE MODEL
+from keras.applications.resnet50 import ResNet50
+
+resNet = ResNet50(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top = False)
+
+for layer in resNet.layers:
+    layer.trainable = False
+
+x3 = Flatten()(resNet.output)
+
+prediction = Dense(len(folders), activation='softmax')(x3)
+
+model3 = Model(inputs=resNet.input, outputs=prediction)
+
+model3.summary()
+
+model3.compile(
+    loss='categorical_crossentropy',
+    optimizer = 'adam',
+    metrics = ['accuracy']
+)
+
+result3 = model3.fit_generator(
+    training_set,
+    validation_data=test_set,
+    epochs=10,
+    steps_per_epoch=len(training_set),
+    validation_steps=len(test_set)
+)
+
+# The result from this model
+# loss: 0.6916 - accuracy: 0.6479 - val_loss: 1.5950 - val_accuracy: 0.5020
 
 
 
