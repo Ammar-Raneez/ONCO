@@ -153,6 +153,10 @@ result2 = model2.fit_generator(
 # result for the 20 epoch
 # loss: 0.5789 - accuracy: 0.9420 - val_loss: 0.7598 - val_accuracy: 0.9300
 
+import tensorflow as tf
+from keras.models import load_model
+
+model.save('model_xcepModel.h5')
 
 plt.plot(result.history['loss'], label='train loss')
 plt.plot(result.history['val_loss'], label='val loss')
