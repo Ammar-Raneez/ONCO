@@ -22,7 +22,7 @@ def finetuned_inception():
     ft_inception.add(layers.Flatten())
     ft_inception.add(layers.Dense(1024, activation='relu'))
     ft_inception.add(layers.Dropout(0.8))
-    ft_inception.add(layers.Dense(8, activation='softmax'))
+    ft_inception.add(layers.Dense(9, activation='softmax'))
     
     return ft_inception
 

@@ -20,5 +20,5 @@ TRAIN_DATASET = 'data/Train'
 TEST_DATASET = 'data/Test'
 
 IMAGE_SIZE = 224
-BATCH_SIZE = 250
+BATCH_SIZE = 32
 
