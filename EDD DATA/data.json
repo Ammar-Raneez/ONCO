@@ -4,34 +4,42 @@
 		"exercises": [
 			{
 				"name": "Walk",
+				"imageURL": "https://www.dailynews.lk/sites/default/files/news/2019/07/17/z_T%26C-p31-WALK.jpg",
 				"description": "Walking is a great choice, especially if you’re just getting started. Do it anywhere -- outside, in a mall, on a treadmill. If it seems daunting, add 30 seconds or 10 yards each day. Even a slow pace will do you good."
 			},
 			{
 				"name": "Bike",
+				"imageURL": "https://www.dw.com/image/16741933_401.jpg",
 				"description": "A stationary bike can work well. You can pedal away in the privacy of your home. In a gym or rehab setting, you can find supervision and meet people. Ask the instructor before jumping into a group cycling class, to be sure it matches your ability. As you improve, try a spin outside on a traditional bike and soak up the scenery. If any exercise makes you short of breath, stop and sit down for a few minutes."
 			},
 			{
 				"name": "Arm Curls",
+				"imageURL": "https://i.ytimg.com/vi/in7PaeYlhrM/maxresdefault.jpg",
 				"description": "Lifting light weights can help you reach a high shelf or lug a gallon of milk. Choose hand weights, stretchy bands, or water bottles to try arm curls. Hold the weights at your sides, palms forward. Breathe in. Now lift toward your chest, keeping elbows down, and exhaling slowly. Slowly lower your arms back down as you breathe in. Build up to two sets of 10-15 repetitions."
 			},
 			{
 				"name": "Forward Arm Raises",
+				"imageURL": "https://www.verywellfit.com/thmb/PpdyXqRyfiZ2iodRLzb-1DSUfrE=/1500x844/smart/filters:no_upscale()/front-raise-2-56ca3c485f9b5879cc4c0b94.jpg",
 				"description": "Hold weights down at your sides, palms facing in. Inhale, then exhale slowly as you raise both arms straight out front to shoulder height. Inhale as you slowly lower your arms. This strengthens your upper arms and shoulders. Build up to two sets of 10-15 repetitions. Start with light weights and go a little heavier every two to three weeks to challenge your muscles."
 			},
 			{
 				"name": "Calf Raises",
+				"imageURL": "https://i.ytimg.com/vi/-M4-G8p8fmc/maxresdefault.jpg",
 				"description": "Add leg work to your routine and you'll be able to walk easier and farther. For the calf raise, stand 6-12 inches behind a sturdy chair with your feet hip-width apart. Hold on for balance. Inhale. Now, lift up high on your toes, exhaling slowly. Hold the raised position briefly. Lower your heels back to the ground, inhaling slowly. As you get stronger, do one leg at a time. Work up to two sets of 10-15 reps."
 			},
 			{
 				"name": "Leg Extensions",
+				"imageURL": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/mh-young-man-exercising-legs-in-the-local-gym-royalty-free-image-867359800-1560457264.jpg",
 				"description": "For stronger thighs, sit in a chair that supports your back. Inhale. Now exhale slowly as you stretch one leg as straight as you can, without locking your knee. Breathe in as you slowly lower your foot back to the floor. Do one set with your right leg, then one set with your left. Getting too easy? Add ankle weights. Work up to two sets of 10-15 reps."
 			},
 			{
 				"name": "Exercise Your Diaphragm",
+				"imageURL": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/breathing-exercises-toned-abs-1530625687.jpg",
 				"description": "This move strengthens a key breathing muscle, the diaphragm. Lie down with your knees bent or sit in an easy chair -- one hand on your chest, one below your rib cage. Slowly inhale through your nose so that your stomach raises one hand. Exhale with pursed lips and tighten your stomach. The hand on your chest should not move. Do this for 5 to 10 minutes, three or four times a day. Breathing this way will become easy and automatic."
 			},
 			{
 				"name": "Chair Dance",
+				"imageURL": "https://hipshakefitness.com/wp-content/uploads/2019/03/Chair-Dance-Cha.jpg",
 				"description": "If you love to dance, try this armchair version in a class or with a DVD at home. Different programs can get your heart pumping, or pump up your muscles, or both -- to all kinds of music, from big band to hip hop. Beginners might start with a class to learn the safest ways to swing and bend. Adding hand weights can increase the challenge -- and your fitness level."
 			}
 		],
@@ -49,26 +57,32 @@
 		"exercises": [
 			{
 				"name": "Jumping Jacks",
+				"imageURL": "https://cathe.com/wp-content/uploads/2020/02/shutterstock_502211857.jpg",
 				"description": "Stand up straight, hold your arms at your sides, and stand with your feet shoulder-width apart. Jump and extend your arms overhead. Extend your legs. As you jump, open your legs wider than shoulder width as you lift your arms overhead. Give or take some space depending on your height and leave a wide amount of space between your feet. Land in the starting position. After jumping in the air, gently land in the first position with arms at your sides and feet shoulder width apart. Repeat as needed."
 			},
 			{
 				"name": "Squats",
+				"imageURL": "https://media.self.com/photos/5ea9bc77bb9c6b75996c7e91/2:1/w_3949,h_1974,c_limit/squats_woman_exercise.jpg",
 				"description": "The Squat is a lower body exercise. You can do the bodyweight version, without added resistance (also called Bodyweight Squat or Air Squat), or with weights such as a barbell (Front Squat and Back Squat are variations of the Barbell Squat). The Squat exercise mainly targets the thighs (quadriceps & hamstrings) and the glutes. However, core strength & stability, ankle mobility, back muscles, calves, and other factors play an important role when you are doing this exercise."
 			},
 			{
 				"name": "Crunches",
+				"imageURL": "https://cdn2.coachmag.co.uk/sites/coachmag/files/styles/16x9_480/public/images/dir_30/mens_fitness_15427.jpg?itok=T3OF7wPv&timestamp=1369282187",
 				"description": "Lie down on your back. Plant your feet on the floor, hip-width apart. Bend your knees and place your arms across your chest. Contract your abs and inhale. Exhale and lift your upper body, keeping your head and neck relaxed. Inhale and return to the starting position."
 			},
 			{
 				"name": "Jump Lunges",
+				"imageURL": "https://cdn.prod.openfit.com/uploads/2019/07/17095431/Jumping-Lunges.jpg",
 				"description": "Starting standing with feet shoulder-width apart. Jump your left leg forward and your right leg back into a lunge, with both knees at 90 degrees. Jump up and switch your legs in midair so that you land in a lunge with your right leg in front. Continue jumping back and forth, pausing as little as possibl"
 			},
 			{
 				"name": "Push Ups",
+				"imageURL": "https://www.topendsports.com/fitness/images/push-up-pixabay.jpg",
 				"description": "Get down on all fours, placing your hands slightly wider than your shoulders. Straighten your arms and legs. Lower your body until your chest nearly touches the floor. Pause, then push yourself back up. Repeat."
 			},
 			{
 				"name": "Burpees",
+				"imageURL": "https://cdn2.coachmag.co.uk/sites/coachmag/files/2016/02/burpee.jpg",
 				"description": "Stand with your feet shoulder-width apart, weight in your heels, and your arms at your sides. Push your hips back, bend your knees, and lower your body into a squat. Place your hands on the floor directly in front of, and just inside, your feet. Shift your weight onto your hands. Jump your feet back to softly land on the balls of your feet in a plank position. Your body should form a straight line from your head to heels. Be careful not to let your back sag or your butt stick up in the air, as both can keep you from effectively working your core."
 			}
 		],
@@ -86,30 +100,37 @@
 		"exercises": [
 			{
 				"name": "Cobra pose",
+				"imageURL": "https://diyactive.com/wp-content/uploads/2019/09/Your-Complete-Guide-to-the-Cobra-Pose.jpg",
 				"description": "Start by lying on your stomach with your legs extended and the tops of your feet resting on the floor. Place your hands directly under your shoulders with your elbows tucked in. Begin to lift your head and chest off the ground while drawing your shoulders back and keeping your neck neutral. Straighten your arms as much as is comfortable. Hold the pose for 30 seconds and return to the start. Repeat three times."
 			},
 			{
 				"name": "Traveling plank",
+				"imageURL": "https://media.self.com/photos/5808e51f5a0364cf5e074a60/16:9/w_1487,h_836,c_limit/travel-workouts-no-equipment.jpg",
 				"description": "Start in a plank position with your head and neck neutral and your hands stacked under your shoulders. Make sure that your lower back isn’t sagging. Keeping your core tight, lift your right hand and right foot off the ground, and “step” a foot to the right. This is one rep. Pause for a second, reset, and move another foot to the right. Complete 10 “steps” to the right, then switch sides, and make your way back to the starting point, stepping with your left hand and left foot. Repeat three sets."
 			},
 			{
 				"name": "Push Ups",
+				"imageURL": "https://lmimirror3pvr.azureedge.net/static/media/12867/2d5a7ea5-1c56-40e1-aba6-dbbfe959f35a/pushup-study_960x540.jpg",
 				"description": "Get down on all fours, placing your hands slightly wider than your shoulders. Straighten your arms and legs. Lower your body until your chest nearly touches the floor. Pause, then push yourself back up. Repeat."
 			},
 			{
 				"name": "Plank reach-under",
+				"imageURL": "https://zoomzee.org/wp-content/uploads/2018/01/plank-reach-through.jpg",
 				"description": "Start in a plank position with your hands under your shoulders, your back neutral, and your core tight. Maintain the plank position and, starting with your right arm, lift your hand off the ground and touch your left knee. Return to the plank position. Repeat 10 reps with your right arm, then switch to your left arm, and complete 10 reps. This is one set. Complete three sets."
 			},
 			{
 				"name": "Dumbbell chest press",
+				"imageURL": "https://cdn1.coachmag.co.uk/sites/coachmag/files/2018/09/dumbbell-bench-press.jpg",
 				"description": "With a dumbbell in each hand, start by sitting on the end of the bench. Lower yourself down so your back is flat on the bench, your knees are bent, and your feet are flat on the floor.To set up for the bench press, bring your upper arms out at your side, parallel to the floor, and bend your elbows so the weights are parallel to your upper arms.When your arms are fully extended, pause and begin to lower the weights back down to the starting position. This is one rep. Repeat three sets of 12 reps."
 			},
 			{
 				"name": "Stability ball dumbbell fly",
+				"imageURL": "https://i.pinimg.com/originals/d1/30/c3/d130c3d5191d140cddb3554c19057009.jpg",
 				"description": "Get into the starting position, resting your upper body on a stability ball and forming a 90-degree angle with the rest of your body — trunk and upper legs straight, knees bent, and feet flat on the ground. You should have one dumbbell in each hand. Keeping your core tight, extend your arms with palms facing up and a slight bend in your elbow. Arms should be parallel to the floor to start. Simultaneously begin to raise both dumbbells up toward your midline, feeling your pectoral muscles working to get them there. When you reach the center, slowly lower back down slightly past the starting position until you feel a stretch in your chest. This is one rep. Complete three sets of 12 reps."
 			},
 			{
 				"name": "Medicine ball superman",
+				"imageURL": "https://i0.wp.com/post.greatist.com/wp-content/uploads/sites/2/2019/05/SuperMan_1.jpg?w=1155&h=789",
 				"description": "Start by lying on your stomach, arms extended out in front of you, with the medicine ball in your hands. Your head and neck should be neutral. To perform, use your core and your chest to raise your legs and upper body and the medicine ball off the ground. Lift as high as you can go, without straining your neck, and pause at the top. Return to the start. Complete three sets of 12 reps."
 			}
 		],

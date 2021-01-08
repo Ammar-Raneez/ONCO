@@ -30,21 +30,21 @@
 ---
 
 ### - Lung Cancer
-**Resources used to created the API:**
+**Resources used**
 
 [https://www.verywellhealth.com/superfoods-to-lower-lung-cancer-risk-2249269](https://www.verywellhealth.com/superfoods-to-lower-lung-cancer-risk-2249269)
 
 ---
 
 ### - Skin Cancer
-**Resources used to created the API:**
+**Resources used**
 
 [https://legionathletics.com/miracle-foods-that-can-help-prevent-skin-cancer/](https://legionathletics.com/miracle-foods-that-can-help-prevent-skin-cancer/)
 
 ---
 
 ### - Breast Cancer
-**Resources used to created the API:**
+**Resources used**
 
 [https://www.healthline.com/nutrition/breast-cancer-foods#foods-to-eat](https://www.healthline.com/nutrition/breast-cancer-foods#foods-to-eat)
 
@@ -55,21 +55,21 @@
 ---
 
 ### - Lung Cancer
-**Resources used to created the API:**
+**Resources used**
 
 [https://www.mayoclinic.org/departments-centers/lung-cancer-program/sections/doctors/drc-20474599](https://www.mayoclinic.org/departments-centers/lung-cancer-program/sections/doctors/drc-20474599)
 
 ---
 
 ### - Skin Cancer
-**Resources used to created the API:**
+**Resources used**
 
 [https://www.mayoclinic.org/diseases-conditions/skin-cancer/doctors-departments/ddc-20377610](https://www.mayoclinic.org/diseases-conditions/skin-cancer/doctors-departments/ddc-20377610)
 
 ---
 
 ### - Breast Cancer
-**Resources used to created the API:**
+**Resources used**
 
 [https://www.mayoclinic.org/tests-procedures/breast-cancer-surgery/doctors-departments/pdc-20385256](https://www.mayoclinic.org/tests-procedures/breast-cancer-surgery/doctors-departments/pdc-20385256)
 
