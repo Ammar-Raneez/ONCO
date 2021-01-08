@@ -86,8 +86,56 @@
 			}
 		],
 		"doctors": [
-			{ "name": "", "mainUrl": "" },
-			{ "name": "", "mainUrl": "" }
+			{
+				"name": "Sadeer J. Alzubaidi, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/23/21/Sadeer-Alzubaidi-20906382.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/alzubaidi-sadeer-j-m-d/bio-20426348"
+			},
+			{
+				"name": "Vichaya Arunthari, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/26/Vichaya-Arunthari-14619695.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/arunthari-vichaya-m-d/bio-20055394"
+			},
+			{
+				"name": "Staci E. Beamer, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/23/05/Staci-Beamer-16312856.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/beamer-staci-e-m-d/bio-20167067"
+			},
+			{
+				"name": "Shanda Blackmon, M.D., M.P.H.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/59/Shanda-Blackmon-16112911.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/blackmon-shanda-m-d-m-p-h/bio-20110768"
+			},
+			{
+				"name": "Cassandra M. Braun, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/45/Cassandra-Braun-15493440.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/braun-cassandra-m-m-d/bio-20461136"
+			},
+			{
+				"name": "Matthew R. Callstrom, M.D., Ph.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/46/Matthew-Callstrom-11969148.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/callstrom-matthew-r-m-d-ph-d/bio-20054437"
+			},
+			{
+				"name": "Stephen D. Cassivi, M.D., M.S.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/GBS/Patient-Consumer/Images/2016/12/08/20/26/Cassivi-Stephen-440.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/cassivi-stephen-d-m-d-m-s/bio-20054355"
+			},
+			{
+				"name": "Kristopher W. Cummings, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/23/00/Kristopher-Cummings-16209745.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/cummings-kristopher-w-m-d/bio-20143035"
+			},
+			{
+				"name": "Jonathan D'Cunha, M.D., Ph.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2019/10/03/19/40/Jonathan-DCunha-12557374.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/d-cunha-jonathan-m-d-ph-d/bio-20471123"
+			},
+			{
+				"name": "Thomas B. Daniels, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/16/Thomas-Daniels-14061651.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/daniels-thomas-b-m-d/bio-20087334"
+			}
 		]
 	},
 	{
@@ -142,8 +190,56 @@
 			}
 		],
 		"doctors": [
-			{ "name": "", "mainUrl": "" },
-			{ "name": "", "mainUrl": "" }
+			{
+				"name": "Kevin Arce, M.D., D.M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/51/Kevin-Arce-Castro-12361721.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/arce-kevin-m-d-d-m-d/bio-20055379"
+			},
+			{
+				"name": "Christopher J. Arpey, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/31/Christopher-Arpey-10801421.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/arpey-christopher-j-m-d/bio-20055329"
+			},
+			{
+				"name": "Sanjay P. Bagaria, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/GBS/Patient-Consumer/Images/2016/12/22/19/33/Bagaria-Sanjay-440.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/bagaria-sanjay-p-m-d/bio-20055349"
+			},
+			{
+				"name": "Christian L. Baum, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/25/Christian-Baum-14566842.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/baum-christian-l-m-d/bio-20055328"
+			},
+			{
+				"name": "Matthew S. Block, M.D., Ph.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/56/Matthew-Block-12661261.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/block-matthew-s-m-d-ph-d/bio-20055420"
+			},
+			{
+				"name": "Mitesh J. Borad, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/35/Mitesh-Borad-15063488.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/borad-mitesh-j-m-d/bio-20055089"
+			},
+			{
+				"name": "Jerry D. Brewer, M.D., M.S.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/20/Jerry-Brewer-14276402.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/brewer-jerry-d-m-d-m-s/bio-20055243"
+			},
+			{
+				"name": "William J. Casey, III, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/55/William-Casey-12601926.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/casey-william-j-iii-m-d/bio-20054476"
+			},
+			{
+				"name": "Asher (Asher) A. Chanan-Khan, M.B.B.S., M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/GBS/Patient-Consumer/Images/2016/12/27/18/22/Chanan-Khan-Asher-440.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/chanan-khan-asher-asher-a-m-b-b-s-m-d/bio-20055528"
+			},
+			{
+				"name": "Nneka I. Comfere, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/57/Nneka-Comfere-12802972.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/comfere-nneka-i-m-d/bio-20054906"
+			}
 		]
 	},
 	{
@@ -223,8 +319,56 @@
 			}
 		],
 		"doctors": [
-			{ "name": "", "mainUrl": "" },
-			{ "name": "", "mainUrl": "" }
+			{
+				"name": "Sanjay P. Bagaria, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/GBS/Patient-Consumer/Images/2016/12/22/19/33/Bagaria-Sanjay-440.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/bagaria-sanjay-p-m-d/bio-20055349"
+			},
+			{
+				"name": "Jamie N. Bakkum-Gamez, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/13/Jamie-Bakkum-Gamez-13871561.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/bakkum-gamez-jamie-n-m-d/bio-20055230"
+			},
+			{
+				"name": "Judy C. Boughey, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/53/Judy-Boughey-12517712.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/boughey-judy-c-m-d/bio-20054836"
+			},
+			{
+				"name": "William J. Casey, III, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/55/William-Casey-12601926.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/casey-william-j-iii-m-d/bio-20054476"
+			},
+			{
+				"name": "William A. Cliby, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/35/William-Cliby-11095920.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/cliby-william-a-m-d/bio-20053277"
+			},
+			{
+				"name": "Patricia A. Cronin, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/23/09/Patricia-Cronin-17236819.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/cronin-patricia-a-m-d/bio-20399774"
+			},
+			{
+				"name": "Amy C. Degnim, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/20/Amy-Degnim-14288656.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/degnim-amy-c-m-d/bio-20054490"
+			},
+			{
+				"name": "Sean C. Dowdy, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/53/Sean-Dowdy-12484482.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/dowdy-sean-c-m-d/bio-20054619"
+			},
+			{
+				"name": "Kyle S. Ettinger, M.D., D.D.S.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/44/Kyle-Ettinger-15454037.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/ettinger-kyle-s-m-d-d-d-s/bio-20426524"
+			},
+			{
+				"name": "David R. Farley, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/29/David-Farley-10531033.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/farley-david-r-m-d/bio-20053392"
+			}
 		]
 	}
 ]
