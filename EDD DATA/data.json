@@ -44,12 +44,50 @@
 			}
 		],
 		"diet": [
-			{ "name": "", "description": "" },
-			{ "name": "", "description": "" }
+			{
+				"name": "Apples",
+				"imageURL": "https://www.macdentalcare.com/pub/photo/2014-09-apple.jpg",
+				"description": "One of the many health secrets packed into an apple is that every bite fills you with flavonoids. These phytonutrients (plant chemicals) are found in almost all fruits and vegetables. They're powerful antioxidants, offering anti-inflammatory and immune-boosting benefits."
+			},
+			{
+				"name": "Garlic",
+				"imageURL": "https://solidstarts.com/wp-content/uploads/garlic_edited-scaled.jpg",
+				"description": "Garlic actually prevents cancer cells from growing by increasing the activity of natural killer (NK) cells and macrophages (types of white blood cells that are important for immunity).Eating garlic raw seems to be the best way to take advantage of its protective power since cooking or pickling it breaks down beneficial compounds."
+			},
+			{
+				"name": "Onions",
+				"imageURL": "https://www.foodsafetynews.com/files/2020/07/red-onions.jpg",
+				"description": "Onions, like garlic, belong to a family of vegetables known as allium vegetables, which were long used in folk medicine and are now widely studied by scientists for their anti-oxidant properties and the fact that they seem to interfere with the development of cancer cells."
+			},
+			{
+				"name": "Broccoli",
+				"imageURL": "https://www.cookforyourlife.org/wp-content/uploads/2018/08/shutterstock_294838064-min.jpg",
+				"description": "Glucosinates and other compounds compounds in cruciferous vegetables like broccoli counter the deadly effects of environmental carcinogens and can potentially reduce the likelihood that you will develop lung cancer. Among smokers, who have the highest risk of lung cancer, cruciferous vegetables may decrease the likelihood of lung cancer by 32% to 55%, depending on the amount regularly consumed."
+			},
+			{
+				"name": "Fish",
+				"imageURL": "https://nexusmedianews.com/wp-content/uploads/fly-images/10535/95611-1mj11pm4zsbf0ziaj5tebiw-1200x600-c.jpg",
+				"description": "Frequent fish consumption has several health benefits, including a 21% reduction in lung cancer risk, according to one study. However, most researchers agree that more investigation is needed to confirm the correlation between fish and lower rates of lung cancer."
+			},
+			{
+				"name": "Red Peppers",
+				"imageURL": "https://thecounter.org/wp-content/uploads/2018/05/organic-red-peppers-cost-washington-1280x720.jpg",
+				"description": "Red bell peppers, as well as red chili peppers, contain a phytochemical called capsaicin—part of what gives these foods a spicy little kick. It was found that capsaicin suppresses the development of lung cancer in Swiss mice after they were exposed to a carcinogen."
+			},
+			{
+				"name": "Green Tea",
+				"imageURL": "https://assets.newatlas.com/dims4/default/490d6fb/2147483647/strip/true/crop/2000x1050+0+133/resize/1200x630!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2F95%2F19%2Fcfafe2924aeaa27022653a53b7fa%2Fdepositphotos-92038314-l-2015.jpg",
+				"description": "Green tea contains a powerful antioxidant, epigallocatechin gallate (EGCG), that has been shown to offer significant defense against cancer."
+			},
+			{
+				"name": "Spinach",
+				"imageURL": "https://i.ndtvimg.com/i/2016-11/spinach_620x350_81477995047.jpg",
+				"description": "Spinach and other green leafy vegetables are rich in vitamin C, carotenoids, lutein, folic acid, vitamin A, and vitamin K. Several studies have found that this super-nutritious food reduces the risk of lung cancer."
+			}
 		],
 		"doctors": [
-			{ "name": "", "url": "" },
-			{ "name": "", "url": "" }
+			{ "name": "", "mainUrl": "" },
+			{ "name": "", "mainUrl": "" }
 		]
 	},
 	{
@@ -87,12 +125,25 @@
 			}
 		],
 		"diet": [
-			{ "name": "", "description": "" },
-			{ "name": "", "description": "" }
+			{
+				"name": "Antioxidant-Rich Foods",
+				"imageURL": "https://www.thehealthsite.com/wp-content/uploads/2014/04/antioxidants.jpg",
+				"description": "If you fill your diet with foods that have a high antioxidant content, you’ll be giving yourself a significant leg up in the fight against skin cancer. These compounds help cells become more resistant to damage."
+			},
+			{
+				"name": "Fruits and Veggies",
+				"imageURL": "https://hhp-blog.s3.amazonaws.com/2020/06/GettyImages-1208790371.jpg",
+				"description": "Oranges, limes, lemons, and grapefruits are great sources of vitamin C, which is a powerful antioxidant that fights against those cancer-causing free radicals. Dark and leafy greens, cruciferous vegetables, like spinach, collard greens, kale, and broccoli can contribute to your body’s fight against melanoma."
+			},
+			{
+				"name": "Coffee",
+				"imageURL": "https://media3.s-nbcnews.com/j/newscms/2019_33/2203981/171026-better-coffee-boost-se-329p_67dfb6820f7d3898b5486975903c2e51.fit-1240w.jpg",
+				"description": "If you already drink coffee every day like the vast majority of Americans, you may already be reaping the anti-skin cancer benefits of the beverage without even realizing it! If you don’t drink coffee, you might be wise to start drinking it more regularly – especially if you’re getting your caffeine from sources like sodas."
+			}
 		],
 		"doctors": [
-			{ "name": "", "url": "" },
-			{ "name": "", "url": "" }
+			{ "name": "", "mainUrl": "" },
+			{ "name": "", "mainUrl": "" }
 		]
 	},
 	{
@@ -135,12 +186,45 @@
 			}
 		],
 		"diet": [
-			{ "name": "", "description": "" },
-			{ "name": "", "description": "" }
+			{
+				"name": "Leafy green vegetables",
+				"imageURL": "https://youngmenshealthsite.org/wp-content/uploads/2015/05/iStock_000003421602Small1.jpg",
+				"description": "Kale, arugula, spinach, mustard greens, and chard are just a few of the leafy green vegetables that may have anticancer properties. Leafy green vegetables contain carotenoid antioxidants, including beta carotene, lutein, and zeaxanthin, higher blood levels of which are associated with reduced breast cancer risk"
+			},
+			{
+				"name": "Citrus fruits",
+				"imageURL": "https://www.homeperch.com/wp-content/uploads/2019/04/Types-of-Citrus-Fruits-1-27-4.jpg",
+				"description": "Citrus fruits are teeming with compounds that may protect against breast cancer, including folate, vitamin C, and carotenoids like beta cryptoxanthin and beta carotene, plus flavonoid antioxidants like quercetin, hesperetin, and naringenin"
+			},
+			{
+				"name": "Fatty fish",
+				"imageURL": "https://images.indianexpress.com/2018/01/omega-3-fish-thinkstockphotos-1200.jpg",
+				"description": "Fatty fish, including salmon, sardines, and mackerel, are known for their impressive health benefits. Their omega-3 fats, selenium, and antioxidants like canthaxanthin may offer cancer-protective effects"
+			},
+			{
+				"name": "Berries",
+				"imageURL": "https://www.drfuhrman.com/rollups/4bb4704741c780ef9cd22056a220835360b6f5d4456da95bfb237e7652b835f0.jpg",
+				"description": "Regularly enjoying berries may help lower your risk of certain cancers, including breast cancer. Berries’ antioxidants, including flavonoids and anthocyanins, have been shown to protect against cellular damage, as well as the development and spread of cancer cells "
+			},
+			{
+				"name": "Fermented foods",
+				"imageURL": "https://www.health.harvard.edu/media/content/images/p4_COMP_FermentedFoods_W1807_gi608000236.jpg",
+				"description": "Fermented foods like yogurt, kimchi, miso, and sauerkraut contain probiotics and other nutrients that may safeguard against breast cancer. A review of 27 studies linked fermented dairy products, such as yogurt and kefir, to a reduced risk of breast cancer in both Western and Asian populations "
+			},
+			{
+				"name": "Allium vegetables",
+				"imageURL": "https://guardian.ng/wp-content/uploads/2017/11/Allium-vegetables.jpg",
+				"description": "Garlic, onions, and leeks are all allium vegetables that boast an array of nutrients, including organosulfur compounds, flavonoid antioxidants, and vitamin C. These may have powerful anticancer properties. A study in 660 women in Puerto Rico tied high garlic and onion intake to a reduced risk of breast cancer"
+			},
+			{
+				"name": "Beans",
+				"imageURL": "https://thefamilydinnerproject.org/wp-content/uploads/2013/09/Green-bean-lime-633x326.jpg",
+				"description": "Beans are loaded with fiber, vitamins, and minerals. Specifically, their high fiber content may protect against breast cancer. A study in 2,571 women found that high bean intake reduced breast cancer risk by up to 20%, compared with low bean intake"
+			}
 		],
 		"doctors": [
-			{ "name": "", "url": "" },
-			{ "name": "", "url": "" }
+			{ "name": "", "mainUrl": "" },
+			{ "name": "", "mainUrl": "" }
 		]
 	}
 ]
