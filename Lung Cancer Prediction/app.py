@@ -97,7 +97,7 @@ if __name__ == '__main__':
 
 # body = {
 #     "Age": 44,
-#     "Gender": 5.2,
+#     "Gender": 1,
 #     "AirPollution": 5.5,
 #     "Alcoholuse": 5.5,
 #     "DustAllergy": 5.5,

@@ -9,7 +9,7 @@ And add the json body and you will get a valid 200 response back in a json forma
 
    {
         "Age": 44,
-        "Gender": 5.2,
+        "Gender": 1,
         "AirPollution": 5.5,
         "Alcoholuse": 5.5,
         "DustAllergy": 5.5,
