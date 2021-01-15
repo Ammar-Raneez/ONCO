@@ -5,11 +5,12 @@
 
 # ### Importing Libraries
 
-# In[5]:
+# In[1]:
 
 
 # Make sure that all the following modules are already installed for use.
 from flask import Flask
+from flask_cors import CORS
 from flask_restful import Api, Resource, reqparse
 import joblib
 import numpy as np
@@ -17,10 +18,12 @@ import numpy as np
 
 # ### Creating an instance of the flask app and an API
 
-# In[ ]:
+# In[2]:
 
 
 APP = Flask(__name__)
+APP.config['CORS_HEADERS'] = 'Content-Type'
+CORS(APP)
 API = Api(APP)
 
 
@@ -88,41 +91,41 @@ if __name__ == '__main__':
 
 # ### Using the request module by first defining the URL to access and the body to send along with our HTTP request
 
-# In[13]:
+# In[14]:
 
 
-# import requests
+import requests
 
-# URL = 'http://127.0.0.1:1080/predict'  # localhost and the defined port + endpoint
+URL = 'http://127.0.0.1:1080/predict'  # localhost and the defined port + endpoint
 
-# body = {
-#     "Age": 44,
-#     "Gender": 1,
-#     "AirPollution": 5.5,
-#     "Alcoholuse": 5.5,
-#     "DustAllergy": 5.5,
-#     "OccuPationalHazards": 5.5,
-#     "GeneticRisk": 5.3,
-#     "chronicLungDisease": 1.3,
-#     "BalancedDiet": 1.3,
-#     "Obesity": 1.3,
-#     "Smoking": 5.6,
-#     "PassiveSmoker": 1.6,
-#     "ChestPain": 1.6,
-#     "CoughingofBlood": 1.8,
-#     "Fatigue": 5.8,
-#     "WeightLoss": 1.7,
-#     "ShortnessofBreath": 1.7,
-#     "Wheezing": 5.7,
-#     "SwallowingDifficulty": 1.1,
-#     "ClubbingofFingerNails": 1.2,
-#     "FrequentCold": 5.9,
-#     "DryCough": 1.0,
-#     "Snoring": 5.4,
-# }
+body = {
+    "Age": 44,
+    "Gender": 1,
+    "AirPollution": 5.5,
+    "Alcoholuse": 5.5,
+    "DustAllergy": 5.5,
+    "OccuPationalHazards": 5.5,
+    "GeneticRisk": 5.3,
+    "chronicLungDisease": 1.3,
+    "BalancedDiet": 1.3,
+    "Obesity": 1.3,
+    "Smoking": 5.6,
+    "PassiveSmoker": 1.6,
+    "ChestPain": 1.6,
+    "CoughingofBlood": 1.8,
+    "Fatigue": 5.8,
+    "WeightLoss": 1.7,
+    "ShortnessofBreath": 1.7,
+    "Wheezing": 5.7,
+    "SwallowingDifficulty": 1.1,
+    "ClubbingofFingerNails": 1.2,
+    "FrequentCold": 5.9,
+    "DryCough": 1.0,
+    "Snoring": 5.4,
+}
 
-# response = requests.post(URL, data=body)
-# response.json()
+response = requests.post(URL, data=body)
+response.json()
 
 
 # In[ ]:
