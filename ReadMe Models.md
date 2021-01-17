@@ -26,5 +26,5 @@ Report
            6       0.57      0.63      0.60        27
 
     accuracy                           0.74      1442
-    macro avg       0.51      0.44      0.46      1442
-    weighted avg       0.72      0.74      0.72      1442
+    macro avg      0.51      0.44      0.46      1442
+    weighted avg   0.72      0.74      0.72      1442
