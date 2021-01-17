@@ -15,8 +15,8 @@ Accuracy Score
 0.7441054091539528
 
 Report
-              precision    recall  f1-score   support
 
+	      precision    recall  f1-score   support
            0       0.44      0.22      0.29        55
            1       0.53      0.33      0.41        82
            2       0.50      0.50      0.50       161
