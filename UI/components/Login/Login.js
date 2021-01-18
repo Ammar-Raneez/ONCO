@@ -201,7 +201,21 @@ const Login = () => {
 	};
 
 	const onClickForgotPassword = () => {
-		
+		setClickedSignUp(false);
+
+		let isEmailValidAndPresentInFirebase = true;
+
+		// we set the click forget password to true only when the user has entered valid email stored in the firebase
+		if (isEmailValidAndPresentInFirebase) {
+			setClickForgetPassword(true);
+			setEmail('');
+			setPassword('');
+			setValidEmail(true);
+			setValidPassword(true);
+		} else {
+			setEmail('This Email is not Registered or invalid!');
+			setValidEmail(false);
+		}
 	};
 
 	return (
