@@ -7,7 +7,22 @@ import { TextInput } from 'react-native-gesture-handler';
 import LoginWelcome from './LoginWelcome';
 
 const Login = () => {
-	
+	const [displayWelcome, setDisplayWelcome] = useState(true);
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [username, setUsername] = useState('');
+	const [newPassword, setNewPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const opacity = useState(new Animated.Value(0.1))[0];
+
+	const [validUserName, setValidUserName] = useState(true);
+	const [validEmail, setValidEmail] = useState(true);
+	const [validPassword, setValidPassword] = useState(true);
+	const [clickForgetPassword, setClickForgetPassword] = useState(false);
+
+	const [validNewPassword, setValidNewPassword] = useState(true);
+	const [validConfirmPassword, setValidConfirmPassword] = useState(true);
+	const [clickedSignUp, setClickedSignUp] = useState(false);
 
 	// this is to update the displayWelcome component after a given time
 	useEffect(() => {
@@ -22,7 +37,7 @@ const Login = () => {
 	}, []);
 
 	const onClickLogin = () => {
-        let checkEmail = true;
+		let checkEmail = true;
 		let checkPassword = true;
 
 		// check if the user has filled the password
@@ -73,7 +88,6 @@ const Login = () => {
 
 
 		console.log('You Clicked Google Auth Login');
-
 	};
 	const onClickSignUp = () => {
 		let checkEmail = true;
@@ -219,8 +233,8 @@ const Login = () => {
 	};
 
 	return (
-        <SafeAreaView style={style.container}>
-            {displayWelcome ? (
+		<SafeAreaView style={style.container}>
+			{displayWelcome ? (
 				<>
 					<LoginWelcome />
 				</>
@@ -477,7 +491,7 @@ const Login = () => {
 							)}
 						</View>
 
-                        {/* MAIN BUTTONS */}
+						{/* MAIN BUTTONS */}
 						<View style={{ margin: 10 }}>
 							{clickForgetPassword ? (
 								// CONFIRM BUTTON (FOR CHANGING PASSWORDS)
@@ -506,7 +520,7 @@ const Login = () => {
 							</View>
 						</View>
 
-                        {/* Sign Up Footer */}
+						{/* Sign Up Footer */}
 						<View style={style.login__footer}>
 							<Text style={{ alignSelf: 'center', fontWeight: 600, color: '#2c7c8c' }}>
 								{!clickedSignUp ? (
@@ -551,8 +565,10 @@ const Login = () => {
 								)}
 							</Text>
 						</View>
-
-        </SafeAreaView>
+					</Animated.View>
+				</>
+			)}
+		</SafeAreaView>
 	);
 };
 const style = StyleSheet.create({
