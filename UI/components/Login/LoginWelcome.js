@@ -2,6 +2,13 @@ import React from 'react';
 import { Image, View, Animated, StyleSheet } from 'react-native';
 
 function LoginWelcome() {
+	// Animation
+	const position = new Animated.ValueXY({ x: 1, y: 1 });
+
+	Animated.timing(position, {
+		toValue: { x: 0.7, y: -100 },
+		duration: 5000,
+	}).start();
 
 	return (
 		<View style={style.container}>
