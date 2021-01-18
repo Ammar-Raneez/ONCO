@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "onco-ui",
-    "slug": "onco-ui",
+    "name": "onco",
+    "slug": "onco",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
