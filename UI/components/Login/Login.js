@@ -151,7 +151,52 @@ const Login = () => {
 	};
 
 	const onClickConfirmChangePass = () => {
-		
+		// checking if the new password and confirm password is more than 5 chars and both are equal
+
+		if (!newPassword && !confirmPassword) {
+			setNewPassword('Enter New Password!');
+			setConfirmPassword('Enter Confirm New Password!');
+			setValidNewPassword(false);
+			setValidConfirmPassword(false);
+
+		} else if (newPassword.length < 6) {
+			setNewPassword('Enter at least 6 characters!');
+			setValidNewPassword(false);
+
+		} else if (newPassword !== confirmPassword) {
+			setConfirmPassword('Invalid Confirm Password!');
+			setValidConfirmPassword(false);
+
+		} else {
+			// This means all good to go (BOTH NEW PASSWORD AND CONFIRM PASSWORD ARE EQUAL)
+			console.log("This is your new password: " + password);
+			console.log("This is your confirm password: " + confirmPassword);
+
+			// displays an alert on if any errors occurred or success message
+			Alert.alert(
+				'Alert Title',
+				'My Alert Msg',
+				[
+					{
+						text: 'Ask me later',
+						onPress: () => console.log('Ask me later pressed'),
+					},
+					{
+						text: 'Cancel',
+						onPress: () => console.log('Cancel Pressed'),
+						style: 'cancel',
+					},
+					{ text: 'OK', onPress: () => console.log('OK Pressed') },
+				],
+				{ cancelable: false }
+			);
+
+			// redirecting when the password is RESET!
+			// setClickForgetPassword(false);
+			// setNewPassword('');
+			// setValidConfirmPassword(true);
+			// setValidNewPassword(true);
+			// setConfirmPassword('');
 		}
 	};
 
