@@ -352,7 +352,29 @@ const Login = () => {
 											Sign Up
 										</Text>
 									</>
-								) 
+								) : (
+									// SIGN IN SECTION
+									<>
+										<Text
+											style={style.login__signUp}
+											onPress={() => {
+												setClickedSignUp(false);
+												setClickForgetPassword(false);
+												setEmail('');
+												setValidEmail(true);
+												setPassword('');
+												setValidPassword(true);
+												setUsername('');
+												setValidUserName(true);
+											}}
+										>
+											Sign In
+										</Text>{' '}
+										to your account.
+									</>
+								)}
+							</Text>
+						</View>
 
         </SafeAreaView>
 	);
