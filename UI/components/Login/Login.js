@@ -157,6 +157,72 @@ const Login = () => {
 										/>
 									</View>
 								</>
+							) : !clickForgetPassword ? (
+								// THIS DISPLAYS THE LOGIN SECTION ON THE APP
+								<>
+									<Text style={style.login__inputContainerLoginDetails}>Log in to your existing account</Text>
+
+									{/* This is the section when the user didn't click the forget button */}
+
+									{/* EMAIL */}
+									<View
+										style={[
+											style.login__inputContainerInputsSection,
+											!validEmail && style.redField,
+											validEmail && style.blueField,
+										]}
+									>
+										<PersonIcon />
+										<TextInput
+											style={[style.login__inputContainerInputs, !validEmail && style.invalidTextContent]}
+											onChangeText={(text) => {
+												setEmail(text);
+												setValidEmail(true);
+											}}
+											textContentType="emailAddress"
+											placeholder="Email Address"
+											value={email}
+											onFocus={() => {
+												if (!validEmail) {
+													setEmail('');
+												}
+											}}
+										/>
+									</View>
+
+									{/* PASSWORD */}
+									<View
+										style={[
+											style.login__inputContainerInputsSection,
+											!validPassword && style.redField,
+											validPassword && style.blueField,
+										]}
+									>
+										<LockIcon />
+										<TextInput
+											style={[style.login__inputContainerInputs, !validPassword && style.invalidTextContent]}
+											onChangeText={(text) => {
+												setPassword(text);
+												setValidPassword(true);
+											}}
+											textContentType="password"
+											placeholder="Password"
+											secureTextEntry={validPassword && true}
+											value={password}
+											onFocus={() => {
+												if (!validPassword) {
+													setPassword('');
+												}
+											}}
+										/>
+									</View>
+
+									{/* FORGOT PASSWORD SECTION */}
+									<Text style={style.login__forgotPasswordLink} onPress={onClickForgotPassword}>
+										Forgot Password?
+									</Text>
+								</>
+							) 
         </SafeAreaView>
 	);
 };
