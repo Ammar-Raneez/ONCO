@@ -380,6 +380,93 @@ const Login = () => {
 	);
 };
 const style = StyleSheet.create({
-	
+	container: {
+		height: '100vh',
+		flex: 1,
+		flexDirection: 'column',
+		justifyContent: 'space-between',
+	},
+	logo: {
+		height: '25px',
+		margin: '55px',
+		resizeMode: 'contain',
+	},
+	login__header: {
+		backgroundColor: '#01CDFA',
+		height: '20vh',
+	},
+	login__welcomeBack: {
+		alignItems: 'center',
+	},
+	login__welcomeBackMessage: {
+		fontFamily: 'Arial',
+		fontSize: '18px',
+		fontWeight: '600',
+		color: '#3f3f3f',
+	},
+	login__inputContainer: {
+		margin: '30px',
+	},
+	redField: {
+		borderColor: 'red',
+		borderWidth: 1,
+	},
+	blueField: {
+		borderWidth: 1,
+		borderColor: '#01CDFA',
+	},
+	login__inputContainerLoginDetails: {
+		alignSelf: 'center',
+		padding: 12,
+		fontSize: 13,
+		fontWeight: 600,
+		color: '#2c7c8c',
+	},
+	invalidTextContent: {
+		color: 'red',
+	},
+	login__inputContainerInputs: {
+		height: 20,
+		color: 'grey',
+		outline: 'none',
+		borderWidth: 0,
+		paddingLeft: '5px',
+		flex: 1,
+	},
+	login__inputContainerInputsSection: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		borderRadius: '40px',
+		flex: 1,
+		margin: '5px',
+		color: 'lightgrey',
+		padding: 18,
+		backgroundColor: 'white',
+		alignItems: 'center',
+	},
+	login__forgotPasswordLink: {
+		alignSelf: 'flex-end',
+		marginRight: 15,
+		marginTop: 5,
+		fontWeight: 600,
+		color: '#2c7c8c',
+	},
+	login__buttons: { width: 120, alignSelf: 'center', borderRadius: 30, overflow: 'hidden' },
+	login__buttonsGOOGLE: {
+		width: 120,
+		alignSelf: 'center',
+		borderRadius: 5,
+		overflow: 'hidden',
+	},
+	login__footer: {
+		position: 'relative',
+		backgroundColor: 'white',
+		bottom: 0,
+		padding: 15,
+	},
+	login__signUp: {
+		color: '#01CDFA',
+		fontWeight: 700,
+	},
 });
 export default Login;
