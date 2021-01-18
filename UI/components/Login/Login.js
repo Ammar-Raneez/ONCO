@@ -222,7 +222,85 @@ const Login = () => {
 										Forgot Password?
 									</Text>
 								</>
-							) 
+							) : (
+								// THIS SECTION DISPLAYS THE CHANGE PASSWORD SECTION ON THE APP
+								<>
+									<Text style={style.login__inputContainerLoginDetails}>Change your password</Text>
+
+									{/* This is the section when the user has clicked the forget password section */}
+
+									{/* NEW PASSWORD */}
+									<View
+										style={[
+											style.login__inputContainerInputsSection,
+											!validNewPassword && style.redField,
+											validNewPassword && style.blueField,
+										]}
+									>
+										<LockIcon />
+										<TextInput
+											style={[style.login__inputContainerInputs, !validNewPassword && style.invalidTextContent]}
+											onChangeText={(text) => {
+												setNewPassword(text);
+												setValidNewPassword(true);
+											}}
+											textContentType="password"
+											placeholder="New Password"
+											secureTextEntry={validNewPassword && true}
+											value={newPassword}
+											onFocus={() => {
+												if (!validNewPassword) {
+													setNewPassword('');
+												}
+											}}
+										/>
+									</View>
+
+									{/* CONFIRM PASSWORD */}
+									<View
+										style={[
+											style.login__inputContainerInputsSection,
+											!validConfirmPassword && style.redField,
+											validConfirmPassword && style.blueField,
+										]}
+									>
+										<LockIcon />
+										<TextInput
+											style={[style.login__inputContainerInputs, !validConfirmPassword && style.invalidTextContent]}
+											onChangeText={(text) => {
+												setConfirmPassword(text);
+												setValidConfirmPassword(true);
+											}}
+											textContentType="password"
+											placeholder="Confirm Password"
+											secureTextEntry={validConfirmPassword && true}
+											value={confirmPassword}
+											onFocus={() => {
+												if (!validConfirmPassword) {
+													setConfirmPassword('');
+												}
+											}}
+										/>
+									</View>
+
+									{/* GO BACK BUTTON */}
+									<Text
+										style={style.login__forgotPasswordLink}
+										onPress={() => {
+											setClickForgetPassword(false);
+											setNewPassword('');
+											setValidConfirmPassword(true);
+											setValidNewPassword(true);
+											setConfirmPassword('');
+											setClickedSignUp(false);
+										}}
+									>
+										Go back
+									</Text>
+								</>
+							)}
+						</View>
+
         </SafeAreaView>
 	);
 };
