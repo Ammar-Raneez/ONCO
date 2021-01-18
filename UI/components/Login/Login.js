@@ -22,7 +22,48 @@ const Login = () => {
 	}, []);
 
 	const onClickLogin = () => {
+        let checkEmail = true;
+		let checkPassword = true;
 
+		// check if the user has filled the password
+		if (!password) {
+			setPassword('Enter Password!');
+			setValidPassword(false);
+			checkPassword = false;
+		} else if (password.length < 6) {
+			setPassword('Enter at least 6 characters!');
+			setValidPassword(false);
+			checkPassword = false;
+		} else if (password !== 'Enter at least 6 characters!' && password !== 'Enter Password!') {
+			setValidPassword(true);
+			checkPassword = true;
+		} else {
+			setValidPassword(false);
+			checkPassword = false;
+		}
+
+		// check for email format but anyways checking will be further done by FIREBASE
+		if (!email.includes('@')) {
+			setEmail('Invalid Email Format!');
+			setValidEmail(false);
+			checkEmail = false;
+		} else {
+			setValidEmail(true);
+			checkEmail = true;
+		}
+
+		// NOW WE ARE GOOD TO CHECK WITH FIREBASE AND PROCEED (we can do email validation with firebase as well)
+		if (checkEmail && checkPassword) {
+			// FIREBASE MAIN CODE GOES HERE!!!
+
+			console.log('You are LOGGING into your account, please hold on...');
+			console.log('This is your email: ' + email);
+			console.log('This is your password: ' + password);
+		}
+
+		// once all the firebase stuff is completed we reset the fields
+		// setEmail();
+		// setPassword();
 	};
 
 	const onClickGoogleLogin = () => {
