@@ -301,6 +301,35 @@ const Login = () => {
 							)}
 						</View>
 
+                        {/* MAIN BUTTONS */}
+						<View style={{ margin: 10 }}>
+							{clickForgetPassword ? (
+								// CONFIRM BUTTON (FOR CHANGING PASSWORDS)
+								<View style={style.login__buttons}>
+									<Button onPress={onClickConfirmChangePass} title="Confirm" color="#01CDFA" />
+								</View>
+							) : clickedSignUp ? (
+								// SIGN UP BUTTON
+								<View style={style.login__buttons}>
+									<Button onPress={onClickSignUp} title="Sign Up" color="#01CDFA" />
+								</View>
+							) : (
+								// LOGIN BUTTON
+								<View style={style.login__buttons}>
+									<Button onPress={onClickLogin} title="Login" color="#01CDFA" />
+								</View>
+							)}
+
+							<Text style={{ alignSelf: 'center', margin: 15, fontWeight: 600, color: '#2c7c8c' }}>
+								Or connect using Google
+							</Text>
+
+							{/* GOOGLE LOGIN BUTTON */}
+							<View style={style.login__buttonsGOOGLE}>
+								<Button onPress={onClickGoogleLogin} bo title="Google" color="red" />
+							</View>
+						</View>
+
         </SafeAreaView>
 	);
 };
