@@ -69,9 +69,85 @@ const Login = () => {
 	const onClickGoogleLogin = () => {
 
 
+		// HERE GOES GOOGLE AUTH BY FIREBASE
+
+
+		console.log('You Clicked Google Auth Login');
+
 	};
 	const onClickSignUp = () => {
-	
+		let checkEmail = true;
+		let checkPassword = true;
+		let checkUsername = true;
+
+		// we have to check if all the 3 fields (username, email, password) are all filled
+		if (!password && !email) {
+			setEmail('Enter Email Address!');
+			setPassword('Enter Password!');
+
+			setValidEmail(false);
+			checkEmail = false;
+
+			setValidPassword(false);
+			checkPassword = false;
+
+		} else if (password.length < 6) {
+			setPassword('Enter at least 6 characters!');
+			setValidPassword(false);
+			checkPassword = false;
+
+		} else if (password !== 'Enter at least 6 characters!' && password !== 'Enter Password!') {
+			setValidPassword(true);
+			checkPassword = true;
+
+		} else {
+			setValidPassword(false);
+			checkPassword = false;
+		}
+
+		// check for email format but anyways checking will be further done by FIREBASE
+		if (!email.includes('@')) {
+			setEmail('Invalid Email Format!');
+			setValidEmail(false);
+			checkEmail = false;
+
+		} else if (email !== 'Enter Email Address!' && email !== 'Invalid Email Format!') {
+			setValidEmail(true);
+			checkEmail = true;
+
+		} else {
+			setValidEmail(false);
+			checkEmail = false;
+
+		}
+
+		// VALIDATION for the USERNAME
+		if (!username) {
+			setUsername('Enter Username!');
+			setValidUserName(false);
+			checkUsername = false;
+
+		} else if (username !== 'Enter Username!') {
+			setValidUserName(true);
+			checkUsername = true;
+		} else {
+			setValidUserName(false);
+			checkUsername = false;
+		}
+
+		// FIREBASE PART FOR SIGNING UP THE NEW USER
+		if (checkEmail && checkPassword && checkUsername) {
+			console.log('You are signing up your new account, congrats!!!');
+
+			// FIREBASE SIGN UP PART GOES HERE!!!
+		}
+
+		// AFTER ALL THE SIGN UP HAPPENS WE RESET THE INPUT FIELDS AND REDIRECT TO THE LOG IN PAGE
+		// setEmail('');
+		// setPassword('');
+		// setUsername('');
+
+		// setClickedSignUp(false);
 	};
 
 	const onClickConfirmChangePass = () => {
