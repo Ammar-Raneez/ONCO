@@ -330,6 +330,30 @@ const Login = () => {
 							</View>
 						</View>
 
+                        {/* Sign Up Footer */}
+						<View style={style.login__footer}>
+							<Text style={{ alignSelf: 'center', fontWeight: 600, color: '#2c7c8c' }}>
+								{!clickedSignUp ? (
+									// SIGN UP SECTION
+									<>
+										Don't have an account?{' '}
+										<Text
+											style={style.login__signUp}
+											onPress={() => {
+												setClickedSignUp(true);
+												setEmail('');
+												setValidEmail(true);
+												setPassword('');
+												setValidPassword(true);
+												setUsername('');
+												setValidUserName(true);
+											}}
+										>
+											Sign Up
+										</Text>
+									</>
+								) 
+
         </SafeAreaView>
 	);
 };
