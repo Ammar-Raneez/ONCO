@@ -1,24 +1,37 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up"],
+         "patterns": ["Hi", "How are you", "hey", "yo", "Is anyone there?", "Hello", "Good day", "Whats up"],
          "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?", "Hello there!, how are you feeling today?"],
          "context_set": ""
         },
+  
         {"tag": "goodbye",
          "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day"],
-         "responses": ["Sad to see you go :( Please take care of your health!", "Talk to you later, take care!", "Goodbye! Always stay safe!",                        "Take care", "Be safe!", "I'm always here if you need me <3"],
+         "responses": ["Sad to see you go :( Please take care of your health!", "Talk to you later, take care!", "Goodbye! Always stay safe!", "Take care", "Be safe!", "I'm always here if you need me <3"],
          "context_set": ""
         },
+ 
         {"tag": "name",
          "patterns": ["what is your name", "what should I call you", "whats your name?"],
          "responses": ["You can call me CHANCO (Chatbot + ONCO :P).", "I am CHANCO!", "I am CHANCO aka chatbot + ONCO!"],
          "context_set": ""
         },
-        {"tag": "sick",
+ 
+        {"tag": "firstsickprompt",
          "patterns": ["I am not feeling well", "I feel sick", "something is wrong with me", "I do not think I am of perfect health"],
-         "responses": ["I am sorry to hear that, but do not panic! I can be of help :)", "not to worry, you have me! lets get started",
-                       "oh is that so :( Not to worry I am the 'chanciest' :P out there", "I can be of help!", "Please dont worry, you got                             me!", "Not to worry! I am very dependable when it comes to your health!"],
+         "responses": ["I am sorry to hear that, but do not panic! I can be of help :) What symptoms do you have?", "not to worry, you have me! lets get started, what do have?",
+                       "oh is that so :( Not to worry I am the 'chanciest' :P out there", "I can be of help! What symptoms do you have?", "Please dont worry, you got me!", "Not to worry! I am very dependable when it comes to your health! Tell me, what do you have"],
          "context_set": ""
+        },
+
+        {"tag": "lungcancerintialsymptoms",
+         "patterns": ["cough", "i have a cough", "chest pain", "my chest pains", "chest aches", "i feel unusually tired", "i feel too tired", "i feel exhausted", "i get tired too easily", "no energy", "lack in energy", "i dont want to eat", "i dont have an appetite", "i dont have an appetite", "i dont want to eat"],
+         "responses": ["I am sorry to hear that... These symptoms however can be less serious than you think! :) So please let me know further symptoms that you might have (Coughing up blood, a cough that does not stop, breathlessness)"]
+        },
+    
+        {"tag": "lungcancersecondarysymptoms",
+         "patterns": ["cough blood", "i cough blood", "out of breathe", "breathing difficulties", "hard to breathe", "non stop cough", "long cough"],
+         "responses": ["I suspect a chance of you having lung cancer... I'm really sorry to tell you this. But Please do not panic! Contact your doctor right away for further information"]
         }
    ]
 }
