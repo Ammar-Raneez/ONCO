@@ -1,8 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 
 const Home = () => {
-	return <Text>Home Screen</Text>;
+	return (
+		<SafeAreaView>
+			<Text>Home Screen</Text>
+		</SafeAreaView>
+	);
 };
 
 export default Home;

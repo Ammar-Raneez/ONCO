@@ -8,6 +8,7 @@ function LoginWelcome() {
 	Animated.timing(position, {
 		toValue: { x: 0.7, y: -100 },
 		duration: 5000,
+		useNativeDriver: true 
 	}).start();
 
 	return (
@@ -32,10 +33,10 @@ const style = StyleSheet.create({
 	container: {
 		backgroundColor: '#01CDFA',
 		flex: 1,
-		paddingTop: '150px',
+		paddingTop: 150,
 	},
 	logo: {
-		height: '35px',
+		height: 35,
 		resizeMode: 'contain',
 	},
 });

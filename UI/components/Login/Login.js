@@ -32,6 +32,7 @@ const Login = () => {
 			Animated.timing(opacity, {
 				toValue: 1,
 				duration: 1500,
+				useNativeDriver: true,
 			}).start();
 		}, 5000);
 	}, []);
@@ -82,10 +83,7 @@ const Login = () => {
 	};
 
 	const onClickGoogleLogin = () => {
-
-
 		// HERE GOES GOOGLE AUTH BY FIREBASE
-
 
 		console.log('You Clicked Google Auth Login');
 	};
@@ -104,16 +102,13 @@ const Login = () => {
 
 			setValidPassword(false);
 			checkPassword = false;
-
 		} else if (password.length < 6) {
 			setPassword('Enter at least 6 characters!');
 			setValidPassword(false);
 			checkPassword = false;
-
 		} else if (password !== 'Enter at least 6 characters!' && password !== 'Enter Password!') {
 			setValidPassword(true);
 			checkPassword = true;
-
 		} else {
 			setValidPassword(false);
 			checkPassword = false;
@@ -124,15 +119,12 @@ const Login = () => {
 			setEmail('Invalid Email Format!');
 			setValidEmail(false);
 			checkEmail = false;
-
 		} else if (email !== 'Enter Email Address!' && email !== 'Invalid Email Format!') {
 			setValidEmail(true);
 			checkEmail = true;
-
 		} else {
 			setValidEmail(false);
 			checkEmail = false;
-
 		}
 
 		// VALIDATION for the USERNAME
@@ -140,7 +132,6 @@ const Login = () => {
 			setUsername('Enter Username!');
 			setValidUserName(false);
 			checkUsername = false;
-
 		} else if (username !== 'Enter Username!') {
 			setValidUserName(true);
 			checkUsername = true;
@@ -172,19 +163,16 @@ const Login = () => {
 			setConfirmPassword('Enter Confirm New Password!');
 			setValidNewPassword(false);
 			setValidConfirmPassword(false);
-
 		} else if (newPassword.length < 6) {
 			setNewPassword('Enter at least 6 characters!');
 			setValidNewPassword(false);
-
 		} else if (newPassword !== confirmPassword) {
 			setConfirmPassword('Invalid Confirm Password!');
 			setValidConfirmPassword(false);
-
 		} else {
 			// This means all good to go (BOTH NEW PASSWORD AND CONFIRM PASSWORD ARE EQUAL)
-			console.log("This is your new password: " + password);
-			console.log("This is your confirm password: " + confirmPassword);
+			console.log('This is your new password: ' + password);
+			console.log('This is your confirm password: ' + confirmPassword);
 
 			// displays an alert on if any errors occurred or success message
 			Alert.alert(
@@ -276,7 +264,9 @@ const Login = () => {
 											validUserName && style.blueField,
 										]}
 									>
-										<AccountCircleIcon />
+										<View>
+											<AccountCircleIcon />
+										</View>
 										<TextInput
 											style={[style.login__inputContainerInputs, !validUserName && style.invalidTextContent]}
 											onChangeText={(text) => {
@@ -302,7 +292,9 @@ const Login = () => {
 											validEmail && style.blueField,
 										]}
 									>
-										<PersonIcon />
+										<View>
+											<PersonIcon />
+										</View>
 										<TextInput
 											style={[style.login__inputContainerInputs, !validEmail && style.invalidTextContent]}
 											onChangeText={(text) => {
@@ -328,7 +320,9 @@ const Login = () => {
 											validPassword && style.blueField,
 										]}
 									>
-										<LockIcon />
+										<View>
+											<LockIcon />
+										</View>
 										<TextInput
 											style={[style.login__inputContainerInputs, !validPassword && style.invalidTextContent]}
 											onChangeText={(text) => {
@@ -362,7 +356,9 @@ const Login = () => {
 											validEmail && style.blueField,
 										]}
 									>
-										<PersonIcon />
+										<View>
+											<PersonIcon />
+										</View>
 										<TextInput
 											style={[style.login__inputContainerInputs, !validEmail && style.invalidTextContent]}
 											onChangeText={(text) => {
@@ -388,7 +384,9 @@ const Login = () => {
 											validPassword && style.blueField,
 										]}
 									>
-										<LockIcon />
+										<View>
+											<LockIcon />
+										</View>
 										<TextInput
 											style={[style.login__inputContainerInputs, !validPassword && style.invalidTextContent]}
 											onChangeText={(text) => {
@@ -427,7 +425,9 @@ const Login = () => {
 											validNewPassword && style.blueField,
 										]}
 									>
-										<LockIcon />
+										<View>
+											<LockIcon />
+										</View>
 										<TextInput
 											style={[style.login__inputContainerInputs, !validNewPassword && style.invalidTextContent]}
 											onChangeText={(text) => {
@@ -454,7 +454,9 @@ const Login = () => {
 											validConfirmPassword && style.blueField,
 										]}
 									>
-										<LockIcon />
+										<View>
+											<LockIcon />
+										</View>
 										<TextInput
 											style={[style.login__inputContainerInputs, !validConfirmPassword && style.invalidTextContent]}
 											onChangeText={(text) => {
@@ -510,7 +512,7 @@ const Login = () => {
 								</View>
 							)}
 
-							<Text style={{ alignSelf: 'center', margin: 15, fontWeight: 600, color: '#2c7c8c' }}>
+							<Text style={{ alignSelf: 'center', margin: 15, fontWeight: '600', color: '#2c7c8c' }}>
 								Or connect using Google
 							</Text>
 
@@ -522,7 +524,7 @@ const Login = () => {
 
 						{/* Sign Up Footer */}
 						<View style={style.login__footer}>
-							<Text style={{ alignSelf: 'center', fontWeight: 600, color: '#2c7c8c' }}>
+							<Text style={{ alignSelf: 'center', fontWeight: '600', color: '#2c7c8c' }}>
 								{!clickedSignUp ? (
 									// SIGN UP SECTION
 									<>
@@ -573,31 +575,31 @@ const Login = () => {
 };
 const style = StyleSheet.create({
 	container: {
-		height: '100vh',
+		// height: 100,
 		flex: 1,
 		flexDirection: 'column',
 		justifyContent: 'space-between',
 	},
 	logo: {
-		height: '25px',
-		margin: '55px',
+		height: 25,
+		margin: 55,
 		resizeMode: 'contain',
 	},
 	login__header: {
 		backgroundColor: '#01CDFA',
-		height: '20vh',
+		height: 120,
 	},
 	login__welcomeBack: {
 		alignItems: 'center',
 	},
 	login__welcomeBackMessage: {
-		fontFamily: 'Arial',
-		fontSize: '18px',
+		// fontFamily: 'Arial',
+		fontSize: 18,
 		fontWeight: '600',
 		color: '#3f3f3f',
 	},
 	login__inputContainer: {
-		margin: '30px',
+		margin: 30,
 	},
 	redField: {
 		borderColor: 'red',
@@ -611,7 +613,7 @@ const style = StyleSheet.create({
 		alignSelf: 'center',
 		padding: 12,
 		fontSize: 13,
-		fontWeight: 600,
+		fontWeight: '600',
 		color: '#2c7c8c',
 	},
 	invalidTextContent: {
@@ -620,17 +622,16 @@ const style = StyleSheet.create({
 	login__inputContainerInputs: {
 		height: 20,
 		color: 'grey',
-		outline: 'none',
 		borderWidth: 0,
-		paddingLeft: '5px',
+		paddingLeft: 5,
 		flex: 1,
 	},
 	login__inputContainerInputsSection: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		borderRadius: '40px',
+		borderRadius: 40,
 		flex: 1,
-		margin: '5px',
+		margin: 5,
 		color: 'lightgrey',
 		padding: 18,
 		backgroundColor: 'white',
@@ -640,7 +641,7 @@ const style = StyleSheet.create({
 		alignSelf: 'flex-end',
 		marginRight: 15,
 		marginTop: 5,
-		fontWeight: 600,
+		fontWeight: '600',
 		color: '#2c7c8c',
 	},
 	login__buttons: { width: 120, alignSelf: 'center', borderRadius: 30, overflow: 'hidden' },
@@ -658,7 +659,7 @@ const style = StyleSheet.create({
 	},
 	login__signUp: {
 		color: '#01CDFA',
-		fontWeight: 700,
+		fontWeight: '700',
 	},
 });
 export default Login;
