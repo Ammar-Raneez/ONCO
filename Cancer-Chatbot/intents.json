@@ -1,0 +1,24 @@
+{"intents": [
+        {"tag": "greeting",
+         "patterns": ["Hi", "How are you", "Is anyone there?", "Hello", "Good day", "Whats up"],
+         "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?", "Hello there!, how are you feeling today?"],
+         "context_set": ""
+        },
+        {"tag": "goodbye",
+         "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day"],
+         "responses": ["Sad to see you go :( Please take care of your health!", "Talk to you later, take care!", "Goodbye! Always stay safe!",                        "Take care", "Be safe!", "I'm always here if you need me <3"],
+         "context_set": ""
+        },
+        {"tag": "name",
+         "patterns": ["what is your name", "what should I call you", "whats your name?"],
+         "responses": ["You can call me CHANCO (Chatbot + ONCO :P).", "I am CHANCO!", "I am CHANCO aka chatbot + ONCO!"],
+         "context_set": ""
+        },
+        {"tag": "sick",
+         "patterns": ["I am not feeling well", "I feel sick", "something is wrong with me", "I do not think I am of perfect health"],
+         "responses": ["I am sorry to hear that, but do not panic! I can be of help :)", "not to worry, you have me! lets get started",
+                       "oh is that so :( Not to worry I am the 'chanciest' :P out there", "I can be of help!", "Please dont worry, you got                             me!", "Not to worry! I am very dependable when it comes to your health!"],
+         "context_set": ""
+        }
+   ]
+}
