@@ -26,12 +26,26 @@
 
         {"tag": "lungcancerintialsymptoms",
          "patterns": ["cough", "i have a cough", "chest pain", "my chest pains", "chest aches", "i feel unusually tired", "i feel too tired", "i feel exhausted", "i get tired too easily", "no energy", "lack in energy", "i dont want to eat", "i dont have an appetite", "i dont have an appetite", "i dont want to eat"],
-         "responses": ["I am sorry to hear that... These symptoms however can be less serious than you think! :) So please let me know further symptoms that you might have (Coughing up blood, a cough that does not stop, breathlessness)"]
+         "responses": ["I am sorry to hear that... These symptoms however can be less serious than you think! :) So please let me know further symptoms that you might have (Coughing up blood, a cough that does not stop, breathlessness)"],
+         "context_set": ""
         },
     
         {"tag": "lungcancersecondarysymptoms",
          "patterns": ["cough blood", "i cough blood", "out of breathe", "breathing difficulties", "hard to breathe", "non stop cough", "long cough"],
-         "responses": ["I suspect a chance of you having lung cancer... I'm really sorry to tell you this. But Please do not panic! Contact your doctor right away for further information"]
+         "responses": ["I suspect a chance of you having lung cancer... But there's always a chance of positivity! I suggest that you please get an x-ray uploaded on our detection section such that we can confirm"],
+         "context_set": ""
+        },
+    
+        {"tag": "breastcancerinitialsymptoms",
+         "patterns": [],
+         "responses": [],
+         "context_set": ""
+        },
+    
+        {"tag": "breastcancersecondarysymptoms",
+         "patterns": [],
+         "responses": [],
+         "context_set": ""
         }
    ]
 }
