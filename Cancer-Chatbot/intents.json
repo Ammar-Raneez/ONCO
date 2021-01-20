@@ -40,7 +40,7 @@
          "patterns": ["breast size change", "breast swelling", "breast darkening", "breast warmth"],
          "responses": ["I am sorry to hear that... But fret not! Please do not be alarmed, because this can be not as serious as you think :), but just for confirmation, could you let me know any further symptoms that you might have (breast pain, any lumps near shoulder or breast, any peeling/flaking of skin surrounding the nipple)"],
          "context": [""]
-        }
+        },
         
         {"tag": "bc_main",
          "patterns": ["breast aches", "my breast pains", "shoulder lump", "breast lump", "nipple skin flaking", "skin around nipple unusual", "peeling of skin around nipple"],
@@ -49,9 +49,9 @@
         },
             
         {"tag": "noanswer",
-         "patterns": [],
+         "patterns": [""],
          "responses": ["Sorry, can't understand you, I am not perfect :'(", "Please give me more info :(", "Not sure I understand :("],
          "context": [""]
-        },
+        }
    ]
 }
