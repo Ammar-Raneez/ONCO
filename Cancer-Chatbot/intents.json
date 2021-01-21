@@ -2,56 +2,67 @@
         {"tag": "greeting",
          "patterns": ["Hi", "How are you", "hey", "yo", "Is anyone there?", "Hello", "Good day", "Whats up"],
          "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?", "Hello there!, how are you feeling today?"],
-         "context": [""]
         },
   
         {"tag": "goodbye",
          "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day"],
          "responses": ["Sad to see you go :( Please take care of your health!", "Talk to you later, take care!", "Goodbye! Always stay safe!", "Take care", "Be safe!", "I'm always here if you need me <3"],
-         "context": [""]
         },
  
         {"tag": "name",
          "patterns": ["what is your name", "what should I call you", "whats your name?"],
-         "responses": ["You can call me CHANCO (Chatbot + ONCO :P).", "I am CHANCO!", "I am CHANCO aka chatbot + ONCO!"],
-         "context": [""]
+         "responses": ["You can call me CHANCO (Chatbot + ONCO :P). Hope it sounds catch!", "I am CHANCO! does it fit?", "I am CHANCO aka chatbot + ONCO! Cringey?"],
+         "context": "name"
+        },
+    
+        {"tag": "name_yes",
+         "patterns": ["yes", "haha yes", "yep", "nice", "indeed", "yup"]
+         "responses": ["Yayyy thankyou!", "hahaha yayy, I do think its cringey tho :P", "See! I am smart ;)"],
+         "context_filter": "name"
+        },
+
+        {"tag": "name_no",
+         "patterns": ["nah", "no", "nope", "not really", "Ew", "cringe"],
+         "responses": ["oh. :/", "For reals?? :'[", "Aww.. I really thought it would be nice :/"],
+         "context_filter": "name"
         },
  
+        {"tag": "thanks",
+         "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
+         "responses": ["Happy to help!", "Any time!", "My pleasure"],
+        },
+    
         {"tag": "first",
          "patterns": ["I am not feeling well", "I feel sick", "something is wrong with me", "I do not think I am of perfect health"],
          "responses": ["I am sorry to hear that, but do not panic! I can be of help :) What symptoms do you have?", "not to worry, you have me! lets get started, what do have?",
                        "oh is that so :( Not to worry I am the 'chanciest' :P out there", "I can be of help! What symptoms do you have?", "Please dont worry, you got me!", "Not to worry! I am very dependable when it comes to your health! Tell me, what do you have"],
-         "context": [""]
+         "context": "firstQ"
         },
 
         {"tag": "lc_initial",
          "patterns": ["cough", "chest pain", "chest aches", "i feel unusually tired", "i feel too tired", "i feel exhausted", "i get tired too easily", "no energy", "lack in energy", "i dont want to eat", "i dont have an appetite", "i dont want to eat"],
          "responses": ["I am sorry to hear that... These symptoms however can be less serious than you think! :) So please let me know further symptoms that you might have (Coughing up blood, a cough that does not stop, breathlessness)"],
-         "context": [""]
+         "context_filter": "firstQ",
+         "context": "lc"
         },
     
         {"tag": "lc_main",
-         "patterns": ["cough blood", "i cough blood", "out of breathe", "breathing difficulties", "hard to breathe", "non stop cough", "long cough"],
+         "patterns": ["yes", "yea", "cough blood", "i cough blood", "out of breathe", "breathing difficulties", "hard to breathe", "non stop cough", "long cough"],
          "responses": ["I suspect a chance of you having lung cancer... But there's always a chance of positivity! I suggest that you please get an x-ray uploaded on our detection section so that we can confirm"],
-         "context": [""]
+         "context_filter": "lc"
         },
     
         {"tag": "bc_initial",
          "patterns": ["breast size change", "breast swelling", "breast darkening", "breast warmth"],
          "responses": ["I am sorry to hear that... But fret not! Please do not be alarmed, because this can be not as serious as you think :), but just for confirmation, could you let me know any further symptoms that you might have (breast pain, any lumps near shoulder or breast, any peeling/flaking of skin surrounding the nipple)"],
-         "context": [""]
+         "context_filter": "firstQ",
+         "context": "bc"
         },
         
         {"tag": "bc_main",
-         "patterns": ["breast aches", "my breast pains", "shoulder lump", "breast lump", "nipple skin flaking", "skin around nipple unusual", "peeling of skin around nipple"],
+         "patterns": ["yes", "yea", "breast aches", "my breast pains", "shoulder lump", "breast lump", "nipple skin flaking", "skin around nipple unusual", "peeling of skin around nipple"],
          "responses": ["I suspect a chance of you having breast cancer... But please do not panic right away, because I myself could always get a better reassurance by something else. So I would uggest that you please get a mammogram uploaded on our detection section so that we can confirm ASAP"],
-         "context": [""]
-        },
-            
-        {"tag": "noanswer",
-         "patterns": [""],
-         "responses": ["Sorry, can't understand you, I am not perfect :'(", "Please give me more info :(", "Not sure I understand :("],
-         "context": [""]
+         "context_filter": "bc"
         }
    ]
 }
