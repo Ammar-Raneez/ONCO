@@ -1,12 +1,12 @@
 {"intents": [
         {"tag": "greeting",
          "patterns": ["Hi", "How are you", "hey", "yo", "Is anyone there?", "Hello", "Good day", "Whats up"],
-         "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?", "Hello there!, how are you feeling today?"],
+         "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?", "Hello there!, how are you feeling today?"]
         },
   
         {"tag": "goodbye",
          "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day"],
-         "responses": ["Sad to see you go :( Please take care of your health!", "Talk to you later, take care!", "Goodbye! Always stay safe!", "Take care", "Be safe!", "I'm always here if you need me <3"],
+         "responses": ["Sad to see you go :( Please take care of your health!", "Talk to you later, take care!", "Goodbye! Always stay safe!", "Take care", "Be safe!", "I'm always here if you need me <3"]
         },
  
         {"tag": "name",
@@ -16,7 +16,7 @@
         },
     
         {"tag": "name_yes",
-         "patterns": ["yes", "haha yes", "yep", "nice", "indeed", "yup"]
+         "patterns": ["yes", "haha yes", "yep", "nice", "indeed", "yup"],
          "responses": ["Yayyy thankyou!", "hahaha yayy, I do think its cringey tho :P", "See! I am smart ;)"],
          "context_filter": "name"
         },
@@ -29,7 +29,7 @@
  
         {"tag": "thanks",
          "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
-         "responses": ["Happy to help!", "Any time!", "My pleasure"],
+         "responses": ["Happy to help!", "Any time!", "My pleasure"]
         },
     
         {"tag": "first",
@@ -42,7 +42,6 @@
         {"tag": "lc_initial",
          "patterns": ["cough", "chest pain", "chest aches", "i feel unusually tired", "i feel too tired", "i feel exhausted", "i get tired too easily", "no energy", "lack in energy", "i dont want to eat", "i dont have an appetite", "i dont want to eat"],
          "responses": ["I am sorry to hear that... These symptoms however can be less serious than you think! :) So please let me know further symptoms that you might have (Coughing up blood, a cough that does not stop, breathlessness)"],
-         "context_filter": "firstQ",
          "context": "lc"
         },
     
@@ -55,7 +54,6 @@
         {"tag": "bc_initial",
          "patterns": ["breast size change", "breast swelling", "breast darkening", "breast warmth"],
          "responses": ["I am sorry to hear that... But fret not! Please do not be alarmed, because this can be not as serious as you think :), but just for confirmation, could you let me know any further symptoms that you might have (breast pain, any lumps near shoulder or breast, any peeling/flaking of skin surrounding the nipple)"],
-         "context_filter": "firstQ",
          "context": "bc"
         },
         
