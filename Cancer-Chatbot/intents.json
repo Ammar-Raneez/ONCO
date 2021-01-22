@@ -35,8 +35,7 @@
         {"tag": "first",
          "patterns": ["I am not feeling well", "I feel sick", "something is wrong with me", "I do not think I am of perfect health"],
          "responses": ["I am sorry to hear that, but do not panic! I can be of help :) What symptoms do you have?", "not to worry, you have me! lets get started, what do have?",
-                       "oh is that so :( Not to worry I am the 'chanciest' :P out there", "I can be of help! What symptoms do you have?", "Please dont worry, you got me!", "Not to worry! I am very dependable when it comes to your health! Tell me, what do you have"],
-         "context": "firstQ"
+                       "oh is that so :( Not to worry I am the 'chanciest' :P out there, please tell me, what do you have?", "I can be of help! What symptoms do you have?", "Please dont worry, you got me!", "Not to worry! I am very dependable when it comes to your health! Tell me, what do you have"],
         },
 
         {"tag": "lc_initial",
