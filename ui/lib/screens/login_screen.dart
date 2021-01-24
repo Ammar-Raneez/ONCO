@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Flexible(
@@ -70,7 +71,28 @@ class _LoginScreenState extends State<LoginScreen> {
               Text(
                 "Change Existing Password", textAlign: TextAlign.end,
               ),
-
+              RoundedButton(
+                  onPressed: ()  {
+                    //Implement login functionality.
+                  },
+                  colour: Colors.lightBlueAccent,
+                  title:'LOG IN'
+              ),
+              RoundedButton(
+                  onPressed: ()  {
+                    //Implement login functionality.
+                  },
+                  colour: Colors.redAccent,
+                  title:'Google'
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Don't have an account?"),
+                  Text("Sign Up"),
+                ],
+              )
             ],
           ),
         ),
