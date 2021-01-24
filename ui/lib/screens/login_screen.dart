@@ -17,20 +17,40 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Center(
         child: Container(
           decoration: BoxDecoration(gradient: kBackgroundBlueGradient),
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Flexible(
-                child: Hero(
-                  tag: "logo",
-                  child: Container(
-                    height: 30,
-                    child: Image.asset('images/officialLogo.png'),
+          child: Padding(
+            padding: EdgeInsets.all(35.0),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Flexible(
+                  child: Hero(
+                    tag: "logo",
+                    child: Container(
+                      height: 20,
+                      child: Image.asset('images/officialLogo.png'),
+                    ),
                   ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 48.0,
+                ),
+                Expanded(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Flexible(
+                        child: Container(
+                          height: 250,
+                          child: Image.asset('images/clouds.png'),
+                        ),
+                      ),
+                      Text("Welcome back!")
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

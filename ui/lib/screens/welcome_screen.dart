@@ -59,7 +59,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 tag: "logo",
                 child: Container(
                   child: Image.asset('images/officialLogo.png'),
-                  height: animation.value * 50,
+                  height: animation.value * 45,
                 ),
               )
             ],
