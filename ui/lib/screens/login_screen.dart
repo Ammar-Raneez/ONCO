@@ -11,8 +11,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool displayClouds = true;
+
   @override
   Widget build(BuildContext context) {
+    double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -20,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
           gradient: kBackgroundBlueGradient,
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
+          padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -36,23 +40,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              Flexible(
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black)),
-                      height: 150,
-                      child: Image.asset('images/clouds.png'),
-                    ),
-                    Text("Welcome back!")
-                  ],
+              if (keyboardOpenVisibility == 0.0)
+                Flexible(
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black)),
+                        height: 150,
+                        child: Image.asset('images/clouds.png'),
+                      ),
+                      Text("Welcome back!")
+                    ],
+                  ),
                 ),
-              ),
-              Text(
-                "Log in to your existing account", textAlign: TextAlign.center,
-              ),
+              if (keyboardOpenVisibility == 0.0)
+                Text(
+                  "Log in to your existing account",
+                  textAlign: TextAlign.center,
+                ),
               TextField(
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
@@ -69,22 +76,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 // decoration: kTextFieldDecoration.copyWith(hintText: "Enter your password"),
               ),
               Text(
-                "Change Existing Password", textAlign: TextAlign.end,
+                "Change Existing Password",
+                textAlign: TextAlign.end,
               ),
               RoundedButton(
-                  onPressed: ()  {
+                  onPressed: () {
                     //Implement login functionality.
+                    setState(() {
+                      print(keyboardOpenVisibility);
+                    });
                   },
                   colour: Colors.lightBlueAccent,
-                  title:'LOG IN'
-              ),
+                  title: 'LOG IN'),
               RoundedButton(
-                  onPressed: ()  {
+                  onPressed: () {
                     //Implement login functionality.
                   },
                   colour: Colors.redAccent,
-                  title:'Google'
-              ),
+                  title: 'Google'),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
