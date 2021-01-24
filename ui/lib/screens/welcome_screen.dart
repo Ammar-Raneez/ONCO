@@ -19,7 +19,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void initState() {
     super.initState();
     controller = AnimationController(
-        duration: Duration(seconds: 2), vsync: this, upperBound: 1.0);
+        duration: Duration(seconds: 1), vsync: this, upperBound: 1.0);
 
     // This below animation can be used when u need to add some speed for your animation
     animation =
@@ -34,7 +34,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     });
 
     // Go to Login Screen after 3seconds from displaying the logo
-    Future.delayed(const Duration(milliseconds: 5000), () {
+    goToLoginScreen();
+  }
+
+  void goToLoginScreen(){
+    // Go to Login Screen after a given time duration
+    Future.delayed(const Duration(milliseconds: 3000), () {
       Navigator.push(
           context,
           PageRouteBuilder(
@@ -55,11 +60,18 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Hero(
-                tag: "logo",
-                child: Container(
-                  child: Image.asset('images/officialLogo.png'),
-                  height: animation.value * 45,
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    goToLoginScreen();
+                  });
+                },
+                child: Hero(
+                  tag: "logo",
+                  child: Container(
+                    child: Image.asset('images/officialLogo.png'),
+                    height: animation.value * 45,
+                  ),
                 ),
               )
             ],
