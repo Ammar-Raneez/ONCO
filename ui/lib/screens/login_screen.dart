@@ -65,7 +65,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 onChanged: (value) {
                   // email = value;
                 },
-                // decoration: kTextFieldDecoration.copyWith(hintText: "Enter your email"),
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: "Enter your email",
+                  prefixIcon: Icon(Icons.person),
+                ),
               ),
               TextField(
                 obscureText: true,
@@ -73,7 +76,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   //Do something with the user input.
                   // password = value;
                 },
-                // decoration: kTextFieldDecoration.copyWith(hintText: "Enter your password"),
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: "Enter your password",
+                  prefixIcon: Icon(Icons.lock),
+                ),
               ),
               Text(
                 "Change Existing Password",
@@ -82,9 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
               RoundedButton(
                   onPressed: () {
                     //Implement login functionality.
-                    setState(() {
-                      print(keyboardOpenVisibility);
-                    });
                   },
                   colour: Colors.lightBlueAccent,
                   title: 'LOG IN'),
