@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui/screens/changePassword_screeen.dart';
+import 'package:ui/screens/changePassword_screen.dart';
 import 'package:ui/screens/home_screen.dart';
 import 'package:ui/screens/login_screen.dart';
 import 'package:ui/screens/registration_screen.dart';
@@ -28,6 +28,6 @@ class MyApp extends StatelessWidget {
         ChangePassword.id: (context) => ChangePassword(),
         HomeScreen.id: (context) => HomeScreen()
       },
-    )
+    );
   }
 }
