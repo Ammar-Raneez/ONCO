@@ -1,17 +1,17 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Hi", "How are you", "hey", "yo", "Is anyone there?", "Hello", "Good day", "Whats up"],
+         "patterns": ["Hi", "How are you", "hey", "yo", "Is anyone there?", "Hello", "Good day", "Whats up", "sup"],
          "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?", "Hello there!, how are you feeling today?"]
         },
   
         {"tag": "goodbye",
-         "patterns": ["cya", "See you later", "Goodbye", "I am Leaving", "Have a Good day"],
+         "patterns": ["cya", "See you later", "Goodbye", "im Leaving", "Have a Good day", "bye"],
          "responses": ["Sad to see you go :( Please take care of your health!", "Talk to you later, take care!", "Goodbye! Always stay safe!", "Take care", "Be safe!", "I'm always here if you need me <3"]
         },
  
         {"tag": "name",
-         "patterns": ["what is your name", "what should I call you", "whats your name?"],
-         "responses": ["You can call me CHANCO (Chatbot + ONCO :P). Hope it sounds catch!", "I am CHANCO! does it fit?", "I am CHANCO aka chatbot + ONCO! Cringey?"],
+         "patterns": ["what is your name", "what should I call you", "whats your name?", "name?", "your name?"],
+         "responses": ["You can call me CHANCO (Chatbot + ONCO :P). Hope it sounds catch!", "I am CHANCO! does it fit?", "I am CHANCO aka chatbot + ONCO! Do you like it?"],
          "context": "name"
         },
     
@@ -33,19 +33,19 @@
         },
     
         {"tag": "first",
-         "patterns": ["I am not feeling well", "I feel sick", "something is wrong with me", "I do not think I am of perfect health"],
+         "patterns": ["sick", "i dont feel good", "not well", "I am not feeling well", "I feel sick", "something is wrong with me", "I do not think I am of perfect health"],
          "responses": ["I am sorry to hear that, but do not panic! I can be of help :) What symptoms do you have?", "not to worry, you have me! lets get started, what do have?",
-                       "oh is that so :( Not to worry I am the 'chanciest' :P out there, please tell me, what do you have?", "I can be of help! What symptoms do you have?", "Please dont worry, you got me!", "Not to worry! I am very dependable when it comes to your health! Tell me, what do you have"],
+                       "oh is that so :( Not to worry I am the 'chanciest' :P out there, please tell me, what do you have?", "I can be of help! What symptoms do you have?", "Please dont worry, you got me!", "Not to worry! I am very dependable when it comes to your health! Tell me, what do you have"]
         },
 
         {"tag": "lc_initial",
-         "patterns": ["cough", "chest pain", "chest aches", "i feel unusually tired", "i feel too tired", "i feel exhausted", "i get tired too easily", "no energy", "lack in energy", "i dont want to eat", "i dont have an appetite", "i dont want to eat"],
+         "patterns": ["cough", "i have a cough", "i have a chest pain", "chest pain", "i have a chest ache", "chest aches", "i feel unusually tired", "i feel too tired", "i feel exhausted", "i get tired too easily", "no energy", "lack in energy", "i dont want to eat", "i dont have an appetite", "i dont want to eat"],
          "responses": ["I am sorry to hear that... These symptoms however can be less serious than you think! :) So please let me know further symptoms that you might have (Coughing up blood, a cough that does not stop, breathlessness)"],
          "context": "lc"
         },
     
         {"tag": "lc_main",
-         "patterns": ["yes", "yea", "cough blood", "i cough blood", "out of breathe", "breathing difficulties", "hard to breathe", "non stop cough", "long cough"],
+         "patterns": ["cough blood", "i cough blood", "out of breathe", "breathing difficulties", "hard to breathe", "non stop cough", "long cough"],
          "responses": ["I suspect a chance of you having lung cancer... But there's always a chance of positivity! I suggest that you please get an x-ray uploaded on our detection section so that we can confirm"],
          "context_filter": "lc"
         },
@@ -57,21 +57,16 @@
         },
         
         {"tag": "bc_main",
-         "patterns": ["yes", "yea", "breast aches", "my breast pains", "shoulder lump", "breast lump", "nipple skin flaking", "skin around nipple unusual", "peeling of skin around nipple"],
-         "responses": ["I suspect a chance of you having breast cancer... But please do not panic right away, because I myself could always get a better reassurance by something else. So I would uggest that you please get a mammogram uploaded on our detection section so that we can confirm ASAP"],
+         "patterns": ["breast aches", "my breast pains", "shoulder lump", "breast lump", "i have a lump on my breast", "i have a lump on my shoulder", "nipple skin flaking", "skin around nipple unusual", "peeling of skin around nipple"],
+         "responses": ["I suspect a chance of you having breast cancer... But please do not panic right away, because I myself could always get a better reassurance by something else. So I would suggest that you please get a mammogram uploaded on our detection section so that we can confirm ASAP"],
          "context_filter": "bc"
         },
     
-        {"tag": "sc_initial",
-         "patterns": [],
-         "responses": [],
-         "context": "sc"
-        },
-    
         {"tag": "sc_main",
-         "patterns": [],
-         "responses": [],
-         "context_filter": "sc"
+         "patterns": ["unhealable sore", "sore not healed", "waxy bump", "pearly bump", "brown scar", "crusty skin", "returning scab", 
+"mole", "brown spots", "painful lesion", "dark lesions"],
+         "responses": ["Hmm... these may be signs of skin cancer, but please do not panic. There are several types: some are harmless; some can be easily healed too! But there are several types, so to confirm I would suggest that you please upload a picture of the infected area, so that we can get a better view of it! :)"],
+         "context": "sc"
         }
    ]
 }
