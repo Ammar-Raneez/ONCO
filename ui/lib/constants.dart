@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 const kBackgroundBlueGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Colors.blue, Colors.white]);
+    colors: [Color(0xff01CDFA), Colors.white]);
 
 // This constant is for the text field decoration in the login page
 const kTextFieldDecoration = InputDecoration(
@@ -18,11 +18,11 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
   enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
+    borderSide: BorderSide(color: Color(0xff01CDFA), width: 1.0),
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+    borderSide: BorderSide(color: Color(0xff01CDFA), width: 2.0),
     borderRadius: BorderRadius.all(Radius.circular(32.0)),
   ),
 );

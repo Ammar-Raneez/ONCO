@@ -30,3 +30,8 @@ flutter:
 
   assets:
     - images/
+
+  fonts:
+    - family: Poppins-Regular
+      fonts:
+        - asset: fonts/Poppins-Regular.ttf

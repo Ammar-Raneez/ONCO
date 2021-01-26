@@ -11,6 +11,7 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
+
   // We are creating Animation Controller in order to create our own custom Animations
   AnimationController controller;
   Animation animation;
@@ -19,7 +20,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   void initState() {
     super.initState();
     controller = AnimationController(
-        duration: Duration(seconds: 1), vsync: this, upperBound: 1.0);
+        duration: Duration(seconds: 3), vsync: this, upperBound: 1.0);
 
     // This below animation can be used when u need to add some speed for your animation
     animation =
@@ -38,12 +39,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   }
 
   void goToLoginScreen(){
+
     // Go to Login Screen after a given time duration
-    Future.delayed(const Duration(milliseconds: 3000), () {
+    Future.delayed(const Duration(milliseconds: 3500), () {
       Navigator.push(
           context,
           PageRouteBuilder(
-            transitionDuration: Duration(seconds: 2),
+            transitionDuration: Duration(seconds: 5),
             pageBuilder: (_, __, ___) => LoginScreen(),
           ));
     });
