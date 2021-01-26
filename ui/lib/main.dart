@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui/screens/changePassword_screen.dart';
+import 'package:ui/screens/forgetPassword_screen.dart';
 import 'package:ui/screens/home_screen.dart';
 import 'package:ui/screens/login_screen.dart';
 import 'package:ui/screens/registration_screen.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
-        ChangePassword.id: (context) => ChangePassword(),
+        ForgetPassword.id: (context) => ForgetPassword(),
         HomeScreen.id: (context) => HomeScreen()
       },
     );

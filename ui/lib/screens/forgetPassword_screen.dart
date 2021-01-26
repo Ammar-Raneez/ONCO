@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
 
-class ChangePassword extends StatefulWidget {
+class ForgetPassword extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
-  static String id = "changePassword";
+  static String id = "forgetPassword";
 
   @override
-  _ChangePasswordState createState() => _ChangePasswordState();
+  _ForgetPasswordState createState() => _ForgetPasswordState();
 }
 
-class _ChangePasswordState extends State<ChangePassword> {
+class _ForgetPasswordState extends State<ForgetPassword> {
+  // variables used
+  String favouriteFood;
+  String newPassword;
+  String confirmPassword;
+
+  bool visibleFavouriteFood = false;
+  bool visibleNewPassword = false;
+  bool visibleConfirmPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -68,48 +76,84 @@ class _ChangePasswordState extends State<ChangePassword> {
                 ),
               if (keyboardOpenVisibility == 0.0)
                 Text(
-                  "Change your password",
+                  "Forgot your password?",
                   textAlign: TextAlign.center,
                   style: kTextStyle.copyWith(
                     fontSize: 15,
                   ),
                 ),
               TextField(
-                obscureText: true,
+                obscureText: !visibleFavouriteFood,
                 onChanged: (value) {
-                  // track the user current password
+                  // track the user favourite food (security reason question)
+                  favouriteFood = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
-                  hintText: "Enter Current password",
+                  hintText: "Your favourite food?",
                   prefixIcon: Icon(
-                    Icons.lock_outline,
+                    Icons.security,
                     color: Colors.lightBlueAccent,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        visibleFavouriteFood = !visibleFavouriteFood;
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.lightBlueAccent,
+                    ),
                   ),
                 ),
               ),
               TextField(
-                obscureText: true,
+                obscureText: !visibleNewPassword,
                 onChanged: (value) {
                   // track the user new password
+                  newPassword = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: "Enter New password",
                   prefixIcon: Icon(
-                    Icons.lock,
+                    Icons.lock_outline_sharp,
                     color: Colors.lightBlueAccent,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        visibleNewPassword = !visibleNewPassword;
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.lightBlueAccent,
+                    ),
                   ),
                 ),
               ),
               TextField(
-                obscureText: true,
+                obscureText: !visibleConfirmPassword,
                 onChanged: (value) {
                   // track the user confirm password
+                  confirmPassword = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: "Enter Confirm password",
                   prefixIcon: Icon(
                     Icons.lock,
                     color: Colors.lightBlueAccent,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        visibleConfirmPassword = !visibleConfirmPassword;
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.lightBlueAccent,
+                    ),
                   ),
                 ),
               ),
@@ -128,10 +172,15 @@ class _ChangePasswordState extends State<ChangePassword> {
               ),
               RoundedButton(
                 onPressed: () {
-                  //Implement Change password functionality.
+                  //Implement forget password functionality.
+                  print(favouriteFood +
+                      " " +
+                      newPassword +
+                      " " +
+                      confirmPassword);
                 },
                 colour: Colors.lightBlueAccent,
-                title: 'CHANGE PASSWORD',
+                title: 'SUBMIT',
               ),
               SizedBox(
                 height: 8.0,

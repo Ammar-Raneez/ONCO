@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
-import 'package:ui/screens/changePassword_screen.dart';
+import 'package:ui/screens/forgetPassword_screen.dart';
 import 'package:ui/screens/registration_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,6 +13,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // variables used for the login screen
+  String email;
+  String password;
+  var _emailAddressTextFieldController = TextEditingController();
+  var _passwordTextFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               TextField(
+                controller: _emailAddressTextFieldController,
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
-                  // email = value;
+                  email = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: "Enter your email",
@@ -90,10 +96,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               TextField(
+                controller: _passwordTextFieldController,
                 obscureText: true,
                 onChanged: (value) {
-                  //Do something with the user input.
-                  // password = value;
+                  password = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: "Enter your password",
@@ -105,11 +111,11 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  // GO TO THE CHANGE PASSWORD SCREEN
-                  Navigator.pushNamed(context, ChangePassword.id);
+                  // GO TO THE FORGET PASSWORD SCREEN
+                  Navigator.pushNamed(context, ForgetPassword.id);
                 },
                 child: Text(
-                  "Change Existing Password",
+                  "Forgot Password?",
                   textAlign: TextAlign.end,
                   style: kTextStyle.copyWith(
                     fontSize: 12,
@@ -119,6 +125,12 @@ class _LoginScreenState extends State<LoginScreen> {
               RoundedButton(
                 onPressed: () {
                   //Implement login functionality.
+                  print("This is the email address: " + email);
+                  print("This is the password: : " + password);
+
+                  // clearing the text fields on submitted the details
+                  _emailAddressTextFieldController.clear();
+                  _passwordTextFieldController.clear();
                 },
                 colour: Colors.lightBlueAccent,
                 title: 'LOG IN',
