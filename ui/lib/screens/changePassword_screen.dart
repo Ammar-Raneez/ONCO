@@ -11,7 +11,6 @@ class ChangePassword extends StatefulWidget {
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-  bool displayClouds = true;
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +119,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  "Back to login",
+                  "<- Back to login",
                   textAlign: TextAlign.end,
                   style: kTextStyle.copyWith(
                     fontSize: 12,
