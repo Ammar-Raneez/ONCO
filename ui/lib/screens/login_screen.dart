@@ -24,7 +24,10 @@ class _LoginScreenState extends State<LoginScreen> {
           gradient: kBackgroundBlueGradient,
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+          padding: EdgeInsets.symmetric(
+            vertical: 20.0,
+            horizontal: 20.0,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -36,8 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Hero(
                   tag: "logo",
                   child: Container(
-                    // decoration:
-                    //     BoxDecoration(border: Border.all(color: Colors.black)),
                     height: 20,
                     child: Image.asset('images/officialLogo.png'),
                   ),
@@ -52,20 +53,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.center,
                     children: [
                       Container(
-                        // decoration: BoxDecoration(
-                        //     border: Border.all(color: Colors.black)),
                         height: 150,
                         child: Image.asset('images/clouds.png'),
                       ),
                       Text(
                         "Welcome back!",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color(0xff5b5b5b),
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Poppins-Regular'),
-                      )
+                        style: kTextStyle.copyWith(
+                          color: Color(0xff5b5b5b),
+                          fontSize: 20,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -73,11 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(
                   "Log in to your existing account",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black38,
+                  style: kTextStyle.copyWith(
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Poppins-Regular',
                   ),
                 ),
               TextField(
@@ -114,11 +109,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Text(
                   "Change Existing Password",
                   textAlign: TextAlign.end,
-                  style: TextStyle(
-                    color: Colors.black38,
+                  style: kTextStyle.copyWith(
                     fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Poppins-Regular',
                   ),
                 ),
               ),
@@ -132,11 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
               Text(
                 "Or connect using",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black38,
+                style: kTextStyle.copyWith(
                   fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Poppins-Regular',
                 ),
               ),
               RoundedButton(
@@ -154,11 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(
                       "Don't have an account?",
-                      style: TextStyle(
-                        color: Colors.black38,
+                      style: kTextStyle.copyWith(
                         fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Poppins-Regular',
                       ),
                     ),
                     SizedBox(
@@ -168,15 +154,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: () {
                         print("U tapped the sign up button");
                       },
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          color: Color(0xff01CDFA),
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Poppins-Regular',
-                        ),
-                      ),
+                      child: Text("Sign Up",
+                          style: kTextStyle.copyWith(
+                            color: Color(0xff01CDFA),
+                            fontSize: 13,
+                          )),
                     ),
                   ],
                 ),
