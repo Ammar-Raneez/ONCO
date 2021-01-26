@@ -11,6 +11,19 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  String username;
+  String email;
+  String password;
+  String favoriteFood;
+
+  bool visibleFavouriteFood = false;
+  bool visiblePassword = false;
+
+  var _usernameController = TextEditingController();
+  var _passwordTextFieldController = TextEditingController();
+  var _emailAddressController = TextEditingController();
+  var _favouriteFoodSecurityController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;
@@ -74,8 +87,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 ),
               TextField(
+                controller: _usernameController,
                 onChanged: (value) {
-                  // track the user current password
+                  username = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: "Enter Username",
@@ -83,23 +97,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     Icons.person,
                     color: Colors.lightBlueAccent,
                   ),
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        // visibleFavouriteFood = !visibleFavouriteFood;
-                      });
-                    },
-                    child: Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.lightBlueAccent,
-                    ),
-                  ),
                 ),
               ),
               TextField(
+                controller: _emailAddressController,
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
-                  // track email address
+                  email = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: "Enter Email Address",
@@ -107,23 +111,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     Icons.alternate_email,
                     color: Colors.lightBlueAccent,
                   ),
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        // visibleFavouriteFood = !visibleFavouriteFood;
-                      });
-                    },
-                    child: Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.lightBlueAccent,
-                    ),
-                  ),
                 ),
               ),
               TextField(
-                obscureText: true,
+                controller: _passwordTextFieldController,
+                obscureText: !visiblePassword,
                 onChanged: (value) {
-                  // track the user password
+                  password = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: "Enter Password",
@@ -134,7 +128,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   suffixIcon: GestureDetector(
                     onTap: () {
                       setState(() {
-                        // visibleFavouriteFood = !visibleFavouriteFood;
+                        visiblePassword = !visiblePassword;
                       });
                     },
                     child: Icon(
@@ -145,9 +139,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
               ),
               TextField(
-                obscureText: true,
+                controller: _favouriteFoodSecurityController,
+                obscureText: !visibleFavouriteFood,
                 onChanged: (value) {
-                  // track the user password
+                  favoriteFood = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: "Your favourite food?",
@@ -156,7 +151,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   suffixIcon: GestureDetector(
                     onTap: () {
                       setState(() {
-                        // visibleFavouriteFood = !visibleFavouriteFood;
+                        visibleFavouriteFood = !visibleFavouriteFood;
                       });
                     },
                     child: Icon(
@@ -182,6 +177,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               RoundedButton(
                 onPressed: () {
                   //Implement Change password functionality.
+                  print("Username: " + username);
+                  print("Email Address: " + email);
+                  print("Enter Password: " + password);
+                  print("Enter favourite food: " + favoriteFood);
+
+                  // clearing the content of the field once submitted
+                  _favouriteFoodSecurityController.clear();
+                  _emailAddressController.clear();
+                  _usernameController.clear();
+                  _passwordTextFieldController.clear();
                 },
                 colour: Colors.lightBlueAccent,
                 title: 'REGISTER ACCOUNT',

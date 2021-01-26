@@ -15,6 +15,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   String favouriteFood;
   String newPassword;
   String confirmPassword;
+  String email;
 
   bool visibleFavouriteFood = false;
   bool visibleNewPassword = false;
@@ -92,7 +93,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 controller: _emailAddressTextFieldController,
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
-                  // email = value;
+                  email = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: "Enter your email",
