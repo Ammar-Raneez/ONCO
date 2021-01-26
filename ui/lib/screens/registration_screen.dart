@@ -24,6 +24,28 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   var _emailAddressController = TextEditingController();
   var _favouriteFoodSecurityController = TextEditingController();
 
+  // creating an alert
+  createAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Error!"),
+            content: Text("Something went wrong please re-try."),
+            elevation: 24.0,
+            actions: [
+              MaterialButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                elevation: 5.0,
+                child: Text("OK"),
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;
@@ -177,16 +199,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               RoundedButton(
                 onPressed: () {
                   //Implement Change password functionality.
-                  print("Username: " + username);
-                  print("Email Address: " + email);
-                  print("Enter Password: " + password);
-                  print("Enter favourite food: " + favoriteFood);
+                  // print("Username: " + username);
+                  // print("Email Address: " + email);
+                  // print("Enter Password: " + password);
+                  // print("Enter favourite food: " + favoriteFood);
 
                   // clearing the content of the field once submitted
                   _favouriteFoodSecurityController.clear();
                   _emailAddressController.clear();
                   _usernameController.clear();
                   _passwordTextFieldController.clear();
+
+                  // Displaying the alert dialog if anything goes wrong
+                  createAlertDialog(context);
                 },
                 colour: Colors.lightBlueAccent,
                 title: 'REGISTER ACCOUNT',
