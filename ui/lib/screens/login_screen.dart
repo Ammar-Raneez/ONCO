@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
+import 'package:ui/screens/changePassword_screen.dart';
+import 'package:ui/screens/registration_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -104,7 +106,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  print("U tapped the change password button");
+                  // GO TO THE CHANGE PASSWORD SCREEN
+                  Navigator.pushNamed(context, ChangePassword.id);
                 },
                 child: Text(
                   "Change Existing Password",
@@ -153,6 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () {
                         print("U tapped the sign up button");
+                        // GO TO THE SIGN IN SCREEN
+                        Navigator.pushNamed(context, RegistrationScreen.id);
                       },
                       child: Text("Sign Up",
                           style: kTextStyle.copyWith(
