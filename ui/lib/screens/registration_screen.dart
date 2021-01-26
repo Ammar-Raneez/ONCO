@@ -83,6 +83,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     Icons.person,
                     color: Colors.lightBlueAccent,
                   ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        // visibleFavouriteFood = !visibleFavouriteFood;
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.lightBlueAccent,
+                    ),
+                  ),
                 ),
               ),
               TextField(
@@ -96,6 +107,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     Icons.alternate_email,
                     color: Colors.lightBlueAccent,
                   ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        // visibleFavouriteFood = !visibleFavouriteFood;
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.lightBlueAccent,
+                    ),
+                  ),
                 ),
               ),
               TextField(
@@ -108,6 +130,39 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   prefixIcon: Icon(
                     Icons.lock,
                     color: Colors.lightBlueAccent,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        // visibleFavouriteFood = !visibleFavouriteFood;
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.lightBlueAccent,
+                    ),
+                  ),
+                ),
+              ),
+              TextField(
+                obscureText: true,
+                onChanged: (value) {
+                  // track the user password
+                },
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: "Your favourite food?",
+                  prefixIcon:
+                      Icon(Icons.security, color: Colors.lightBlueAccent),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        // visibleFavouriteFood = !visibleFavouriteFood;
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.lightBlueAccent,
+                    ),
                   ),
                 ),
               ),

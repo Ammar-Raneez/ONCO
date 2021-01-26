@@ -20,6 +20,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   bool visibleNewPassword = false;
   bool visibleConfirmPassword = false;
 
+  var _emailAddressTextFieldController = TextEditingController();
+  var _passwordTextFieldController = TextEditingController();
+  var _confirmPasswordTextFieldController = TextEditingController();
+  var _favouriteFoodSecurityController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;
@@ -82,32 +87,23 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     fontSize: 15,
                   ),
                 ),
+
               TextField(
-                obscureText: !visibleFavouriteFood,
+                controller: _emailAddressTextFieldController,
+                keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
-                  // track the user favourite food (security reason question)
-                  favouriteFood = value;
+                  // email = value;
                 },
                 decoration: kTextFieldDecoration.copyWith(
-                  hintText: "Your favourite food?",
+                  hintText: "Enter your email",
                   prefixIcon: Icon(
-                    Icons.security,
+                    Icons.person,
                     color: Colors.lightBlueAccent,
-                  ),
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        visibleFavouriteFood = !visibleFavouriteFood;
-                      });
-                    },
-                    child: Icon(
-                      Icons.remove_red_eye,
-                      color: Colors.lightBlueAccent,
-                    ),
                   ),
                 ),
               ),
               TextField(
+                controller: _passwordTextFieldController,
                 obscureText: !visibleNewPassword,
                 onChanged: (value) {
                   // track the user new password
@@ -132,7 +128,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   ),
                 ),
               ),
+
               TextField(
+                controller: _confirmPasswordTextFieldController,
                 obscureText: !visibleConfirmPassword,
                 onChanged: (value) {
                   // track the user confirm password
@@ -148,6 +146,32 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     onTap: () {
                       setState(() {
                         visibleConfirmPassword = !visibleConfirmPassword;
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.lightBlueAccent,
+                    ),
+                  ),
+                ),
+              ),
+              TextField(
+                controller: _favouriteFoodSecurityController,
+                obscureText: !visibleFavouriteFood,
+                onChanged: (value) {
+                  // track the user favourite food (security reason question)
+                  favouriteFood = value;
+                },
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: "Your favourite food?",
+                  prefixIcon: Icon(
+                    Icons.security,
+                    color: Colors.lightBlueAccent,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        visibleFavouriteFood = !visibleFavouriteFood;
                       });
                     },
                     child: Icon(
@@ -173,11 +197,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               RoundedButton(
                 onPressed: () {
                   //Implement forget password functionality.
-                  print(favouriteFood +
-                      " " +
-                      newPassword +
-                      " " +
-                      confirmPassword);
+
+                  // clearing the fields once all the data is collected
+                  _emailAddressTextFieldController.clear();
+                  _passwordTextFieldController.clear();
+                  _confirmPasswordTextFieldController.clear();
+                  _favouriteFoodSecurityController.clear();
+
                 },
                 colour: Colors.lightBlueAccent,
                 title: 'SUBMIT',

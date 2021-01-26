@@ -16,6 +16,9 @@ class _LoginScreenState extends State<LoginScreen> {
   // variables used for the login screen
   String email;
   String password;
+
+  bool visiblePassword = false;
+
   var _emailAddressTextFieldController = TextEditingController();
   var _passwordTextFieldController = TextEditingController();
 
@@ -93,11 +96,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     Icons.person,
                     color: Colors.lightBlueAccent,
                   ),
+
                 ),
               ),
               TextField(
                 controller: _passwordTextFieldController,
-                obscureText: true,
+                obscureText: !visiblePassword,
                 onChanged: (value) {
                   password = value;
                 },
@@ -106,6 +110,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   prefixIcon: Icon(
                     Icons.lock,
                     color: Colors.lightBlueAccent,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        visiblePassword = !visiblePassword;
+                      });
+                    },
+                    child: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.lightBlueAccent,
+                    ),
                   ),
                 ),
               ),
