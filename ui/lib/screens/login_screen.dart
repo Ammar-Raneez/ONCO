@@ -107,9 +107,31 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+              GestureDetector(
+                onTap: () {
+                  print("U tapped the change password button");
+                },
+                child: Text(
+                  "Change Existing Password",
+                  textAlign: TextAlign.end,
+                  style: TextStyle(
+                    color: Colors.black38,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Poppins-Regular',
+                  ),
+                ),
+              ),
+              RoundedButton(
+                onPressed: () {
+                  //Implement login functionality.
+                },
+                colour: Colors.lightBlueAccent,
+                title: 'LOG IN',
+              ),
               Text(
-                "Change Existing Password",
-                textAlign: TextAlign.end,
+                "Or connect using",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black38,
                   fontSize: 12,
@@ -118,17 +140,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               RoundedButton(
-                  onPressed: () {
-                    //Implement login functionality.
-                  },
-                  colour: Colors.lightBlueAccent,
-                  title: 'LOG IN'),
-              RoundedButton(
-                  onPressed: () {
-                    //Implement login functionality.
-                  },
-                  colour: Colors.redAccent,
-                  title: 'Google'),
+                onPressed: () {
+                  //Implement login functionality.
+                },
+                colour: Colors.redAccent,
+                title: 'Google',
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
                 child: Row(
@@ -147,13 +164,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       width: 5.0,
                     ),
-                    Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        color: Colors.black38,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Poppins-Regular',
+                    GestureDetector(
+                      onTap: () {
+                        print("U tapped the sign up button");
+                      },
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          color: Color(0xff01CDFA),
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins-Regular',
+                        ),
                       ),
                     ),
                   ],
