@@ -1,4 +1,4 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/screens/chatbot_screen.dart';
 import 'package:ui/screens/home_screen.dart';
@@ -30,33 +30,19 @@ class _NavigationBottomBarScreenState extends State<NavigationBottomBarScreen> {
       // under this body only the screen go into
       body: listOfColors[currentIndex],
 
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: currentIndex,
-        onItemSelected: (index) {
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.blueAccent,
+
+        onTap: (index) {
           setState(() {
             currentIndex = index;
           });
           print("This is the value of the index: " + index.toString());
         },
         items: [
-          BottomNavyBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Home"),
-            activeColor: Color(0xff01CDFA),
-            inactiveColor: Colors.grey,
-          ),
-          BottomNavyBarItem(
-            icon: Icon(Icons.widgets_outlined),
-            title: Text("Cancers"),
-            activeColor: Color(0xff01CDFA),
-            inactiveColor: Colors.grey,
-          ),
-          BottomNavyBarItem(
-            icon: Icon(Icons.chat),
-            title: Text("Chatbot"),
-            activeColor: Color(0xff01CDFA),
-            inactiveColor: Colors.grey,
-          ),
+          Icon(Icons.home, size: 30,),
+          Icon(Icons.widgets_outlined, size: 30,),
+          Icon(Icons.chat, size: 30,),
         ],
       ),
     );

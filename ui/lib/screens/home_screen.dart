@@ -9,9 +9,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xff01CDFA),
+      color: Colors.blueAccent,
       child: Center(
-        child: Text("This is the HomeScreen"),
+        child: Text("This is the HomeScreen",
+            style: TextStyle(color: Colors.white)),
       ),
     );
   }
