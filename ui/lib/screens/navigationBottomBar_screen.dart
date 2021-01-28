@@ -10,11 +10,15 @@ class NavigationBottomBarScreen extends StatefulWidget {
   static String id = "homeScreen";
 
   @override
-  _NavigationBottomBarScreenState createState() => _NavigationBottomBarScreenState();
+  _NavigationBottomBarScreenState createState() =>
+      _NavigationBottomBarScreenState();
 }
 
 class _NavigationBottomBarScreenState extends State<NavigationBottomBarScreen> {
   int currentIndex = 0;
+  PageController _pageController = PageController(
+    initialPage: 0,
+  );
 
   List<Widget> listOfColors = [
     HomeScreen(),
@@ -28,21 +32,40 @@ class _NavigationBottomBarScreenState extends State<NavigationBottomBarScreen> {
       backgroundColor: Colors.white,
 
       // under this body only the screen go into
-      body: listOfColors[currentIndex],
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (page) {
+          setState(() {
+            currentIndex = page;
+          });
+        },
+        children: [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()],
+      ),
 
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.blueAccent,
-
+        index: currentIndex,
         onTap: (index) {
           setState(() {
             currentIndex = index;
+            _pageController.jumpToPage(
+              index,
+            );
           });
-          print("This is the value of the index: " + index.toString());
         },
         items: [
-          Icon(Icons.home, size: 30,),
-          Icon(Icons.widgets_outlined, size: 30,),
-          Icon(Icons.chat, size: 30,),
+          Icon(
+            Icons.home,
+            size: 30,
+          ),
+          Icon(
+            Icons.widgets_outlined,
+            size: 30,
+          ),
+          Icon(
+            Icons.chat,
+            size: 30,
+          ),
         ],
       ),
     );
