@@ -1,0 +1,374 @@
+[
+	{
+		"type": "lung",
+		"exercises": [
+			{
+				"name": "Walk",
+				"imageURL": "https://www.dailynews.lk/sites/default/files/news/2019/07/17/z_T%26C-p31-WALK.jpg",
+				"description": "Walking is a great choice, especially if you’re just getting started. Do it anywhere -- outside, in a mall, on a treadmill. If it seems daunting, add 30 seconds or 10 yards each day. Even a slow pace will do you good."
+			},
+			{
+				"name": "Bike",
+				"imageURL": "https://www.dw.com/image/16741933_401.jpg",
+				"description": "A stationary bike can work well. You can pedal away in the privacy of your home. In a gym or rehab setting, you can find supervision and meet people. Ask the instructor before jumping into a group cycling class, to be sure it matches your ability. As you improve, try a spin outside on a traditional bike and soak up the scenery. If any exercise makes you short of breath, stop and sit down for a few minutes."
+			},
+			{
+				"name": "Arm Curls",
+				"imageURL": "https://i.ytimg.com/vi/in7PaeYlhrM/maxresdefault.jpg",
+				"description": "Lifting light weights can help you reach a high shelf or lug a gallon of milk. Choose hand weights, stretchy bands, or water bottles to try arm curls. Hold the weights at your sides, palms forward. Breathe in. Now lift toward your chest, keeping elbows down, and exhaling slowly. Slowly lower your arms back down as you breathe in. Build up to two sets of 10-15 repetitions."
+			},
+			{
+				"name": "Forward Arm Raises",
+				"imageURL": "https://www.verywellfit.com/thmb/PpdyXqRyfiZ2iodRLzb-1DSUfrE=/1500x844/smart/filters:no_upscale()/front-raise-2-56ca3c485f9b5879cc4c0b94.jpg",
+				"description": "Hold weights down at your sides, palms facing in. Inhale, then exhale slowly as you raise both arms straight out front to shoulder height. Inhale as you slowly lower your arms. This strengthens your upper arms and shoulders. Build up to two sets of 10-15 repetitions. Start with light weights and go a little heavier every two to three weeks to challenge your muscles."
+			},
+			{
+				"name": "Calf Raises",
+				"imageURL": "https://i.ytimg.com/vi/-M4-G8p8fmc/maxresdefault.jpg",
+				"description": "Add leg work to your routine and you'll be able to walk easier and farther. For the calf raise, stand 6-12 inches behind a sturdy chair with your feet hip-width apart. Hold on for balance. Inhale. Now, lift up high on your toes, exhaling slowly. Hold the raised position briefly. Lower your heels back to the ground, inhaling slowly. As you get stronger, do one leg at a time. Work up to two sets of 10-15 reps."
+			},
+			{
+				"name": "Leg Extensions",
+				"imageURL": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/mh-young-man-exercising-legs-in-the-local-gym-royalty-free-image-867359800-1560457264.jpg",
+				"description": "For stronger thighs, sit in a chair that supports your back. Inhale. Now exhale slowly as you stretch one leg as straight as you can, without locking your knee. Breathe in as you slowly lower your foot back to the floor. Do one set with your right leg, then one set with your left. Getting too easy? Add ankle weights. Work up to two sets of 10-15 reps."
+			},
+			{
+				"name": "Exercise Your Diaphragm",
+				"imageURL": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/breathing-exercises-toned-abs-1530625687.jpg",
+				"description": "This move strengthens a key breathing muscle, the diaphragm. Lie down with your knees bent or sit in an easy chair -- one hand on your chest, one below your rib cage. Slowly inhale through your nose so that your stomach raises one hand. Exhale with pursed lips and tighten your stomach. The hand on your chest should not move. Do this for 5 to 10 minutes, three or four times a day. Breathing this way will become easy and automatic."
+			},
+			{
+				"name": "Chair Dance",
+				"imageURL": "https://hipshakefitness.com/wp-content/uploads/2019/03/Chair-Dance-Cha.jpg",
+				"description": "If you love to dance, try this armchair version in a class or with a DVD at home. Different programs can get your heart pumping, or pump up your muscles, or both -- to all kinds of music, from big band to hip hop. Beginners might start with a class to learn the safest ways to swing and bend. Adding hand weights can increase the challenge -- and your fitness level."
+			}
+		],
+		"diet": [
+			{
+				"name": "Apples",
+				"imageURL": "https://www.macdentalcare.com/pub/photo/2014-09-apple.jpg",
+				"description": "One of the many health secrets packed into an apple is that every bite fills you with flavonoids. These phytonutrients (plant chemicals) are found in almost all fruits and vegetables. They're powerful antioxidants, offering anti-inflammatory and immune-boosting benefits."
+			},
+			{
+				"name": "Garlic",
+				"imageURL": "https://solidstarts.com/wp-content/uploads/garlic_edited-scaled.jpg",
+				"description": "Garlic actually prevents cancer cells from growing by increasing the activity of natural killer (NK) cells and macrophages (types of white blood cells that are important for immunity).Eating garlic raw seems to be the best way to take advantage of its protective power since cooking or pickling it breaks down beneficial compounds."
+			},
+			{
+				"name": "Onions",
+				"imageURL": "https://www.foodsafetynews.com/files/2020/07/red-onions.jpg",
+				"description": "Onions, like garlic, belong to a family of vegetables known as allium vegetables, which were long used in folk medicine and are now widely studied by scientists for their anti-oxidant properties and the fact that they seem to interfere with the development of cancer cells."
+			},
+			{
+				"name": "Broccoli",
+				"imageURL": "https://www.cookforyourlife.org/wp-content/uploads/2018/08/shutterstock_294838064-min.jpg",
+				"description": "Glucosinates and other compounds compounds in cruciferous vegetables like broccoli counter the deadly effects of environmental carcinogens and can potentially reduce the likelihood that you will develop lung cancer. Among smokers, who have the highest risk of lung cancer, cruciferous vegetables may decrease the likelihood of lung cancer by 32% to 55%, depending on the amount regularly consumed."
+			},
+			{
+				"name": "Fish",
+				"imageURL": "https://nexusmedianews.com/wp-content/uploads/fly-images/10535/95611-1mj11pm4zsbf0ziaj5tebiw-1200x600-c.jpg",
+				"description": "Frequent fish consumption has several health benefits, including a 21% reduction in lung cancer risk, according to one study. However, most researchers agree that more investigation is needed to confirm the correlation between fish and lower rates of lung cancer."
+			},
+			{
+				"name": "Red Peppers",
+				"imageURL": "https://thecounter.org/wp-content/uploads/2018/05/organic-red-peppers-cost-washington-1280x720.jpg",
+				"description": "Red bell peppers, as well as red chili peppers, contain a phytochemical called capsaicin—part of what gives these foods a spicy little kick. It was found that capsaicin suppresses the development of lung cancer in Swiss mice after they were exposed to a carcinogen."
+			},
+			{
+				"name": "Green Tea",
+				"imageURL": "https://assets.newatlas.com/dims4/default/490d6fb/2147483647/strip/true/crop/2000x1050+0+133/resize/1200x630!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2F95%2F19%2Fcfafe2924aeaa27022653a53b7fa%2Fdepositphotos-92038314-l-2015.jpg",
+				"description": "Green tea contains a powerful antioxidant, epigallocatechin gallate (EGCG), that has been shown to offer significant defense against cancer."
+			},
+			{
+				"name": "Spinach",
+				"imageURL": "https://i.ndtvimg.com/i/2016-11/spinach_620x350_81477995047.jpg",
+				"description": "Spinach and other green leafy vegetables are rich in vitamin C, carotenoids, lutein, folic acid, vitamin A, and vitamin K. Several studies have found that this super-nutritious food reduces the risk of lung cancer."
+			}
+		],
+		"doctors": [
+			{
+				"name": "Sadeer J. Alzubaidi, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/23/21/Sadeer-Alzubaidi-20906382.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/alzubaidi-sadeer-j-m-d/bio-20426348"
+			},
+			{
+				"name": "Vichaya Arunthari, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/26/Vichaya-Arunthari-14619695.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/arunthari-vichaya-m-d/bio-20055394"
+			},
+			{
+				"name": "Staci E. Beamer, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/23/05/Staci-Beamer-16312856.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/beamer-staci-e-m-d/bio-20167067"
+			},
+			{
+				"name": "Shanda Blackmon, M.D., M.P.H.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/59/Shanda-Blackmon-16112911.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/blackmon-shanda-m-d-m-p-h/bio-20110768"
+			},
+			{
+				"name": "Cassandra M. Braun, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/45/Cassandra-Braun-15493440.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/braun-cassandra-m-m-d/bio-20461136"
+			},
+			{
+				"name": "Matthew R. Callstrom, M.D., Ph.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/46/Matthew-Callstrom-11969148.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/callstrom-matthew-r-m-d-ph-d/bio-20054437"
+			},
+			{
+				"name": "Stephen D. Cassivi, M.D., M.S.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/GBS/Patient-Consumer/Images/2016/12/08/20/26/Cassivi-Stephen-440.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/cassivi-stephen-d-m-d-m-s/bio-20054355"
+			},
+			{
+				"name": "Kristopher W. Cummings, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/23/00/Kristopher-Cummings-16209745.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/cummings-kristopher-w-m-d/bio-20143035"
+			},
+			{
+				"name": "Jonathan D'Cunha, M.D., Ph.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2019/10/03/19/40/Jonathan-DCunha-12557374.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/d-cunha-jonathan-m-d-ph-d/bio-20471123"
+			},
+			{
+				"name": "Thomas B. Daniels, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/16/Thomas-Daniels-14061651.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/daniels-thomas-b-m-d/bio-20087334"
+			}
+		]
+	},
+	{
+		"type": "skin",
+		"exercises": [
+			{
+				"name": "Jumping Jacks",
+				"imageURL": "https://cathe.com/wp-content/uploads/2020/02/shutterstock_502211857.jpg",
+				"description": "Stand up straight, hold your arms at your sides, and stand with your feet shoulder-width apart. Jump and extend your arms overhead. Extend your legs. As you jump, open your legs wider than shoulder width as you lift your arms overhead. Give or take some space depending on your height and leave a wide amount of space between your feet. Land in the starting position. After jumping in the air, gently land in the first position with arms at your sides and feet shoulder width apart. Repeat as needed."
+			},
+			{
+				"name": "Squats",
+				"imageURL": "https://media.self.com/photos/5ea9bc77bb9c6b75996c7e91/2:1/w_3949,h_1974,c_limit/squats_woman_exercise.jpg",
+				"description": "The Squat is a lower body exercise. You can do the bodyweight version, without added resistance (also called Bodyweight Squat or Air Squat), or with weights such as a barbell (Front Squat and Back Squat are variations of the Barbell Squat). The Squat exercise mainly targets the thighs (quadriceps & hamstrings) and the glutes. However, core strength & stability, ankle mobility, back muscles, calves, and other factors play an important role when you are doing this exercise."
+			},
+			{
+				"name": "Crunches",
+				"imageURL": "https://cdn2.coachmag.co.uk/sites/coachmag/files/styles/16x9_480/public/images/dir_30/mens_fitness_15427.jpg?itok=T3OF7wPv&timestamp=1369282187",
+				"description": "Lie down on your back. Plant your feet on the floor, hip-width apart. Bend your knees and place your arms across your chest. Contract your abs and inhale. Exhale and lift your upper body, keeping your head and neck relaxed. Inhale and return to the starting position."
+			},
+			{
+				"name": "Jump Lunges",
+				"imageURL": "https://cdn.prod.openfit.com/uploads/2019/07/17095431/Jumping-Lunges.jpg",
+				"description": "Starting standing with feet shoulder-width apart. Jump your left leg forward and your right leg back into a lunge, with both knees at 90 degrees. Jump up and switch your legs in midair so that you land in a lunge with your right leg in front. Continue jumping back and forth, pausing as little as possibl"
+			},
+			{
+				"name": "Push Ups",
+				"imageURL": "https://www.topendsports.com/fitness/images/push-up-pixabay.jpg",
+				"description": "Get down on all fours, placing your hands slightly wider than your shoulders. Straighten your arms and legs. Lower your body until your chest nearly touches the floor. Pause, then push yourself back up. Repeat."
+			},
+			{
+				"name": "Burpees",
+				"imageURL": "https://cdn2.coachmag.co.uk/sites/coachmag/files/2016/02/burpee.jpg",
+				"description": "Stand with your feet shoulder-width apart, weight in your heels, and your arms at your sides. Push your hips back, bend your knees, and lower your body into a squat. Place your hands on the floor directly in front of, and just inside, your feet. Shift your weight onto your hands. Jump your feet back to softly land on the balls of your feet in a plank position. Your body should form a straight line from your head to heels. Be careful not to let your back sag or your butt stick up in the air, as both can keep you from effectively working your core."
+			}
+		],
+		"diet": [
+			{
+				"name": "Antioxidant-Rich Foods",
+				"imageURL": "https://www.thehealthsite.com/wp-content/uploads/2014/04/antioxidants.jpg",
+				"description": "If you fill your diet with foods that have a high antioxidant content, you’ll be giving yourself a significant leg up in the fight against skin cancer. These compounds help cells become more resistant to damage."
+			},
+			{
+				"name": "Fruits and Veggies",
+				"imageURL": "https://hhp-blog.s3.amazonaws.com/2020/06/GettyImages-1208790371.jpg",
+				"description": "Oranges, limes, lemons, and grapefruits are great sources of vitamin C, which is a powerful antioxidant that fights against those cancer-causing free radicals. Dark and leafy greens, cruciferous vegetables, like spinach, collard greens, kale, and broccoli can contribute to your body’s fight against melanoma."
+			},
+			{
+				"name": "Coffee",
+				"imageURL": "https://media3.s-nbcnews.com/j/newscms/2019_33/2203981/171026-better-coffee-boost-se-329p_67dfb6820f7d3898b5486975903c2e51.fit-1240w.jpg",
+				"description": "If you already drink coffee every day like the vast majority of Americans, you may already be reaping the anti-skin cancer benefits of the beverage without even realizing it! If you don’t drink coffee, you might be wise to start drinking it more regularly – especially if you’re getting your caffeine from sources like sodas."
+			}
+		],
+		"doctors": [
+			{
+				"name": "Kevin Arce, M.D., D.M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/51/Kevin-Arce-Castro-12361721.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/arce-kevin-m-d-d-m-d/bio-20055379"
+			},
+			{
+				"name": "Christopher J. Arpey, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/31/Christopher-Arpey-10801421.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/arpey-christopher-j-m-d/bio-20055329"
+			},
+			{
+				"name": "Sanjay P. Bagaria, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/GBS/Patient-Consumer/Images/2016/12/22/19/33/Bagaria-Sanjay-440.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/bagaria-sanjay-p-m-d/bio-20055349"
+			},
+			{
+				"name": "Christian L. Baum, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/25/Christian-Baum-14566842.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/baum-christian-l-m-d/bio-20055328"
+			},
+			{
+				"name": "Matthew S. Block, M.D., Ph.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/56/Matthew-Block-12661261.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/block-matthew-s-m-d-ph-d/bio-20055420"
+			},
+			{
+				"name": "Mitesh J. Borad, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/35/Mitesh-Borad-15063488.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/borad-mitesh-j-m-d/bio-20055089"
+			},
+			{
+				"name": "Jerry D. Brewer, M.D., M.S.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/20/Jerry-Brewer-14276402.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/brewer-jerry-d-m-d-m-s/bio-20055243"
+			},
+			{
+				"name": "William J. Casey, III, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/55/William-Casey-12601926.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/casey-william-j-iii-m-d/bio-20054476"
+			},
+			{
+				"name": "Asher (Asher) A. Chanan-Khan, M.B.B.S., M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/GBS/Patient-Consumer/Images/2016/12/27/18/22/Chanan-Khan-Asher-440.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/chanan-khan-asher-asher-a-m-b-b-s-m-d/bio-20055528"
+			},
+			{
+				"name": "Nneka I. Comfere, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/57/Nneka-Comfere-12802972.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/comfere-nneka-i-m-d/bio-20054906"
+			}
+		]
+	},
+	{
+		"type": "breast",
+		"exercises": [
+			{
+				"name": "Cobra pose",
+				"imageURL": "https://diyactive.com/wp-content/uploads/2019/09/Your-Complete-Guide-to-the-Cobra-Pose.jpg",
+				"description": "Start by lying on your stomach with your legs extended and the tops of your feet resting on the floor. Place your hands directly under your shoulders with your elbows tucked in. Begin to lift your head and chest off the ground while drawing your shoulders back and keeping your neck neutral. Straighten your arms as much as is comfortable. Hold the pose for 30 seconds and return to the start. Repeat three times."
+			},
+			{
+				"name": "Traveling plank",
+				"imageURL": "https://media.self.com/photos/5808e51f5a0364cf5e074a60/16:9/w_1487,h_836,c_limit/travel-workouts-no-equipment.jpg",
+				"description": "Start in a plank position with your head and neck neutral and your hands stacked under your shoulders. Make sure that your lower back isn’t sagging. Keeping your core tight, lift your right hand and right foot off the ground, and “step” a foot to the right. This is one rep. Pause for a second, reset, and move another foot to the right. Complete 10 “steps” to the right, then switch sides, and make your way back to the starting point, stepping with your left hand and left foot. Repeat three sets."
+			},
+			{
+				"name": "Push Ups",
+				"imageURL": "https://lmimirror3pvr.azureedge.net/static/media/12867/2d5a7ea5-1c56-40e1-aba6-dbbfe959f35a/pushup-study_960x540.jpg",
+				"description": "Get down on all fours, placing your hands slightly wider than your shoulders. Straighten your arms and legs. Lower your body until your chest nearly touches the floor. Pause, then push yourself back up. Repeat."
+			},
+			{
+				"name": "Plank reach-under",
+				"imageURL": "https://zoomzee.org/wp-content/uploads/2018/01/plank-reach-through.jpg",
+				"description": "Start in a plank position with your hands under your shoulders, your back neutral, and your core tight. Maintain the plank position and, starting with your right arm, lift your hand off the ground and touch your left knee. Return to the plank position. Repeat 10 reps with your right arm, then switch to your left arm, and complete 10 reps. This is one set. Complete three sets."
+			},
+			{
+				"name": "Dumbbell chest press",
+				"imageURL": "https://cdn1.coachmag.co.uk/sites/coachmag/files/2018/09/dumbbell-bench-press.jpg",
+				"description": "With a dumbbell in each hand, start by sitting on the end of the bench. Lower yourself down so your back is flat on the bench, your knees are bent, and your feet are flat on the floor.To set up for the bench press, bring your upper arms out at your side, parallel to the floor, and bend your elbows so the weights are parallel to your upper arms.When your arms are fully extended, pause and begin to lower the weights back down to the starting position. This is one rep. Repeat three sets of 12 reps."
+			},
+			{
+				"name": "Stability ball dumbbell fly",
+				"imageURL": "https://i.pinimg.com/originals/d1/30/c3/d130c3d5191d140cddb3554c19057009.jpg",
+				"description": "Get into the starting position, resting your upper body on a stability ball and forming a 90-degree angle with the rest of your body — trunk and upper legs straight, knees bent, and feet flat on the ground. You should have one dumbbell in each hand. Keeping your core tight, extend your arms with palms facing up and a slight bend in your elbow. Arms should be parallel to the floor to start. Simultaneously begin to raise both dumbbells up toward your midline, feeling your pectoral muscles working to get them there. When you reach the center, slowly lower back down slightly past the starting position until you feel a stretch in your chest. This is one rep. Complete three sets of 12 reps."
+			},
+			{
+				"name": "Medicine ball superman",
+				"imageURL": "https://i0.wp.com/post.greatist.com/wp-content/uploads/sites/2/2019/05/SuperMan_1.jpg?w=1155&h=789",
+				"description": "Start by lying on your stomach, arms extended out in front of you, with the medicine ball in your hands. Your head and neck should be neutral. To perform, use your core and your chest to raise your legs and upper body and the medicine ball off the ground. Lift as high as you can go, without straining your neck, and pause at the top. Return to the start. Complete three sets of 12 reps."
+			}
+		],
+		"diet": [
+			{
+				"name": "Leafy green vegetables",
+				"imageURL": "https://youngmenshealthsite.org/wp-content/uploads/2015/05/iStock_000003421602Small1.jpg",
+				"description": "Kale, arugula, spinach, mustard greens, and chard are just a few of the leafy green vegetables that may have anticancer properties. Leafy green vegetables contain carotenoid antioxidants, including beta carotene, lutein, and zeaxanthin, higher blood levels of which are associated with reduced breast cancer risk"
+			},
+			{
+				"name": "Citrus fruits",
+				"imageURL": "https://www.homeperch.com/wp-content/uploads/2019/04/Types-of-Citrus-Fruits-1-27-4.jpg",
+				"description": "Citrus fruits are teeming with compounds that may protect against breast cancer, including folate, vitamin C, and carotenoids like beta cryptoxanthin and beta carotene, plus flavonoid antioxidants like quercetin, hesperetin, and naringenin"
+			},
+			{
+				"name": "Fatty fish",
+				"imageURL": "https://images.indianexpress.com/2018/01/omega-3-fish-thinkstockphotos-1200.jpg",
+				"description": "Fatty fish, including salmon, sardines, and mackerel, are known for their impressive health benefits. Their omega-3 fats, selenium, and antioxidants like canthaxanthin may offer cancer-protective effects"
+			},
+			{
+				"name": "Berries",
+				"imageURL": "https://www.drfuhrman.com/rollups/4bb4704741c780ef9cd22056a220835360b6f5d4456da95bfb237e7652b835f0.jpg",
+				"description": "Regularly enjoying berries may help lower your risk of certain cancers, including breast cancer. Berries’ antioxidants, including flavonoids and anthocyanins, have been shown to protect against cellular damage, as well as the development and spread of cancer cells "
+			},
+			{
+				"name": "Fermented foods",
+				"imageURL": "https://www.health.harvard.edu/media/content/images/p4_COMP_FermentedFoods_W1807_gi608000236.jpg",
+				"description": "Fermented foods like yogurt, kimchi, miso, and sauerkraut contain probiotics and other nutrients that may safeguard against breast cancer. A review of 27 studies linked fermented dairy products, such as yogurt and kefir, to a reduced risk of breast cancer in both Western and Asian populations "
+			},
+			{
+				"name": "Allium vegetables",
+				"imageURL": "https://guardian.ng/wp-content/uploads/2017/11/Allium-vegetables.jpg",
+				"description": "Garlic, onions, and leeks are all allium vegetables that boast an array of nutrients, including organosulfur compounds, flavonoid antioxidants, and vitamin C. These may have powerful anticancer properties. A study in 660 women in Puerto Rico tied high garlic and onion intake to a reduced risk of breast cancer"
+			},
+			{
+				"name": "Beans",
+				"imageURL": "https://thefamilydinnerproject.org/wp-content/uploads/2013/09/Green-bean-lime-633x326.jpg",
+				"description": "Beans are loaded with fiber, vitamins, and minerals. Specifically, their high fiber content may protect against breast cancer. A study in 2,571 women found that high bean intake reduced breast cancer risk by up to 20%, compared with low bean intake"
+			}
+		],
+		"doctors": [
+			{
+				"name": "Sanjay P. Bagaria, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/GBS/Patient-Consumer/Images/2016/12/22/19/33/Bagaria-Sanjay-440.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/bagaria-sanjay-p-m-d/bio-20055349"
+			},
+			{
+				"name": "Jamie N. Bakkum-Gamez, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/13/Jamie-Bakkum-Gamez-13871561.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/bakkum-gamez-jamie-n-m-d/bio-20055230"
+			},
+			{
+				"name": "Judy C. Boughey, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/53/Judy-Boughey-12517712.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/boughey-judy-c-m-d/bio-20054836"
+			},
+			{
+				"name": "William J. Casey, III, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/55/William-Casey-12601926.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/casey-william-j-iii-m-d/bio-20054476"
+			},
+			{
+				"name": "William A. Cliby, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/35/William-Cliby-11095920.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/cliby-william-a-m-d/bio-20053277"
+			},
+			{
+				"name": "Patricia A. Cronin, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/23/09/Patricia-Cronin-17236819.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/cronin-patricia-a-m-d/bio-20399774"
+			},
+			{
+				"name": "Amy C. Degnim, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/20/Amy-Degnim-14288656.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/degnim-amy-c-m-d/bio-20054490"
+			},
+			{
+				"name": "Sean C. Dowdy, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/53/Sean-Dowdy-12484482.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/dowdy-sean-c-m-d/bio-20054619"
+			},
+			{
+				"name": "Kyle S. Ettinger, M.D., D.D.S.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/22/44/Kyle-Ettinger-15454037.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/ettinger-kyle-s-m-d-d-d-s/bio-20426524"
+			},
+			{
+				"name": "David R. Farley, M.D.",
+				"imageURL": "https://www.mayoclinic.org/-/media/KCMS/Employees/2018/06/16/21/29/David-Farley-10531033.jpg",
+				"siteURL": "https://www.mayoclinic.org/biographies/farley-david-r-m-d/bio-20053392"
+			}
+		]
+	}
+]
