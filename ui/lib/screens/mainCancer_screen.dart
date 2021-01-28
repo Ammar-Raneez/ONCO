@@ -8,12 +8,14 @@ class MainCancerTypesScreen extends StatefulWidget {
 class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blueAccent,
-      child: Center(
-        child: Text(
-          "list of cancer for prognosis and disgnosis",
-          style: TextStyle(color: Colors.white),
+    return SafeArea(
+      child: Container(
+        color: Color(0xff01CDFA),
+        child: Center(
+          child: Text(
+            "list of cancer for prognosis and disgnosis",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );

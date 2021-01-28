@@ -28,45 +28,47 @@ class _NavigationBottomBarScreenState extends State<NavigationBottomBarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
 
-      // under this body only the screen go into
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (page) {
-          setState(() {
-            currentIndex = page;
-          });
-        },
-        children: [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()],
-      ),
+        // under this body only the screen go into
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (page) {
+            setState(() {
+              currentIndex = page;
+            });
+          },
+          children: [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()],
+        ),
 
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.blueAccent,
-        index: currentIndex,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-            _pageController.jumpToPage(
-              index,
-            );
-          });
-        },
-        items: [
-          Icon(
-            Icons.home,
-            size: 30,
-          ),
-          Icon(
-            Icons.widgets_outlined,
-            size: 30,
-          ),
-          Icon(
-            Icons.chat,
-            size: 30,
-          ),
-        ],
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Color(0xff01CDFA),
+          index: currentIndex,
+          onTap: (index) {
+            setState(() {
+              currentIndex = index;
+              _pageController.jumpToPage(
+                index,
+              );
+            });
+          },
+          items: [
+            Icon(
+              Icons.home,
+              size: 30,
+            ),
+            Icon(
+              Icons.widgets_outlined,
+              size: 30,
+            ),
+            Icon(
+              Icons.chat,
+              size: 30,
+            ),
+          ],
+        ),
       ),
     );
   }

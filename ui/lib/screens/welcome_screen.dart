@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/screens/login_screen.dart';
 import 'package:ui/screens/navigationBottomBar_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -53,32 +54,34 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff01CDFA),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    goToLoginScreen();
-                  });
-                },
-                child: Hero(
-                  tag: "logo",
-                  child: Container(
-                    child: Image.asset('images/officialLogo.png'),
-                    height: animation.value * 45,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color(0xff01CDFA),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      goToLoginScreen();
+                    });
+                  },
+                  child: Hero(
+                    tag: "logo",
+                    child: Container(
+                      child: Image.asset('images/officialLogo.png'),
+                      height: animation.value * 45,
+                    ),
                   ),
-                ),
-              )
-            ],
-          )
-        ],
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
