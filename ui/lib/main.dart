@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui/screens/forgetPassword_screen.dart';
-import 'package:ui/screens/home_screen.dart';
+import 'package:ui/screens/navigationBottomBar_screen.dart';
 import 'package:ui/screens/login_screen.dart';
 import 'package:ui/screens/registration_screen.dart';
 import 'package:ui/screens/welcome_screen.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
         ForgetPassword.id: (context) => ForgetPassword(),
-        HomeScreen.id: (context) => HomeScreen()
+        NavigationBottomBarScreen.id: (context) => NavigationBottomBarScreen()
       },
     );
   }
