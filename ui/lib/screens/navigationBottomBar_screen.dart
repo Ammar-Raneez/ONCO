@@ -7,7 +7,7 @@ import 'package:ui/screens/mainCancer_screen.dart';
 
 class NavigationBottomBarScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
-  static String id = "homeScreen";
+  static String id = "navigationBottom";
 
   @override
   _NavigationBottomBarScreenState createState() =>

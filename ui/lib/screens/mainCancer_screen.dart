@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MainCancerTypesScreen extends StatefulWidget {
+  // static 'id' variable for the naming convention for the routes
+  static String id = "mainCancerTypesScreen";
+
   @override
   _MainCancerTypesScreenState createState() => _MainCancerTypesScreenState();
 }

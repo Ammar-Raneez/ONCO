@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/login_screen.dart';
 import 'package:ui/screens/navigationBottomBar_screen.dart';
 
@@ -47,7 +48,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           context,
           PageRouteBuilder(
             transitionDuration: Duration(seconds: 5),
-            pageBuilder: (_, __, ___) => NavigationBottomBarScreen(),
+            pageBuilder: (_, __, ___) => LungCancerDiagnosis(),
           ));
     });
   }
