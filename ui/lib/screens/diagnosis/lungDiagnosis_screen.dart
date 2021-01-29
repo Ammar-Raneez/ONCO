@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:ui/constants.dart';
 
 class LungCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -19,6 +22,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // HEADER WITH ONCO LOGO AND ICON BUTTON
               Expanded(
                 child: Material(
                   color: Color(0xff01CDFA),
@@ -42,13 +46,48 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                   ),
                 ),
               ),
+
+              // THE REST OF THE BODY CONTENT OF THE SCREEN
               Expanded(
                 flex: 6,
                 child: Material(
                   borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(70.0),
+                    topRight: Radius.circular(70.0),
                   ),
                   color: Colors.white,
+
+                  // PADDING WIDGET
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // LUNG CANCER DIAGNOSIS TEXT CONTENT
+                        Text(
+                          "Lung Cancer",
+                          style: kTextStyle.copyWith(
+                            color: Colors.blueGrey,
+                            fontSize: 25,
+                          ),
+                        ),
+                        Text(
+                          "Diagnosis",
+                          style: kTextStyle.copyWith(
+                            color: Colors.black54,
+                            fontSize: 25,
+                          ),
+                        ),
+
+                        // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
+
+                        // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
+
+                        // PREDICT BUTTON
+
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Container(),
