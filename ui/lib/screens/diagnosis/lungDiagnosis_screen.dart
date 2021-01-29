@@ -1,5 +1,7 @@
 import 'dart:ui';
-
+import 'dart:io';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/constants.dart';
 
@@ -12,6 +14,7 @@ class LungCancerDiagnosis extends StatefulWidget {
 }
 
 class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,10 +35,15 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.arrow_back,
-                          size: 30,
-                          color: Colors.white,
+                        IconButton(
+                          icon: Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            // navigate back
+                          },
                         ),
                         Image.asset(
                           'images/officialLogo.png',
@@ -78,19 +86,16 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                             fontSize: 25,
                           ),
                         ),
-
                         // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
 
                         // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
 
-                        // PREDICT BUTTON
-
+                        // DETECTION BUTTON
                       ],
                     ),
                   ),
                 ),
               ),
-              Container(),
             ],
           ),
         ),
