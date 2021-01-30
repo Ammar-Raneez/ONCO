@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'dart:io';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
 
 class LungCancerDiagnosis extends StatefulWidget {
@@ -14,7 +14,6 @@ class LungCancerDiagnosis extends StatefulWidget {
 }
 
 class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -87,10 +86,55 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                           ),
                         ),
                         // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Image.asset('images/uploadImageGrey1.png'),
+                          ),
+                        ),
 
                         // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
-
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RaisedButton(
+                              elevation: 3.0,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 25.0, vertical: 10.0),
+                              color: Colors.lightBlueAccent,
+                              onPressed: () {},
+                              child: Icon(
+                                Icons.camera_alt_rounded,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            RaisedButton(
+                              elevation: 3.0,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 25.0, vertical: 10.0),
+                              color: Colors.lightBlueAccent,
+                              onPressed: () {},
+                              child: Icon(
+                                Icons.photo,
+                                color: Colors.white,
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
                         // DETECTION BUTTON
+                        RoundedButton(
+                          onPressed: () {
+                            //Implement login functionality.
+                          },
+                          colour: Colors.redAccent,
+                          title: 'DETECT',
+                        ),
                       ],
                     ),
                   ),
