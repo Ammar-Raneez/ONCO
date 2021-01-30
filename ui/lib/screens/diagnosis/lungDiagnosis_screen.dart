@@ -216,20 +216,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   }
 }
 
-// try {
-// String fileName = imageFile.path.split('/').last;
-// print(fileName);
-//
-// FormData formData = new FormData.fromMap({
-// "file":  await MultipartFile.fromFile(imageFile.path, filename:fileName),
-// });
-// print(formData);
-//
-// Response response = await dio.post(
-// "https://10.0.2.2:5000/predict",
-// data: formData,
-// );
-// print(response);
-// } catch (e) {
-// print("Exception Caught: $e");
-// }
+// IMPORTANT REFERENCE USED TO CONNECT FLUTTER AND FLASK FOR (MOBILE PHONE)
+// https://medium.com/@podcoder/connecting-flutter-application-to-localhost-a1022df63130
+// MAKE SURE THE python script is running on this:
+// app.run(host="0.0.0.0", port=80)
