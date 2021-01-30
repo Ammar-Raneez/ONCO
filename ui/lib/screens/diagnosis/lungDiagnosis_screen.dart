@@ -1,5 +1,10 @@
 import 'dart:ui';
 import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:flutter/rendering.dart';
+import 'package:path/path.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/RoundedButton.dart';
@@ -14,21 +19,51 @@ class LungCancerDiagnosis extends StatefulWidget {
 }
 
 class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
+  //  Variables
   File imageFile;
+  Dio dio = new Dio();
 
   // open Gallery method
   _openGallery() async {
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    // NOTE that selectedPicture may also contain null value, suppose user opens gallery and exits
+    // without selecting a picture.
     setState(() {
       imageFile = selectedPicture;
     });
   }
 
+  // detect the cancer
+  _detect() async {
+    try {
+      String fileName = imageFile.path.split('/').last;
+      print(fileName);
+
+      FormData formData = new FormData.fromMap({
+        "file":  await MultipartFile.fromFile(imageFile.path, filename:fileName),
+      });
+      print(formData);
+
+      Response response = await dio.post(
+        "http://192.168.1.3/predict",
+        data: formData,
+      );
+      print(response);
+    } catch (e) {
+      print("Exception Caught: $e");
+    }
+  }
+
+
   // open camera method
   _openCamera() async {
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.camera);
+
+    // NOTE that selectedPicture may also contain null value, suppose user opens the camera and exits
+    // without capturing a picture.
     setState(() {
       imageFile = selectedPicture;
     });
@@ -163,6 +198,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                         RoundedButton(
                           onPressed: () {
                             //Implement lung cancer detect functionality.
+                            _detect();
                           },
                           colour: Colors.redAccent,
                           title: 'DETECT',
@@ -179,3 +215,21 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     );
   }
 }
+
+// try {
+// String fileName = imageFile.path.split('/').last;
+// print(fileName);
+//
+// FormData formData = new FormData.fromMap({
+// "file":  await MultipartFile.fromFile(imageFile.path, filename:fileName),
+// });
+// print(formData);
+//
+// Response response = await dio.post(
+// "https://10.0.2.2:5000/predict",
+// data: formData,
+// );
+// print(response);
+// } catch (e) {
+// print("Exception Caught: $e");
+// }
