@@ -2,9 +2,6 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
-import 'package:path/path.dart';
-import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/RoundedButton.dart';
@@ -19,11 +16,11 @@ class LungCancerDiagnosis extends StatefulWidget {
 }
 
 class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
-  //  Variables
+  //  VARIABLES
   File imageFile;
   Dio dio = new Dio();
 
-  // open Gallery method
+  // OPEN GALLERY TO SELECT AN IMAGE METHOD
   _openGallery() async {
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -35,29 +32,34 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     });
   }
 
-  // detect the cancer
+  // DETECT THE CANCER METHOD (ASYNC TASK)
   _detect() async {
     try {
+      // GETTING THE IMAGE NAME
       String fileName = imageFile.path.split('/').last;
       print(fileName);
 
+      // CREATING THE FORM DATA TO BE SENT TO THE BACKEND
       FormData formData = new FormData.fromMap({
-        "file":  await MultipartFile.fromFile(imageFile.path, filename:fileName),
+        "file":
+            await MultipartFile.fromFile(imageFile.path, filename: fileName),
       });
       print(formData);
 
+      // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
       Response response = await dio.post(
         "http://192.168.1.3/predict",
         data: formData,
       );
       print(response);
     } catch (e) {
+      // DISPLAYING THE EXCEPTION TO THE CONSOLE REMEMBER TO CONVERT THIS INTO
+      // AN ALERT AND DISPLAY IT TO THE USER
       print("Exception Caught: $e");
     }
   }
 
-
-  // open camera method
+  // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE
   _openCamera() async {
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.camera);
@@ -96,7 +98,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            // navigate back
+                            // NAVIGATE BACK
                           },
                         ),
                         Image.asset(
@@ -164,7 +166,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   horizontal: 25.0, vertical: 10.0),
                               color: Colors.lightBlueAccent,
                               onPressed: () {
-                                // open the camera to capture image
+                                // OPEN THE CAMERA TO CAPTURE IMAGE
                                 _openCamera();
                               },
                               child: Icon(
@@ -181,7 +183,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   horizontal: 25.0, vertical: 10.0),
                               color: Colors.lightBlueAccent,
                               onPressed: () {
-                                // open gallery to select image
+                                // OPEN GALLERY TO SELECT AN IMAGE
                                 _openGallery();
                               },
                               child: Icon(
@@ -197,7 +199,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                         // DETECTION BUTTON
                         RoundedButton(
                           onPressed: () {
-                            //Implement lung cancer detect functionality.
+                            // IMPLEMENT THE DETECT LUNG CANCER FUNCTIONALITY
                             _detect();
                           },
                           colour: Colors.redAccent,
