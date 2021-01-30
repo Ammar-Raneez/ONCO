@@ -220,3 +220,5 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 // https://medium.com/@podcoder/connecting-flutter-application-to-localhost-a1022df63130
 // MAKE SURE THE python script is running on this:
 // app.run(host="0.0.0.0", port=80)
+// 192.168.1.3 <--- this is the ip address in my machine
+// to get your ip address go to cmd and hit ipconfig to get ur LAN ip
