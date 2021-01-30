@@ -14,6 +14,26 @@ class LungCancerDiagnosis extends StatefulWidget {
 }
 
 class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
+
+  File imageFile;
+
+  // open Gallery method
+  _openGallery() async {
+    var selectedPicture = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageFile = selectedPicture;
+    });
+  }
+
+  // open camera method
+  _openCamera() async{
+    var selectedPicture = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      imageFile = selectedPicture;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -102,7 +122,11 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 25.0, vertical: 10.0),
                               color: Colors.lightBlueAccent,
-                              onPressed: () {},
+                              onPressed: () {
+                                // open the camera to capture image
+                                _openCamera();
+
+                              },
                               child: Icon(
                                 Icons.camera_alt_rounded,
                                 color: Colors.white,
@@ -116,7 +140,11 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 25.0, vertical: 10.0),
                               color: Colors.lightBlueAccent,
-                              onPressed: () {},
+                              onPressed: () {
+                                // open gallery to select image
+                                _openGallery();
+
+                              },
                               child: Icon(
                                 Icons.photo,
                                 color: Colors.white,
@@ -130,7 +158,8 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                         // DETECTION BUTTON
                         RoundedButton(
                           onPressed: () {
-                            //Implement login functionality.
+                            //Implement lung cancer detect functionality.
+
                           },
                           colour: Colors.redAccent,
                           title: 'DETECT',
