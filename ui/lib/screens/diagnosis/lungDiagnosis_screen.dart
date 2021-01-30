@@ -14,25 +14,25 @@ class LungCancerDiagnosis extends StatefulWidget {
 }
 
 class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
-
   File imageFile;
 
   // open Gallery method
   _openGallery() async {
-    var selectedPicture = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var selectedPicture =
+        await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       imageFile = selectedPicture;
     });
   }
 
   // open camera method
-  _openCamera() async{
-    var selectedPicture = await ImagePicker.pickImage(source: ImageSource.camera);
+  _openCamera() async {
+    var selectedPicture =
+        await ImagePicker.pickImage(source: ImageSource.camera);
     setState(() {
       imageFile = selectedPicture;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,13 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
-                            child: Image.asset('images/uploadImageGrey1.png'),
+                            child: imageFile == null
+                                ? Image.asset('images/uploadImageGrey1.png')
+                                : Image.file(
+                                    imageFile,
+                                    width: 500,
+                                    height: 500,
+                                  ),
                           ),
                         ),
 
@@ -125,7 +131,6 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               onPressed: () {
                                 // open the camera to capture image
                                 _openCamera();
-
                               },
                               child: Icon(
                                 Icons.camera_alt_rounded,
@@ -143,7 +148,6 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               onPressed: () {
                                 // open gallery to select image
                                 _openGallery();
-
                               },
                               child: Icon(
                                 Icons.photo,
@@ -159,7 +163,6 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                         RoundedButton(
                           onPressed: () {
                             //Implement lung cancer detect functionality.
-
                           },
                           colour: Colors.redAccent,
                           title: 'DETECT',
