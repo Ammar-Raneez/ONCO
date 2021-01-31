@@ -1,12 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Backend for Lung Prediction Model
-
-# ### Importing Libraries
-
-# In[1]:
-
 
 # Make sure that all the following modules are already installed for use.
 from flask import Flask
@@ -18,9 +9,6 @@ import numpy as np
 
 # ### Creating an instance of the flask app and an API
 
-# In[2]:
-
-
 APP = Flask(__name__)
 APP.config['CORS_HEADERS'] = 'Content-Type'
 CORS(APP)
@@ -29,16 +17,10 @@ API = Api(APP)
 
 # ### Loading the trained model
 
-# In[10]:
-
-
 LUNG_PREDICTION_MODEL = joblib.load('lung-cancer-pred-model.pkl')
 
 
 # ### Creating a class which is responsible for the prediction
-
-# In[11]:
-
 
 class Predict(Resource):
 
@@ -80,21 +62,16 @@ class Predict(Resource):
 
 # ### Adding the predict class as a resource to the API
 
-# In[ ]:
-
-
 API.add_resource(Predict, '/predict')
 
 if __name__ == '__main__':
-    APP.run(debug=True, port=1080)
+    APP.run(host="0.0.0.0", port=80)
 
 
 # ### Using the request module by first defining the URL to access and the body to send along with our HTTP request
 
-# In[14]:
 
-
-import requests
+'''import requests
 
 URL = 'http://127.0.0.1:1080/predict'  # localhost and the defined port + endpoint
 
@@ -125,10 +102,7 @@ body = {
 }
 
 response = requests.post(URL, data=body)
-response.json()
-
-
-# In[ ]:
+response.json()'''
 
 
 
