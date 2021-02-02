@@ -36,7 +36,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool showSpinner = false;
 
   // creating an alert
-  createAlertDialog(BuildContext context, String title, String message) {
+  createAlertDialog(BuildContext context, String title, String message, int status) {
     return showDialog(
       context: context,
       builder: (context) {
@@ -47,7 +47,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           actions: [
             MaterialButton(
               onPressed: () {
-                if (title == "Success") {
+                if (status == 200) {
                   Navigator.pop(context);
                   Navigator.pushNamed(context, NavigationBottomBarScreen.id);
                 } else {
@@ -242,11 +242,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         if (newUser != null) {
                           // Displaying the alert dialog
                           createAlertDialog(context, "Success",
-                              "Account Registered Successfully!");
+                              "Account Registered Successfully!", 200);
                         } else {
                           // Displaying the alert dialog
                           createAlertDialog(context, "Error",
-                              "Something went wrong, try again later!");
+                              "Something went wrong, try again later!", 404);
                         }
 
                         // stops displaying the spinner once the result comes back
@@ -260,7 +260,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         _usernameController.clear();
                         _passwordTextFieldController.clear();
                       } catch (e) {
-                        createAlertDialog(context, "Error", e.message);
+                        createAlertDialog(context, "Error", e.message, 404);
                         // stops displaying the spinner once the result comes back
                         setState(() {
                           showSpinner = false;
