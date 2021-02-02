@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/cancer_card.dart'; //imports card component
+import 'package:ui/components/custom_app_bar.dart';
 
 //TODO -  add top appbar/row and add functionality for passing colors into card. Might need to adjust padding after adding appbar
 
@@ -18,11 +19,11 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar("settings"),
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.only(
             //* might need to change when adding top row and nav
-            top: 120.0,
             left: 24.0,
             right: 24.0,
           ),
