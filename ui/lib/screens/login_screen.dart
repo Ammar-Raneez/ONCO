@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/components/AlertWidget.dart';
 import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
 import 'package:ui/screens/forgetPassword_screen.dart';
@@ -64,10 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // using GOOGLE Authentication to implement the login functionality
-  googleAuthLogin(BuildContext context) async {
-
-  }
-
+  googleAuthLogin(BuildContext context) async {}
 
   // creating an alert
   createAlertDialog(
@@ -75,24 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(message),
-          elevation: 24.0,
-          actions: [
-            MaterialButton(
-              onPressed: () {
-                if (status == 200) {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, NavigationBottomBarScreen.id);
-                } else {
-                  Navigator.pop(context);
-                }
-              },
-              elevation: 5.0,
-              child: Text("OK"),
-            ),
-          ],
+        return AlertWidget(
+          title: title,
+          message: message,
+          status: status,
         );
       },
     );
@@ -281,4 +265,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/components/AlertWidget.dart';
 import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,28 +37,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool showSpinner = false;
 
   // creating an alert
-  createAlertDialog(BuildContext context, String title, String message, int status) {
+  createAlertDialog(
+      BuildContext context, String title, String message, int status) {
     return showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(message),
-          elevation: 24.0,
-          actions: [
-            MaterialButton(
-              onPressed: () {
-                if (status == 200) {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, NavigationBottomBarScreen.id);
-                } else {
-                  Navigator.pop(context);
-                }
-              },
-              elevation: 5.0,
-              child: Text("OK"),
-            ),
-          ],
+        return AlertWidget(
+          title: title,
+          message: message,
+          status: status,
         );
       },
     );
