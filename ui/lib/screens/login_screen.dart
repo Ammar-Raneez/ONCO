@@ -4,8 +4,8 @@ import 'package:ui/constants.dart';
 import 'package:ui/screens/forgetPassword_screen.dart';
 import 'package:ui/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
+// Variables used to get the logged in user
 final _auth = FirebaseAuth.instance;
 User loggedInUser;
 

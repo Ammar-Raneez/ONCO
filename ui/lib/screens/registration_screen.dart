@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ui/screens/login_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'navigationBottomBar_screen.dart';
+
+// Firebase related variables
+final _firestore = FirebaseFirestore.instance;
 
 class RegistrationScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -15,6 +18,7 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  // Variables used for the registration page
   String username;
   String email;
   String password;
@@ -34,32 +38,34 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   // creating an alert
   createAlertDialog(BuildContext context, String title, String message) {
     return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(title),
-            content: Text(message),
-            elevation: 24.0,
-            actions: [
-              MaterialButton(
-                onPressed: () {
-                  if(title == "Success"){
-                    Navigator.pushNamed(context, LoginScreen.id);
-
-                  }else{
-                    Navigator.pop(context);
-                  }
-                },
-                elevation: 5.0,
-                child: Text("OK"),
-              ),
-            ],
-          );
-        });
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          elevation: 24.0,
+          actions: [
+            MaterialButton(
+              onPressed: () {
+                if (title == "Success") {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, NavigationBottomBarScreen.id);
+                } else {
+                  Navigator.pop(context);
+                }
+              },
+              elevation: 5.0,
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    // This variable is used to handle the screen widgets when the keyboard is opened
     double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;
 
     return SafeArea(
@@ -220,20 +226,30 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                       // register the user in firebase
                       try {
+                        // created the user and returns a user once created
                         final newUser =
                             await _auth.createUserWithEmailAndPassword(
                                 email: email, password: password);
 
+                        // Adding the user details to the cloud firestore for delete account and other functionality
+                        _firestore.collection("users").add({
+                          "userID": email,
+                          "securityCode": favoriteFood,
+                          'timestamp': Timestamp.now()
+                        });
+
+                        // displaying alerts according to the progress
                         if (newUser != null) {
                           // Displaying the alert dialog
-                          createAlertDialog(
-                              context, "Success", "Account Registered Successfully!");
+                          createAlertDialog(context, "Success",
+                              "Account Registered Successfully!");
                         } else {
                           // Displaying the alert dialog
-                          createAlertDialog(
-                              context, "Error", "Something went wrong, try again later!");
+                          createAlertDialog(context, "Error",
+                              "Something went wrong, try again later!");
                         }
 
+                        // stops displaying the spinner once the result comes back
                         setState(() {
                           showSpinner = false;
                         });
@@ -245,6 +261,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         _passwordTextFieldController.clear();
                       } catch (e) {
                         createAlertDialog(context, "Error", e.message);
+                        // stops displaying the spinner once the result comes back
+                        setState(() {
+                          showSpinner = false;
+                        });
                       }
                     },
                     colour: Colors.lightBlueAccent,
