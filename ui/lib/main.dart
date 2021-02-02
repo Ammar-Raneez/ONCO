@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ui/screens/cancer_page.dart';
 import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';

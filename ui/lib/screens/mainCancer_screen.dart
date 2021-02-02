@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/cancer_card.dart'; //imports card component
 
-//TODO add top appbar/row and add functionality for passing colors into card.
-//?Might need to adjust padding after adding appbar
+//TODO -  add top appbar/row and add functionality for passing colors into card. Might need to adjust padding after adding appbar
 
 /* This is the Cancer Page that displays an appbar with a gradient and a logo, three cards that allow the user to click on a
  certain cancer and be redirected to that page and the nav at the bottom. */
