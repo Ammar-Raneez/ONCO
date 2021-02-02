@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/components/cancer_card.dart';
 
 //TODO add top appbar/row and add
 

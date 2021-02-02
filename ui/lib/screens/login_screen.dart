@@ -5,7 +5,8 @@ import 'package:ui/screens/forgetPassword_screen.dart';
 import 'package:ui/screens/navigationBottomBar_screen.dart';
 import 'package:ui/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,8 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
   String email;
   String password;
   bool visiblePassword = false;
-  final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   var _emailAddressTextFieldController = TextEditingController();
   var _passwordTextFieldController = TextEditingController();
@@ -60,6 +62,12 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     }
   }
+
+  // using GOOGLE Authentication to implement the login functionality
+  googleAuthLogin(BuildContext context) async {
+
+  }
+
 
   // creating an alert
   createAlertDialog(
@@ -211,7 +219,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       //Implement login functionality.
                       loginUserByEmailAndPassword(context);
-
                       // clearing the text fields on submitted the details
                       _emailAddressTextFieldController.clear();
                       _passwordTextFieldController.clear();
@@ -228,7 +235,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   RoundedButton(
                     onPressed: () {
-                      //Implement login functionality.
+                      //Implement login functionality using google auth
+                      googleAuthLogin(context);
                     },
                     colour: Colors.redAccent,
                     title: 'Google',
@@ -273,3 +281,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+

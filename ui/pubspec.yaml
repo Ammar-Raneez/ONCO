@@ -23,6 +23,7 @@ dependencies:
   image_picker: ^0.6.7+21
   http: ^0.12.2
   dio: ^3.0.10
+  google_sign_in: ^4.5.9
 
 dev_dependencies:
   flutter_test:
