@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
+//TODO - need to add functionality for passing colors into card, add font and finishing touches.
+
+// This is the Cancer Card generator that accepts parameters to build a custom card for each cancer
+
 class CancerCard extends StatelessWidget {
+  //properties that are passed in
   final String cardTitle;
 
-  CancerCard({@required this.cardTitle});
+  CancerCard({@required this.cardTitle}); //constructor to init values
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class CancerCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 80.0, left: 20.0),
           child: Text(
-            cardTitle,
+            cardTitle, 
             style: TextStyle(
               fontSize: 25.0,
               color: Color(0xFF345860),
