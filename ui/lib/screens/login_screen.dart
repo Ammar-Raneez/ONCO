@@ -3,6 +3,11 @@ import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
 import 'package:ui/screens/forgetPassword_screen.dart';
 import 'package:ui/screens/registration_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+final _auth = FirebaseAuth.instance;
+User loggedInUser;
 
 class LoginScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -21,6 +26,24 @@ class _LoginScreenState extends State<LoginScreen> {
 
   var _emailAddressTextFieldController = TextEditingController();
   var _passwordTextFieldController = TextEditingController();
+
+ @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() async{
+    try{
+      final user = _auth.currentUser;
+      if(user != null){
+        loggedInUser = user;
+        print(loggedInUser.email + "<---------------------- registered user email");
+      }
+    }catch(e){
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

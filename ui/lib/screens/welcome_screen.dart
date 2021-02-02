@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/login_screen.dart';
 import 'package:ui/screens/navigationBottomBar_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class WelcomeScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -21,6 +23,13 @@ class _WelcomeScreenState extends State<WelcomeScreen>
   @override
   void initState() {
     super.initState();
+
+    // initialize the firebase app
+    Firebase.initializeApp().whenComplete(() {
+      print("completed");
+      setState(() {});
+    });
+
     controller = AnimationController(
         duration: Duration(seconds: 3), vsync: this, upperBound: 1.0);
 
@@ -48,7 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           context,
           PageRouteBuilder(
             transitionDuration: Duration(seconds: 5),
-            pageBuilder: (_, __, ___) => LungCancerDiagnosis(),
+            pageBuilder: (_, __, ___) => LoginScreen(),
           ));
     });
   }

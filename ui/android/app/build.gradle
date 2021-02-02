@@ -54,7 +54,7 @@ flutter {
     source '../..'
 }
 dependencies {
-    implementation 'com.android.support:multidex:1.0.3' //enter the latest version
     implementation platform('com.google.firebase:firebase-bom:26.4.0')
+    implementation 'com.android.support:multidex:2.0.1' //enter the latest version
 }
 apply plugin: 'com.google.gms.google-services'
