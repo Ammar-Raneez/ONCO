@@ -4,8 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:ui/components/AlertWidget.dart';
 import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class LungCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -19,6 +21,22 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   //  VARIABLES
   File imageFile;
   Dio dio = new Dio();
+  bool showSpinner = false;
+
+  // creating an alert
+  createAlertDialog(
+      BuildContext context, String title, String message, int status) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertWidget(
+          title: title,
+          message: message,
+          status: status,
+        );
+      },
+    );
+  }
 
   // OPEN GALLERY TO SELECT AN IMAGE METHOD
   _openGallery() async {
@@ -34,6 +52,9 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 
   // DETECT THE CANCER METHOD (ASYNC TASK)
   _detect() async {
+    setState(() {
+      showSpinner = true;
+    });
     try {
       // GETTING THE IMAGE NAME
       String fileName = imageFile.path.split('/').last;
@@ -52,10 +73,34 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         data: formData,
       );
       print(response);
+
+      // Creating fake response at the moment to create the ui functionality and stuff-----
+      // String response;
+      // await Future.delayed(const Duration(seconds: 5), () {
+      //   response = "POSITIVE";
+      // });
+
+      // Display the spinner to indicate that its loading
+      setState(() {
+        showSpinner = false;
+      });
+
+      // checking if the response is not null and displaying the result
+      if (response != null) {
+        // Displaying the alert dialog
+        createAlertDialog(
+            context, "Diagnosis Result", response.toString(), 201);
+      } else {
+        // Displaying the alert dialog
+        createAlertDialog(context, "Error", "Oops something went wrong!", 404);
+      }
     } catch (e) {
-      // DISPLAYING THE EXCEPTION TO THE CONSOLE REMEMBER TO CONVERT THIS INTO
-      // AN ALERT AND DISPLAY IT TO THE USER
-      print("Exception Caught: $e");
+      // Displaying alert to the user
+      createAlertDialog(context, "Error", e.message, 404);
+
+      setState(() {
+        showSpinner = false;
+      });
     }
   }
 
@@ -76,141 +121,145 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xff01CDFA),
-        body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // HEADER WITH ONCO LOGO AND ICON BUTTON
-              Expanded(
-                child: Material(
-                  color: Color(0xff01CDFA),
-                  child: Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.arrow_back,
-                            size: 30,
-                            color: Colors.white,
+        body: ModalProgressHUD(
+          inAsyncCall: showSpinner,
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // HEADER WITH ONCO LOGO AND ICON BUTTON
+                Expanded(
+                  child: Material(
+                    color: Color(0xff01CDFA),
+                    child: Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.arrow_back,
+                              size: 30,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              // NAVIGATE BACK
+                              Navigator.pop(context);
+                            },
                           ),
-                          onPressed: () {
-                            // NAVIGATE BACK
-                          },
-                        ),
-                        Image.asset(
-                          'images/officialLogo.png',
-                          height: 20,
-                        ),
-                      ],
+                          Image.asset(
+                            'images/officialLogo.png',
+                            height: 20,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
 
-              // THE REST OF THE BODY CONTENT OF THE SCREEN
-              Expanded(
-                flex: 6,
-                child: Material(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(70.0),
-                  ),
-                  color: Colors.white,
+                // THE REST OF THE BODY CONTENT OF THE SCREEN
+                Expanded(
+                  flex: 6,
+                  child: Material(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(70.0),
+                    ),
+                    color: Colors.white,
 
-                  // PADDING WIDGET
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // LUNG CANCER DIAGNOSIS TEXT CONTENT
-                        Text(
-                          "Lung Cancer",
-                          style: kTextStyle.copyWith(
-                            color: Colors.blueGrey,
-                            fontSize: 25,
-                          ),
-                        ),
-                        Text(
-                          "Diagnosis",
-                          style: kTextStyle.copyWith(
-                            color: Colors.black54,
-                            fontSize: 25,
-                          ),
-                        ),
-                        // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: imageFile == null
-                                ? Image.asset('images/uploadImageGrey1.png')
-                                : Image.file(
-                                    imageFile,
-                                    width: 500,
-                                    height: 500,
-                                  ),
-                          ),
-                        ),
-
-                        // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RaisedButton(
-                              elevation: 3.0,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 25.0, vertical: 10.0),
-                              color: Colors.lightBlueAccent,
-                              onPressed: () {
-                                // OPEN THE CAMERA TO CAPTURE IMAGE
-                                _openCamera();
-                              },
-                              child: Icon(
-                                Icons.camera_alt_rounded,
-                                color: Colors.white,
-                              ),
+                    // PADDING WIDGET
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // LUNG CANCER DIAGNOSIS TEXT CONTENT
+                          Text(
+                            "Lung Cancer",
+                            style: kTextStyle.copyWith(
+                              color: Colors.blueGrey,
+                              fontSize: 25,
                             ),
-                            SizedBox(
-                              width: 20.0,
+                          ),
+                          Text(
+                            "Diagnosis",
+                            style: kTextStyle.copyWith(
+                              color: Colors.black54,
+                              fontSize: 25,
                             ),
-                            RaisedButton(
-                              elevation: 3.0,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 25.0, vertical: 10.0),
-                              color: Colors.lightBlueAccent,
-                              onPressed: () {
-                                // OPEN GALLERY TO SELECT AN IMAGE
-                                _openGallery();
-                              },
-                              child: Icon(
-                                Icons.photo,
-                                color: Colors.white,
+                          ),
+                          // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: imageFile == null
+                                  ? Image.asset('images/uploadImageGrey1.png')
+                                  : Image.file(
+                                      imageFile,
+                                      width: 500,
+                                      height: 500,
+                                    ),
+                            ),
+                          ),
+
+                          // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RaisedButton(
+                                elevation: 3.0,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 25.0, vertical: 10.0),
+                                color: Colors.lightBlueAccent,
+                                onPressed: () {
+                                  // OPEN THE CAMERA TO CAPTURE IMAGE
+                                  _openCamera();
+                                },
+                                child: Icon(
+                                  Icons.camera_alt_rounded,
+                                  color: Colors.white,
+                                ),
                               ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        // DETECTION BUTTON
-                        RoundedButton(
-                          onPressed: () {
-                            // IMPLEMENT THE DETECT LUNG CANCER FUNCTIONALITY
-                            _detect();
-                          },
-                          colour: Colors.redAccent,
-                          title: 'DETECT',
-                        ),
-                      ],
+                              SizedBox(
+                                width: 20.0,
+                              ),
+                              RaisedButton(
+                                elevation: 3.0,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 25.0, vertical: 10.0),
+                                color: Colors.lightBlueAccent,
+                                onPressed: () {
+                                  // OPEN GALLERY TO SELECT AN IMAGE
+                                  _openGallery();
+                                },
+                                child: Icon(
+                                  Icons.photo,
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          // DETECTION BUTTON
+                          RoundedButton(
+                            onPressed: () {
+                              // IMPLEMENT THE DETECT LUNG CANCER FUNCTIONALITY
+                              _detect();
+                            },
+                            colour: Colors.redAccent,
+                            title: 'DETECT',
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
