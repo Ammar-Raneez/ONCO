@@ -57,7 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           context,
           PageRouteBuilder(
             transitionDuration: Duration(seconds: 5),
-            pageBuilder: (_, __, ___) => LungCancerDiagnosis(),
+            pageBuilder: (_, __, ___) => LoginScreen(),
           ));
     });
   }
