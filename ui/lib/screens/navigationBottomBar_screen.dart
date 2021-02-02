@@ -15,16 +15,12 @@ class NavigationBottomBarScreen extends StatefulWidget {
 }
 
 class _NavigationBottomBarScreenState extends State<NavigationBottomBarScreen> {
+
+  // page controller is used to control the flow of the main pages (HOME, CANCER AND CHATBOT PAGE/SCREEN)
   int currentIndex = 0;
   PageController _pageController = PageController(
     initialPage: 0,
   );
-
-  List<Widget> listOfColors = [
-    HomeScreen(),
-    MainCancerTypesScreen(),
-    ChatBotScreen()
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +31,24 @@ class _NavigationBottomBarScreenState extends State<NavigationBottomBarScreen> {
         // under this body only the screen go into
         body: PageView(
           controller: _pageController,
+
+          // when you swipe through the screen (HOME, CANCER, CHATBOT)
           onPageChanged: (page) {
             setState(() {
               currentIndex = page;
             });
           },
+
+          // List of the Main Swiping Screens
           children: [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()],
         ),
 
+        // Bottom bar navigation
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Color(0xff01CDFA),
           index: currentIndex,
+
+          // Logic for the switching of MAIN SCREENS (HOME, CANCER, CHATBOT)
           onTap: (index) {
             setState(() {
               currentIndex = index;
