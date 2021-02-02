@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "425803825049",
+    "project_id": "onco-127df",
+    "storage_bucket": "onco-127df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425803825049:android:29f95d370e67580d065d08",
+        "android_client_info": {
+          "package_name": "com.NashMLonco.ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425803825049-sfl7o3foupahclj5bhrs9c4hl39639si.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYK2d18-tbidF-n5NNa1hoy3Jv73saCk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425803825049-sfl7o3foupahclj5bhrs9c4hl39639si.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
