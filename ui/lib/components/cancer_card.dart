@@ -22,7 +22,7 @@ class CancerCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(top: 80.0, left: 20.0),
           child: Text(
-            cardTitle, 
+            cardTitle,
             style: TextStyle(
               fontSize: 25.0,
               color: Color(0xFF345860),
