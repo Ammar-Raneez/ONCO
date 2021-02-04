@@ -20,12 +20,13 @@ class CancerCard extends StatelessWidget {
         width: 320.0,
         height: 120.0,
         child: Padding(
-          padding: const EdgeInsets.only(top: 80.0, left: 20.0),
+          padding: const EdgeInsets.only(top: 70.0, left: 20.0),
           child: Text(
             cardTitle,
             style: TextStyle(
-              fontSize: 25.0,
+              fontSize: 23.0,
               color: Color(0xFF345860),
+              fontFamily: 'Poppins-SemiBold',
             ),
           ),
         ),

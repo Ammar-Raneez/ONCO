@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ui/components/cancer_card.dart'; //imports card component
 import 'package:ui/components/custom_app_bar.dart';
 
-//TODO -  add top appbar/row and add functionality for passing colors into card. Might need to adjust padding after adding appbar
+//TODO - Add nav to bottom also add passing colors into card. Might need to adjust padding after(Appbar done only for nav)
 
 /* This is the Cancer Page that displays an appbar with a gradient and a logo, three cards that allow the user to click on a
  certain cancer and be redirected to that page and the nav at the bottom. */
@@ -24,32 +24,32 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
         child: Container(
           padding: EdgeInsets.only(
             //* might need to change when adding top row and nav
-            left: 24.0,
-            right: 24.0,
+            left: 33.0,
+            right: 36.0,
           ),
           child: Center(
             child: Column(
               children: [
                 Text(
-                  'Prognosis and Diagnosis of Cancers',
+                  'Prognosis & Diagnosis of Cancers',
                   style: TextStyle(
-                    fontSize: 32.0,
-                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Poppins-SemiBold',
+                    fontSize: 27.0,
                   ),
                 ),
                 SizedBox(
-                  height: 32,
+                  height: 11,
                 ),
-                CancerCard(cardTitle: 'Skin Cancer.'),
+                CancerCard(cardTitle: 'Skin Cancer'),
                 //generates a cancer card with text passed.
                 SizedBox(
-                  height: 32,
+                  height: 15,
                 ),
-                CancerCard(cardTitle: 'Lung Cancer.'),
+                CancerCard(cardTitle: 'Lung Cancer'),
                 SizedBox(
-                  height: 32,
+                  height: 12,
                 ),
-                CancerCard(cardTitle: 'Breast Cancer.'),
+                CancerCard(cardTitle: 'Breast Cancer'),
               ],
             ),
           ),
