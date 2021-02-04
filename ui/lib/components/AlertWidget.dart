@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui/screens/navigationBottomBar_screen.dart';
+import 'package:ui/screens/current_screen.dart';
 
 class AlertWidget extends StatelessWidget {
 
@@ -22,7 +22,7 @@ class AlertWidget extends StatelessWidget {
           onPressed: () {
             if (status == 200) {
               Navigator.pop(context);
-              Navigator.pushNamed(context, NavigationBottomBarScreen.id);
+              Navigator.pushNamed(context, CurrentScreen.id);
             } else {
               Navigator.pop(context);
             }

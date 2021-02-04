@@ -3,7 +3,7 @@ import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
 import 'package:ui/screens/forgetPassword_screen.dart';
-import 'package:ui/screens/navigationBottomBar_screen.dart';
+import 'package:ui/screens/current_screen.dart';
 import 'package:ui/screens/login_screen.dart';
 import 'package:ui/screens/registration_screen.dart';
 import 'package:ui/screens/welcome_screen.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
         ForgetPassword.id: (context) => ForgetPassword(),
-        NavigationBottomBarScreen.id: (context) => NavigationBottomBarScreen(),
+        CurrentScreen.id: (context) => CurrentScreen(),
         LungCancerDiagnosis.id: (context) => LungCancerDiagnosis(),
         BreastCancerDiagnosis.id: (context) => BreastCancerDiagnosis(),
         SkinCancerDiagnosis.id: (context) => SkinCancerDiagnosis(),

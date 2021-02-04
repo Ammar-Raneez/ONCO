@@ -32,12 +32,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return new SizedBox.fromSize(
 
+
       size: preferredSize,
       child: ClipPath(
-
+        
         clipper: CustomShape(),
         child: Container(
-
+          
           height: 200,
           decoration: BoxDecoration(
 

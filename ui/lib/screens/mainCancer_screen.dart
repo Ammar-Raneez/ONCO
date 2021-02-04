@@ -19,7 +19,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar("settings"),
+      
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.only(

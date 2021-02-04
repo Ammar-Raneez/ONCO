@@ -3,11 +3,8 @@ import 'package:ui/components/AlertWidget.dart';
 import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
 import 'package:ui/screens/forgetPassword_screen.dart';
-import 'package:ui/screens/navigationBottomBar_screen.dart';
 import 'package:ui/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class LoginScreen extends StatefulWidget {
