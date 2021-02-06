@@ -39,7 +39,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         clipper: CustomShape(),
         child: Container(
           
-          height: 200,
+          height: 150,
           decoration: BoxDecoration(
 
               gradient: LinearGradient(
@@ -67,7 +67,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
                     child: Image(
                         image: AssetImage('images/officialLogo.png'),
-                        width: 75),
+                        width: 65),
                     padding: EdgeInsets.only(right: 30, bottom: 30)
                 )
               ]
@@ -78,7 +78,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(200.0);
+  Size get preferredSize => const Size.fromHeight(150.0);
 }
 
 class CustomShape extends CustomClipper<Path> {
