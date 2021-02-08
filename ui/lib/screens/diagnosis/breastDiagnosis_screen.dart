@@ -41,7 +41,7 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   // OPEN GALLERY TO SELECT AN IMAGE METHOD
   _openGallery() async {
     var selectedPicture =
-    await ImagePicker.pickImage(source: ImageSource.gallery);
+        await ImagePicker.pickImage(source: ImageSource.gallery);
 
     // NOTE that selectedPicture may also contain null value, suppose user opens gallery and exits
     // without selecting a picture.
@@ -52,62 +52,70 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
 
   // DETECT THE CANCER METHOD (ASYNC TASK)
   _detect() async {
-    setState(() {
-      showSpinner = true;
-    });
-    try {
-      // GETTING THE IMAGE NAME
-      String fileName = imageFile.path.split('/').last;
-      print(fileName);
-
-      // CREATING THE FORM DATA TO BE SENT TO THE BACKEND
-      FormData formData = new FormData.fromMap({
-        "file":
-        await MultipartFile.fromFile(imageFile.path, filename: fileName),
-      });
-      print(formData);
-
-      // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
-      Response response = await dio.post(
-        "http://192.168.1.3/predict",
-        data: formData,
-      );
-      print(response);
-
-      // Creating fake response at the moment to create the ui functionality and stuff-----
-      // String response;
-      // await Future.delayed(const Duration(seconds: 5), () {
-      //   response = "POSITIVE";
-      // });
-
-      // Display the spinner to indicate that its loading
+    // If the user selects an image only we perform the API request else an alert will be displayed
+    if (imageFile == null) {
+      // ALERT USER TO SELECT OR CAPTURE IMAGE FIRST OFF
+      createAlertDialog(
+          context, "Error", "There is no image selected or captured!", 404);
+    } else {
       setState(() {
-        showSpinner = false;
+        showSpinner = true;
       });
+      try {
+        // GETTING THE IMAGE NAME
+        String fileName = imageFile.path.split('/').last;
+        print(fileName);
 
-      // checking if the response is not null and displaying the result
-      if (response != null) {
-        // Displaying the alert dialog
-        createAlertDialog(
-            context, "Diagnosis Result", response.toString(), 201);
-      } else {
-        // Displaying the alert dialog
-        createAlertDialog(context, "Error", "Oops something went wrong!", 404);
+        // CREATING THE FORM DATA TO BE SENT TO THE BACKEND
+        FormData formData = new FormData.fromMap({
+          "file":
+              await MultipartFile.fromFile(imageFile.path, filename: fileName),
+        });
+        print(formData);
+
+        // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
+        Response response = await dio.post(
+          "http://192.168.1.3/predict",
+          data: formData,
+        );
+        print(response);
+
+        // Creating fake response at the moment to create the ui functionality and stuff-----
+        // String response;
+        // await Future.delayed(const Duration(seconds: 5), () {
+        //   response = "POSITIVE";
+        // });
+
+        // Display the spinner to indicate that its loading
+        setState(() {
+          showSpinner = false;
+        });
+
+        // checking if the response is not null and displaying the result
+        if (response != null) {
+          // Displaying the alert dialog
+          createAlertDialog(
+              context, "Diagnosis Result", response.toString(), 201);
+        } else {
+          // Displaying the alert dialog
+          createAlertDialog(
+              context, "Error", "Oops something went wrong!", 404);
+        }
+      } catch (e) {
+        // Displaying alert to the user
+        createAlertDialog(context, "Error", e.message, 404);
+
+        setState(() {
+          showSpinner = false;
+        });
       }
-    } catch (e) {
-      // Displaying alert to the user
-      createAlertDialog(context, "Error", e.message, 404);
-
-      setState(() {
-        showSpinner = false;
-      });
     }
   }
 
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE
   _openCamera() async {
     var selectedPicture =
-    await ImagePicker.pickImage(source: ImageSource.camera);
+        await ImagePicker.pickImage(source: ImageSource.camera);
 
     // NOTE that selectedPicture may also contain null value, suppose user opens the camera and exits
     // without capturing a picture.
@@ -197,10 +205,10 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                               child: imageFile == null
                                   ? Image.asset('images/uploadImageGrey1.png')
                                   : Image.file(
-                                imageFile,
-                                width: 500,
-                                height: 500,
-                              ),
+                                      imageFile,
+                                      width: 500,
+                                      height: 500,
+                                    ),
                             ),
                           ),
 
