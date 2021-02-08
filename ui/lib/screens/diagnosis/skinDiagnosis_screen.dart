@@ -95,7 +95,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         if (response != null) {
           // Displaying the alert dialog
           createAlertDialog(
-              context, "Diagnosis Result", response.toString(), 201);
+              context, "Diagnosis", response.toString(), 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
