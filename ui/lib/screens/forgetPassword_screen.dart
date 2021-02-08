@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
+import 'package:ui/components/AlertWidget.dart';
 
 class ForgetPassword extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -12,19 +15,72 @@ class ForgetPassword extends StatefulWidget {
 
 class _ForgetPasswordState extends State<ForgetPassword> {
   // variables used
-  String favouriteFood;
-  String newPassword;
-  String confirmPassword;
   String email;
-
-  bool visibleFavouriteFood = false;
-  bool visibleNewPassword = false;
-  bool visibleConfirmPassword = false;
-
   var _emailAddressTextFieldController = TextEditingController();
-  var _passwordTextFieldController = TextEditingController();
-  var _confirmPasswordTextFieldController = TextEditingController();
-  var _favouriteFoodSecurityController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool showSpinner = false;
+
+  // creating an alert
+  createAlertDialog(
+      BuildContext context, String title, String message, int status) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertWidget(
+          title: title,
+          message: message,
+          status: status,
+        );
+      },
+    );
+  }
+
+  // Performing forget password functionality using firebase for resetting password
+  forgetPasswordFunctionality(BuildContext context) async {
+    if (email == null || email == "") {
+      // Alert the user to enter the email
+      createAlertDialog(
+          context, "Error", "Please enter an email to proceed", 404);
+    } else {
+      // Since we have an email we can proceed
+      // If all the fields are filled and ready to proceed
+      setState(() {
+        showSpinner = true;
+      });
+
+      try {
+        _auth
+            .sendPasswordResetEmail(email: email)
+            .then(
+              (value) => {
+                createAlertDialog(
+                  context,
+                  "Success",
+                  "Please check your mail to reset password!",
+                  201,
+                ),
+                // stops displaying the spinner once the result comes back
+                setState(() {
+                  showSpinner = false;
+                })
+              },
+            )
+            .catchError((e) {
+          createAlertDialog(context, "Error", e.message, 404);
+          // stops displaying the spinner once the result comes back
+          setState(() {
+            showSpinner = false;
+          });
+        });
+      } catch (e) {
+        createAlertDialog(context, "Error", e.message, 404);
+        // stops displaying the spinner once the result comes back
+        setState(() {
+          showSpinner = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,187 +89,107 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: kBackgroundBlueGradient,
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 20.0,
-              horizontal: 20.0,
+        body: ModalProgressHUD(
+          inAsyncCall: showSpinner,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: kBackgroundBlueGradient,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  height: 8.0,
-                ),
-                Flexible(
-                  child: Hero(
-                    tag: "logo",
-                    child: Container(
-                      height: 20,
-                      child: Image.asset('images/officialLogo.png'),
-                    ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 20.0,
+                horizontal: 20.0,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(
+                    height: 8.0,
                   ),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                if (keyboardOpenVisibility == 0.0)
                   Flexible(
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Container(
-                          height: 150,
-                          child: Image.asset('images/clouds.png'),
-                        ),
-                        Text(
-                          "Hi there 👋",
-                          textAlign: TextAlign.center,
-                          style: kTextStyle.copyWith(
-                            color: Color(0xff5b5b5b),
-                            fontSize: 20,
+                    child: Hero(
+                      tag: "logo",
+                      child: Container(
+                        height: 20,
+                        child: Image.asset('images/officialLogo.png'),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  if (keyboardOpenVisibility == 0.0)
+                    Flexible(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            height: 150,
+                            child: Image.asset('images/clouds.png'),
                           ),
-                        ),
-                      ],
+                          Text(
+                            "Hi there 👋",
+                            textAlign: TextAlign.center,
+                            style: kTextStyle.copyWith(
+                              color: Color(0xff5b5b5b),
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                if (keyboardOpenVisibility == 0.0)
-                  Text(
-                    "Forgot your password?",
-                    textAlign: TextAlign.center,
-                    style: kTextStyle.copyWith(
-                      fontSize: 15,
+                  if (keyboardOpenVisibility == 0.0)
+                    Text(
+                      "Forgot your password?",
+                      textAlign: TextAlign.center,
+                      style: kTextStyle.copyWith(
+                        fontSize: 15,
+                      ),
                     ),
-                  ),
-
-                TextField(
-                  controller: _emailAddressTextFieldController,
-                  keyboardType: TextInputType.emailAddress,
-                  onChanged: (value) {
-                    email = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                    hintText: "Enter your email",
-                    prefixIcon: Icon(
-                      Icons.person,
-                      color: Colors.lightBlueAccent,
-                    ),
-                  ),
-                ),
-                TextField(
-                  controller: _passwordTextFieldController,
-                  obscureText: !visibleNewPassword,
-                  onChanged: (value) {
-                    // track the user new password
-                    newPassword = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                    hintText: "Enter New password",
-                    prefixIcon: Icon(
-                      Icons.lock_outline_sharp,
-                      color: Colors.lightBlueAccent,
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          visibleNewPassword = !visibleNewPassword;
-                        });
-                      },
-                      child: Icon(
-                        Icons.remove_red_eye,
+                  TextField(
+                    controller: _emailAddressTextFieldController,
+                    keyboardType: TextInputType.emailAddress,
+                    onChanged: (value) {
+                      email = value;
+                    },
+                    decoration: kTextFieldDecoration.copyWith(
+                      hintText: "Enter your email",
+                      prefixIcon: Icon(
+                        Icons.person,
                         color: Colors.lightBlueAccent,
                       ),
                     ),
                   ),
-                ),
-
-                TextField(
-                  controller: _confirmPasswordTextFieldController,
-                  obscureText: !visibleConfirmPassword,
-                  onChanged: (value) {
-                    // track the user confirm password
-                    confirmPassword = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                    hintText: "Enter Confirm password",
-                    prefixIcon: Icon(
-                      Icons.lock,
-                      color: Colors.lightBlueAccent,
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          visibleConfirmPassword = !visibleConfirmPassword;
-                        });
-                      },
-                      child: Icon(
-                        Icons.remove_red_eye,
-                        color: Colors.lightBlueAccent,
+                  GestureDetector(
+                    onTap: () {
+                      // GO TO THE LOGIN SCREEN
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "<- Back to login",
+                      textAlign: TextAlign.end,
+                      style: kTextStyle.copyWith(
+                        fontSize: 12,
                       ),
                     ),
                   ),
-                ),
-                TextField(
-                  controller: _favouriteFoodSecurityController,
-                  obscureText: !visibleFavouriteFood,
-                  onChanged: (value) {
-                    // track the user favourite food (security reason question)
-                    favouriteFood = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                    hintText: "Your favourite food?",
-                    prefixIcon: Icon(
-                      Icons.security,
-                      color: Colors.lightBlueAccent,
-                    ),
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          visibleFavouriteFood = !visibleFavouriteFood;
-                        });
-                      },
-                      child: Icon(
-                        Icons.remove_red_eye,
-                        color: Colors.lightBlueAccent,
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // GO TO THE LOGIN SCREEN
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    "<- Back to login",
-                    textAlign: TextAlign.end,
-                    style: kTextStyle.copyWith(
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-                RoundedButton(
-                  onPressed: () {
-                    //Implement forget password functionality.
+                  RoundedButton(
+                    onPressed: () {
+                      //Implement forget password functionality.
+                      forgetPasswordFunctionality(context);
 
-                    // clearing the fields once all the data is collected
-                    _emailAddressTextFieldController.clear();
-                    _passwordTextFieldController.clear();
-                    _confirmPasswordTextFieldController.clear();
-                    _favouriteFoodSecurityController.clear();
-
-                  },
-                  colour: Colors.lightBlueAccent,
-                  title: 'SUBMIT',
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-              ],
+                      // clearing the fields once all the data is collected
+                      _emailAddressTextFieldController.clear();
+                    },
+                    colour: Colors.lightBlueAccent,
+                    title: 'SUBMIT',
+                  ),
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
