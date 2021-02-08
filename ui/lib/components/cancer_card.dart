@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 class CancerCard extends StatelessWidget {
   //properties that are passed in
   final String cardTitle;
+  final String cardColor;
+  final String textColor;
 
-  CancerCard({@required this.cardTitle}); //constructor to init values
+  CancerCard({@required this.cardTitle, @required this.cardColor, @required this.textColor}); //constructor to init values
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +27,13 @@ class CancerCard extends StatelessWidget {
             cardTitle,
             style: TextStyle(
               fontSize: 23.0,
-              color: Color(0xFF345860),
+              color: Color(int.parse(textColor)),
               fontFamily: 'Poppins-SemiBold',
             ),
           ),
         ),
       ),
-      color: Color(0xFFd3e5e8),
+      color: Color(int.parse(cardColor)),
     );
     // width: 320.0,
     // height: 120.0,

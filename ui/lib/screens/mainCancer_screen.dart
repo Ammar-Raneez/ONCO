@@ -19,7 +19,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.only(
@@ -40,16 +40,16 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                 SizedBox(
                   height: 11,
                 ),
-                CancerCard(cardTitle: 'Skin Cancer'),
+                CancerCard(cardTitle: 'Skin Cancer', cardColor: '0xFFC6E7EE', textColor: '0xFF63888F', ),
                 //generates a cancer card with text passed.
                 SizedBox(
                   height: 15,
                 ),
-                CancerCard(cardTitle: 'Lung Cancer'),
+                CancerCard(cardTitle: 'Lung Cancer', cardColor: '0xFFABD8E2', textColor: '0xFFFFFFFF',),
                 SizedBox(
                   height: 12,
                 ),
-                CancerCard(cardTitle: 'Breast Cancer'),
+                CancerCard(cardTitle: 'Breast Cancer', cardColor: '0xFF7EB9C7', textColor: '0xFFFFFFFF',),
               ],
             ),
           ),
