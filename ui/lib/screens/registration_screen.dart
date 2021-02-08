@@ -181,50 +181,61 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   RoundedButton(
                     onPressed: () async {
-                      // Display the spinner
-                      setState(() {
-                        showSpinner = true;
-                      });
-
-                      // register the user in firebase
-                      try {
-                        // created the user and returns a user once created
-                        final newUser =
-                            await _auth.createUserWithEmailAndPassword(
-                                email: email, password: password);
-
-                        // Adding the user details to the cloud fire store
-                        _firestore.collection("users").doc(email).set({
-                          "userEmail": email,
-                          'timestamp': Timestamp.now(),
+                      if (username == null ||
+                          email == null ||
+                          password == null ||
+                          username == "" ||
+                          email == "" ||
+                          password == "") {
+                        createAlertDialog(context, "Error",
+                            "Please fill all the given fields to proceed", 404);
+                      } else {
+                        // If details for all the fields are filled then proceed
+                        // Display the spinner
+                        setState(() {
+                          showSpinner = true;
                         });
 
-                        // displaying alerts according to the progress
-                        if (newUser != null) {
-                          // Displaying the alert dialog
-                          createAlertDialog(context, "Success",
-                              "Account Registered Successfully!", 200);
-                        } else {
-                          // Displaying the alert dialog
-                          createAlertDialog(context, "Error",
-                              "Something went wrong, try again later!", 404);
+                        // register the user in firebase
+                        try {
+                          // created the user and returns a user once created
+                          final newUser =
+                              await _auth.createUserWithEmailAndPassword(
+                                  email: email, password: password);
+
+                          // Adding the user details to the cloud fire store
+                          _firestore.collection("users").doc(email).set({
+                            "userEmail": email,
+                            'timestamp': Timestamp.now(),
+                          });
+
+                          // displaying alerts according to the progress
+                          if (newUser != null) {
+                            // Displaying the alert dialog
+                            createAlertDialog(context, "Success",
+                                "Account Registered Successfully!", 200);
+                          } else {
+                            // Displaying the alert dialog
+                            createAlertDialog(context, "Error",
+                                "Something went wrong, try again later!", 404);
+                          }
+
+                          // stops displaying the spinner once the result comes back
+                          setState(() {
+                            showSpinner = false;
+                          });
+
+                          // clearing the content of the field once submitted
+                          _emailAddressController.clear();
+                          _usernameController.clear();
+                          _passwordTextFieldController.clear();
+                        } catch (e) {
+                          createAlertDialog(context, "Error", e.message, 404);
+                          // stops displaying the spinner once the result comes back
+                          setState(() {
+                            showSpinner = false;
+                          });
                         }
-
-                        // stops displaying the spinner once the result comes back
-                        setState(() {
-                          showSpinner = false;
-                        });
-
-                        // clearing the content of the field once submitted
-                        _emailAddressController.clear();
-                        _usernameController.clear();
-                        _passwordTextFieldController.clear();
-                      } catch (e) {
-                        createAlertDialog(context, "Error", e.message, 404);
-                        // stops displaying the spinner once the result comes back
-                        setState(() {
-                          showSpinner = false;
-                        });
                       }
                     },
                     colour: Colors.lightBlueAccent,

@@ -29,35 +29,42 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // method to implement login functionality using username and password
   loginUserByEmailAndPassword(BuildContext context) async {
-    setState(() {
-      showSpinner = true;
-    });
+    if(email == null || email == "" || password == null || password == ""){
+      // Alerts the user to fill all the fields required
+      createAlertDialog(context, "Error",
+          "Please fill all the given fields to proceed", 404);
+    }else{
+      // If all the fields are filled and ready to proceed
+      setState(() {
+        showSpinner = true;
+      });
 
-    try {
-      // getting the logged in user details as a USER object or type
-      final user = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      try {
+        // getting the logged in user details as a USER object or type
+        final user = await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
 
-      // displaying alerts according to the progress
-      if (user != null) {
-        // Displaying the alert dialog
-        createAlertDialog(context, "Success", "Successfully logged in!", 200);
-      } else {
-        // Displaying the alert dialog
-        createAlertDialog(
-            context, "Error", "Something went wrong, try again later!", 404);
+        // displaying alerts according to the progress
+        if (user != null) {
+          // Displaying the alert dialog
+          createAlertDialog(context, "Success", "Successfully logged in!", 200);
+        } else {
+          // Displaying the alert dialog
+          createAlertDialog(
+              context, "Error", "Something went wrong, try again later!", 404);
+        }
+
+        // stops displaying the spinner once the result comes back
+        setState(() {
+          showSpinner = false;
+        });
+      } catch (e) {
+        createAlertDialog(context, "Error", e.message, 404);
+        // stops displaying the spinner once the result comes back
+        setState(() {
+          showSpinner = false;
+        });
       }
-
-      // stops displaying the spinner once the result comes back
-      setState(() {
-        showSpinner = false;
-      });
-    } catch (e) {
-      createAlertDialog(context, "Error", e.message, 404);
-      // stops displaying the spinner once the result comes back
-      setState(() {
-        showSpinner = false;
-      });
     }
   }
 
