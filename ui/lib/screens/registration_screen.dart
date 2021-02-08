@@ -22,7 +22,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String username;
   String email;
   String password;
-  String favoriteFood;
 
   bool visibleFavouriteFood = false;
   bool visiblePassword = false;
@@ -30,7 +29,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   var _usernameController = TextEditingController();
   var _passwordTextFieldController = TextEditingController();
   var _emailAddressController = TextEditingController();
-  var _favouriteFoodSecurityController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
@@ -168,29 +166,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                     ),
                   ),
-                  TextField(
-                    controller: _favouriteFoodSecurityController,
-                    obscureText: !visibleFavouriteFood,
-                    onChanged: (value) {
-                      favoriteFood = value;
-                    },
-                    decoration: kTextFieldDecoration.copyWith(
-                      hintText: "Your favourite food?",
-                      prefixIcon:
-                          Icon(Icons.security, color: Colors.lightBlueAccent),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            visibleFavouriteFood = !visibleFavouriteFood;
-                          });
-                        },
-                        child: Icon(
-                          Icons.remove_red_eye,
-                          color: Colors.lightBlueAccent,
-                        ),
-                      ),
-                    ),
-                  ),
                   GestureDetector(
                     onTap: () {
                       // GO TO THE LOGIN SCREEN
@@ -218,11 +193,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             await _auth.createUserWithEmailAndPassword(
                                 email: email, password: password);
 
-                        // Adding the user details to the cloud firestore for delete account and other functionality
-                        _firestore.collection("users").add({
-                          "userID": email,
-                          "securityCode": favoriteFood,
-                          'timestamp': Timestamp.now()
+                        // Adding the user details to the cloud fire store
+                        _firestore.collection("users").doc(email).set({
+                          "userEmail": email,
+                          'timestamp': Timestamp.now(),
                         });
 
                         // displaying alerts according to the progress
@@ -242,7 +216,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         });
 
                         // clearing the content of the field once submitted
-                        _favouriteFoodSecurityController.clear();
                         _emailAddressController.clear();
                         _usernameController.clear();
                         _passwordTextFieldController.clear();
