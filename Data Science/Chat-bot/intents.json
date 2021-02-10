@@ -47,7 +47,8 @@
         {"tag": "lc_main",
          "patterns": ["cough blood", "i cough blood", "out of breathe", "breathing difficulties", "hard to breathe", "non stop cough", "long cough"],
          "responses": ["I suspect a chance of you having lung cancer... But there's always a chance of positivity! I suggest that you please get an x-ray uploaded on our detection section so that we can confirm"],
-         "context_filter": "lc"
+         "context_filter": "lc",
+         "direct_access": "lc_m"
         },
     
         {"tag": "bc_initial",
@@ -59,7 +60,8 @@
         {"tag": "bc_main",
          "patterns": ["breast aches", "my breast pains", "shoulder lump", "breast lump", "i have a lump on my breast", "i have a lump on my shoulder", "nipple skin flaking", "skin around nipple unusual", "peeling of skin around nipple"],
          "responses": ["I suspect a chance of you having breast cancer... But please do not panic right away, because I myself could always get a better reassurance by something else. So I would suggest that you please get a mammogram uploaded on our detection section so that we can confirm ASAP"],
-         "context_filter": "bc"
+         "context_filter": "bc",
+         "direct_access": "bc_m"
         },
     
         {"tag": "sc_main",
