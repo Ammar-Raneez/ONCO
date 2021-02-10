@@ -68,7 +68,8 @@ class AlertWidget extends StatelessWidget {
             ),
             onPressed: () {
               if (status == 200) {
-                Navigator.pop(context);
+                Navigator.pop(context); // pop the alert
+                Navigator.pop(context); // pop on login /register screen
                 Navigator.pushNamed(context, CurrentScreen.id);
               } else {
                 Navigator.pop(context);
