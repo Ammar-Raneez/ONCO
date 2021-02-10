@@ -6,6 +6,7 @@ import 'package:ui/screens/forgetPassword_screen.dart';
 import 'package:ui/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -19,6 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   // Variables
   String email;
   String password;
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+
   bool visiblePassword = false;
   bool showSpinner = false;
 
@@ -47,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // displaying alerts according to the progress
         if (user != null) {
           // Displaying the alert dialog
-          createAlertDialog(context, "Success", "Successfully logged in!", 200);
+          createAlertDialog(context, "Success", "Successfully logged in !", 200);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -69,7 +72,33 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // using GOOGLE Authentication to implement the login functionality
-  googleAuthLogin(BuildContext context) async {}
+  googleAuthLogin(BuildContext context) async {
+    setState(() {
+      showSpinner = true;
+    });
+    try {
+      await _googleSignIn.signIn();
+      // Displaying the alert dialog
+      createAlertDialog(context, "Success", "Successfully logged in " + _googleSignIn.currentUser.displayName +"!", 200);
+
+      // stops displaying the spinner once the result comes back
+      setState(() {
+        showSpinner = false;
+      });
+    } catch (e) {
+      createAlertDialog(context, "Error", e.message, 404);
+      // stops displaying the spinner once the result comes back
+      setState(() {
+        showSpinner = false;
+      });
+    }
+  }
+
+  // google auth logout
+  googleAuthLogout(){
+    _googleSignIn.signOut();
+
+  }
 
   // creating an alert
   createAlertDialog(
