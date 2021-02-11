@@ -89,19 +89,19 @@ class ChatbotFunctions:
                     bag[index] = 1
         return numpy.array(bag)
     
-    def chat(self, username, user_input):
-        print(f'Hi {username}, how can I help you today?')
-
+    def chat(self, user_input, username, model):       
+        print(f"Hello, {username}, how can I help you today?") 
+        
         context = None
         default_responses = [
         "Sorry, can't understand you, I am not perfect :'(", "Please give me more info :(", "Not sure I understand :(",
         "Please be more specific", "Please provide me more information"
         ]
 
-        bag = self.bag_of_words(user_input, self.all_words)
-        results = self.create_model().predict([bag])[0]
+        bag = self.bag_of_words(user_input)
+        results = model.predict([bag])[0]
         result_index = numpy.argmax(results)
-        result_tag = all_labels[result_index]
+        result_tag = self.all_labels[result_index]
 
         if results[result_index] > 0.8:
             if result_tag == 'goodbye' or result_tag == 'thanks':
