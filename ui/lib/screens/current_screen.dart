@@ -38,11 +38,14 @@ class _CurrentScreenState extends State<CurrentScreen> {
       final user = _auth.currentUser;
 
       if(user != null){
+        // This will run when the user logs in using the normal username and password way
         print("Normal User is Present!");
         print(user.email);
-      }
+      }else{
+        // This will fire when user logs in using the Google Authentication way
+        print(GoogleUserSignInDetails.googleSignInUserEmail);
 
-      print(GoogleUserSignInDetails.googleSignInUserEmail);
+      }
 
     }catch(e){
       print(e);

@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
             password = "";
           });
           createAlertDialog(
-              context, "Success", "Successfully logged in !", 200);
+              context, "Success", "Successfully logged in!", 200);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -81,25 +81,29 @@ class _LoginScreenState extends State<LoginScreen> {
   googleAuthLogin(BuildContext context) async {
     try {
       await _googleSignIn.signIn().catchError((e) => (print(e.message)));
+      // print(_googleSignIn.currentUser);
 
       // Setting the user email to the global email variable to be used for firestore usecases
-      // if(_googleSignIn != null){
+      if(_googleSignIn.currentUser != null){
         GoogleUserSignInDetails.googleSignInUserEmail = _googleSignIn.currentUser.email;
-      // }else{
-      //   GoogleUserSignInDetails.googleSignInUserEmail = null;
-      // }
+        print("User is not null");
 
-      // Now we sign out of this account once we get the email address
-      _googleSignIn.signOut();
+        // Now we sign out of this account once we get the email address
+        _googleSignIn.signOut();
 
-      // Displaying the alert dialog
-      createAlertDialog(
-          context,
-          "Success",
-          "Successfully logged in!",
-          200);
+        // Displaying the alert dialog
+        createAlertDialog(
+            context,
+            "Success",
+            "Successfully logged in!",
+            200);
+      }else{
+        GoogleUserSignInDetails.googleSignInUserEmail = null;
+        print("User is null");
+      }
+
     } catch (e) {
-      // createAlertDialog(context, "Error", "Please re-try later", 404);
+      createAlertDialog(context, "Error", "Something went wrong!\nPlease re-try later", 404);
     }
   }
 
