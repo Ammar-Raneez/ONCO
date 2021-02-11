@@ -8,6 +8,7 @@ import 'package:ui/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -22,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String email;
   String password;
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
+  final _firestore = FirebaseFirestore.instance;
 
   bool visiblePassword = false;
   bool showSpinner = false;
@@ -55,8 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
             email = "";
             password = "";
           });
-          createAlertDialog(
-              context, "Success", "Successfully logged in!", 200);
+          createAlertDialog(context, "Success", "Successfully logged in!", 200);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -84,26 +85,58 @@ class _LoginScreenState extends State<LoginScreen> {
       // print(_googleSignIn.currentUser);
 
       // Setting the user email to the global email variable to be used for firestore usecases
-      if(_googleSignIn.currentUser != null){
-        GoogleUserSignInDetails.googleSignInUserEmail = _googleSignIn.currentUser.email;
+      if (_googleSignIn.currentUser != null) {
+        // Display the spinner because it will take time to fetch the data from the DB
+        setState(() {
+          showSpinner = true;
+        });
+
+        // setting the email for google sign in users
+        GoogleUserSignInDetails.googleSignInUserEmail =
+            _googleSignIn.currentUser.email;
         print("User is not null");
 
         // Now we sign out of this account once we get the email address
         _googleSignIn.signOut();
 
-        // Displaying the alert dialog
-        createAlertDialog(
-            context,
-            "Success",
-            "Successfully logged in!",
-            200);
-      }else{
+        bool emailDoesExist = false;
+
+        // Checking with the database records to check if the google account has a ONCO account as well.
+        QuerySnapshot querySnapshot =
+            await _firestore.collection("users").get();
+        querySnapshot.docs.forEach((document) {
+          print(document.data()['userEmail']);
+          if (document.data()['userEmail'] ==
+              GoogleUserSignInDetails.googleSignInUserEmail) {
+            emailDoesExist = true;
+          }
+        });
+
+        // stop displaying the spinner
+        setState(() {
+          showSpinner = false;
+        });
+
+        // validated redirection
+        if (emailDoesExist) {
+          // IF it does exist then we proceed to "SUCCESS" navigation
+          createAlertDialog(context, "Success", "Successfully logged in!", 200);
+        } else {
+          // ELSE we alert the user with appropriate message to register firstly.
+          createAlertDialog(
+              context,
+              "Error",
+              "There is no account register with the following email address,"
+                  " therefore consider registering first to get access!",
+              404);
+        }
+      } else {
         GoogleUserSignInDetails.googleSignInUserEmail = null;
         print("User is null");
       }
-
     } catch (e) {
-      createAlertDialog(context, "Error", "Something went wrong!\nPlease re-try later", 404);
+      createAlertDialog(
+          context, "Error", "Something went wrong!\nPlease re-try later", 404);
     }
   }
 

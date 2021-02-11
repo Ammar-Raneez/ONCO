@@ -206,6 +206,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           // Adding the user details to the cloud fire store
                           _firestore.collection("users").doc(email).set({
                             "userEmail": email,
+                            "username": username,
                             'timestamp': Timestamp.now(),
                           });
 
