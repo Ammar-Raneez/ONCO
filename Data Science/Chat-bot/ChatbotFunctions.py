@@ -11,8 +11,13 @@ with open("intents.json") as intents:
     intent_data = json.load(intents)
 
 class ChatbotFunctions:
+    #Store the entire chat between user and bot
+    user_messages = []
+    bot_messages = []
+    
     stemmer = None
     lemmatizer = None 
+    context = None
     all_words = [] 
     all_labels = []
     all_patterns = [] 
@@ -69,13 +74,13 @@ class ChatbotFunctions:
 
         if not retrain:
             try:
-                model.load("chatbot.tflearn")
+                model.load("model/chatbot.tflearn")
             except:
                 model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
-                model.save("chatbot.tflearn")
+                model.save("model/chatbot.tflearn")
         else:
                 model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
-                model.save("chatbot.tflearn")
+                model.save("model/chatbot.tflearn")
         return model
 
     def bag_of_words(self, text):
@@ -89,19 +94,18 @@ class ChatbotFunctions:
                     bag[index] = 1
         return numpy.array(bag)
     
-    def chat(self, username, user_input):
-        print(f'Hi {username}, how can I help you today?')
-
-        context = None
+    def chat(self, user_input, username, model):   
+        print(f"Hello, {username}, how can I help you today?") 
+        
         default_responses = [
         "Sorry, can't understand you, I am not perfect :'(", "Please give me more info :(", "Not sure I understand :(",
         "Please be more specific", "Please provide me more information"
         ]
 
-        bag = self.bag_of_words(user_input, self.all_words)
-        results = self.create_model().predict([bag])[0]
+        bag = self.bag_of_words(user_input)
+        results = model.predict([bag])[0]
         result_index = numpy.argmax(results)
-        result_tag = all_labels[result_index]
+        result_tag = self.all_labels[result_index]
 
         if results[result_index] > 0.8:
             if result_tag == 'goodbye' or result_tag == 'thanks':
@@ -110,12 +114,12 @@ class ChatbotFunctions:
 
             for intent in intent_data['intents']:
                 if intent['tag'] == result_tag:
-                    if 'context_filter' not in intent or 'context_filter' in intent and intent['context_filter'] == context:
+                    if 'context_filter' not in intent or 'context_filter' in intent and intent['context_filter'] == self.context:
                         responses = intent['responses']
                         if 'context' in intent:
-                            context = intent['context']
+                            self.context = intent['context']
                         else:
-                            context = None
+                            self.context = None
                         return "CHANCO: " + random.choice(responses) + "\n"
                     elif intent.get('direct_access'):
                         responses = intent['responses']
