@@ -69,13 +69,13 @@ class ChatbotFunctions:
 
         if not retrain:
             try:
-                model.load("chatbot.tflearn")
+                model.load("model/chatbot.tflearn")
             except:
                 model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
-                model.save("chatbot.tflearn")
+                model.save("model/chatbot.tflearn")
         else:
                 model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
-                model.save("chatbot.tflearn")
+                model.save("model/chatbot.tflearn")
         return model
 
     def bag_of_words(self, text):
