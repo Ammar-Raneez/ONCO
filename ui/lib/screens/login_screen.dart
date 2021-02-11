@@ -32,11 +32,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // method to implement login functionality using username and password
   loginUserByEmailAndPassword(BuildContext context) async {
-    if(email == null || email == "" || password == null || password == ""){
+    if (email == null || email == "" || password == null || password == "") {
       // Alerts the user to fill all the fields required
-      createAlertDialog(context, "Error",
-          "Please fill all the given fields to proceed", 404);
-    }else{
+      createAlertDialog(
+          context, "Error", "Please fill all the given fields to proceed", 404);
+    } else {
       // If all the fields are filled and ready to proceed
       setState(() {
         showSpinner = true;
@@ -50,7 +50,8 @@ class _LoginScreenState extends State<LoginScreen> {
         // displaying alerts according to the progress
         if (user != null) {
           // Displaying the alert dialog
-          createAlertDialog(context, "Success", "Successfully logged in !", 200);
+          createAlertDialog(
+              context, "Success", "Successfully logged in !", 200);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -73,31 +74,25 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // using GOOGLE Authentication to implement the login functionality
   googleAuthLogin(BuildContext context) async {
-    setState(() {
-      showSpinner = true;
-    });
     try {
-      await _googleSignIn.signIn();
-      // Displaying the alert dialog
-      createAlertDialog(context, "Success", "Successfully logged in " + _googleSignIn.currentUser.displayName +"!", 200);
+      await _googleSignIn.signIn().catchError((e) => (print(e.message)));
 
-      // stops displaying the spinner once the result comes back
-      setState(() {
-        showSpinner = false;
-      });
+      // Displaying the alert dialog
+      createAlertDialog(
+          context,
+          "Success",
+          "Successfully logged in " +
+              _googleSignIn.currentUser.displayName +
+              "!",
+          200);
     } catch (e) {
       createAlertDialog(context, "Error", e.message, 404);
-      // stops displaying the spinner once the result comes back
-      setState(() {
-        showSpinner = false;
-      });
     }
   }
 
   // google auth logout
-  googleAuthLogout(){
+  googleAuthLogout() {
     _googleSignIn.signOut();
-
   }
 
   // creating an alert
@@ -280,7 +275,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             onTap: () {
                               print("U tapped the sign up button");
                               // GO TO THE SIGN IN SCREEN
-                              Navigator.pushNamed(context, RegistrationScreen.id);
+                              Navigator.pushNamed(
+                                  context, RegistrationScreen.id);
                             },
                             child: Text("Sign Up",
                                 style: kTextStyle.copyWith(

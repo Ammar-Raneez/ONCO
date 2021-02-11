@@ -12,17 +12,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-
-      child: Scaffold(
-        
-        body: Container(
-
-          child: Center(
-            child: Text("This is the HomeScreen",
-                style: TextStyle(color: Colors.black)),
-          ),
+        child: Scaffold(
+      body: Container(
+        child: Center(
+          child: Text("This is the HomeScreen",
+              style: TextStyle(color: Colors.black)),
         ),
-      )
-    );
+      ),
+    ));
   }
 }
