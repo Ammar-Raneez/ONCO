@@ -86,7 +86,7 @@ class ChatbotFunctions:
                     bag[index] = 1
         return numpy.array(bag)
     
-    def chat(self, username):
+    def chat(self, username, user_input):
         print(f'Hi {username}, how can I help you today?')
 
         context = None
@@ -95,38 +95,31 @@ class ChatbotFunctions:
         "Please be more specific", "Please provide me more information"
         ]
 
-        while True:
-            user_input = str(input("You: ")).lower()
-            if user_input == 'quit':
-                break
+        if user_input == 'quit':
+            break
 
-            bag = self.bag_of_words(user_input, self.all_words)
-            results = self.create_model().predict([bag])[0]
-            result_index = numpy.argmax(results)
-            result_tag = all_labels[result_index]
+        bag = self.bag_of_words(user_input, self.all_words)
+        results = self.create_model().predict([bag])[0]
+        result_index = numpy.argmax(results)
+        result_tag = all_labels[result_index]
 
-            if results[result_index] > 0.8:
-                if result_tag == 'goodbye' or result_tag == 'thanks':
-                    responses = intent_data['intents'][1]['responses'] if result_tag == 'goodbye' else intent_data['intents'][5]['responses']
-                    print("CHANCO: " + random.choice(responses))
-                    break
+        if results[result_index] > 0.8:
+            if result_tag == 'goodbye' or result_tag == 'thanks':
+                responses = intent_data['intents'][1]['responses'] if result_tag == 'goodbye' else intent_data['intents'][5]['responses']
+                return "CHANCO: " + random.choice(responses) + "\n"
 
-                for intent in intent_data['intents']:
-                    if intent['tag'] == result_tag:
-                        print(result_tag)
-                        if 'context_filter' not in intent or 'context_filter' in intent and intent['context_filter'] == context:
-                            responses = intent['responses']
-                            if 'context' in intent:
-                                context = intent['context']
-                            else:
-                                context = None
-                            print("CHANCO: " + random.choice(responses))
-                        elif intent.get('direct_access'):
-                            responses = intent['responses']
-                            print("CHANCO: " + random.choice(responses))
-
+            for intent in intent_data['intents']:
+                if intent['tag'] == result_tag:
+                    if 'context_filter' not in intent or 'context_filter' in intent and intent['context_filter'] == context:
+                        responses = intent['responses']
+                        if 'context' in intent:
+                            context = intent['context']
                         else:
-                            print("CHANCO: " + random.choice(default_responses))
-            else :
-                print("CHANCO: " + random.choice(default_responses))
-            print()
+                            context = None
+                        return "CHANCO: " + random.choice(responses) + "\n"
+                    elif intent.get('direct_access'):
+                        responses = intent['responses']
+                        return "CHANCO: " + random.choice(responses) + "\n"
+                    return "CHANCO: " + random.choice(default_responses) + "\n"
+                
+        return "CHANCO: " + random.choice(default_responses) + "\n"
