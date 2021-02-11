@@ -67,7 +67,7 @@ class ChatbotFunctions:
         net = tflearn.regression(net)
         model = tflearn.DNN(net)
 
-        if retrain:
+        if not retrain:
             try:
                 model.load("chatbot.tflearn")
             except:
