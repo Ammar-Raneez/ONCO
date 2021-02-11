@@ -59,8 +59,7 @@ class ChatbotFunctions:
         self.output = numpy.array(self.output)
 
     def create_model(self, retrain = False):
-        if retrain:
-            self.create_training_and_test()
+        self.create_training_and_test()
         net = tflearn.input_data(shape=[None, len(self.training[0])])
         net = tflearn.fully_connected(net, 8)
         net = tflearn.fully_connected(net, 8)
@@ -68,11 +67,15 @@ class ChatbotFunctions:
         net = tflearn.regression(net)
         model = tflearn.DNN(net)
 
-        try:
-            model.load("chatbot.tflearn")
-        except:
-            model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
-            model.save("chatbot.tflearn")
+        if retrain:
+            try:
+                model.load("chatbot.tflearn")
+            except:
+                model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
+                model.save("chatbot.tflearn")
+        else:
+                model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
+                model.save("chatbot.tflearn")
         return model
 
     def bag_of_words(self, text):
