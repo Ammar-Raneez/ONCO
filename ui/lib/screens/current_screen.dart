@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ui/screens/chatbot_screen.dart';
 import 'package:ui/screens/home_screen.dart';
+import 'package:ui/screens/login_screen.dart';
 import 'package:ui/screens/mainCancer_screen.dart';
 import 'package:ui/components/custom_app_bar.dart';
 
@@ -31,6 +32,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
   // getting the current user details
   void getCurrentUser() {
+
     try{
       final user = _auth.currentUser;
       final googleUser = _googleSignIn.currentUser;

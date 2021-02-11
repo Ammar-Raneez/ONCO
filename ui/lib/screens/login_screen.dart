@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+
 class LoginScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
   static String id = "loginScreen";
@@ -301,3 +302,5 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+

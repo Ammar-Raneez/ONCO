@@ -41,3 +41,4 @@ const kTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'Poppins-Regular',
 );
+

@@ -9,14 +9,16 @@ import 'package:ui/screens/registration_screen.dart';
 import 'package:ui/screens/welcome_screen.dart';
 
 // Main method CALLED at which the APP STARTS INITIALLY
-void main()  => runApp( MyApp() );
+void main() {
+  String name = "";
+  runApp(MyApp());
+}
 
 // This is the Main MyApp class for the navigation lists
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       // This is the first screen which will be displayed for the user when he opens the app
       home: WelcomeScreen(),
 
