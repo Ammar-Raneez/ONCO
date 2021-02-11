@@ -2,16 +2,16 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleUserSignInDetails{
 
-  GoogleSignIn googleSignInUser;
+  static String googleSignInUserEmail;
 
   // setter
-  void setGoogleSignInUser(GoogleSignIn user){
-    this.googleSignInUser = user;
+  void setGoogleSignInUser(String email){
+    googleSignInUserEmail = email;
   }
 
   // getter
-  GoogleSignIn getGoogleSignInUser(){
-    return googleSignInUser;
+  String getGoogleSignInUser(){
+   return googleSignInUserEmail;
   }
 
 }

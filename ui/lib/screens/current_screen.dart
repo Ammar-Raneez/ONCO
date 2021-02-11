@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:ui/GoogleUserSignInDetails.dart';
 import 'package:ui/screens/chatbot_screen.dart';
 import 'package:ui/screens/home_screen.dart';
 import 'package:ui/screens/login_screen.dart';
@@ -31,27 +32,18 @@ class _CurrentScreenState extends State<CurrentScreen> {
   }
 
   // getting the current user details
-  void getCurrentUser() {
+  void getCurrentUser()async {
 
     try{
       final user = _auth.currentUser;
-      final googleUser = _googleSignIn.currentUser;
 
       if(user != null){
         print("Normal User is Present!");
-        print(user.displayName);
         print(user.email);
-        print(user.uid);
-      }else if(googleUser != null){
-        print("Google User is present");
       }
 
-      // if(user != null){
-        // we have a user
-        // loggedInUser = user;
-        // print(user.email);
-        // print(_googleSignIn.currentUser.email);
-      // }
+      print(GoogleUserSignInDetails.googleSignInUserEmail);
+
     }catch(e){
       print(e);
     }
@@ -69,7 +61,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
           // Google Sign Out and other login signOut
           print("YOUUUU ARE QUITTING THE APPLICATION..............");
           _auth.signOut();
-          _googleSignIn.signOut();
+          GoogleUserSignInDetails.googleSignInUserEmail = null;
           print("Signing out......");
           // Future.delayed(const Duration(milliseconds: 200), () {
           //   SystemChannels.platform.invokeMethod('SystemNavigator.pop');

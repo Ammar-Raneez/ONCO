@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/GoogleUserSignInDetails.dart';
 import 'package:ui/components/AlertWidget.dart';
 import 'package:ui/components/RoundedButton.dart';
 import 'package:ui/constants.dart';
@@ -7,7 +8,6 @@ import 'package:ui/screens/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 
 class LoginScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -82,16 +82,24 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       await _googleSignIn.signIn().catchError((e) => (print(e.message)));
 
+      // Setting the user email to the global email variable to be used for firestore usecases
+      // if(_googleSignIn != null){
+        GoogleUserSignInDetails.googleSignInUserEmail = _googleSignIn.currentUser.email;
+      // }else{
+      //   GoogleUserSignInDetails.googleSignInUserEmail = null;
+      // }
+
+      // Now we sign out of this account once we get the email address
+      _googleSignIn.signOut();
+
       // Displaying the alert dialog
       createAlertDialog(
           context,
           "Success",
-          "Successfully logged in " +
-              _googleSignIn.currentUser.displayName +
-              "!",
+          "Successfully logged in!",
           200);
     } catch (e) {
-      createAlertDialog(context, "Error", e.message, 404);
+      // createAlertDialog(context, "Error", "Please re-try later", 404);
     }
   }
 
@@ -302,5 +310,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-
