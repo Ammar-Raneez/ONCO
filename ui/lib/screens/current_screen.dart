@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ui/screens/chatbot_screen.dart';
 import 'package:ui/screens/home_screen.dart';
@@ -36,12 +33,23 @@ class _CurrentScreenState extends State<CurrentScreen> {
   void getCurrentUser() {
     try{
       final user = _auth.currentUser;
+      final googleUser = _googleSignIn.currentUser;
+
       if(user != null){
-        // we have a user
-        loggedInUser = user;
+        print("Normal User is Present!");
+        print(user.displayName);
         print(user.email);
-        print(_googleSignIn.currentUser.displayName);
+        print(user.uid);
+      }else if(googleUser != null){
+        print("Google User is present");
       }
+
+      // if(user != null){
+        // we have a user
+        // loggedInUser = user;
+        // print(user.email);
+        // print(_googleSignIn.currentUser.email);
+      // }
     }catch(e){
       print(e);
     }
@@ -56,14 +64,15 @@ class _CurrentScreenState extends State<CurrentScreen> {
     return SafeArea(
       child: WillPopScope(
         onWillPop: () async {
-          // Google Sign Out
+          // Google Sign Out and other login signOut
           print("YOUUUU ARE QUITTING THE APPLICATION..............");
           _auth.signOut();
           _googleSignIn.signOut();
-          Future.delayed(const Duration(milliseconds: 200), () {
-            SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-          });
-          return false;
+          print("Signing out......");
+          // Future.delayed(const Duration(milliseconds: 200), () {
+          //   SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+          // });
+          return true;
         },
         child: Scaffold(
           appBar: CustomAppBar("settings"),

@@ -50,6 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
         // displaying alerts according to the progress
         if (user != null) {
           // Displaying the alert dialog
+          setState(() {
+            email = "";
+            password = "";
+          });
           createAlertDialog(
               context, "Success", "Successfully logged in !", 200);
         } else {
