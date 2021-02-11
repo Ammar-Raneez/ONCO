@@ -95,9 +95,6 @@ class ChatbotFunctions:
         "Please be more specific", "Please provide me more information"
         ]
 
-        if user_input == 'quit':
-            break
-
         bag = self.bag_of_words(user_input, self.all_words)
         results = self.create_model().predict([bag])[0]
         result_index = numpy.argmax(results)
