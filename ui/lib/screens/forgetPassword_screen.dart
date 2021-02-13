@@ -14,7 +14,7 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
-  // variables used
+  // Variables used
   String email;
   var _emailAddressTextFieldController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;

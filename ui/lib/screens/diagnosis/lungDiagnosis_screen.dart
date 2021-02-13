@@ -23,7 +23,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   Dio dio = new Dio();
   bool showSpinner = false;
 
-  // creating an alert
+  // CREATING AN ALERT
   createAlertDialog(
       BuildContext context, String title, String message, int status) {
     return showDialog(
@@ -38,12 +38,12 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     );
   }
 
-  // OPEN GALLERY TO SELECT AN IMAGE METHOD
+  // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.gallery);
 
-    // NOTE that selectedPicture may also contain null value, suppose user opens gallery and exits
+    // NOTE that 'selectedPicture' may also contain 'null' value, suppose user opens gallery and exits
     // without selecting a picture.
     setState(() {
       imageFile = selectedPicture;
@@ -74,17 +74,17 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         print(formData);
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
-        // Response response = await dio.post(
-        //   "http://192.168.1.3/predict",
-        //   data: formData,
-        // );
-        // print(response);
+        Response response = await dio.post(
+          "http://192.168.1.3/predict",
+          data: formData,
+        );
+        print(response);
 
         // Creating fake response at the moment to create the ui functionality and stuff-----
-        String response;
-        await Future.delayed(const Duration(seconds: 5), () {
-          response = "POSITIVE";
-        });
+        // String response;
+        // await Future.delayed(const Duration(seconds: 5), () {
+        //   response = "POSITIVE";
+        // });
 
         // Display the spinner to indicate that its loading
         setState(() {
@@ -112,7 +112,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     }
   }
 
-  // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE
+  // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
   _openCamera() async {
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.camera);
@@ -130,6 +130,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
       child: Scaffold(
         backgroundColor: Color(0xff01CDFA),
         body: ModalProgressHUD(
+          // displaying the spinner for async tasks
           inAsyncCall: showSpinner,
           child: Container(
             child: Column(

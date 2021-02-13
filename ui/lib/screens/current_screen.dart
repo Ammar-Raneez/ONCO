@@ -5,12 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ui/GoogleUserSignInDetails.dart';
 import 'package:ui/screens/chatbot_screen.dart';
 import 'package:ui/screens/home_screen.dart';
-import 'package:ui/screens/login_screen.dart';
 import 'package:ui/screens/mainCancer_screen.dart';
 import 'package:ui/components/custom_app_bar.dart';
-
-User loggedInUser;
-GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
 class CurrentScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -21,37 +17,43 @@ class CurrentScreen extends StatefulWidget {
 }
 
 class _CurrentScreenState extends State<CurrentScreen> {
-  // page controller is used to control the flow of the main pages (HOME, CANCER AND CHATBOT PAGE/SCREEN)
+  // Page controller is used to control the flow of the main pages
+  // (HOME, CANCER AND CHATBOT PAGE/SCREEN)
   int currentIndex = 0;
   final _auth = FirebaseAuth.instance;
+
+  // using this User instance we can access the details of the logged user using
+  // the normal email/pass auth method not the (Google Auth)
+  User loggedInUser;
 
   @override
   void initState() {
     super.initState();
+    // getting the current user details on loading of the screen
     getCurrentUser();
   }
 
-  // getting the current user details
-  void getCurrentUser()async {
-
-    try{
+  // Getting the current user details
+  void getCurrentUser() async {
+    try {
+      // getting the current user (email/pass auth)
       final user = _auth.currentUser;
 
-      if(user != null){
+      if (user != null) {
         // This will run when the user logs in using the normal username and password way
-        print("Normal User is Present!");
+        print("(Email-Password login) User is Present!");
         print(user.email);
-      }else{
+      } else {
         // This will fire when user logs in using the Google Authentication way
+        print("(Google Auth login) User is Present!");
         print(GoogleUserSignInDetails.googleSignInUserEmail);
-
       }
-
-    }catch(e){
+    } catch (e) {
       print(e);
     }
   }
 
+  // pageController for the navigation bar
   PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -62,13 +64,21 @@ class _CurrentScreenState extends State<CurrentScreen> {
       child: WillPopScope(
         onWillPop: () async {
           // Google Sign Out and other login signOut
-          print("YOUUUU ARE QUITTING THE APPLICATION..............");
+          print(
+              "YOU ARE QUITTING THE APPLICATION BY CLICK THE BACK ICON FROM THE PHONE DEFAULT");
+
+          // (Email-Pass) user gets signed out
           _auth.signOut();
+
+          // Google Auth User gets signed out
           GoogleUserSignInDetails.googleSignInUserEmail = null;
+
           print("Signing out......");
+
           // Future.delayed(const Duration(milliseconds: 200), () {
           //   SystemChannels.platform.invokeMethod('SystemNavigator.pop');
           // });
+
           return true;
         },
         child: Scaffold(
@@ -103,7 +113,10 @@ class _CurrentScreenState extends State<CurrentScreen> {
               });
             },
             items: [
-              Icon(Icons.home, size: 30),
+              Icon(
+                Icons.home,
+                size: 30,
+              ),
               Icon(
                 Icons.widgets_outlined,
                 size: 30,

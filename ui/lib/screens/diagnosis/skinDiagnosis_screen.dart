@@ -23,7 +23,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   Dio dio = new Dio();
   bool showSpinner = false;
 
-  // creating an alert
+  // CREATING AN ALERT
   createAlertDialog(
       BuildContext context, String title, String message, int status) {
     return showDialog(
@@ -38,7 +38,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
     );
   }
 
-  // OPEN GALLERY TO SELECT AN IMAGE METHOD
+  // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -112,7 +112,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
     }
   }
 
-  // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE
+  // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
   _openCamera() async {
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.camera);
@@ -130,6 +130,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
       child: Scaffold(
         backgroundColor: Color(0xff01CDFA),
         body: ModalProgressHUD(
+          // displaying the spinner for async tasks
           inAsyncCall: showSpinner,
           child: Container(
             child: Column(

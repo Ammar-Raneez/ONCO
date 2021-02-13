@@ -19,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // Variables
+  // Variables used
   String email;
   String password;
   GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
@@ -84,7 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
       await _googleSignIn.signIn().catchError((e) => (print(e.message)));
       // print(_googleSignIn.currentUser);
 
-      // Setting the user email to the global email variable to be used for firestore usecases
+      // Setting the user email to the global email variable to be used for
+      // fire store use cases
       if (_googleSignIn.currentUser != null) {
         // Display the spinner because it will take time to fetch the data from the DB
         setState(() {

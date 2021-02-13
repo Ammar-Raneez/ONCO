@@ -23,7 +23,7 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   Dio dio = new Dio();
   bool showSpinner = false;
 
-  // creating an alert
+  // CREATING AN ALERT
   createAlertDialog(
       BuildContext context, String title, String message, int status) {
     return showDialog(
@@ -38,12 +38,12 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
     );
   }
 
-  // OPEN GALLERY TO SELECT AN IMAGE METHOD
+  // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.gallery);
 
-    // NOTE that selectedPicture may also contain null value, suppose user opens gallery and exits
+    // NOTE that 'selectedPicture' may also contain 'null' value, suppose user opens gallery and exits
     // without selecting a picture.
     setState(() {
       imageFile = selectedPicture;
@@ -94,8 +94,7 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         // checking if the response is not null and displaying the result
         if (response != null) {
           // Displaying the alert dialog
-          createAlertDialog(
-              context, "Diagnosis", response.toString(), 201);
+          createAlertDialog(context, "Diagnosis", response.toString(), 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -112,7 +111,7 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
     }
   }
 
-  // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE
+  // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
   _openCamera() async {
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.camera);
@@ -130,6 +129,7 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
       child: Scaffold(
         backgroundColor: Color(0xff01CDFA),
         body: ModalProgressHUD(
+          // displaying the spinner for async tasks
           inAsyncCall: showSpinner,
           child: Container(
             child: Column(
