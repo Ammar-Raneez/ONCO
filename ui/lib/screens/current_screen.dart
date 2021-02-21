@@ -100,7 +100,8 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
           // Bottom bar navigation
           bottomNavigationBar: CurvedNavigationBar(
-            backgroundColor: Color(0xff01CDFA),
+            color: Color(0xff01CDFA),
+            backgroundColor: Color(0x00000000),
             index: currentIndex,
 
             // Logic for the switching of MAIN SCREENS (HOME, CANCER, CHATBOT)
@@ -116,14 +117,17 @@ class _CurrentScreenState extends State<CurrentScreen> {
               Icon(
                 Icons.home,
                 size: 30,
+                color: Colors.white,
               ),
               Icon(
                 Icons.widgets_outlined,
                 size: 30,
+                color: Colors.white,
               ),
               Icon(
                 Icons.chat,
                 size: 30,
+                color: Colors.white,
               ),
             ],
           ),
