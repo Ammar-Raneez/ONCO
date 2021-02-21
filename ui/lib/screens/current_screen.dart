@@ -100,6 +100,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
           // Bottom bar navigation
           bottomNavigationBar: CurvedNavigationBar(
+            height:52,
             color: Color(0xff01CDFA),
             backgroundColor: Color(0x00000000),
             index: currentIndex,
@@ -116,17 +117,17 @@ class _CurrentScreenState extends State<CurrentScreen> {
             items: [
               Icon(
                 Icons.home,
-                size: 30,
+                size: 27,
                 color: Colors.white,
               ),
               Icon(
                 Icons.widgets_outlined,
-                size: 30,
+                size: 27,
                 color: Colors.white,
               ),
               Icon(
                 Icons.chat,
-                size: 30,
+                size: 27,
                 color: Colors.white,
               ),
             ],
