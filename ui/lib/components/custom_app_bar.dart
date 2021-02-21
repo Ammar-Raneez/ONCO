@@ -39,7 +39,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         clipper: CustomShape(),
         child: Container(
           
-          height: 150,
+          height: 120,
           decoration: BoxDecoration(
           color: Color(0xff01CDFA),
 
@@ -70,7 +70,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(150.0);
+  Size get preferredSize => const Size.fromHeight(120.0);
 }
 
 class CustomShape extends CustomClipper<Path> {
@@ -82,7 +82,7 @@ class CustomShape extends CustomClipper<Path> {
     path.lineTo(0, size.height * .5);
 
     var firstControlPoint = Offset(0, size.height * .75);
-    var firstEndPoint = Offset(size.width / 6, size.height * .75);
+    var firstEndPoint = Offset(size.width / 8, size.height * .75);
 
     path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
         firstEndPoint.dx, firstEndPoint.dy);
