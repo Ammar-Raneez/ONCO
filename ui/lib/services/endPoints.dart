@@ -6,3 +6,4 @@ const postBreastCancerPrediction_API = "";
 const postLungCancerDetection_API = "";
 const postSkinCancerDetection_API = "";
 const postBreastCancerDetection_API = "";
+const postChatBotMessage_API = "";
