@@ -21,38 +21,36 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
     return Scaffold(
 
       body: SafeArea(
-        child: Expanded(
-          child: Container(
-            padding: EdgeInsets.only(
-              //* might need to change when adding top row and nav
-              left: 33.0,
-              right: 36.0,
-            ),
-            child: Center(
-              child: Column(
-                children: [
-                  Text(
-                    'Prognosis & Diagnosis of Cancers',
-                    style: TextStyle(
-                      fontFamily: 'Poppins-SemiBold',
-                      fontSize: 27.0,
-                    ),
+        child: Container(
+          padding: EdgeInsets.only(
+            //* might need to change when adding top row and nav
+            left: 33.0,
+            right: 36.0,
+          ),
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  'Prognosis & Diagnosis of Cancers',
+                  style: TextStyle(
+                    fontFamily: 'Poppins-SemiBold',
+                    fontSize: 27.0,
                   ),
-                  SizedBox(
-                    height: 11,
-                  ),
-                  CancerCard(cardTitle: 'Skin Cancer', cardColor: '0xFFC6E7EE', textColor: '0xFF63888F', ),
-                  //generates a cancer card with text passed.
-                  SizedBox(
-                    height: 15,
-                  ),
-                  CancerCard(cardTitle: 'Lung Cancer', cardColor: '0xFFABD8E2', textColor: '0xFFFFFFFF',),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  CancerCard(cardTitle: 'Breast Cancer', cardColor: '0xFF7EB9C7', textColor: '0xFFFFFFFF',),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 11,
+                ),
+                CancerCard(cardTitle: 'Skin Cancer', cardColor: '0xFFC6E7EE', textColor: '0xFF63888F', ),
+                //generates a cancer card with text passed.
+                SizedBox(
+                  height: 15,
+                ),
+                CancerCard(cardTitle: 'Lung Cancer', cardColor: '0xFFABD8E2', textColor: '0xFFFFFFFF',),
+                SizedBox(
+                  height: 12,
+                ),
+                CancerCard(cardTitle: 'Breast Cancer', cardColor: '0xFF7EB9C7', textColor: '0xFFFFFFFF',),
+              ],
             ),
           ),
         ),
