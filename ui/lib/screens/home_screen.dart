@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui/components/cancer_card.dart';
+
 import 'package:ui/components/homepage_card.dart';
 
 class HomeScreen extends StatefulWidget {
