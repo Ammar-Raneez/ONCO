@@ -40,11 +40,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       if (user != null) {
         // This will run when the user logs in using the normal username and password way
         loggedInUserEP = user.email;
-        print(loggedInUserEP);
       } else {
         // This will fire when user logs in using the Google Authentication way
         loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
-        print(loggedInUserGoogle);
       }
     } catch (e) {
       print(e);
@@ -117,11 +115,14 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       },
                       controller: messageTextController,
                       decoration: kTextFieldDecoration.copyWith(
-                          suffixIcon: IconButton(
-                              icon: Icon(Icons.send),
-                              onPressed: handleSendMessage,
-                              color: Colors.lightBlueAccent),
-                          prefixIcon: null),
+                        suffixIcon: IconButton(
+                            icon: Icon(Icons.send),
+                            onPressed: handleSendMessage,
+                            color: Colors.lightBlueAccent
+                        ),
+                        prefixIcon: null,
+                        hintText: 'Write a message'
+                      ),
                     ),
                   ),
                 ),
@@ -161,7 +162,6 @@ class MessageStream extends StatelessWidget {
 
         //order it based on most recent text
         final messages = snapshot.data.docs.reversed;
-        print(messages);
         List<MessageBubble> messageBubbles = [];
 
         for (var message in messages) {
