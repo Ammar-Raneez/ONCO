@@ -27,6 +27,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   void initState() {
     super.initState();
     getCurrentUser();
+    messageStream();
   }
 
   void getCurrentUser() async {
@@ -43,6 +44,15 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  //listen to real time updates in firestore database
+  void messageStream() async {
+    await for (var snapshot in _firestore.collection("chatbot-messages").snapshots()) {
+      for (var message in snapshot.docs) {
+        print(message.data());
+      }
     }
   }
 
