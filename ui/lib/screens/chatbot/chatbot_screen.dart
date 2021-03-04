@@ -83,7 +83,12 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                   onPressed: () {
                     messageTextController.clear();
                     _firestore.collection("chatbot-messages").add(
-                        {'text': messageText, 'sender': loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle});
+                      {
+                        'text': messageText,
+                        'sender': loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle,
+                        'timestamp': Timestamp.now(),
+                      }
+                    );
                   },
                   child: Text(
                     'Send',
@@ -107,7 +112,7 @@ class MessageStream extends StatelessWidget {
     //in other words, the code is rebuilt whenever there's a change in the
     //firestore database
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection("chatbot-messages").snapshots(),
+      stream: _firestore.collection("chatbot-messages").orderBy('timestamp').snapshots(),
       builder: (context, snapshot) {
         //while fetching display a spinner
         if (!snapshot.hasData) {
@@ -118,8 +123,8 @@ class MessageStream extends StatelessWidget {
           );
         }
 
-        //order it based on most recent at the bottom
-        final messages = snapshot.data.docs;
+        //order it based on most recent text
+        final messages = snapshot.data.docs.reversed;
         List<MessageBubble> messageBubbles = [];
 
         for (var message in messages) {
@@ -140,7 +145,7 @@ class MessageStream extends StatelessWidget {
         return Expanded(
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20.0),
-//            reverse: true,
+            reverse: true,
             children: messageBubbles,
           ),
         );
