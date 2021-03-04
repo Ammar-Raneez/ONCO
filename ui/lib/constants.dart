@@ -42,3 +42,11 @@ const kTextStyle = TextStyle(
   fontFamily: 'Poppins-Regular',
 );
 
+//chat bot send button
+const kSendButtonTextStyle = TextStyle(
+  color: Colors.lightBlueAccent,
+  fontWeight: FontWeight.bold,
+  fontSize: 18.0,
+);
+
+
