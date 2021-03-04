@@ -105,7 +105,7 @@ class ChatbotFunctions:
         if results[result_index] > 0.8:
             if result_tag == 'goodbye' or result_tag == 'thanks':
                 responses = intent_data['intents'][1]['responses'] if result_tag == 'goodbye' else intent_data['intents'][5]['responses']
-                return "CHANCO: " + random.choice(responses) + "\n"
+                return random.choice(responses) + "\n"
 
             for intent in intent_data['intents']:
                 if intent['tag'] == result_tag:
@@ -115,10 +115,10 @@ class ChatbotFunctions:
                             self.context = intent['context']
                         else:
                             self.context = None
-                        return "CHANCO: " + random.choice(responses) + "\n"
+                        return random.choice(responses) + "\n"
                     elif intent.get('direct_access'):
                         responses = intent['responses']
-                        return "CHANCO: " + random.choice(responses) + "\n"
-                    return "CHANCO: " + random.choice(default_responses) + "\n"
+                        return random.choice(responses) + "\n"
+                    return random.choice(default_responses) + "\n"
                 
-        return "CHANCO: " + random.choice(default_responses) + "\n"
+        return random.choice(default_responses) + "\n"

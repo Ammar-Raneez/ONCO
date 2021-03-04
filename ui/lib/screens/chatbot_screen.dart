@@ -32,7 +32,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   void initState() {
     super.initState();
     getCurrentUser();
-//    messageStream();
   }
 
   void getCurrentUser() async {
@@ -107,26 +106,31 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Expanded(
-                  child: TextField(
-                    onChanged: (value) {
-                      messageText = value;
-                    },
-                    controller: messageTextController,
-                    decoration: kTextFieldDecoration,
-                  ),
-                ),
-                TextButton(
-                  onPressed: handleSendMessage,
-                  child: Text(
-                    'Send',
-                    style: kSendButtonTextStyle,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10.0,
+                      right: 10.0,
+                    ),
+                    child: TextField(
+                      onChanged: (value) {
+                        messageText = value;
+                      },
+                      controller: messageTextController,
+                      decoration: kTextFieldDecoration.copyWith(
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.send),
+                          onPressed: handleSendMessage,
+                          color: Colors.lightBlueAccent
+                        ),
+                        prefixIcon: null),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
           SizedBox(
-            height: 10.0,
+            height: 20.0,
           ),
         ],
       ),
