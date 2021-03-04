@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/GoogleUserSignInDetails.dart';
+import 'package:ui/components/chatbot_message_bubble.dart';
 import 'package:ui/constants.dart';
 
 final _firestore = FirebaseFirestore.instance;
@@ -64,6 +65,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          MessageStream(),
           Container(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,6 +95,56 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class MessageStream extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    //create a stream builder
+    //that rebuilds itself on each change of query snapshot
+    //in other words, the code is rebuilt whenever there's a change in the
+    //firestore database
+    return StreamBuilder<QuerySnapshot>(
+      stream: _firestore.collection("chatbot-messages").snapshots(),
+      builder: (context, snapshot) {
+        //while fetching display a spinner
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.lightBlueAccent,
+            ),
+          );
+        }
+
+        //order it based on most recent at the bottom
+        final messages = snapshot.data.docs;
+        List<MessageBubble> messageBubbles = [];
+
+        for (var message in messages) {
+          final messageText = message.data()['text'];
+          final messageSender = message.data()['sender'];
+
+          //get the current user
+          final currentUser = loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle;
+
+          final messageBubble = MessageBubble(
+            messageSender: messageSender,
+            messageText: messageText,
+            isMe: currentUser == messageSender,
+          );
+          messageBubbles.add(messageBubble);
+        }
+
+        return Expanded(
+          child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20.0),
+//            reverse: true,
+            children: messageBubbles,
+          ),
+        );
+      },
     );
   }
 }
