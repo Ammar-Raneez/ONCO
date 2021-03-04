@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/GoogleUserSignInDetails.dart';
+import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/chatbot_message_bubble.dart';
 import 'package:ui/constants.dart';
 
@@ -22,13 +24,14 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   //used to clear the text field upon send
   final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
+  Dio dio = new Dio();
   String messageText;
 
   @override
   void initState() {
     super.initState();
     getCurrentUser();
-    messageStream();
+//    messageStream();
   }
 
   void getCurrentUser() async {
@@ -49,14 +52,50 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   }
 
   //listen to real time updates in firestore database
-  void messageStream() async {
-    await for (var snapshot in _firestore.collection("chatbot-messages").snapshots()) {
-      for (var message in snapshot.docs) {
-        print(message.data());
-      }
-    }
+//  void messageStream() async {
+//    await for (var snapshot
+//        in _firestore.collection("chatbot-messages").snapshots()) {
+//      for (var message in snapshot.docs) {
+//        print(message.data());
+//      }
+//    }
+//  }
+
+  // CREATING AN ALERT
+  createAlertDialog(
+      BuildContext context, String title, String message, int status) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertWidget(
+          title: title,
+          message: message,
+          status: status,
+        );
+      },
+    );
   }
 
+  void handleSendMessage() async {
+    messageTextController.clear();
+    _firestore.collection("chatbot-messages").add({
+      'text': messageText,
+      'sender': loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle,
+      'timestamp': Timestamp.now(),
+    });
+
+    //send data to chat bot api and get back response
+    try {
+      Response response = await dio.post(
+          'http://127.0.0.1:5000/chatbot-predict',
+          data: messageText
+      );
+      print(response);
+    } catch (e) {
+      // Displaying alert to the user
+      createAlertDialog(context, "Error", e.message, 404);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,19 +118,31 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                     decoration: kTextFieldDecoration,
                   ),
                 ),
-                FlatButton(
-                  onPressed: () {
+                TextButton(
+                  onPressed: () async {
                     messageTextController.clear();
-                    _firestore.collection("chatbot-messages").add(
-                      {
-                        'text': messageText,
-                        'sender': loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle,
-                        'timestamp': Timestamp.now(),
-                      }
-                    );
+                    _firestore.collection("chatbot-messages").add({
+                      'text': messageText,
+                      'sender': loggedInUserEP != null
+                          ? loggedInUserEP
+                          : loggedInUserGoogle,
+                      'timestamp': Timestamp.now(),
+                    });
+                    //send data to chat bot api and get back response
+                    try {
+                      Response response = await dio.post(
+                          'http://192.168.8.100/chatbot-predict',
+                          data: {
+                            'UserIn': messageText
+                          });
+                      print(response);
+                    } catch (e) {
+                      // Displaying alert to the user
+                      createAlertDialog(context, "Error", e.message, 404);
+                    }
                   },
                   child: Text(
-                    'Send',
+                    'POST',
                     style: kSendButtonTextStyle,
                   ),
                 ),
@@ -112,7 +163,10 @@ class MessageStream extends StatelessWidget {
     //in other words, the code is rebuilt whenever there's a change in the
     //firestore database
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection("chatbot-messages").orderBy('timestamp').snapshots(),
+      stream: _firestore
+          .collection("chatbot-messages")
+          .orderBy('timestamp')
+          .snapshots(),
       builder: (context, snapshot) {
         //while fetching display a spinner
         if (!snapshot.hasData) {
@@ -132,7 +186,8 @@ class MessageStream extends StatelessWidget {
           final messageSender = message.data()['sender'];
 
           //get the current user
-          final currentUser = loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle;
+          final currentUser =
+              loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle;
 
           final messageBubble = MessageBubble(
             messageSender: messageSender,

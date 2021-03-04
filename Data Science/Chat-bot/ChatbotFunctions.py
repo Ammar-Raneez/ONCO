@@ -1,7 +1,6 @@
 import nltk
 import numpy
 import tflearn
-import tensorflow as tf
 import random
 import json
 from nltk.stem.wordnet import WordNetLemmatizer
@@ -65,19 +64,15 @@ class ChatbotFunctions:
 
     def create_model(self, retrain = False):
         self.create_training_and_test()
-        net = tflearn.input_data(shape=[None, len(self.training[0])])
-        net = tflearn.fully_connected(net, 8)
-        net = tflearn.fully_connected(net, 8)
-        net = tflearn.fully_connected(net, len(self.output[0]), activation='softmax')
-        net = tflearn.regression(net)
-        model = tflearn.DNN(net)
-
+        
         if not retrain:
-            try:
-                model.load("model/chatbot.tflearn")
-            except:
-                model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
-                model.save("model/chatbot.tflearn")
+            net = tflearn.input_data(shape=[None, len(self.training[0])])   
+            net = tflearn.fully_connected(net, 8)
+            net = tflearn.fully_connected(net, 8)
+            net = tflearn.fully_connected(net, len(self.output[0]), activation='softmax')
+            net = tflearn.regression(net)
+            model = tflearn.DNN(net)
+            model.load("model/chatbot.tflearn")
         else:
                 model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
                 model.save("model/chatbot.tflearn")
