@@ -20,6 +20,7 @@ class MessageBubble extends StatelessWidget {
             style: TextStyle(
               fontSize: 12.0,
               color: Colors.black54,
+              fontWeight: FontWeight.bold
             ),
           ),
           Material(

@@ -162,15 +162,8 @@ class MessageStream extends StatelessWidget {
 
         //order it based on most recent text
         final messages = snapshot.data.docs.reversed;
+        print(messages);
         List<MessageBubble> messageBubbles = [];
-
-        final initialMessageBubble = MessageBubble(
-          messageSender: 'CHANCO',
-          messageText: 'Hi username! How can I help you today?',
-          isMe: false,
-        );
-
-        messageBubbles.add(initialMessageBubble);
 
         for (var message in messages) {
           final messageText = message.data()['text'];
@@ -187,6 +180,16 @@ class MessageStream extends StatelessWidget {
           );
           messageBubbles.add(messageBubble);
         }
+
+        //initial prompt message
+
+        messageBubbles.add(
+          new MessageBubble(
+            messageSender: 'CHANCO',
+            messageText: 'Hi User! How can I help you today?',
+            isMe: false,
+          )
+        );
 
         return Expanded(
           child: ListView(
