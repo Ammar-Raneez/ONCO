@@ -26,6 +26,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   final _auth = FirebaseAuth.instance;
   Dio dio = new Dio();
   String messageText;
+  var responseText;
 
   @override
   void initState() {
@@ -51,17 +52,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     }
   }
 
-  //listen to real time updates in firestore database
-//  void messageStream() async {
-//    await for (var snapshot
-//        in _firestore.collection("chatbot-messages").snapshots()) {
-//      for (var message in snapshot.docs) {
-//        print(message.data());
-//      }
-//    }
-//  }
-
-  // CREATING AN ALERT
   createAlertDialog(
       BuildContext context, String title, String message, int status) {
     return showDialog(
@@ -77,20 +67,32 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   }
 
   void handleSendMessage() async {
+    //clear text field on send
     messageTextController.clear();
+    //add timestamp to be used for message sorting
     _firestore.collection("chatbot-messages").add({
       'text': messageText,
-      'sender': loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle,
+      'sender': loggedInUserEP != null
+          ? loggedInUserEP
+          : loggedInUserGoogle,
       'timestamp': Timestamp.now(),
     });
 
     //send data to chat bot api and get back response
     try {
       Response response = await dio.post(
-          'http://127.0.0.1:5000/chatbot-predict',
-          data: messageText
-      );
-      print(response);
+          'http://192.168.8.100/chatbot-predict',
+          data: {
+            'UserIn': messageText
+          });
+      responseText = response.data.toString();
+
+      //add chat bot response to firestore
+      _firestore.collection("chatbot-messages").add({
+        'text': responseText,
+        'sender': 'CHANCO',
+        'timestamp': Timestamp.now(),
+      });
     } catch (e) {
       // Displaying alert to the user
       createAlertDialog(context, "Error", e.message, 404);
@@ -119,28 +121,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () async {
-                    messageTextController.clear();
-                    _firestore.collection("chatbot-messages").add({
-                      'text': messageText,
-                      'sender': loggedInUserEP != null
-                          ? loggedInUserEP
-                          : loggedInUserGoogle,
-                      'timestamp': Timestamp.now(),
-                    });
-                    //send data to chat bot api and get back response
-                    try {
-                      Response response = await dio.post(
-                          'http://192.168.8.100/chatbot-predict',
-                          data: {
-                            'UserIn': messageText
-                          });
-                      print(response);
-                    } catch (e) {
-                      // Displaying alert to the user
-                      createAlertDialog(context, "Error", e.message, 404);
-                    }
-                  },
+                  onPressed: handleSendMessage,
                   child: Text(
                     'POST',
                     style: kSendButtonTextStyle,
@@ -208,3 +189,5 @@ class MessageStream extends StatelessWidget {
     );
   }
 }
+
+//Replace IP address here with deployment address
