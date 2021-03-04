@@ -117,12 +117,11 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       },
                       controller: messageTextController,
                       decoration: kTextFieldDecoration.copyWith(
-                        suffixIcon: IconButton(
-                          icon: Icon(Icons.send),
-                          onPressed: handleSendMessage,
-                          color: Colors.lightBlueAccent
-                        ),
-                        prefixIcon: null),
+                          suffixIcon: IconButton(
+                              icon: Icon(Icons.send),
+                              onPressed: handleSendMessage,
+                              color: Colors.lightBlueAccent),
+                          prefixIcon: null),
                     ),
                   ),
                 ),
@@ -183,13 +182,11 @@ class MessageStream extends StatelessWidget {
 
         //initial prompt message
 
-        messageBubbles.add(
-          new MessageBubble(
-            messageSender: 'CHANCO',
-            messageText: 'Hi User! How can I help you today?',
-            isMe: false,
-          )
-        );
+        messageBubbles.add(new MessageBubble(
+          messageSender: 'CHANCO',
+          messageText: 'Hi User! How can I help you today?',
+          isMe: false,
+        ));
 
         return Expanded(
           child: ListView(
