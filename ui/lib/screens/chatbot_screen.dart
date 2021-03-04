@@ -120,7 +120,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                             onPressed: handleSendMessage,
                             color: Colors.lightBlueAccent
                         ),
-                        prefixIcon: null,
+                        prefixIcon: Container(width: 0, height: 0,),
                         hintText: 'Write a message'
                       ),
                     ),
