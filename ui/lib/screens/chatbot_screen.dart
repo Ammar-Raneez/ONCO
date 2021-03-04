@@ -72,24 +72,19 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     //add timestamp to be used for message sorting
     _firestore.collection("chatbot-messages").add({
       'text': messageText,
-      'sender': loggedInUserEP != null
-          ? loggedInUserEP
-          : loggedInUserGoogle,
+      'sender': loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle,
       'timestamp': Timestamp.now(),
     });
 
     //send data to chat bot api and get back response
     try {
-      Response response = await dio.post(
-          'http://192.168.8.100/chatbot-predict',
-          data: {
-            'UserIn': messageText
-          });
-      responseText = response.data.toString();
+      Response response = await dio.post('http://192.168.8.100/chatbot-predict',
+          data: {'UserIn': messageText});
+      responseText = response.data['Chatbot Response'];
 
       //add chat bot response to firestore
       _firestore.collection("chatbot-messages").add({
-        'text': responseText,
+        'text': response.data['Chatbot Response'],
         'sender': 'CHANCO',
         'timestamp': Timestamp.now(),
       });
@@ -123,12 +118,15 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                 TextButton(
                   onPressed: handleSendMessage,
                   child: Text(
-                    'POST',
+                    'Send',
                     style: kSendButtonTextStyle,
                   ),
                 ),
               ],
             ),
+          ),
+          SizedBox(
+            height: 10.0,
           ),
         ],
       ),
@@ -161,6 +159,14 @@ class MessageStream extends StatelessWidget {
         //order it based on most recent text
         final messages = snapshot.data.docs.reversed;
         List<MessageBubble> messageBubbles = [];
+
+        final initialMessageBubble = MessageBubble(
+          messageSender: 'CHANCO',
+          messageText: 'Hi username! How can I help you today?',
+          isMe: false,
+        );
+
+        messageBubbles.add(initialMessageBubble);
 
         for (var message in messages) {
           final messageText = message.data()['text'];
