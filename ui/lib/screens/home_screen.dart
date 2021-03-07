@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:ui/components/homepage_card.dart';
+import 'package:ui/screens/personalManager_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -64,11 +65,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
                     Container(
-                        child: HomeCard(cardTitle: 'Personal Manager', cardColor: '0xFF7EB9C7', textColor: '0xFFFFFFFF', )),
+                        child:GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context)=> PersonalManager()
+                              ),
+                            );
+                          },
+                              child: HomeCard(cardTitle: 'Personal Manager', cardColor: '0xFF7EB9C7', textColor: '0xFFFFFFFF', ),
+                        )
+                    ),
                     Container(
-                        child: HomeCard(cardTitle: 'Exercise Plan', cardColor: '0xFF7EB9C7', textColor: '0xFFFFFFFF', )),
+                        child: HomeCard(cardTitle: 'Exercise Plan', cardColor: '0xFF7EB9C7', textColor: '0xFFFFFFFF', )
+                    ),
                     Container(
-                        child: HomeCard(cardTitle: 'Meal Plan', cardColor: '0xFF7EB9C7', textColor: '0xFFFFFFFF', ))
+                        child: HomeCard(cardTitle: 'Meal Plan', cardColor: '0xFF7EB9C7', textColor: '0xFFFFFFFF', )
+                    ),
                   ]
               )
               ),
