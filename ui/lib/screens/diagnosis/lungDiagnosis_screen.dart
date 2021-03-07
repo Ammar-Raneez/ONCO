@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/components/AlertWidget.dart';
-import 'package:ui/components/RoundedButton.dart';
+import 'package:ui/components/alert_widget.dart';
+import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -75,7 +75,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
-          "http://192.168.1.3/predict",
+          "http://192.168.1.4/predict",
           data: formData,
         );
         print(response);
@@ -280,5 +280,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 // https://medium.com/@podcoder/connecting-flutter-application-to-localhost-a1022df63130
 // MAKE SURE THE python script is running on this:
 // app.run(host="0.0.0.0", port=80)
-// 192.168.1.3 <--- this is the ip address in my machine
+// 192.168.1.4 <--- this is the ip address in my machine
 // to get your ip address go to cmd and hit ipconfig to get ur LAN ip
+// Remember to connect to the same Wifi else ip will a problem
+// (NOTE: Nazhim 192.168.1.4 this was the ip for ur SLT wifi)

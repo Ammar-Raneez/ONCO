@@ -1,7 +1,6 @@
 import nltk
 import numpy
 import tflearn
-import tensorflow as tf
 import random
 import json
 from nltk.stem.wordnet import WordNetLemmatizer
@@ -65,19 +64,15 @@ class ChatbotFunctions:
 
     def create_model(self, retrain = False):
         self.create_training_and_test()
-        net = tflearn.input_data(shape=[None, len(self.training[0])])
-        net = tflearn.fully_connected(net, 8)
-        net = tflearn.fully_connected(net, 8)
-        net = tflearn.fully_connected(net, len(self.output[0]), activation='softmax')
-        net = tflearn.regression(net)
-        model = tflearn.DNN(net)
-
+        
         if not retrain:
-            try:
-                model.load("model/chatbot.tflearn")
-            except:
-                model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
-                model.save("model/chatbot.tflearn")
+            net = tflearn.input_data(shape=[None, len(self.training[0])])   
+            net = tflearn.fully_connected(net, 8)
+            net = tflearn.fully_connected(net, 8)
+            net = tflearn.fully_connected(net, len(self.output[0]), activation='softmax')
+            net = tflearn.regression(net)
+            model = tflearn.DNN(net)
+            model.load("model/chatbot.tflearn")
         else:
                 model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
                 model.save("model/chatbot.tflearn")
@@ -110,7 +105,7 @@ class ChatbotFunctions:
         if results[result_index] > 0.8:
             if result_tag == 'goodbye' or result_tag == 'thanks':
                 responses = intent_data['intents'][1]['responses'] if result_tag == 'goodbye' else intent_data['intents'][5]['responses']
-                return "CHANCO: " + random.choice(responses) + "\n"
+                return random.choice(responses) + "\n"
 
             for intent in intent_data['intents']:
                 if intent['tag'] == result_tag:
@@ -120,10 +115,10 @@ class ChatbotFunctions:
                             self.context = intent['context']
                         else:
                             self.context = None
-                        return "CHANCO: " + random.choice(responses) + "\n"
+                        return random.choice(responses) + "\n"
                     elif intent.get('direct_access'):
                         responses = intent['responses']
-                        return "CHANCO: " + random.choice(responses) + "\n"
-                    return "CHANCO: " + random.choice(default_responses) + "\n"
+                        return random.choice(responses) + "\n"
+                    return random.choice(default_responses) + "\n"
                 
-        return "CHANCO: " + random.choice(default_responses) + "\n"
+        return random.choice(default_responses) + "\n"

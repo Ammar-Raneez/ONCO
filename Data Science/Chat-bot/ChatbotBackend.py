@@ -9,7 +9,7 @@ chatbot_functions = ChatbotFunctions()
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 api = Api(app)
-model = chatbot_functions.create_model()
+model = chatbot_functions.create_model(False)
 
 class ChatbotChat(Resource):
     @staticmethod
@@ -25,4 +25,4 @@ class ChatbotChat(Resource):
 api.add_resource(ChatbotChat, '/chatbot-predict')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+        app.run(host="0.0.0.0", port=80)

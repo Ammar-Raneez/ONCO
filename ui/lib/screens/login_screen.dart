@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/GoogleUserSignInDetails.dart';
-import 'package:ui/components/AlertWidget.dart';
-import 'package:ui/components/RoundedButton.dart';
+import 'package:ui/components/alert_widget.dart';
+import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 import 'package:ui/screens/forgetPassword_screen.dart';
 import 'package:ui/screens/registration_screen.dart';

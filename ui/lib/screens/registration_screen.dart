@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ui/components/AlertWidget.dart';
-import 'package:ui/components/RoundedButton.dart';
+import 'package:ui/components/alert_widget.dart';
+import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

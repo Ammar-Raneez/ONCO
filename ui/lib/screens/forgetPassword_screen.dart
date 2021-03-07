@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:ui/components/RoundedButton.dart';
+import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
-import 'package:ui/components/AlertWidget.dart';
+import 'package:ui/components/alert_widget.dart';
 
 class ForgetPassword extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
