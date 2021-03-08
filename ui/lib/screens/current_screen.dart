@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
   // using this User instance we can access the details of the logged user using
   // the normal email/pass auth method not the (Google Auth)
   User loggedInUser;
+  final _firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -63,8 +65,12 @@ class _CurrentScreenState extends State<CurrentScreen> {
       child: WillPopScope(
         onWillPop: () async {
           // Google Sign Out and other login signOut
-          print(
-              "YOU ARE QUITTING THE APPLICATION BY CLICK THE BACK ICON FROM THE PHONE DEFAULT");
+          print( "YOU ARE QUITTING THE APPLICATION BY CLICK THE BACK ICON FROM THE PHONE DEFAULT");
+
+          // clearing the chatbot data from the database firestore
+          _firestore.collection('chatbot-messages').get().then((snapshot) {
+            for (DocumentSnapshot ds in snapshot.docs) ds.reference.delete();
+          });
 
           // (Email-Pass) user gets signed out
           _auth.signOut();
