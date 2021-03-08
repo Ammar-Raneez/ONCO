@@ -43,7 +43,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
       setState(() {});
     });
 
-    // Go to Login Screen after 3seconds from displaying the logo
+    // Go to Login Screen after 3.5 seconds from displaying the logo
     goToLoginScreen();
   }
 

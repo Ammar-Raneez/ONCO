@@ -5,12 +5,12 @@ class GoogleUserSignInDetails{
   static String googleSignInUserEmail;
 
   // setter
-  void setGoogleSignInUser(String email){
+  static void setGoogleSignInUser(String email){
     googleSignInUserEmail = email;
   }
 
   // getter
-  String getGoogleSignInUser(){
+  static String getGoogleSignInUser(){
    return googleSignInUserEmail;
   }
 
