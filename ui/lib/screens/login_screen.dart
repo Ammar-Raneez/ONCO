@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ui/services/UserDetails.dart';
 
 class LoginScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -57,6 +58,16 @@ class _LoginScreenState extends State<LoginScreen> {
             email = "";
             password = "";
           });
+
+          // Getting a snapshot of the users (to get username of logged in user)
+          QuerySnapshot querySnapshot = await _firestore.collection("users").get();
+          querySnapshot.docs.forEach((document) {
+            if (document.data()['userEmail'] == user.user.email) {
+              // setting the user name and its email to the global user details variable
+              UserDetails.setUserData(user.user.email, document.data()['username']);
+            }
+          });
+
           createAlertDialog(context, "Success", "Successfully logged in!", 200);
         } else {
           // Displaying the alert dialog
@@ -82,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
   googleAuthLogin(BuildContext context) async {
     try {
       await _googleSignIn.signIn().catchError((e) => (print(e.message)));
-      // print(_googleSignIn.currentUser);
+      print(_googleSignIn.currentUser);
 
       // Setting the user email to the global email variable to be used for
       // fire store use cases
@@ -99,17 +110,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
         // Now we sign out of this account once we get the email address
         _googleSignIn.signOut();
+        print("Google Signing out...");
 
         bool emailDoesExist = false;
 
         // Checking with the database records to check if the google account has a ONCO account as well.
-        QuerySnapshot querySnapshot =
-            await _firestore.collection("users").get();
+        QuerySnapshot querySnapshot = await _firestore.collection("users").get();
         querySnapshot.docs.forEach((document) {
-          print(document.data()['userEmail']);
           if (document.data()['userEmail'] ==
               GoogleUserSignInDetails.googleSignInUserEmail) {
             emailDoesExist = true;
+            // adding user details for global access
+            UserDetails.setUserData(GoogleUserSignInDetails.googleSignInUserEmail, document.data()['username']);
           }
         });
 
@@ -139,6 +151,10 @@ class _LoginScreenState extends State<LoginScreen> {
       createAlertDialog(
           context, "Error", "Something went wrong!\nPlease re-try later", 404);
     }
+    // stop displaying the spinner
+    setState(() {
+      showSpinner = false;
+    });
   }
 
   // google auth logout

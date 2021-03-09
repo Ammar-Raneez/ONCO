@@ -5,6 +5,7 @@ import 'package:ui/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:ui/services/UserDetails.dart';
 
 // Firebase related variables
 final _firestore = FirebaseFirestore.instance;
@@ -212,6 +213,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                           // displaying alerts according to the progress
                           if (newUser != null) {
+                            // Adding the new registered user details to the global variable
+                            UserDetails.setUserData(email, username);
+
                             // Displaying the alert dialog
                             createAlertDialog(context, "Success",
                                 "Account Registered Successfully!", 200);
