@@ -15,7 +15,7 @@ class _PersonalManagerState extends State<PersonalManager> {
       body: SafeArea(
           child: Column(
               children: [
-                CustomAppBar("arrow"),
+                CustomAppBar("arrow", context),
                 Column(
                   children : [
 
