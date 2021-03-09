@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/personal_manager_card.dart';
+import 'package:ui/screens/medicationManager_screen.dart';
 
 class PersonalManager extends StatefulWidget {
   @override
@@ -62,7 +63,18 @@ class _PersonalManagerState extends State<PersonalManager> {
                         scrollDirection: Axis.vertical,
                         children: <Widget>[
                           Container(
-                              child: PersonalCard(cardTitle: 'Medications', cardColor1: '0xFF91C77E', cardColor2:'0xFF146314' , textColor: '0xFFFFFFFF', )),
+                              child: GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context)=> MedicationManager()
+                                      ),
+                                    );
+                                  },
+                                  child: PersonalCard(cardTitle: 'Medications', cardColor1: '0xFF91C77E', cardColor2:'0xFF146314' , textColor: '0xFFFFFFFF', )
+                              ),
+                          ),
                           Container(
                               child: PersonalCard(cardTitle: 'Reports', cardColor1: '0xFF7EC794', cardColor2:'0xFF0D886B', textColor: '0xFFFFFFFF', )),
                           Container(
