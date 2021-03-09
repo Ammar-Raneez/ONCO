@@ -87,7 +87,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
           return true;
         },
         child: Scaffold(
-          appBar: CustomAppBar("settings"),
+          appBar: CustomAppBar("settings", context),
 
           // under this body only the screen go into
           body: PageView(

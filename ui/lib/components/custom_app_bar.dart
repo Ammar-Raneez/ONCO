@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   var iconButton; // This Variable holds the Icon type required for the left part of the App Bar
-
   // Constructor for the RoundedAppBar Component
-  CustomAppBar(String iconName) {
+  CustomAppBar(String iconName, BuildContext context) {
 
     if (iconName == "arrow")
     {
@@ -14,7 +13,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
         icon: Icon(Icons.arrow_back_sharp,
         color: Colors.white,
-        size: 25.0,)
+        size: 25.0,),
+        onPressed: () {
+          Navigator.pop(context);
+        },
       );
     }
     else if (iconName == "settings")
