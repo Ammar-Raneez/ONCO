@@ -1,40 +1,14 @@
-import os
 from utils import *
-from ImageGenerator import *
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import seaborn as sns
-from PIL import Image
 from ImageSplit import *
 from keras.utils.np_utils import to_categorical
-
-
-# figure = plt.figure(figsize=(15, 15))
-# columns = 5
-# rows = 3
-
-
-# for i in range(1, columns*rows +1):
-#     ax = figure.add_subplot(rows, columns, i)
-#     if y_train[i] == 0:
-#         ax.title.set_text('Benign')
-#     else:
-#         ax.title.set_text('Malignant')
-#     plt.imshow(X_train[i], interpolation='nearest')
-# plt.show()
-
+from keras.applications import InceptionV3
+from keras import models, layers
 
 #Normalize (Rescale data to same range)
 X_train, X_test = X_train/255, X_test/255
 
 #one hot encode the labels
 y_train = to_categorical(y_train, num_classes= 2)
-
-
-#the model
-from keras.applications import InceptionV3
-from keras import models, layers
 
 def fine_tuned_inception():
     pt_inception = InceptionV3(
@@ -57,6 +31,6 @@ def fine_tuned_inception():
 
 
 #InceptionV3 model
-#Accuracy ==> 83.6
-#Sensitivity ==> 85
-#Specificity ==> 82
+#Accuracy ==> 84.2
+#Precision ==> 83%, 86%
+#Recall ==> 89%, 78%

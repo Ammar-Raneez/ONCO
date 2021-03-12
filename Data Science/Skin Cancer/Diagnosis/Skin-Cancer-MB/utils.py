@@ -4,10 +4,10 @@
 # In[1]:
 
 
-TEST_MALIGNANT_FOLDER = '../../Skin Cancer stuff/datasets/Benign Malignant/test/malignant'
-TEST_BENIGN_FOLDER = '../../Skin Cancer stuff/datasets/Benign Malignant/test/benign'
+TEST_MALIGNANT_FOLDER = '../../../../../Skin Cancer stuff/datasets/Benign Malignant/test/malignant'
+TEST_BENIGN_FOLDER = '../../../../../Skin Cancer stuff/datasets/Benign Malignant/test/benign'
 
-TRAIN_MALIGNANT_FOLDER = '../../Skin Cancer stuff/datasets/Benign Malignant/train/malignant'
-TRAIN_BENIGN_FOLDER = '../../Skin Cancer stuff/datasets/Benign Malignant/train/benign'
+TRAIN_MALIGNANT_FOLDER = '../../../../../Skin Cancer stuff/datasets/Benign Malignant/train/malignant'
+TRAIN_BENIGN_FOLDER = '../../../../../Skin Cancer stuff/datasets/Benign Malignant/train/benign'
 IMAGE_SIZE = 224
 

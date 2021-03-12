@@ -1,13 +1,8 @@
-import os
 from utils import *
-from ImageGenerator import *
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import seaborn as sns
-from PIL import Image
 from ImageSplit import *
 from keras.utils.np_utils import to_categorical
+from keras.applications import VGG16
+from keras import models, layers
 
 #Normalize (Rescale data to same range)
 X_train, X_test = X_train/255, X_test/255
@@ -15,10 +10,6 @@ X_train, X_test = X_train/255, X_test/255
 #one hot encode the labels
 y_train = to_categorical(y_train, num_classes= 2)
 y_train
-
-#the model
-from keras.applications import VGG16
-from keras import models, layers
 
 def fine_tuned_vgg():
     pt_vgg = VGG16(
@@ -40,6 +31,6 @@ def fine_tuned_vgg():
     return ft_vgg
 
 #VGG16 model
-#Accuracy ==> 85.6
-#Sensitivity ==> 87.1
-#Specificity ==> 83.8
+#Accuracy ==> 85.2
+#precision ==> 90%, 80%
+#Specificity ==> 82%, 89%
