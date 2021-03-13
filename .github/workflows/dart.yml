@@ -27,7 +27,9 @@ jobs:
       - run: flutter pub get
         working-directory: ui    
       - run: flutter test
+        working-directory: ui    
       - run: flutter build apk
+        working-directory: ui    
       # Uncomment this step to verify the use of 'dart format' on each commit.
       # - name: Verify formatting
       #   run: dart format --output=none --set-exit-if-changed .
