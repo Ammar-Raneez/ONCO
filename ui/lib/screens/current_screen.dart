@@ -2,7 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/GoogleUserSignInDetails.dart';
-import 'file:///C:/Users/Ammuuu/Downloads/learning/UNI/Semester%20II/SDGP/SDGP-ONCO/ui/lib/screens/chatbot_screen.dart';
+import 'package:ui/screens/chatbot_screen.dart';
 import 'package:ui/screens/home_screen.dart';
 import 'package:ui/screens/mainCancer_screen.dart';
 import 'package:ui/components/custom_app_bar.dart';
