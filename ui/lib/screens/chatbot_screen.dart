@@ -9,7 +9,7 @@ import 'package:ui/constants.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
-//To fetch username
+//To fetch username, and check current user
 var loggedInUserEP;
 var loggedInUserGoogle;
 
@@ -52,11 +52,13 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       }
 
       //fetch username
-      _firestore.collection("users").doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle).get()
-      .then((value) => {
-        username = value.data()["username"],
-      });
-
+      _firestore
+          .collection("users")
+          .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
+          .get()
+          .then((value) => {
+                username = value.data()["username"],
+              });
     } catch (e) {
       print(e);
     }
@@ -80,7 +82,12 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     //clear text field on send
     messageTextController.clear();
     //add timestamp to be used for message sorting, current user's message
-    _firestore.collection("chatbot-messages").add({
+    //create message collection unique for each user, so multiple users can use at the same time
+    _firestore
+        .collection("chatbot-messages")
+        .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
+        .collection("chatbot-messages")
+        .add({
       'text': messageText,
       'sender': username,
       'timestamp': Timestamp.now(),
@@ -93,7 +100,11 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       responseText = response.data['Chatbot Response'];
 
       //add chat bot response to firestore
-      _firestore.collection("chatbot-messages").add({
+      _firestore
+          .collection("chatbot-messages")
+          .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
+          .collection("chatbot-messages")
+          .add({
         'text': response.data['Chatbot Response'],
         'sender': 'CHANCO',
         'timestamp': Timestamp.now(),
@@ -128,14 +139,15 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       },
                       controller: messageTextController,
                       decoration: kTextFieldDecoration.copyWith(
-                        suffixIcon: IconButton(
-                            icon: Icon(Icons.send),
-                            onPressed: handleSendMessage,
-                            color: Colors.lightBlueAccent
-                        ),
-                        prefixIcon: Container(width: 0, height: 0,),
-                        hintText: 'Write a message'
-                      ),
+                          suffixIcon: IconButton(
+                              icon: Icon(Icons.send),
+                              onPressed: handleSendMessage,
+                              color: Colors.lightBlueAccent),
+                          prefixIcon: Container(
+                            width: 0,
+                            height: 0,
+                          ),
+                          hintText: 'Write a message'),
                     ),
                   ),
                 ),
@@ -160,6 +172,8 @@ class MessageStream extends StatelessWidget {
     //firestore database
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore
+          .collection("chatbot-messages")
+          .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
           .collection("chatbot-messages")
           .orderBy('timestamp')
           .snapshots(),
@@ -193,7 +207,8 @@ class MessageStream extends StatelessWidget {
 
         messageBubbles.add(new MessageBubble(
           messageSender: 'CHANCO',
-          messageText: 'Hi ${username.toString().toUpperCase()}! How can I help you today?',
+          messageText:
+              'Hi ${username.toString().toUpperCase()}! How can I help you today?',
           isMe: false,
         ));
 
