@@ -76,7 +76,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
-          "http://192.168.8.100/predict",
+          "http://192.168.1.3/predict",
           data: formData,
         );
         print(response);
