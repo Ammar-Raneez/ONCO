@@ -7,8 +7,8 @@
 ONCO is an Open Source mobile platform that specializes in the diagnosis and prognosis of Skin, Lung, and Breast Cancer, utilizing deep convolutional neural networks for diagnosis, and machine learning and risk models for prognosis. The main aim is to bridge the gap between many mediocre diagnosis applications, bringing them all together, while at the same time making it more enhanced and effective.
 
 # Tech-Stack
-Flutter
-Python
-Firebase
-TensorFlow | Keras | Sci-kit Learn | NLTK | TfLearn
-Flask
+* Flutter
+* Python
+* Firebase
+* TensorFlow | Keras | Sci-kit Learn | NLTK | TfLearn
+* Flask
