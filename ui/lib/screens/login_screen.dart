@@ -46,6 +46,14 @@ class _LoginScreenState extends State<LoginScreen> {
         showSpinner = true;
       });
 
+      //clear chat bot messages on login/register
+      _firestore.collection("chatbot-messages").get()
+          .then((value) => {
+        for (var msg in value.docs) {
+          msg.reference.delete()
+        }
+      });
+
       try {
         // getting the logged in user details as a USER object or type
         final user = await _auth.signInWithEmailAndPassword(
@@ -101,6 +109,14 @@ class _LoginScreenState extends State<LoginScreen> {
         // Display the spinner because it will take time to fetch the data from the DB
         setState(() {
           showSpinner = true;
+        });
+
+        //clear chat bot messages on login/register
+        _firestore.collection("chatbot-messages").get()
+            .then((value) => {
+          for (var msg in value.docs) {
+            msg.reference.delete()
+          }
         });
 
         // setting the email for google sign in users

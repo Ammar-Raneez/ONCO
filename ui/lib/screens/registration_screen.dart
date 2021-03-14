@@ -211,6 +211,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             'timestamp': Timestamp.now(),
                           });
 
+                          //clear chat bot messages on login/register
+                          _firestore.collection("chatbot-messages").get()
+                          .then((value) => {
+                            for (var msg in value.docs) {
+                              msg.reference.delete()
+                            }
+                          });
+
                           // displaying alerts according to the progress
                           if (newUser != null) {
                             // Adding the new registered user details to the global variable

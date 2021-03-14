@@ -12,6 +12,7 @@
         android:name="io.flutter.app.FlutterApplication"
         android:requestLegacyExternalStorage="true"
         android:label="onco"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
 
         <activity
