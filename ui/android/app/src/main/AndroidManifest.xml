@@ -8,7 +8,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:requestLegacyExternalStorage="true"
-        android:label="ui"
+        android:label="onco"
         android:icon="@mipmap/ic_launcher">
 
         <activity
