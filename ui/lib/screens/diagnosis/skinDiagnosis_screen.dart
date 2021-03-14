@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/alert_widget.dart';
+import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -128,7 +129,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xff01CDFA),
+        appBar: CustomAppBar("arrow", context),
         body: ModalProgressHUD(
           // displaying the spinner for async tasks
           inAsyncCall: showSpinner,
@@ -137,37 +138,6 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // HEADER WITH ONCO LOGO AND ICON BUTTON
-                Expanded(
-                  child: Material(
-                    color: Color(0xff01CDFA),
-                    child: Padding(
-                      padding: const EdgeInsets.all(25.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.arrow_back,
-                              size: 30,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              // NAVIGATE BACK
-                              Navigator.pop(context);
-                            },
-                          ),
-                          Image.asset(
-                            'images/officialLogo.png',
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
                 // THE REST OF THE BODY CONTENT OF THE SCREEN
                 Expanded(
                   flex: 6,

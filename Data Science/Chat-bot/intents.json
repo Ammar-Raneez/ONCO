@@ -1,6 +1,6 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Hi", "How are you", "hey", "yo", "Is anyone there", "Hello", "Good day", "Whats up", "sup"],
+         "patterns": ["Hi", "How are you", "hey", "yo", "Is anyone there", "Hello", "Good day", "Whats up", "sup", "what are you", "who are you"],
          "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?", "Hello there!, how are you feeling today?"]
         },
   
@@ -28,12 +28,12 @@
         },
  
         {"tag": "thanks",
-         "patterns": ["Thanks", "Thank you", "Thats helpful", "Awesome thanks", "Thanks for helping me"],
+         "patterns": ["Thanks", "Thank you", "That is helpful", "Awesome thanks", "Thanks for helping me"],
          "responses": ["Happy to help!", "Any time!", "My pleasure"]
         },
     
         {"tag": "first",
-         "patterns": ["sick", "i dont feel good", "not well", "I am not feeling well", "I feel sick", "something is wrong with me", "I do not think I am of perfect health"],
+         "patterns": ["sick", "i do not feel good", "not well", "I am not feeling well", "I feel sick", "something is wrong with me", "I do not think I am of perfect health"],
          "responses": ["I am sorry to hear that, but do not panic! I can be of help :) What symptoms do you have?", "not to worry, you have me! lets get started, what do have?",
                        "oh is that so :( Not to worry I am the 'chanciest' :P out there, please tell me, what do you have?", "I can be of help! What symptoms do you have?", "Please dont worry, you got me!", "Not to worry! I am very dependable when it comes to your health! Tell me, what do you have"]
         },
@@ -66,7 +66,7 @@
     
         {"tag": "sc_main",
          "patterns": ["unhealable sore", "sore not healed", "waxy bump", "pearly bump", "brown scar", "crusty skin", "returning scab", 
-"mole", "brown spots", "painful lesion", "dark lesions"],
+"mole", "brown spots", "painful lesion", "dark lesions", "bleeding sore", ],
          "responses": ["Hmm... these may be signs of skin cancer, but please do not panic. There are several types: some are harmless; some can be easily healed too! But there are several types, so to confirm I would suggest that you please upload a picture of the infected area, so that we can get a better view of it! :)"],
          "context": "sc"
         }

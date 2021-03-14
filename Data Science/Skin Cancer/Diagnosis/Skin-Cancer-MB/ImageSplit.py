@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[4]:
-
-
 import os
 import numpy as np
 from PIL import Image
@@ -50,4 +44,3 @@ s = np.arange(X_test.shape[0])
 np.random.shuffle(s)
 X_test = X_test[s]
 y_test = y_test[s]
-
