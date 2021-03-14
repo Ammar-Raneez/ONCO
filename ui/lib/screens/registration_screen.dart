@@ -212,7 +212,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           });
 
                           //clear chat bot messages on login/register
-                          //clear chat bot messages on login/register
                           _firestore.collection("chatbot-messages").doc(email)
                               .collection("chatbot-messages").get()
                               .then((value) => {
