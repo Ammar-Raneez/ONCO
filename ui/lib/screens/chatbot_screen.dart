@@ -9,8 +9,12 @@ import 'package:ui/constants.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
+//To fetch username
 var loggedInUserEP;
 var loggedInUserGoogle;
+
+//store current username
+var username;
 
 class ChatBotScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -23,8 +27,11 @@ class ChatBotScreen extends StatefulWidget {
 class _ChatBotScreenState extends State<ChatBotScreen> {
   //used to clear the text field upon send
   final messageTextController = TextEditingController();
-  final _auth = FirebaseAuth.instance;
+  //current user (has email and password)
+  final user = FirebaseAuth.instance.currentUser;
+
   Dio dio = new Dio();
+
   String messageText;
   var responseText;
 
@@ -36,7 +43,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 
   void getCurrentUser() async {
     try {
-      final user = _auth.currentUser;
       if (user != null) {
         // This will run when the user logs in using the normal username and password way
         loggedInUserEP = user.email;
@@ -44,6 +50,13 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
         // This will fire when user logs in using the Google Authentication way
         loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
       }
+
+      //fetch username
+      _firestore.collection("users").doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle).get()
+      .then((value) => {
+        username = value.data()["username"],
+      });
+
     } catch (e) {
       print(e);
     }
@@ -66,10 +79,10 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   void handleSendMessage() async {
     //clear text field on send
     messageTextController.clear();
-    //add timestamp to be used for message sorting
+    //add timestamp to be used for message sorting, current user's message
     _firestore.collection("chatbot-messages").add({
       'text': messageText,
-      'sender': loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle,
+      'sender': username,
       'timestamp': Timestamp.now(),
     });
 
@@ -168,14 +181,10 @@ class MessageStream extends StatelessWidget {
           final messageText = message.data()['text'];
           final messageSender = message.data()['sender'];
 
-          //get the current user
-          final currentUser =
-              loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle;
-
           final messageBubble = MessageBubble(
-            messageSender: messageSender,
+            messageSender: username,
             messageText: messageText,
-            isMe: currentUser == messageSender,
+            isMe: username == messageSender,
           );
           messageBubbles.add(messageBubble);
         }
@@ -184,7 +193,7 @@ class MessageStream extends StatelessWidget {
 
         messageBubbles.add(new MessageBubble(
           messageSender: 'CHANCO',
-          messageText: 'Hi User! How can I help you today?',
+          messageText: 'Hi ${username.toString().toUpperCase()}! How can I help you today?',
           isMe: false,
         ));
 
