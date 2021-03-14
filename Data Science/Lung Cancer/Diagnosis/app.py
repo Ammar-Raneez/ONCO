@@ -14,7 +14,7 @@ import glob
 import re
 import numpy as np
 
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template, jsonify
 from werkzeug.utils import secure_filename
 
 from keras.models import load_model
@@ -64,9 +64,10 @@ def model_predict(img_path, model):
 
 @app.route('/', methods=['GET'])
 def index():
-    # Main page
-    return render_template('index.html')
-    # return "Hello World"
+    return jsonify(
+        message = "Hello World"
+    )
+
 
 
 # ### Defining the predict route
