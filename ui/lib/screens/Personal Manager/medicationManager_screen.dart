@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/medication_card.dart';
 
-import 'addMedication_screen.dart';
-
 class MedicationManager extends StatefulWidget {
   @override
   _MedicationManagerState createState() => _MedicationManagerState();
@@ -14,14 +12,13 @@ class _MedicationManagerState extends State<MedicationManager> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
 
             CustomAppBar("arrow", context),
 
             Column(
               children: [
-
 
                 Padding(
                   padding: const EdgeInsets.only(
@@ -81,6 +78,7 @@ class _MedicationManagerState extends State<MedicationManager> {
                               children: [
                                 MedicationCard(medicationTitle: "Panadol", medicationDose: "2 times every 8 hours",),
                                 MedicationCard(medicationTitle: "Banana", medicationDose: "2 times every 8 hours",),
+                                MedicationCard(medicationTitle: "Panadol", medicationDose: "2 times every 8 hours",),
                                 MedicationCard(medicationTitle: "Panadol", medicationDose: "2 times every 8 hours",),
                               ],
                             ),
