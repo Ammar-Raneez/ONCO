@@ -65,7 +65,7 @@ class _MedicationManagerState extends State<MedicationManager> {
                     child:Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 17,
-                        vertical: 10
+                        vertical: 0
                       ),
                       child: Container(
                         decoration: BoxDecoration(
@@ -103,7 +103,7 @@ class _MedicationManagerState extends State<MedicationManager> {
             ),
             Positioned(
                   bottom:17,
-                  right: 24,
+                  right: 17,
                   child: GestureDetector(
                     onTap: (){
                       Navigator.push(
@@ -119,13 +119,11 @@ class _MedicationManagerState extends State<MedicationManager> {
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
-                          color: Color(0xFF212121),
+                          color: Color(0xFF1c374a),
                           borderRadius: BorderRadius.circular(18)
                       ),
                       child: Image(
-                          image:AssetImage(
-                              'images/add_icon.png' // Add icon
-                          )
+                          image:AssetImage('images/add_icon.png') // Add icon
                       ),
                     ),
                   ),
