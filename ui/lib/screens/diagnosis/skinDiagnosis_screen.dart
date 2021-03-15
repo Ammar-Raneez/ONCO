@@ -117,7 +117,6 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
   _openCamera() async {
     var selectedPicture =
-        // ignore: deprecated_member_use
         await ImagePicker.pickImage(source: ImageSource.camera);
 
     // NOTE that selectedPicture may also contain null value, suppose user opens the camera and exits

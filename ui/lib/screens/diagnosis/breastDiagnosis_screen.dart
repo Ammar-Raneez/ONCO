@@ -42,7 +42,6 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
     var selectedPicture =
-        // ignore: deprecated_member_use
         await ImagePicker.pickImage(source: ImageSource.gallery);
 
     // NOTE that 'selectedPicture' may also contain 'null' value, suppose user opens gallery and exits
@@ -116,7 +115,6 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
   _openCamera() async {
     var selectedPicture =
-        // ignore: deprecated_member_use
         await ImagePicker.pickImage(source: ImageSource.camera);
 
     // NOTE that selectedPicture may also contain null value, suppose user opens the camera and exits
