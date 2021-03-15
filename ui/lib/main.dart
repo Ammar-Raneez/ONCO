@@ -10,7 +10,7 @@ import 'package:ui/screens/welcome_screen.dart';
 
 // Main method CALLED at which the APP STARTS INITIALLY
 void main() {
-  String name = "";
+  // String name = "";
   runApp(MyApp());
 }
 
