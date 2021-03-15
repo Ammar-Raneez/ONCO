@@ -12,13 +12,13 @@ class MedicationCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical:5.0,
-        horizontal: 10
+        horizontal: 0
       ),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: Colors.white,
+          color: Color(0xFFCDDDF6)
         ),
         child: Container(
           child: Padding(
