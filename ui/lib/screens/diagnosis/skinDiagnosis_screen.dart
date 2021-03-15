@@ -42,6 +42,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
     var selectedPicture =
+        // ignore: deprecated_member_use
         await ImagePicker.pickImage(source: ImageSource.gallery);
 
     // NOTE that selectedPicture may also contain null value, suppose user opens gallery and exits

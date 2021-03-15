@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/personal_manager_card.dart';
-import 'package:ui/screens/medicationManager_screen.dart';
+import 'package:ui/screens/Personal%20Manager/medicationManager_screen.dart';
 
 class PersonalManager extends StatefulWidget {
   @override
