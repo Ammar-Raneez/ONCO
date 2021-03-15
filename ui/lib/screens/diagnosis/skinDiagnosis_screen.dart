@@ -76,16 +76,10 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
-          "http://192.168.1.3/predict",
+          "http://192.168.8.100/skin-diagnosis",
           data: formData,
         );
         print(response);
-
-        // Creating fake response at the moment to create the ui functionality and stuff-----
-        // String response;
-        // await Future.delayed(const Duration(seconds: 5), () {
-        //   response = "POSITIVE";
-        // });
 
         // Display the spinner to indicate that its loading
         setState(() {
