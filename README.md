@@ -1,4 +1,4 @@
-# SDGP-ONCO
+# ONCO
 [![Dart CI](https://github.com/Ammar-Raneez/SDGP-ONCO/actions/workflows/dart.yml/badge.svg)](https://github.com/Ammar-Raneez/SDGP-ONCO/actions/workflows/dart.yml)
 [![CodeQL](https://github.com/Ammar-Raneez/SDGP-ONCO/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Ammar-Raneez/SDGP-ONCO/actions/workflows/codeql-analysis.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/ammar-raneez/sdgp-onco/badge)](https://www.codefactor.io/repository/github/ammar-raneez/sdgp-onco)
