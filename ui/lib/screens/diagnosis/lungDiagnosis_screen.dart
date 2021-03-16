@@ -86,7 +86,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         final body = json.decode(response.toString());
         print(body);
         print(body["result"]);
-        print(body["imageName"]);
+        print(body["imageUrl"]);
         print(body["percentage"]);
 
         // Creating fake response at the moment to create the ui functionality and stuff-----
@@ -113,7 +113,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         // checking if the response is not null and displaying the result
         if (response != null) {
           // Displaying the alert dialog
-          createAlertDialog(context, "Diagnosis", response.toString(), 201);
+          createAlertDialog(context, "Diagnosis", body["result"], 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(

@@ -1,14 +1,15 @@
-import sys
-import os
 import glob
-import numpy as np
-import re
 import math
-import tensorflow as tf
-from Functions import Functions
+import os
+import re
+import sys
 
-from flask import Flask, redirect, url_for, request, render_template
+import numpy as np
+import tensorflow as tf
+from flask import Flask, redirect, render_template, request, url_for
 from werkzeug.utils import secure_filename
+
+from Functions import Functions
 
 app = Flask(__name__)
 functions = Functions()
@@ -35,6 +36,7 @@ def upload():
         file_path = os.path.join( basepath, 'uploads', secure_filename(f.filename))
         file_path = file_path.replace("\\", "/")
         f.save(file_path)
+        print(file_path)
         
         prediction = model_predict(file_path, model)
         

@@ -272,6 +272,7 @@ def upload():
 
         # Storing the image into firebase
         image_fileName = storeGradCamImage(file_path);
+        print("Storing image into firebase . . .")
         
         # Getting the prediction percentage value
         prediction_percentage = calculatePredictionPercent(file_path)
@@ -291,7 +292,7 @@ def upload():
         # returning the result
         return jsonify(
             result = output,
-            imageName = image_fileName,
+            imageUrl = image_download_Url,
             percentage = prediction_percentage
         )
     

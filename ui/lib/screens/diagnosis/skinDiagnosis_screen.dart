@@ -77,7 +77,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
-          "http://192.168.8.100/skin-diagnosis",
+          "http://192.168.1.2/skin-diagnosis",
           data: formData,
         );
         print(response);
