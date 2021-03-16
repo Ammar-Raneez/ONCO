@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'dart:io';
 import 'package:dio/dio.dart';
@@ -77,25 +78,31 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         print(formData);
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
-        // Response response = await dio.post(
-        //   "http://192.168.1.3/predict",
-        //   data: formData,
-        // );
-        // print(response);
+        Response response = await dio.post(
+          "http://192.168.1.2/predict",
+          data: formData,
+        );
+
+        final body = json.decode(response.toString());
+        print(body);
+        print(body["result"]);
+        print(body["imageName"]);
+        print(body["percentage"]);
 
         // Creating fake response at the moment to create the ui functionality and stuff-----
-        Map response;
-        await Future.delayed(const Duration(seconds: 5), () {
-          response = {
-            "result": "CANCER",
-            "imageFileName": "4c2c75aa-b9de-4c04-9e5a-8088c0752d23.jpg",
-            "percentPredict": 100.0
-          };
-        });
+        // Map response;
+        // await Future.delayed(const Duration(seconds: 5), () {
+        //   response = {
+        //     "result": "CANCER",
+        //     "imageFileName": "4c2c75aa-b9de-4c04-9e5a-8088c0752d23.jpg",
+        //     "percentPredict": 100.0
+        //   };
+        // });
 
-        print(response);
-        print(response["result"]);
-        print("superimposedImages/" + response["imageFileName"]);
+        // print(response["result"]);
+
+        // print(response["result"]);
+        // print("superimposedImages/" + response["imageFileName"]);
 
 
         // Display the spinner to indicate that its loading

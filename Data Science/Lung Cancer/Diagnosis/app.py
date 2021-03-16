@@ -5,7 +5,7 @@
 
 # ### Importing libraries
 
-# In[15]:
+# In[10]:
 
 
 import glob
@@ -30,15 +30,37 @@ from werkzeug.utils import secure_filename
 
 # ### Defining the flask app
 
-# In[16]:
+# In[11]:
 
 
 app = Flask(__name__)
 
 
+# ### Initializing Firebase App
+
+# In[12]:
+
+
+# firebase cloud storage stuff to store the image to cloud
+firebase_config = {
+    "apiKey": "AIzaSyCTCf6EWg_Mthy590c8JpkX5CsOdIlpEA4",
+    "authDomain": "onco-127df.firebaseapp.com",
+    "projectId": "onco-127df",
+    "databaseURL": "https://onco-127df-default-rtdb.firebaseio.com",
+    "storageBucket": "onco-127df.appspot.com",
+    "messagingSenderId": "425803825049",
+    "appId": "1:425803825049:web:3f261cd2ecf11241065d08",
+    "measurementId": "G-S3DZNYJLXT"
+}
+
+
+firebase = pyrebase.initialize_app(firebase_config)
+firebase_storage = firebase.storage()
+
+
 # ### Loading your saved modal
 
-# In[17]:
+# In[13]:
 
 
 MODEL_PATH = "model_vgg16.h5"
@@ -48,7 +70,7 @@ print('Model loaded. Check http://127.0.0.1:5000/ or http://localhost:5000/')
 
 # ### Predict using the model
 
-# In[18]:
+# In[14]:
 
 
 def model_predict(img_path, model):
@@ -62,7 +84,7 @@ def model_predict(img_path, model):
 
 # ### Important GradCAM functions
 
-# In[19]:
+# In[15]:
 
 
 def get_img_array(img_path, size):
@@ -128,7 +150,7 @@ def make_gradcam_heatmap(
 
 # ### Storing the Visualized GradCAM image to firebase storage
 
-# In[20]:
+# In[16]:
 
 
 def storeGradCamImage(local_target_image_path):
@@ -184,35 +206,19 @@ def storeGradCamImage(local_target_image_path):
     folderName = "superimposedImages"
     save_local_path = "superimposedImages/" + generateImageName + extension
     superimposed_img.save(save_local_path)
-    
-   # firebase cloud storage stuff to store the image to cloud
-    firebase_config = {
-        "apiKey": "AIzaSyCTCf6EWg_Mthy590c8JpkX5CsOdIlpEA4",
-        "authDomain": "onco-127df.firebaseapp.com",
-        "projectId": "onco-127df",
-        "databaseURL": "https://onco-127df-default-rtdb.firebaseio.com",
-        "storageBucket": "onco-127df.appspot.com",
-        "messagingSenderId": "425803825049",
-        "appId": "1:425803825049:web:3f261cd2ecf11241065d08",
-        "measurementId": "G-S3DZNYJLXT"
-    }
-
-    
-    firebase = pyrebase.initialize_app(firebase_config)
-    firebase_storage = firebase.storage()
 
     # storing the image from local path to the firebase cloud storage
     firebase_storage.child(folderName + "/" + fileName).put(save_local_path)
     
     # returning the file name of the image I have stored inside the firebase cloud storage
-    return generateImageName + extension
+    return save_local_path
     
     
 
 
 # ### Defining the index route
 
-# In[21]:
+# In[17]:
 
 
 @app.route('/', methods=['GET'])
@@ -224,7 +230,7 @@ def index():
 
 # ### Calculate Prediction Percentage
 
-# In[22]:
+# In[18]:
 
 
 def calculatePredictionPercent(image_path):
@@ -232,9 +238,25 @@ def calculatePredictionPercent(image_path):
     return str(np.amax(prediction[0][1] * 100))
 
 
+# ### Get image download URL based on the image file name
+
+# In[20]:
+
+
+def getImageUrl(imagePathName):
+    auth = firebase.auth()
+    email = "onconashml@gmail.com"
+    password = "onconashml12345"
+    user = auth.sign_in_with_email_and_password(email, password)
+    url = firebase_storage.child(imagePathName).get_url(user["idToken"])
+    print(url)
+    return url
+    
+
+
 # ### Defining the predict route
 
-# In[23]:
+# In[9]:
 
 
 @app.route('/predict', methods=['GET', 'POST'])
@@ -244,17 +266,18 @@ def upload():
         f = request.files['file']
 
         # Save the file to ./uploads
-        basepath = os.path.dirname(__file__)
-        file_path = "./uploads/" + f.filename
-        f.save(file_path)
-
+        file_path = "./uploads/"+f.filename
         print(file_path)
+        f.save(file_path)
 
         # Storing the image into firebase
         image_fileName = storeGradCamImage(file_path);
         
-        # # Getting the prediction percentage value
+        # Getting the prediction percentage value
         prediction_percentage = calculatePredictionPercent(file_path)
+        
+        # Getting the superimposed image download URL link
+        image_download_Url = getImageUrl(image_fileName);
         
         # Make prediction
         prediction = model_predict(file_path, model)
@@ -268,14 +291,14 @@ def upload():
         # returning the result
         return jsonify(
             result = output,
-            imageFileName = image_fileName,
+            imageName = image_fileName,
             percentage = prediction_percentage
         )
-        # return output
+    
     # if not a 'POST' request we then return None
     return None
 
-# C:\Users\Nazhim\Documents\GitHub\SDGP-ONCO\Data Science\Lung Cancer\Diagnosis\uploads\image_picker2329454639435085364.jpg
+
 # ### Running the main application
 
 # In[9]:
@@ -285,10 +308,4 @@ if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
 
   
-
-
-# In[ ]:
-
-
-
 
