@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/cancer_card.dart'; //imports card component
-import 'package:ui/components/custom_app_bar.dart';
+// import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';

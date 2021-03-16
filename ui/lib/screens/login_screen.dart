@@ -53,11 +53,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
         // displaying alerts according to the progress
         if (user != null) {
+          //clear chat bot messages on login/register
+          _firestore.collection("chatbot-messages").doc(email)
+              .collection("chatbot-messages").get()
+              .then((value) => {
+            for (var msg in value.docs) {
+              msg.reference.delete()
+            }
+          });
+
           // Displaying the alert dialog
           setState(() {
             email = "";
             password = "";
           });
+
 
           // Getting a snapshot of the users (to get username of logged in user)
           QuerySnapshot querySnapshot = await _firestore.collection("users").get();
@@ -103,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
           showSpinner = true;
         });
 
+
         // setting the email for google sign in users
         GoogleUserSignInDetails.googleSignInUserEmail =
             _googleSignIn.currentUser.email;
@@ -134,6 +145,16 @@ class _LoginScreenState extends State<LoginScreen> {
         if (emailDoesExist) {
           // IF it does exist then we proceed to "SUCCESS" navigation
           createAlertDialog(context, "Success", "Successfully logged in!", 200);
+
+          //clear chat bot messages on login/register
+          _firestore.collection("chatbot-messages").doc(GoogleUserSignInDetails.googleSignInUserEmail)
+              .collection("chatbot-messages").get()
+              .then((value) => {
+            for (var msg in value.docs) {
+              msg.reference.delete()
+            }
+          });
+
         } else {
           // ELSE we alert the user with appropriate message to register firstly.
           createAlertDialog(
