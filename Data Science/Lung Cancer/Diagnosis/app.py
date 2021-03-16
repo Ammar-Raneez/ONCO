@@ -1,12 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # Serving the lung cancer detection modal
-
-# ### Importing libraries
-
-# In[10]:
-
 
 import glob
 import os
@@ -29,18 +20,10 @@ from tensorflow import keras
 from werkzeug.utils import secure_filename
 
 # ### Defining the flask app
-
-# In[11]:
-
-
 app = Flask(__name__)
 
 
 # ### Initializing Firebase App
-
-# In[12]:
-
-
 # firebase cloud storage stuff to store the image to cloud
 firebase_config = {
     "apiKey": "AIzaSyCTCf6EWg_Mthy590c8JpkX5CsOdIlpEA4",
@@ -59,20 +42,12 @@ firebase_storage = firebase.storage()
 
 
 # ### Loading your saved modal
-
-# In[13]:
-
-
 MODEL_PATH = "model_vgg16.h5"
 model = tf.keras.models.load_model('model_vgg16.h5')
 print('Model loaded. Check http://127.0.0.1:5000/ or http://localhost:5000/')
 
 
 # ### Predict using the model
-
-# In[14]:
-
-
 def model_predict(img_path, model):
     IMG_SIZE = 224
     img_array = cv2.imread(img_path)
@@ -83,10 +58,6 @@ def model_predict(img_path, model):
 
 
 # ### Important GradCAM functions
-
-# In[15]:
-
-
 def get_img_array(img_path, size):
     # `img` is a PIL image of size 299x299
     img = keras.preprocessing.image.load_img(img_path, target_size=size)
@@ -149,10 +120,6 @@ def make_gradcam_heatmap(
 
 
 # ### Storing the Visualized GradCAM image to firebase storage
-
-# In[16]:
-
-
 def storeGradCamImage(local_target_image_path):
    
     img_size = (224, 224)
@@ -217,10 +184,6 @@ def storeGradCamImage(local_target_image_path):
 
 
 # ### Defining the index route
-
-# In[17]:
-
-
 @app.route('/', methods=['GET'])
 def index():
     return jsonify(
@@ -229,20 +192,12 @@ def index():
 
 
 # ### Calculate Prediction Percentage
-
-# In[18]:
-
-
 def calculatePredictionPercent(image_path):
     prediction = model_predict(image_path, model)
     return str(np.amax(prediction[0][1] * 100))
 
 
 # ### Get image download URL based on the image file name
-
-# In[20]:
-
-
 def getImageUrl(imagePathName):
     auth = firebase.auth()
     email = "onconashml@gmail.com"
@@ -255,10 +210,6 @@ def getImageUrl(imagePathName):
 
 
 # ### Defining the predict route
-
-# In[9]:
-
-
 @app.route('/predict', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
@@ -301,10 +252,6 @@ def upload():
 
 
 # ### Running the main application
-
-# In[9]:
-
-
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
 
