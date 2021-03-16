@@ -144,7 +144,7 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                   child: Material(
                     // PADDING WIDGET
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.stretch,

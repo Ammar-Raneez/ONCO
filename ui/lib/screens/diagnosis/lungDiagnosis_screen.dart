@@ -142,14 +142,9 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                 Expanded(
                   flex: 6,
                   child: Material(
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(70.0),
-                    ),
-                    color: Colors.white,
-
                     // PADDING WIDGET
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
