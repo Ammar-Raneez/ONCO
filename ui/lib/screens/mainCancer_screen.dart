@@ -37,6 +37,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     style: TextStyle(
                       fontFamily: 'Poppins-SemiBold',
                       fontSize: 27.0,
+                      color: Color(0xFF373737),
                     ),
                   ),
                   SizedBox(
