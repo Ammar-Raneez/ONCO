@@ -10,7 +10,6 @@ import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class LungCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -25,6 +24,8 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   File imageFile;
   Dio dio = new Dio();
   bool showSpinner = false;
+  bool showHighlightedImage = false;
+  dynamic responseBody;
 
   // CREATING AN ALERT
   createAlertDialog(
@@ -51,6 +52,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     // without selecting a picture.
     setState(() {
       imageFile = selectedPicture;
+      showHighlightedImage = false;
     });
   }
 
@@ -83,37 +85,34 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
           data: formData,
         );
 
-        final body = json.decode(response.toString());
-        print(body);
-        print(body["result"]);
-        print(body["imageUrl"]);
-        print(body["percentage"]);
+        responseBody = json.decode(response.toString());
+
+        // Output Results
+        // print(responseBody["result"]);
+        // print(responseBody["imageUrl"]);
+        // print(responseBody["percentage"]);
 
         // Creating fake response at the moment to create the ui functionality and stuff-----
-        // Map response;
         // await Future.delayed(const Duration(seconds: 5), () {
         //   response = {
         //     "result": "CANCER",
-        //     "imageFileName": "4c2c75aa-b9de-4c04-9e5a-8088c0752d23.jpg",
+        //     "imageFileName": "https://firebasestorage.googleapis.com/v0/b/onco-127df.appspot.com/o",
         //     "percentPredict": 100.0
         //   };
         // });
-
+        //
         // print(response["result"]);
-
-        // print(response["result"]);
-        // print("superimposedImages/" + response["imageFileName"]);
-
 
         // Display the spinner to indicate that its loading
         setState(() {
           showSpinner = false;
+          showHighlightedImage = true;
         });
 
         // checking if the response is not null and displaying the result
         if (response != null) {
           // Displaying the alert dialog
-          createAlertDialog(context, "Diagnosis", body["result"], 201);
+          createAlertDialog(context, "Diagnosis", responseBody["result"], 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -139,18 +138,19 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     // without capturing a picture.
     setState(() {
       imageFile = selectedPicture;
+      showHighlightedImage = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: CustomAppBar("arrow", context),
-        body: ModalProgressHUD(
-          // displaying the spinner for async tasks
-          inAsyncCall: showSpinner,
-          child: Container(
+      child: ModalProgressHUD(
+        // displaying the spinner for async tasks
+        inAsyncCall: showSpinner,
+        child: Scaffold(
+          appBar: CustomAppBar("arrow", context),
+          body: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -184,16 +184,22 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                           ),
                           // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
                           Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: imageFile == null
-                                  ? Image.asset('images/uploadImageGrey1.png')
-                                  : Image.file(
-                                      imageFile,
-                                      width: 500,
-                                      height: 500,
-                                    ),
-                            ),
+                            child: showHighlightedImage == false
+                                ? Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: imageFile == null
+                                        ? Image.asset(
+                                            'images/uploadImageGrey1.png')
+                                        : Image.file(
+                                            imageFile,
+                                            width: 500,
+                                            height: 500,
+                                          ),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Image.network(
+                                        responseBody["imageUrl"])),
                           ),
 
                           // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
@@ -258,8 +264,6 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     );
   }
 }
-
-
 
 // IMPORTANT REFERENCE USED TO CONNECT FLUTTER AND FLASK FOR (MOBILE PHONE)
 // https://medium.com/@podcoder/connecting-flutter-application-to-localhost-a1022df63130
