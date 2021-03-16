@@ -9,6 +9,7 @@ import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class LungCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -76,17 +77,26 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         print(formData);
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
-        Response response = await dio.post(
-          "http://192.168.1.3/predict",
-          data: formData,
-        );
-        print(response);
+        // Response response = await dio.post(
+        //   "http://192.168.1.3/predict",
+        //   data: formData,
+        // );
+        // print(response);
 
         // Creating fake response at the moment to create the ui functionality and stuff-----
-        // String response;
-        // await Future.delayed(const Duration(seconds: 5), () {
-        //   response = "POSITIVE";
-        // });
+        Map response;
+        await Future.delayed(const Duration(seconds: 5), () {
+          response = {
+            "result": "CANCER",
+            "imageFileName": "4c2c75aa-b9de-4c04-9e5a-8088c0752d23.jpg",
+            "percentPredict": 100.0
+          };
+        });
+
+        print(response);
+        print(response["result"]);
+        print("superimposedImages/" + response["imageFileName"]);
+
 
         // Display the spinner to indicate that its loading
         setState(() {
@@ -96,8 +106,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         // checking if the response is not null and displaying the result
         if (response != null) {
           // Displaying the alert dialog
-          createAlertDialog(
-              context, "Diagnosis", response.toString(), 201);
+          createAlertDialog(context, "Diagnosis", response.toString(), 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -145,7 +154,8 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                   child: Material(
                     // PADDING WIDGET
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                      padding: const EdgeInsets.only(
+                          left: 16, right: 16, bottom: 16),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -241,6 +251,8 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     );
   }
 }
+
+
 
 // IMPORTANT REFERENCE USED TO CONNECT FLUTTER AND FLASK FOR (MOBILE PHONE)
 // https://medium.com/@podcoder/connecting-flutter-application-to-localhost-a1022df63130
