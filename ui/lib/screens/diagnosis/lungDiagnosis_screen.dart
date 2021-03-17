@@ -30,7 +30,6 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   dynamic responseBody;
   final _firestore = FirebaseFirestore.instance;
 
-
   // CREATING AN ALERT
   createAlertDialog(
       BuildContext context, String title, String message, int status) {
@@ -93,8 +92,11 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         responseBody = json.decode(response.toString());
 
         // Adding the response data into the database for report creation purpose
-        _firestore.collection("users").doc(UserDetails.getUserData()["email"])
-            .collection("imageDetections").add({
+        _firestore
+            .collection("users")
+            .doc(UserDetails.getUserData()["email"])
+            .collection("imageDetections")
+            .add({
           "type": "lung",
           "result": responseBody["result"],
           "imageUrl": responseBody["imageUrl"],
@@ -213,8 +215,11 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   )
                                 : Padding(
                                     padding: const EdgeInsets.all(20.0),
-                                    child: Image.network(
-                                        responseBody["imageUrl"])),
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: 'images/loading.gif',
+                                      image: responseBody["imageUrl"],
+                                    ),
+                                  ),
                           ),
 
                           // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
