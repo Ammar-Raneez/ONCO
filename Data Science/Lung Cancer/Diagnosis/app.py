@@ -184,7 +184,7 @@ def storeGradCamImage(local_target_image_path):
 
 
 # ### Defining the index route
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     return jsonify(
         message = "Hello World"
