@@ -184,7 +184,7 @@ def storeGradCamImage(local_target_image_path):
 
 
 # ### Defining the index route
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     return jsonify(
         message = "Hello World"
@@ -217,7 +217,7 @@ def upload():
         f = request.files['file']
 
         # Save the file to ./uploads
-        file_path = "./uploads/"+f.filename
+        file_path = "./uploads/"+ str(uuid.uuid4()) + ".jpg"
         print(file_path)
         f.save(file_path)
 

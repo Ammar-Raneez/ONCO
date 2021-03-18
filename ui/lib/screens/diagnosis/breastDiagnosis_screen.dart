@@ -81,12 +81,6 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         );
         print(response);
 
-        // Creating fake response at the moment to create the ui functionality and stuff-----
-        // String response;
-        // await Future.delayed(const Duration(seconds: 5), () {
-        //   response = "POSITIVE";
-        // });
-
         // Display the spinner to indicate that its loading
         setState(() {
           showSpinner = false;
@@ -127,12 +121,12 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: CustomAppBar("arrow", context),
-        body: ModalProgressHUD(
-          // displaying the spinner for async tasks
-          inAsyncCall: showSpinner,
-          child: Container(
+      child: ModalProgressHUD(
+        // displaying the spinner for async tasks
+        inAsyncCall: showSpinner,
+        child: Scaffold(
+          appBar: CustomAppBar("arrow", context),
+          body: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,

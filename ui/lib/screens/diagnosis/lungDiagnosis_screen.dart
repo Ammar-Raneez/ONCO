@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,6 +11,7 @@ import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:ui/services/UserDetails.dart';
 
 class LungCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -26,6 +28,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   bool showSpinner = false;
   bool showHighlightedImage = false;
   dynamic responseBody;
+  final _firestore = FirebaseFirestore.instance;
 
   // CREATING AN ALERT
   createAlertDialog(
@@ -85,7 +88,21 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
           data: formData,
         );
 
+        // Converting the Json String into an actual Json Object
         responseBody = json.decode(response.toString());
+
+        // Adding the response data into the database for report creation purpose
+        _firestore
+            .collection("users")
+            .doc(UserDetails.getUserData()["email"])
+            .collection("imageDetections")
+            .add({
+          "type": "lung",
+          "result": responseBody["result"],
+          "imageUrl": responseBody["imageUrl"],
+          "percentage": responseBody["percentage"],
+          'timestamp': Timestamp.now(),
+        });
 
         // Output Results
         // print(responseBody["result"]);
@@ -198,8 +215,11 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   )
                                 : Padding(
                                     padding: const EdgeInsets.all(20.0),
-                                    child: Image.network(
-                                        responseBody["imageUrl"])),
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: 'images/loading.gif',
+                                      image: responseBody["imageUrl"],
+                                    ),
+                                  ),
                           ),
 
                           // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
