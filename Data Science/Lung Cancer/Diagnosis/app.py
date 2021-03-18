@@ -217,7 +217,7 @@ def upload():
         f = request.files['file']
 
         # Save the file to ./uploads
-        file_path = "./uploads/"+f.filename
+        file_path = "./uploads/"+ str(uuid.uuid4()) + ".jpg"
         print(file_path)
         f.save(file_path)
 
