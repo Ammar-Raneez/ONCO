@@ -32,12 +32,17 @@ def upload():
     if request.method == 'POST':
         f = request.files['file']
 
-        basepath = os.path.dirname(__file__)
-        file_path = os.path.join( basepath, 'uploads', secure_filename(f.filename))
-        file_path = file_path.replace("\\", "/")
-        f.save(file_path)
-        print(file_path)
+        # basepath = os.path.dirname(__file__)
+        # file_path = os.path.join( basepath, 'uploads', secure_filename(f.filename))
+        # file_path = file_path.replace("\\", "/")
+        # f.save(file_path)
+        # print(file_path)
         
+        # Save the file to ./uploads
+        file_path = "./uploads/"+f.filename
+        print(file_path)
+        f.save(file_path)
+
         prediction = model_predict(file_path, model)
         
         INDEX_TO_TYPE = {

@@ -77,7 +77,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
-          "http://192.168.1.2/skin-diagnosis",
+          "http://192.168.1.3/skin-diagnosis",
           data: formData,
         );
         print(response);
@@ -123,12 +123,12 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: CustomAppBar("arrow", context),
-        body: ModalProgressHUD(
-          // displaying the spinner for async tasks
-          inAsyncCall: showSpinner,
-          child: Container(
+      child: ModalProgressHUD(
+        // displaying the spinner for async tasks
+        inAsyncCall: showSpinner,
+        child: Scaffold(
+          appBar: CustomAppBar("arrow", context),
+          body: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
