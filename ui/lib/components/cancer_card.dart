@@ -19,8 +19,7 @@ class CancerCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(30.0),
       ),
       child: Container(
-        width: 320.0,
-        height: 120.0,
+        width: 320.0, height: 120.0,
         child: Padding(
           padding: const EdgeInsets.only(top: 70.0, left: 20.0),
           child: Text(
