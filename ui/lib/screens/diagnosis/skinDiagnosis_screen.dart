@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,6 +11,7 @@ import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:ui/services/UserDetails.dart';
 
 class SkinCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -23,6 +26,8 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   File imageFile;
   Dio dio = new Dio();
   bool showSpinner = false;
+  dynamic responseBody;
+  final _firestore = FirebaseFirestore.instance;
 
   // CREATING AN ALERT
   createAlertDialog(
@@ -77,10 +82,25 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
-          "http://192.168.1.3/skin-diagnosis",
+          "http://192.168.1.2/skin-diagnosis",
           data: formData,
         );
-        print(response);
+
+        // Converting the Json String into an actual Json Object
+        responseBody = json.decode(response.toString());
+        // print(responseBody);
+
+        // Adding the response data into the database for report creation purpose
+        _firestore
+            .collection("users")
+            .doc(UserDetails.getUserData()["email"])
+            .collection("imageDetections")
+            .add({
+                    "type": "skin",
+                    "result": responseBody["result_string"],
+                    "imageUrl": responseBody["imageDownloadURL"],
+                    'timestamp': Timestamp.now(),
+                  });
 
         // Display the spinner to indicate that its loading
         setState(() {
@@ -91,7 +111,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         if (response != null) {
           // Displaying the alert dialog
           createAlertDialog(
-              context, "Diagnosis", response.toString(), 201);
+              context, "Diagnosis", responseBody["result_string"], 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
