@@ -3,7 +3,6 @@ import 'package:ui/components/cancer_card.dart'; //imports card component
 import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
-import 'package:ui/screens/prognosis/breastPrognosis_screen.dart';
 
 
 //TODO - Add nav to bottom also add passing colors into card. Might need to adjust padding after(Appbar done only for nav)
@@ -86,7 +85,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyHomePage(),
+                          builder: (context) => BreastCancerDiagnosis(),
                         ),
                       );
                     },
