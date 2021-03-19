@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/treatment_card.dart';
 import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
@@ -25,9 +26,10 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Container(
+    return SafeArea(
+      child: Scaffold(
+        appBar: CustomAppBar("arrow", context),
+           body: Container(
             child: SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(
