@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
+import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/selectService_screen.dart';
 
 
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SelectServiceScreen(cancerType: 'Breast Cancer',),
+      home: SelectServiceScreen(cancerType: 'Breast Cancer', diagnosisRoute: BreastCancerDiagnosis()),
     );
   }
 }

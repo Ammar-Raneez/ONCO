@@ -2,25 +2,31 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ui/components/treatment_card.dart';
+import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
+import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
+import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
 import 'package:ui/screens/mainCancer_screen.dart';
-
 import 'diagnosis/skinDiagnosis_screen.dart';
 
 class SelectServiceScreen extends StatefulWidget {
+  final diagnosisRoute;
   final String cancerType;
 
-  const SelectServiceScreen({@required this.cancerType});
+  const SelectServiceScreen({@required this.diagnosisRoute, @required this.cancerType});
+
 
   @override
   _SelectServiceScreenState createState() => _SelectServiceScreenState();
+
+
 }
 
 class _SelectServiceScreenState extends State<SelectServiceScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Expanded(
           child: Container(
             child: SingleChildScrollView(
               child: Container(
@@ -54,7 +60,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SkinCancerDiagnosis(),
+                            builder: (context) => widget.diagnosisRoute,
                           ),
                         );
                       },
@@ -79,7 +85,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SkinCancerDiagnosis(),
+                              builder: (context) => widget.diagnosisRoute,
                             ),
                           );
                         },
@@ -139,7 +145,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
+

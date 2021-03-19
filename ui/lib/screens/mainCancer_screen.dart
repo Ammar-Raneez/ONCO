@@ -20,6 +20,7 @@ class MainCancerTypesScreen extends StatefulWidget {
 }
 
 class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +51,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(cancerType: 'Skin Cancer',),
+                          builder: (context) => SelectServiceScreen(cancerType: 'Skin Cancer', diagnosisRoute: SkinCancerDiagnosis(),),
                         ),
                       );
                     },
@@ -68,7 +69,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(cancerType: 'Lung Cancer',),
+                          builder: (context) => SelectServiceScreen(cancerType: 'Lung Cancer', diagnosisRoute: LungCancerDiagnosis()),
                         ),
                       );
                     },
@@ -86,7 +87,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(cancerType: 'Breast Cancer',),
+                          builder: (context) => SelectServiceScreen(cancerType: 'Breast Cancer',  diagnosisRoute: BreastCancerDiagnosis()),
                         ),
                       );
                     },
