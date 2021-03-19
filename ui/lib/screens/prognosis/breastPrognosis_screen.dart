@@ -42,7 +42,8 @@ class _BreastCancerPrognosisState extends State<BreastCancerPrognosis> {
               height: 150,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+              ),
               child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                   child: Container(
