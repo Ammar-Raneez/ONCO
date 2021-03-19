@@ -11,9 +11,10 @@ import 'diagnosis/skinDiagnosis_screen.dart';
 
 class SelectServiceScreen extends StatefulWidget {
   final diagnosisRoute;
+  final prognosisRoute;
   final String cancerType;
 
-  const SelectServiceScreen({@required this.diagnosisRoute, @required this.cancerType});
+  const SelectServiceScreen({@required this.diagnosisRoute, @required this.prognosisRoute, @required this.cancerType});
 
 
   @override
@@ -87,7 +88,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => widget.diagnosisRoute,
+                              builder: (context) => widget.prognosisRoute,
                             ),
                           );
                         },
