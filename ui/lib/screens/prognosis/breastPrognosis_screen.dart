@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
+import 'package:ui/constants.dart';
 
 void main() {
   runApp(MyApp());
@@ -38,7 +39,6 @@ class _BreastCancerPrognosisState extends State<BreastCancerPrognosis> {
     responseList.forEach((post) {
       listItems.add(
           Container(
-              alignment: Alignment.center,
               height: 150,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
@@ -47,7 +47,6 @@ class _BreastCancerPrognosisState extends State<BreastCancerPrognosis> {
               child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                   child: Container(
-                    alignment: Alignment.center,
                     child: Container(
                       margin: EdgeInsets.only(top: 0, bottom: 50),
                       width: double.infinity,
@@ -97,9 +96,32 @@ class _BreastCancerPrognosisState extends State<BreastCancerPrognosis> {
       child: Scaffold(
         appBar: CustomAppBar("arrow", context),
         body: Container(
+          margin: EdgeInsets.only(left: 20, right: 20),
           height: size.height,
           child: Column(
             children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Text(
+                    "Breast Cancer",
+                    style: kTextStyle.copyWith(
+                      color: Colors.blueGrey,
+                      fontSize: 25,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Text(
+                    "Prognosis",
+                    style: kTextStyle.copyWith(
+                      color: Colors.black54,
+                      fontSize: 25,
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 10,
               ),
