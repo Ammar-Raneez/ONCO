@@ -157,93 +157,126 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                 Expanded(
                   flex: 6,
                   child: Material(
-                    // PADDING WIDGET
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          // LUNG CANCER DIAGNOSIS TEXT CONTENT
-                          Text(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // LUNG CANCER DIAGNOSIS TEXT CONTENT
+                        Container(
+                          alignment: Alignment.topLeft,
+                          padding: EdgeInsets.only(left: 20),
+                          child: Text(
                             "Skin Cancer",
                             style: kTextStyle.copyWith(
                               color: Colors.blueGrey,
                               fontSize: 25,
                             ),
                           ),
-                          Text(
+                        ),
+                        Container(
+                          alignment: Alignment.topLeft,
+                          padding: EdgeInsets.only(left: 20),
+                          child: Text(
                             "Diagnosis",
                             style: kTextStyle.copyWith(
                               color: Colors.black54,
                               fontSize: 25,
                             ),
                           ),
-                          // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: imageFile == null
-                                  ? Image.asset('images/uploadImageGrey1.png')
-                                  : Image.file(
-                                      imageFile,
-                                      width: 500,
-                                      height: 500,
-                                    ),
-                            ),
+                        ),
+                        // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: imageFile == null
+                                ? Image.asset('images/uploadImageGrey1.png')
+                                : Image.file(
+                                    imageFile,
+                                    width: 500,
+                                    height: 500,
+                                  ),
                           ),
+                        ),
 
-                          // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RaisedButton(
-                                elevation: 3.0,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 25.0, vertical: 10.0),
-                                color: Colors.lightBlueAccent,
-                                onPressed: () {
-                                  // OPEN THE CAMERA TO CAPTURE IMAGE
-                                  _openCamera();
-                                },
-                                child: Icon(
-                                  Icons.camera_alt_rounded,
-                                  color: Colors.white,
-                                ),
+                        // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RaisedButton(
+                              elevation: 3.0,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 25.0, vertical: 10.0),
+                              color: Colors.lightBlueAccent,
+                              onPressed: () {
+                                // OPEN THE CAMERA TO CAPTURE IMAGE
+                                _openCamera();
+                              },
+                              child: Icon(
+                                Icons.camera_alt_rounded,
+                                color: Colors.white,
                               ),
-                              SizedBox(
-                                width: 20.0,
+                            ),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            RaisedButton(
+                              elevation: 3.0,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 25.0, vertical: 10.0),
+                              color: Colors.lightBlueAccent,
+                              onPressed: () {
+                                // OPEN GALLERY TO SELECT AN IMAGE
+                                _openGallery();
+                              },
+                              child: Icon(
+                                Icons.photo,
+                                color: Colors.white,
                               ),
-                              RaisedButton(
-                                elevation: 3.0,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 25.0, vertical: 10.0),
-                                color: Colors.lightBlueAccent,
-                                onPressed: () {
-                                  // OPEN GALLERY TO SELECT AN IMAGE
-                                  _openGallery();
-                                },
-                                child: Icon(
-                                  Icons.photo,
-                                  color: Colors.white,
-                                ),
-                              )
-                            ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        // DETECTION BUTTON
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.blueGrey,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20.0),
+                                topLeft: Radius.circular(20.0)),
                           ),
-                          SizedBox(
-                            height: 20.0,
+                          width: double.infinity,
+
+                          padding: const EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
+                          child: RawMaterialButton(
+                            fillColor: Colors.black54,
+                            child: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const <Widget>[
+                                  SizedBox(
+                                    width: 10.0,
+                                    height: 30.0,
+                                  ),
+                                  Text(
+                                    "Predict",
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Poppins-Regular',
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            shape: const StadiumBorder(),
+                            onPressed: () {_detect();},
                           ),
-                          // DETECTION BUTTON
-                          RoundedButton(
-                            onPressed: () {
-                              // IMPLEMENT THE DETECT LUNG CANCER FUNCTIONALITY
-                              _detect();
-                            },
-                            colour: Colors.redAccent,
-                            title: 'DETECT',
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
