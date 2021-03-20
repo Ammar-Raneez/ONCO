@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
+import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 
 void main() {
@@ -54,9 +55,11 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
                             colors: [
+
+                              Colors.blue,
                               Colors.blue,
                               Colors.lightBlueAccent
                             ]
@@ -72,8 +75,6 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
       itemsData = listItems;
     });
   }
-
-
 
   @override
   void initState() {
@@ -95,32 +96,31 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar("arrow", context),
-        body: Container(
-          margin: EdgeInsets.only(left: 20, right: 20),
+        body:  Container(
           height: size.height,
           child: Column(
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Text(
-                    "Skin Cancer",
-                    style: kTextStyle.copyWith(
-                      color: Colors.blueGrey,
-                      fontSize: 25,
-                    ),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(left: 20),
+                child: Text(
+                  "Skin Cancer",
+                  style: kTextStyle.copyWith(
+                    color: Colors.blueGrey,
+                    fontSize: 25,
                   ),
-                ],
+                ),
               ),
-              Row(
-                children: <Widget>[
-                  Text(
-                    "Prognosis",
-                    style: kTextStyle.copyWith(
-                      color: Colors.black54,
-                      fontSize: 25,
-                    ),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(left: 20),
+                child: Text(
+                  "Prognosis",
+                  style: kTextStyle.copyWith(
+                    color: Colors.black54,
+                    fontSize: 25,
                   ),
-                ],
+                ),
               ),
               const SizedBox(
                 height: 10,
@@ -152,6 +152,42 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
                           ),
                         );
                       })
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20.0),
+                      topLeft: Radius.circular(20.0)),
+                ),
+                width: double.infinity,
+
+                padding: const EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
+                child: RawMaterialButton(
+                  fillColor: Colors.black54,
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        SizedBox(
+                          width: 10.0,
+                          height: 30.0,
+                        ),
+                        Text(
+                          "Predict",
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Poppins-Regular',
+                              color: Colors.white
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  shape: const StadiumBorder(),
+                ),
               ),
             ],
           ),
