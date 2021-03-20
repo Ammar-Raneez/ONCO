@@ -54,16 +54,7 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
                       height: 100,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-
-                              Colors.blue,
-                              Colors.blue,
-                              Colors.lightBlueAccent
-                            ]
-                        ),
+                        color: Color(0xFFABD8E2),
                       ),
                     ),
                   )
