@@ -40,7 +40,7 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
     responseList.forEach((post) {
       listItems.add(
           Container(
-              height: 150,
+              height: 190,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20.0))
@@ -49,13 +49,43 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                   child: Container(
                     child: Container(
-                      margin: EdgeInsets.only(top: 0, bottom: 50),
-                      width: double.infinity,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Color(0xFFABD8E2),
-                      ),
+                        padding: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+                        margin: EdgeInsets.only(top: 0, bottom: 50),
+                        width: double.infinity,
+
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Color(0xFFABD8E2),
+                        ),
+                        child: Column(
+                            children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.only(bottom: 10),
+                                  child:Text(
+                                    post,
+                                    style: kTextStyle.copyWith(
+                                      color: Colors.blueGrey,
+                                      fontSize: 18,
+                                    ),
+                                  )
+                              ),
+                              TextField(
+                                decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: new BorderSide(color: Colors.white),
+                                      borderRadius: new BorderRadius.circular(25.7),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: new BorderSide(color: Colors.white),
+                                      borderRadius: new BorderRadius.circular(25.7),
+                                    ),
+                                    hintText: 'Enter the Value for the Input'
+                                ),
+                              ),
+                            ]
+                        )
                     ),
                   )
               )
@@ -86,6 +116,7 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: CustomAppBar("arrow", context),
         body:  Container(
           height: size.height,
@@ -197,7 +228,7 @@ const SKIN_CANCER_PROGNOSIS_QUESTIONS =
   "Texture SE",
 
   "Perimeter Mean",
-  "Perimeter_se",
+  "Perimeter SE",
 
   "Compactness Mean",
   "Compactness SE",
