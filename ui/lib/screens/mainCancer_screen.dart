@@ -3,6 +3,9 @@ import 'package:ui/components/cancer_card.dart'; //imports card component
 import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
+import 'package:ui/screens/prognosis/breastPrognosis_screen.dart';
+import 'package:ui/screens/prognosis/lungPrognosis_screen.dart';
+import 'package:ui/screens/prognosis/skinPrognosis_screen.dart';
 import 'package:ui/screens/selectService_screen.dart';
 
 
@@ -51,7 +54,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(cancerType: 'Skin Cancer', diagnosisRoute: SkinCancerDiagnosis(),),
+                          builder: (context) => SelectServiceScreen(cancerType: 'Skin Cancer', diagnosisRoute: SkinCancerDiagnosis(), prognosisRoute: SkinCancerPrognosis()),
                         ),
                       );
                     },
@@ -69,7 +72,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(cancerType: 'Lung Cancer', diagnosisRoute: LungCancerDiagnosis()),
+                          builder: (context) => SelectServiceScreen(cancerType: 'Lung Cancer', diagnosisRoute: LungCancerDiagnosis(), prognosisRoute: LungCancerPrognosis()),
                         ),
                       );
                     },
@@ -87,7 +90,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(cancerType: 'Breast Cancer',  diagnosisRoute: BreastCancerDiagnosis()),
+                          builder: (context) => SelectServiceScreen(cancerType: 'Breast Cancer',  diagnosisRoute: BreastCancerDiagnosis(),  prognosisRoute: BreastCancerPrognosis()),
                         ),
                       );
                     },
