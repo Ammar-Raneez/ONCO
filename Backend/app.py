@@ -1,11 +1,20 @@
 # //// MAIN BACKEND SERVER ////
 
 # Import Libraries
-import glob, os, re, sys, uuid, cv2
+import glob
+import os
+import re
+import sys
+import uuid
+
+import cv2
 import tensorflow as tf
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from pyrebase import pyrebase
-from lungDiagModule import storeGradCamImageLung, calculatePredictionPercentLung, getImageUrlLung, model_predictLung
+
+from lungDiagModule import (calculatePredictionPercentLung, getImageUrlLung,
+                            model_predictLung, storeGradCamImageLung)
+from skinDiagModule import model_predict_skin, uploadSkinImg
 
 # Defining the flask app
 app = Flask(__name__)
@@ -27,13 +36,13 @@ firebase_storage = firebase.storage()
 
 # Model paths
 LUNG_DIAGNOSIS_MODEL_PATH = "models/lungDiag.h5"
-SKIN_DIAGNOSIS_MODEL_PATH = ""
+SKIN_DIAGNOSIS_MODEL_PATH = "models/skinDiag.hdf5"
 BREAST_DIAGNOSIS_MODEL_PATH = ""
 
 # Loading all the models
-lung_diag_model = tf.keras.models.load_model('lungDiag.h5')
-skin_diag_model = tf.keras.models.load_model('')
-breast_diag_model = tf.keras.models.load_model('')
+lung_diag_model = tf.keras.models.load_model(LUNG_DIAGNOSIS_MODEL_PATH)
+skin_diag_model = tf.keras.models.load_model(SKIN_DIAGNOSIS_MODEL_PATH)
+# breast_diag_model = tf.keras.models.load_model(BREAST_DIAGNOSIS_MODEL_PATH)
 print("Loaded Models . . .")
 
 # Index route
@@ -43,7 +52,7 @@ def index():
         message = "Hello World"
     )
 
-# Index route
+# Lung Cancer Diagnosis route
 @app.route('/lung-cancer/diagnosis', methods=['GET', 'POST'])
 def lungCancerDiagnosis():
     if request.method == 'POST':
@@ -83,3 +92,52 @@ def lungCancerDiagnosis():
     
     # if not a 'POST' request we then return None
     return None 
+
+
+# Skin Cancer Diagnosis route
+@app.route('/skin-cancer/diagnosis', methods=['GET', 'POST'])
+def skinCancerDiagnosis():
+    if request.method == 'POST':
+        
+        # getting the image file
+        f = request.files['file']
+
+        # Save the file to ./uploads
+        fileName = str(uuid.uuid4())
+        file_path = "uploads/" + fileName + ".jpg"
+        print(file_path)
+        f.save(file_path)
+
+        # making prediction
+        prediction = model_predict_skin(file_path, skin_diag_model)
+        
+        # getting download image URL
+        image_download_Url = uploadSkinImg(fileName, firebase_storage, firebase)
+        
+        INDEX_TO_TYPE = {
+            0: 'Melanocytic nevi',
+            1: 'Melanoma',
+            2: 'Benign keratosis-like lesions ',
+            3: 'Basal cell carcinoma',
+            4: 'Actinic keratoses',
+            5: 'Vascular lesions',
+            6: 'Dermatofibroma'
+        }
+        
+        result_string = ""
+        for i in range(len(prediction.flat)):
+            result_string += str(round(prediction.flat[i], 2)) + f"% {INDEX_TO_TYPE[i]} \n"
+
+        # returns the result
+        return jsonify(
+            result_string = result_string,
+            imageDownloadURL = image_download_Url,
+        )
+    
+    # if not a 'POST' request we then return None
+    return None
+
+
+# Running the main application
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=80)
