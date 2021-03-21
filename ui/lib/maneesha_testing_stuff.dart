@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ui/screens/mainCancer_screen.dart';
+import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
+import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
+import 'package:ui/screens/selectService_screen.dart';
 
-// this is just a home page set to my pages to test my stuff ignore it, delete on final publish.
+
+// this is just a home page set to my pages to test my stuff ignore it and delete on final publish.
 
 void main() {
   runApp(MyApp());
@@ -12,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainCancerTypesScreen(),
+      home: SelectServiceScreen(cancerType: 'Breast Cancer', diagnosisRoute: BreastCancerDiagnosis()),
     );
   }
 }

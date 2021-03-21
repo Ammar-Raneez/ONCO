@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,6 +11,7 @@ import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:ui/services/UserDetails.dart';
 
 class LungCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -23,6 +26,9 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   File imageFile;
   Dio dio = new Dio();
   bool showSpinner = false;
+  bool showHighlightedImage = false;
+  dynamic responseBody;
+  final _firestore = FirebaseFirestore.instance;
 
   // CREATING AN ALERT
   createAlertDialog(
@@ -42,12 +48,14 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
     var selectedPicture =
+        // ignore: deprecated_member_use
         await ImagePicker.pickImage(source: ImageSource.gallery);
 
     // NOTE that 'selectedPicture' may also contain 'null' value, suppose user opens gallery and exits
     // without selecting a picture.
     setState(() {
       imageFile = selectedPicture;
+      showHighlightedImage = false;
     });
   }
 
@@ -76,27 +84,52 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
-          "http://192.168.8.100/predict",
+          "http://192.168.1.2/predict",
           data: formData,
         );
-        print(response);
+
+        // Converting the Json String into an actual Json Object
+        responseBody = json.decode(response.toString());
+
+        // Adding the response data into the database for report creation purpose
+        _firestore
+            .collection("users")
+            .doc(UserDetails.getUserData()["email"])
+            .collection("imageDetections")
+            .add({
+          "type": "lung",
+          "result": responseBody["result"],
+          "imageUrl": responseBody["imageUrl"],
+          "percentage": responseBody["percentage"],
+          'timestamp': Timestamp.now(),
+        });
+
+        // Output Results
+        // print(responseBody["result"]);
+        // print(responseBody["imageUrl"]);
+        // print(responseBody["percentage"]);
 
         // Creating fake response at the moment to create the ui functionality and stuff-----
-        // String response;
         // await Future.delayed(const Duration(seconds: 5), () {
-        //   response = "POSITIVE";
+        //   response = {
+        //     "result": "CANCER",
+        //     "imageFileName": "https://firebasestorage.googleapis.com/v0/b/onco-127df.appspot.com/o",
+        //     "percentPredict": 100.0
+        //   };
         // });
+        //
+        // print(response["result"]);
 
         // Display the spinner to indicate that its loading
         setState(() {
           showSpinner = false;
+          showHighlightedImage = true;
         });
 
         // checking if the response is not null and displaying the result
         if (response != null) {
           // Displaying the alert dialog
-          createAlertDialog(
-              context, "Diagnosis", response.toString(), 201);
+          createAlertDialog(context, "Diagnosis", responseBody["result"], 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -122,18 +155,19 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     // without capturing a picture.
     setState(() {
       imageFile = selectedPicture;
+      showHighlightedImage = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: CustomAppBar("arrow", context),
-        body: ModalProgressHUD(
-          // displaying the spinner for async tasks
-          inAsyncCall: showSpinner,
-          child: Container(
+      child: ModalProgressHUD(
+        // displaying the spinner for async tasks
+        inAsyncCall: showSpinner,
+        child: Scaffold(
+          appBar: CustomAppBar("arrow", context),
+          body: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -142,98 +176,135 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                 Expanded(
                   flex: 6,
                   child: Material(
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(70.0),
-                    ),
-                    color: Colors.white,
-
-                    // PADDING WIDGET
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          // LUNG CANCER DIAGNOSIS TEXT CONTENT
-                          Text(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // LUNG CANCER DIAGNOSIS TEXT CONTENT
+                        Container(
+                          alignment: Alignment.topLeft,
+                          padding: EdgeInsets.only(left: 20),
+                          child: Text(
                             "Lung Cancer",
                             style: kTextStyle.copyWith(
                               color: Colors.blueGrey,
                               fontSize: 25,
                             ),
                           ),
-                          Text(
+                        ),
+                        Container(
+                          alignment: Alignment.topLeft,
+                          padding: EdgeInsets.only(left: 20),
+                          child: Text(
                             "Diagnosis",
                             style: kTextStyle.copyWith(
                               color: Colors.black54,
                               fontSize: 25,
                             ),
                           ),
-                          // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: imageFile == null
-                                  ? Image.asset('images/uploadImageGrey1.png')
-                                  : Image.file(
-                                      imageFile,
-                                      width: 500,
-                                      height: 500,
-                                    ),
-                            ),
-                          ),
+                        ),
 
-                          // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RaisedButton(
-                                elevation: 3.0,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 25.0, vertical: 10.0),
-                                color: Colors.lightBlueAccent,
-                                onPressed: () {
-                                  // OPEN THE CAMERA TO CAPTURE IMAGE
-                                  _openCamera();
-                                },
-                                child: Icon(
-                                  Icons.camera_alt_rounded,
-                                  color: Colors.white,
+                        // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
+                        Expanded(
+                          child: showHighlightedImage == false
+                              ? Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: imageFile == null
+                                      ? Image.asset(
+                                          'images/uploadImageGrey1.png')
+                                      : Image.file(
+                                          imageFile,
+                                          width: 500,
+                                          height: 500,
+                                        ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: FadeInImage.assetNetwork(
+                                    placeholder: 'images/loading.gif',
+                                    image: responseBody["imageUrl"],
+                                  ),
                                 ),
+                        ),
+
+                        // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RaisedButton(
+                              elevation: 3.0,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 25.0, vertical: 10.0),
+                              color: Colors.lightBlueAccent,
+                              onPressed: () {
+                                // OPEN THE CAMERA TO CAPTURE IMAGE
+                                _openCamera();
+                              },
+                              child: Icon(
+                                Icons.camera_alt_rounded,
+                                color: Colors.white,
                               ),
-                              SizedBox(
-                                width: 20.0,
+                            ),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            RaisedButton(
+                              elevation: 3.0,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 25.0, vertical: 10.0),
+                              color: Colors.lightBlueAccent,
+                              onPressed: () {
+                                // OPEN GALLERY TO SELECT AN IMAGE
+                                _openGallery();
+                              },
+                              child: Icon(
+                                Icons.photo,
+                                color: Colors.white,
                               ),
-                              RaisedButton(
-                                elevation: 3.0,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 25.0, vertical: 10.0),
-                                color: Colors.lightBlueAccent,
-                                onPressed: () {
-                                  // OPEN GALLERY TO SELECT AN IMAGE
-                                  _openGallery();
-                                },
-                                child: Icon(
-                                  Icons.photo,
-                                  color: Colors.white,
-                                ),
-                              )
-                            ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        // DETECTION BUTTON
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.blueGrey,
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20.0),
+                                topLeft: Radius.circular(20.0)),
                           ),
-                          SizedBox(
-                            height: 20.0,
+                          width: double.infinity,
+                          padding: const EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
+                          child: RawMaterialButton(
+                            fillColor: Colors.black54,
+                            child: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const <Widget>[
+                                  SizedBox(
+                                    width: 10.0,
+                                    height: 30.0,
+                                  ),
+                                  Text(
+                                    "Predict",
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Poppins-Regular',
+                                        color: Colors.white
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            shape: const StadiumBorder(),
+                            onPressed: () {_detect();},
                           ),
-                          // DETECTION BUTTON
-                          RoundedButton(
-                            onPressed: () {
-                              // IMPLEMENT THE DETECT LUNG CANCER FUNCTIONALITY
-                              _detect();
-                            },
-                            colour: Colors.redAccent,
-                            title: 'DETECT',
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

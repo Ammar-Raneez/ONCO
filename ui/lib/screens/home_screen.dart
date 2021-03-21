@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:ui/components/homepage_card.dart';
-import 'package:ui/screens/personalManager_screen.dart';
+
+import 'Personal Manager/personalManager_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
