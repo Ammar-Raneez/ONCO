@@ -2,6 +2,7 @@ import sys
 import os
 import glob
 import re
+import logging
 
 # scriptpath = os.path.abspath(__file__)
 # scriptdir = os.path.dirname(scriptpath)
@@ -19,6 +20,3 @@ def model_predict(image_path, model):
 def upload(image_path, which_model):        
     prediction = model_predict(image_path, which_model)
     return prediction
-
-# if __name__ == '__main__':
-#     upload(sys.argv[1], sys.argv[2])
