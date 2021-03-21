@@ -71,9 +71,9 @@ def uploadSkinImg(imageName):
     
     # get the downloadable url and return it
     auth = firebase.auth()
-    email = "onconashml@gmail.com"
-    password = "onconashml12345"
-    user = auth.sign_in_with_email_and_password(email, password)
+    e = "onconashml@gmail.com"
+    p = "onconashml12345"
+    user = auth.sign_in_with_email_and_password(e, p)
     url = firebase_storage.child(folderName + "/" + fileName).get_url(user["idToken"])
     print(url)
     return url
@@ -133,7 +133,3 @@ def upload():
 # ### Running the main application
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
-
-
-
-

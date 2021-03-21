@@ -200,9 +200,9 @@ def calculatePredictionPercent(image_path):
 # ### Get image download URL based on the image file name
 def getImageUrl(imagePathName):
     auth = firebase.auth()
-    email = "onconashml@gmail.com"
-    password = "onconashml12345"
-    user = auth.sign_in_with_email_and_password(email, password)
+    e = "onconashml@gmail.com"
+    p = "onconashml12345"
+    user = auth.sign_in_with_email_and_password(e, p)
     url = firebase_storage.child(imagePathName).get_url(user["idToken"])
     print(url)
     return url
@@ -222,14 +222,14 @@ def upload():
         f.save(file_path)
 
         # Storing the image into firebase
-        image_fileName = storeGradCamImage(file_path);
+        image_fileName = storeGradCamImage(file_path)
         print("Storing image into firebase . . .")
         
         # Getting the prediction percentage value
         prediction_percentage = calculatePredictionPercent(file_path)
         
         # Getting the superimposed image download URL link
-        image_download_Url = getImageUrl(image_fileName);
+        image_download_Url = getImageUrl(image_fileName)
         
         # Make prediction
         prediction = model_predict(file_path, model)
@@ -254,6 +254,3 @@ def upload():
 # ### Running the main application
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
-
-  
-
