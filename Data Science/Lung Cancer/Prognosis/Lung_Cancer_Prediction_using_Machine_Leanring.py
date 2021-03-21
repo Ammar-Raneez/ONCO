@@ -42,13 +42,13 @@ for index in range(len(dataset.columns)):
 # In[118]:
 
 
-dataset.shape    # 1000 rows and 25 columns (rows, columns)
+x = dataset.shape    # 1000 rows and 25 columns (rows, columns)
 
 
 # In[119]:
 
 
-dataset.isnull().sum()    # checking for Null values
+x = dataset.isnull().sum()    # checking for Null values
 # There are no null values present
 
 
@@ -462,7 +462,7 @@ new_test = [[44,5.2,5.5,5.5,5.5,5.5,5.3,1.3,1.3,1.3,5.6,1.6,1.6,1.8,5.8,1.7,1.7,
 # In[167]:
 
 
-loadedModel.predict(new_test)[0]
+x = loadedModel.predict(new_test)[0]
 
 
 # In[ ]:
