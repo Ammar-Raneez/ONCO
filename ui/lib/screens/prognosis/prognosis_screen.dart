@@ -1,41 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 
-void main() {
-  runApp(MyApp());
-}
+class CancerPrognosis extends StatefulWidget {
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: SkinCancerPrognosis(),
-    );
+  String cancerType;
+  var cancerPrognosisAttributes;
+
+  CancerPrognosis(String cancerType)
+  {
+    this.cancerType = cancerType;
+
+    if (cancerType == "Breast Cancer")
+      cancerPrognosisAttributes = BREAST_CANCER_PROGNOSIS_QUESTIONS;
+    else if (cancerType == "Lung Cancer")
+      cancerPrognosisAttributes = LUNG_CANCER_PROGNOSIS_QUESTIONS;
+    else if (cancerType == "Skin Cancer")
+      cancerPrognosisAttributes = SKIN_CANCER_PROGNOSIS_QUESTIONS;
   }
-}
 
-class SkinCancerPrognosis extends StatefulWidget {
   @override
-  _SkinCancerPrognosisState createState() => _SkinCancerPrognosisState();
+  _CancerPrognosisState createState() => _CancerPrognosisState(cancerType, cancerPrognosisAttributes);
 }
 
-class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
+class _CancerPrognosisState extends State<CancerPrognosis> {
+
   ScrollController controller = ScrollController();
   bool closeTopContainer = false;
   double topContainer = 0;
-
   List<Widget> itemsData = [];
+  String cancerType;
+  var cancerPrognosisAttributes;
+
+  _CancerPrognosisState(String cancerType, var cancerPrognosisAttributes)
+  {
+    this.cancerType = cancerType;
+    this.cancerPrognosisAttributes = cancerPrognosisAttributes;
+  }
 
   void getPostsData() {
-    List<dynamic> responseList = SKIN_CANCER_PROGNOSIS_QUESTIONS;
+    List<dynamic> responseList = cancerPrognosisAttributes;
     List<Widget> listItems = [];
     responseList.forEach((post) {
       listItems.add(
@@ -102,7 +106,7 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
     super.initState();
     getPostsData();
     controller.addListener(() {
-      double value = controller.offset / 119;
+      double value = controller.offset / 150;
 
       setState(() {
         topContainer = value;
@@ -126,7 +130,7 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
                 alignment: Alignment.topLeft,
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
-                  "Skin Cancer",
+                  cancerType,
                   style: kTextStyle.copyWith(
                     color: Colors.blueGrey,
                     fontSize: 25,
@@ -218,40 +222,3 @@ class _SkinCancerPrognosisState extends State<SkinCancerPrognosis> {
     );
   }
 }
-
-const SKIN_CANCER_PROGNOSIS_QUESTIONS =
-[
-  "Radius Mean",
-  "Radius SE",
-
-  "Texture Mean",
-  "Texture SE",
-
-  "Perimeter Mean",
-  "Perimeter SE",
-
-  "Compactness Mean",
-  "Compactness SE",
-  "Compactness Worst",
-
-  "Concavity Mean",
-  "Concavity SE",
-  "Concavity Worst",
-
-  "Points Mean",
-  "Points Worst",
-
-  "Concave",
-  "Concave Points SE",
-
-  "Fractal Dimension Mean",
-  "Fractal Dimension SE",
-  "Fractal Dimension Worst",
-
-  "Symmetry SE",
-  "Symmetry Worst",
-
-  "Tumor Size",
-
-  "Positive Axillary Lymph Node"
-];
