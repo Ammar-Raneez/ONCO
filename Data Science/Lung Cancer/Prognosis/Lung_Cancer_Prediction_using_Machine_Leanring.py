@@ -1,6 +1,5 @@
 
 # # **Lung Cancer Prediction using Machine Leanring**
-
 # ### **Importing the Libraries**
 
 import matplotlib.pyplot as plt  # used for plotting data
@@ -14,7 +13,6 @@ dataset = pd.read_csv("LungDataSet.csv")
 # ### **Exploring the data**
 
 dataset.head(10)
-
 
 print("Number of columns: "+str(len(dataset.columns)))
 print("\nThe list of available column names:")
@@ -52,7 +50,6 @@ print("The max value for Snoring is '",dataset['Snoring'].max(),"' and the min v
 
 
 # ### **Creating the dependent and independent variables with their labels**
-
 from sklearn.model_selection import KFold, cross_val_score, train_test_split
 
 X = dataset.drop(['Level','Patient Id'], axis=1)

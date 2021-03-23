@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui/GoogleUserSignInDetails.dart';
+import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
