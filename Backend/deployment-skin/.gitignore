@@ -4,6 +4,7 @@ csx
 .vs
 edge
 Publish
+modelDeployment/skin_model.hdf5
 
 *.user
 *.suo
