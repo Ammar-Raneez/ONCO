@@ -1,4 +1,10 @@
-import glob, os, re, sys, uuid, cv2
+import glob
+import os
+import re
+import sys
+import uuid
+
+import cv2
 import matplotlib.cm as cm
 import numpy as np
 import tensorflow as tf
@@ -144,9 +150,9 @@ def calculatePredictionPercentLung(image_path, model):
 # Get image download URL based on the image file name
 def getImageUrlLung(imagePathName, firebase, firebase_storage):
     auth = firebase.auth()
-    email = "onconashml@gmail.com"
-    password = "onconashml12345"
-    user = auth.sign_in_with_email_and_password(email, password)
+    e = "onconashml@gmail.com"
+    p = "onconashml12345"
+    user = auth.sign_in_with_email_and_password(e, p)
     url = firebase_storage.child(imagePathName).get_url(user["idToken"])
     print(url)
     return url

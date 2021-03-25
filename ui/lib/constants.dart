@@ -41,3 +41,62 @@ const kTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'Poppins-Regular',
 );
+
+const SKIN_CANCER_PROGNOSIS_QUESTIONS =
+[
+
+];
+
+const LUNG_CANCER_PROGNOSIS_QUESTIONS =
+[
+  "Age",
+  "Gender",
+  "Air Pollution",
+  "Alcohol use",
+  "Dust Allergy",
+  "Occupational Hazards",
+  "Genetic Risk",
+  "Chronic Lung Disease",
+  "Balanced Diet",
+  "Obesity",
+  "Smoking",
+  "Passive Smoker",
+  "Chest Pain",
+  "Coughing of Blood",
+  "Fatigue",
+  "Weight Loss",
+  'Shortness of Breath',
+  "Wheezing",
+  "Swallowing Difficulty",
+  "Clubbing of Finger Nails",
+  "Frequent Cold",
+  "Dry Cough",
+  "Snoring",
+];
+
+const BREAST_CANCER_PROGNOSIS_QUESTIONS =
+[
+  "Radius Mean",
+  "Radius SE",
+  "Texture Mean",
+  "Texture SE",
+  "Perimeter Mean",
+  "Perimeter_se",
+  "Compactness Mean",
+  "Compactness SE",
+  "Compactness Worst",
+  "Concavity Mean",
+  "Concavity SE",
+  "Concavity Worst",
+  "Points Mean",
+  "Points Worst",
+  "Concave",
+  "Concave Points SE",
+  "Fractal Dimension Mean",
+  "Fractal Dimension SE",
+  "Fractal Dimension Worst",
+  "Symmetry SE",
+  "Symmetry Worst",
+  "Tumor Size",
+  "Positive Axillary Lymph Node"
+];

@@ -65,14 +65,14 @@ def lungCancerDiagnosis():
         f.save(file_path)
 
         # Storing the image into firebase
-        image_fileName = storeGradCamImageLung(file_path, lung_diag_model, firebase_storage);
+        image_fileName = storeGradCamImageLung(file_path, lung_diag_model, firebase_storage)
         print("Storing image into firebase . . .")
         
         # Getting the prediction percentage value
         prediction_percentage = calculatePredictionPercentLung(file_path, lung_diag_model)
         
         # Getting the superimposed image download URL link
-        image_download_Url = getImageUrlLung(image_fileName, firebase, firebase_storage);
+        image_download_Url = getImageUrlLung(image_fileName, firebase, firebase_storage)
         
         # Make prediction
         prediction = model_predictLung(file_path, lung_diag_model)

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/GoogleUserSignInDetails.dart';
+import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/chatbot_message_bubble.dart';
 import 'package:ui/constants.dart';

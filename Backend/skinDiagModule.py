@@ -1,5 +1,6 @@
-import cv2 
+import cv2
 import numpy as np
+
 
 def load_img_data(size, image_path):   
         img_height, img_width = size, size
@@ -29,9 +30,9 @@ def uploadSkinImg(imageName, firebase_storage, firebase):
     
     # get the downloadable url and return it
     auth = firebase.auth()
-    email = "onconashml@gmail.com"
-    password = "onconashml12345"
-    user = auth.sign_in_with_email_and_password(email, password)
+    e = "onconashml@gmail.com"
+    p = "onconashml12345"
+    user = auth.sign_in_with_email_and_password(e, p)
     url = firebase_storage.child(folderName + "/" + fileName).get_url(user["idToken"])
     print(url)
     return url
