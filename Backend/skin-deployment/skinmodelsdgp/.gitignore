@@ -4,7 +4,6 @@ csx
 .vs
 edge
 Publish
-modelDeployment/skin_model.hdf5
 
 *.user
 *.suo
@@ -42,3 +41,5 @@ venv.bak/
 __pycache__/
 *.py[cod]
 *$py.class
+
+skinmodelsdgp/skin_model.hdf5

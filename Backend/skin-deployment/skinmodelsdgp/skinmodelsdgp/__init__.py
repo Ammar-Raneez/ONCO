@@ -5,7 +5,7 @@ import json
 from .app import upload, get_firebase_image
 from azure.storage.blob import BlobServiceClient, BlobClient
 from pyrebase import pyrebase
-# import uuid
+import uuid
 
 # Initializing Firebase App
 firebase_config = {
@@ -30,9 +30,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     #fetching the file passed in through form data
     fetched_file = req.files['file']
-    filename = fetched_file.filename
     # make a unique filename, to avoid replacement upon same name uploads
-    # filename = str(uuid.uuid4()) + ".jpg"
+    filename = str(uuid.uuid4()) + ".jpg"
     #converting the file into a byte stream
     filestream = fetched_file.stream
     filestream.seek(0)
@@ -40,7 +39,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # save image to azure storage blob
     #wrap inside try and catch to prevent errors thrown upon same image trying to be saved
     try:
-        blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=modeldeployment;AccountKey=1YZ2Ziv4zRggyRKeb9swXkznHPhdD0qIEOuV99PCTiiq9e17DDvBWnbywgZImYtOIJCO14JYNO3YmUHOGW2tFg==", container_name="images", blob_name=filename)
+        blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=skinmodelsdgp;AccountKey=WugXQYizUnx2W7Apf/RQV0wVtV29nI2GhG1ZiD3SsryK887JvGj/N0zJZIy0cgOwWRNAy3ggdLCRE0X8vUN2Cg==", container_name="images", blob_name=filename)
         blob.upload_blob(filestream.read(), blob_type="BlockBlob")
     except:                                                                                                                                                                          
         pass

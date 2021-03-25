@@ -35,6 +35,7 @@ wasabi==0.7.1
 watchdog==1.0.2
 wcwidth==0.2.5
 webencodings==0.5.1
+Werkzeug==1.0.1
 whitenoise==5.1.0
 widgetsnbextension==3.5.1
 wrapt==1.12.1
