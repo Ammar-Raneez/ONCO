@@ -8,20 +8,18 @@ import matplotlib.cm as cm
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
+from PIL import Image
 
 
 class LungDiagModule:
-    def _get_img_array(self, img_stream, size):
-        # `img` is a PIL image of size 299x299
-        img = keras.preprocessing.image.load_img(img_stream, target_size=size)
-        # `array` is a float32 Numpy array of shape (299, 299, 3)
-        array = keras.preprocessing.image.img_to_array(img)
-        # We add a dimension to transform our array into a "batch"
-        # of size (1, 299, 299, 3)
-        array = np.expand_dims(array, axis=0)
-        return array
+    def get_img_array(self, image_array, size):
+        #this is to decode the numpy byte array, and also make it a 3 channel array (224, 224, 3)
+        img_array = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+        new_array = cv2.resize(img_array, (size, size), 3)
+        new_array = new_array.reshape(1, 224, 224, 3)
+        return new_array
 
-    def _make_gradcam_heatmap(
+    def make_gradcam_heatmap(
         self, img_array, model, last_conv_layer_name, classifier_layer_names
     ):
         # First, we create a model that maps the input image to the activations
@@ -72,9 +70,8 @@ class LungDiagModule:
         return heatmap
 
     # Storing the Visualized GradCAM image to firebase storage
-    def store_gramcam_image(self, image_stream, model, firebase_storage):
-
-        img_size = (224, 224)
+    def store_gramcam_image(self, image_stream, image_array, model, firebase_storage):
+        img_size = 224
         preprocess_input = keras.applications.xception.preprocess_input
         decode_predictions = keras.applications.xception.decode_predictions
 
@@ -85,16 +82,16 @@ class LungDiagModule:
         ]
 
         # Prepare image
-        img_array = preprocess_input(_get_img_array(image_stream, size=img_size))
+        img_array = preprocess_input(self.get_img_array(image_array, size=img_size))
         
         # Generate class activation heatmap
-        heatmap = _make_gradcam_heatmap(
+        heatmap = self.make_gradcam_heatmap(
             img_array, model, last_conv_layer_name, classifier_layer_names
         )
 
-        # We load the original image
-        img = keras.preprocessing.image.load_img(image_stream)
-        img = keras.preprocessing.image.img_to_array(img)
+        # We load the original image, to superimpose over
+        img = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+        img = cv2.resize(img, (img_size, img_size), 3)
         
         # We rescale heatmap to a range 0-255
         heatmap = np.uint8(255 * heatmap)
@@ -114,21 +111,18 @@ class LungDiagModule:
         # Superimpose the heatmap on original image
         superimposed_img = jet_heatmap * 0.4 + img
         superimposed_img = keras.preprocessing.image.array_to_img(superimposed_img)
-        
         # Save the superimposed image to firebase cloud storage
         extension = ".jpg"
         generateImageName = str(uuid.uuid4())
         fileName = generateImageName + extension
+        superimposed_img.save(fileName)
 
         # storing the image from local path to the firebase cloud storage
-        firebase_storage.child("superimposed-lung-image-uploads/" + fileName).put(image_stream)
+        firebase_storage.child("superimposed-lung-image-uploads/" + fileName).put(superimposed_img)
 
     # Predict using the model
     def model_predict_lung(self, image_array, model):
-        IMG_SIZE = 224
-        #this is to decode the byte array, and also make it a 3 channel array (224, 224, 3)
-        img_array = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
-        new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE), 3)
-        new_array = new_array.reshape(1, 224, 224, 3)
-        prediction = model.predict([new_array])
+        img_size = 224
+        img_array = self.get_img_array(image_array, img_size)
+        prediction = model.predict([img_array])
         return prediction

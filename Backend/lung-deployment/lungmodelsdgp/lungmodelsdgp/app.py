@@ -11,9 +11,9 @@ scriptdir = os.path.dirname(scriptpath)
 LUNG_MODEL_PATH = os.path.join(scriptdir, 'lung_model.h5')
 
 # Get image download URL based on the image file name
-def get_firebase_image(image_name, image_stream, firebase_storage, firebase):
+def get_firebase_image(image_name, image_stream, image_array, firebase_storage, firebase):
     lung_model = tf.keras.models.load_model(LUNG_MODEL_PATH)
-    lungDiagModule.store_gramcam_image(image_stream, lung_model, firebase_storage)
+    lungDiagModule.store_gramcam_image(image_stream, image_array, lung_model, firebase_storage)
 
     auth = firebase.auth()
     e = "onconashml@gmail.com"
