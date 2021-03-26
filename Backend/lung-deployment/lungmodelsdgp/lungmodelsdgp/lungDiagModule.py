@@ -19,9 +19,7 @@ class LungDiagModule:
         new_array = new_array.reshape(1, 224, 224, 3)
         return new_array
 
-    def make_gradcam_heatmap(
-        self, img_array, model, last_conv_layer_name, classifier_layer_names
-    ):
+    def make_gradcam_heatmap(self, img_array, model, last_conv_layer_name, classifier_layer_names):
         # First, we create a model that maps the input image to the activations
         # of the last conv layer
         last_conv_layer = model.get_layer(last_conv_layer_name)
@@ -111,10 +109,11 @@ class LungDiagModule:
         # Superimpose the heatmap on original image
         superimposed_img = jet_heatmap * 0.4 + img
         superimposed_img = keras.preprocessing.image.array_to_img(superimposed_img)
-        # Save the superimposed image to firebase cloud storage
+
         extension = ".jpg"
         generateImageName = str(uuid.uuid4())
         fileName = generateImageName + extension
+        # local storage
         superimposed_img.save(fileName)
 
         # storing the image from local path to the firebase cloud storage
