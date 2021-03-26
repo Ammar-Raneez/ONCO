@@ -126,6 +126,7 @@ class LungDiagModule:
     # Predict using the model
     def model_predict_lung(self, image_array, model):
         IMG_SIZE = 224
+        #this is to decode the byte array, and also make it a 3 channel array (224, 224, 3)
         img_array = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
         new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE), 3)
         new_array = new_array.reshape(1, 224, 224, 3)
