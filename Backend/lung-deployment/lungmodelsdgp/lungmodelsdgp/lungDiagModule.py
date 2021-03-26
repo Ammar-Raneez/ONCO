@@ -7,7 +7,6 @@ import cv2
 import matplotlib.cm as cm
 import numpy as np
 import tensorflow as tf
-from tensorflow import keras
 from PIL import Image
 
 
@@ -23,15 +22,15 @@ class LungDiagModule:
         # First, we create a model that maps the input image to the activations
         # of the last conv layer
         last_conv_layer = model.get_layer(last_conv_layer_name)
-        last_conv_layer_model = keras.Model(model.inputs, last_conv_layer.output)
+        last_conv_layer_model = tf.keras.Model(model.inputs, last_conv_layer.output)
 
         # Second, we create a model that maps the activations of the last conv
         # layer to the final class predictions
-        classifier_input = keras.Input(shape=last_conv_layer.output.shape[1:])
+        classifier_input = tf.keras.Input(shape=last_conv_layer.output.shape[1:])
         x = classifier_input
         for layer_name in classifier_layer_names:
             x = model.get_layer(layer_name)(x)
-        classifier_model = keras.Model(classifier_input, x)
+        classifier_model = tf.keras.Model(classifier_input, x)
 
         # Then, we compute the gradient of the top predicted class for our input image
         # with respect to the activations of the last conv layer
@@ -70,8 +69,8 @@ class LungDiagModule:
     # Storing the Visualized GradCAM image to firebase storage
     def store_gramcam_image(self, image_stream, image_array, model, firebase_storage):
         img_size = 224
-        preprocess_input = keras.applications.xception.preprocess_input
-        decode_predictions = keras.applications.xception.decode_predictions
+        preprocess_input = tf.keras.applications.xception.preprocess_input
+        decode_predictions = tf.keras.applications.xception.decode_predictions
 
         last_conv_layer_name = "block5_pool"
         classifier_layer_names = [
@@ -102,13 +101,13 @@ class LungDiagModule:
         jet_heatmap = jet_colors[heatmap]
         
         # We create an image with RGB colorized heatmap
-        jet_heatmap = keras.preprocessing.image.array_to_img(jet_heatmap)
+        jet_heatmap = tf.keras.preprocessing.image.array_to_img(jet_heatmap)
         jet_heatmap = jet_heatmap.resize((img.shape[1], img.shape[0]))
-        jet_heatmap = keras.preprocessing.image.img_to_array(jet_heatmap)
+        jet_heatmap = tf.keras.preprocessing.image.img_to_array(jet_heatmap)
 
         # Superimpose the heatmap on original image
         superimposed_img = jet_heatmap * 0.4 + img
-        superimposed_img = keras.preprocessing.image.array_to_img(superimposed_img)
+        superimposed_img = tf.keras.preprocessing.image.array_to_img(superimposed_img)
 
         extension = ".jpg"
         generateImageName = str(uuid.uuid4())
