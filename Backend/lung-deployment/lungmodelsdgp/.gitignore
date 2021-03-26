@@ -4,6 +4,7 @@ csx
 .vs
 edge
 Publish
+lungmodelsdgp/lung_model.h5
 
 *.user
 *.suo
