@@ -1,6 +1,7 @@
 import glob
 import os
 import sys
+import logging
 import uuid
 import cv2
 import matplotlib.cm as cm
@@ -10,7 +11,7 @@ from tensorflow import keras
 
 
 class LungDiagModule:
-    def get_img_array(self, img_stream, size):
+    def _get_img_array(self, img_stream, size):
         # `img` is a PIL image of size 299x299
         img = keras.preprocessing.image.load_img(img_stream, target_size=size)
         # `array` is a float32 Numpy array of shape (299, 299, 3)
@@ -20,7 +21,7 @@ class LungDiagModule:
         array = np.expand_dims(array, axis=0)
         return array
 
-    def make_gradcam_heatmap(
+    def _make_gradcam_heatmap(
         self, img_array, model, last_conv_layer_name, classifier_layer_names
     ):
         # First, we create a model that maps the input image to the activations
@@ -84,10 +85,10 @@ class LungDiagModule:
         ]
 
         # Prepare image
-        img_array = preprocess_input(get_img_array(image_stream, size=img_size))
+        img_array = preprocess_input(_get_img_array(image_stream, size=img_size))
         
         # Generate class activation heatmap
-        heatmap = make_gradcam_heatmap(
+        heatmap = _make_gradcam_heatmap(
             img_array, model, last_conv_layer_name, classifier_layer_names
         )
 
@@ -118,16 +119,16 @@ class LungDiagModule:
         extension = ".jpg"
         generateImageName = str(uuid.uuid4())
         fileName = generateImageName + extension
-        folderName = "superimposed-lung"
 
         # storing the image from local path to the firebase cloud storage
-        firebase_storage.child(folderName + "/" + fileName).put(save_local_path)
+        firebase_storage.child("superimposed-lung-image-uploads/" + fileName).put(image_stream)
 
     # Predict using the model
-    def model_predict_lung(self, image_stream, model):
+    def model_predict_lung(self, image_array, model):
         IMG_SIZE = 224
         img_array = cv2.imdecode(image_array, cv2.IMREAD_UNCHANGED)
         new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE), 3)
+        logging.info(new_array.shape)
         new_array = new_array.reshape(1, 224, 224, 3)
         prediction = model.predict([new_array])
         return prediction
