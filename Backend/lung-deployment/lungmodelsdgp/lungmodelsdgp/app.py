@@ -1,13 +1,13 @@
 import os
 import logging
 import tensorflow as tf
-from .skinDiagModule import SkinDiagModule
+from .lungDiagModule import LungDiagModule
 
-skinDiagModule = SkinDiagModule()
+lungDiagModule = LungDiagModule()
 
 scriptpath = os.path.abspath(__file__)
 scriptdir = os.path.dirname(scriptpath)
-SKIN_MODEL_PATH = os.path.join(scriptdir, 'skin_model.hdf5')
+SKIN_MODEL_PATH = os.path.join(scriptdir, 'lung_model.hdf5')
 
 
 # upload image to firebase storage
