@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import logging
 import tensorflow as tf
 from .lungDiagModule import LungDiagModule
