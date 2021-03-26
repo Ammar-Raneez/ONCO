@@ -39,7 +39,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # save image to azure storage blob
     #wrap inside try and catch to prevent errors thrown upon same image trying to be saved
     try:
-        blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=skinmodelsdgp;AccountKey=WugXQYizUnx2W7Apf/RQV0wVtV29nI2GhG1ZiD3SsryK887JvGj/N0zJZIy0cgOwWRNAy3ggdLCRE0X8vUN2Cg==", container_name="images", blob_name=filename)
+        blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=lungmodelsdgp;AccountKey=g8El0qrc+rk/+3IvYL3ir+Mqp49Qine7j1wftVFsSp+bOlqIYr0AZ23mxtLJUgZ9elDSEuiQ1ZxrXGFcu99nyA==", container_name="images", blob_name=filename)
         blob.upload_blob(filestream.read(), blob_type="BlockBlob")
     except:                                                                                                                                                                          
         pass

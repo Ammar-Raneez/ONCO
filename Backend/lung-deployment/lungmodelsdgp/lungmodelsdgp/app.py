@@ -7,43 +7,35 @@ lungDiagModule = LungDiagModule()
 
 scriptpath = os.path.abspath(__file__)
 scriptdir = os.path.dirname(scriptpath)
-SKIN_MODEL_PATH = os.path.join(scriptdir, 'lung_model.hdf5')
+LUNG_MODEL_PATH = os.path.join(scriptdir, 'lung_model.hdf5')
 
 
-# upload image to firebase storage
-def get_firebase_image(image_name, image_stream, firebase_storage, firebase):
-    # storing the image from local path to the firebase cloud storage
-    firebase_storage.child("skin-image-uploads/" + image_name).put(image_stream)
-    
-    # get the downloadable url and return it
+# Get image download URL based on the image file name
+def get_firebase_image(self, image_name, image_stream, model, firebase, firebase_storage):
+    lungDiagModule.store_gramcam_image(image_stream, model, firebase_storage)
+
     auth = firebase.auth()
-    email = "onconashml@gmail.com"
-    password = "onconashml12345"
-    user = auth.sign_in_with_email_and_password(email, password)
+    e = "onconashml@gmail.com"
+    p = "onconashml12345"
+    user = auth.sign_in_with_email_and_password(e, p)
     url = firebase_storage.child(image_name).get_url(user["idToken"])
     return url
 
-def construct_skin_output(prediction):
-    INDEX_TO_TYPE = {
-        0: 'Melanocytic nevi',
-        1: 'Melanoma',
-        2: 'Benign keratosis-like lesions ',
-        3: 'Basal cell carcinoma',
-        4: 'Actinic keratoses',
-        5: 'Vascular lesions',
-        6: 'Dermatofibroma'
-    }
-        
-    result_string = ""
-    for i in range(len(prediction.flat)):
-        result_string += str(round(prediction.flat[i], 2)) + f"% {INDEX_TO_TYPE[i]} \n"
-    return result_string
+# Calculate Prediction Percentage
+def calculate_prediction_percent_lung(prediction):
+    return str(np.amax(prediction[0][1] * 100))
+
+def construct_lung_output(prediction):
+    CATEGORIES = ['CANCER', 'NORMAL']
+
+    # getting the prediction result from the categories
+    return CATEGORIES[int(round(prediction[0][0]))], calculate_prediction_percent_lung(prediction)
 
 def model_predict(image_array, model):
-    if model == "skin":
-        skin_model = tf.keras.models.load_model(SKIN_MODEL_PATH)
-        predictions = skinDiagModule.model_predict_skin(image_array, skin_model)
-        return construct_skin_output(predictions)
+    if model == "lung":
+        lung_model = tf.keras.models.load_model(LUNG_MODEL_PATH)
+        prediction = lungDiagModule.model_predict_lung(image_array, lung_model)
+        return construct_lung_output(prediction)
     elif model == "breast":
         return "breast"
     return "lung"

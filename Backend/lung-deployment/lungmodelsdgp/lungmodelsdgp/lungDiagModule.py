@@ -10,9 +10,9 @@ from tensorflow import keras
 
 
 class LungDiagModule:
-    def get_img_array(self, img_path, size):
+    def get_img_array(self, img_stream, size):
         # `img` is a PIL image of size 299x299
-        img = keras.preprocessing.image.load_img(img_path, target_size=size)
+        img = keras.preprocessing.image.load_img(img_stream, target_size=size)
         # `array` is a float32 Numpy array of shape (299, 299, 3)
         array = keras.preprocessing.image.img_to_array(img)
         # We add a dimension to transform our array into a "batch"
@@ -71,7 +71,7 @@ class LungDiagModule:
         return heatmap
 
     # Storing the Visualized GradCAM image to firebase storage
-    def storeGradCamImageLung(self, local_target_image_path, model, firebase_storage):
+    def store_gramcam_image(self, image_stream, model, firebase_storage):
 
         img_size = (224, 224)
         preprocess_input = keras.applications.xception.preprocess_input
@@ -83,11 +83,8 @@ class LungDiagModule:
             "dense",
         ]
 
-        # The local path to our target image
-        img_path = local_target_image_path
-
         # Prepare image
-        img_array = preprocess_input(get_img_array(img_path, size=img_size))
+        img_array = preprocess_input(get_img_array(image_stream, size=img_size))
         
         # Generate class activation heatmap
         heatmap = make_gradcam_heatmap(
@@ -95,7 +92,7 @@ class LungDiagModule:
         )
 
         # We load the original image
-        img = keras.preprocessing.image.load_img(img_path)
+        img = keras.preprocessing.image.load_img(image_stream)
         img = keras.preprocessing.image.img_to_array(img)
         
         # We rescale heatmap to a range 0-255
@@ -121,38 +118,16 @@ class LungDiagModule:
         extension = ".jpg"
         generateImageName = str(uuid.uuid4())
         fileName = generateImageName + extension
-        folderName = "superimposedImages"
-        save_local_path = "superimposedImages/" + generateImageName + extension
-        superimposed_img.save(save_local_path)
+        folderName = "superimposed-lung"
 
         # storing the image from local path to the firebase cloud storage
         firebase_storage.child(folderName + "/" + fileName).put(save_local_path)
-        
-        # returning the file name of the image I have stored inside the firebase cloud storage
-        return save_local_path
-
 
     # Predict using the model
-    def model_predictLung(self, img_path, model):
+    def model_predict_lung(self, image_stream, model):
         IMG_SIZE = 224
-        img_array = cv2.imread(img_path)
+        img_array = cv2.imdecode(image_array, cv2.IMREAD_UNCHANGED)
         new_array = cv2.resize(img_array, (IMG_SIZE, IMG_SIZE), 3)
         new_array = new_array.reshape(1, 224, 224, 3)
         prediction = model.predict([new_array])
         return prediction
-
-    # Calculate Prediction Percentage
-    def calculatePredictionPercentLung(self, image_path, model):
-        prediction = model_predictLung(image_path, model)
-        return str(np.amax(prediction[0][1] * 100))
-
-    # Get image download URL based on the image file name
-    def getImageUrlLung(self, imagePathName, firebase, firebase_storage):
-        auth = firebase.auth()
-        e = "onconashml@gmail.com"
-        p = "onconashml12345"
-        user = auth.sign_in_with_email_and_password(e, p)
-        url = firebase_storage.child(imagePathName).get_url(user["idToken"])
-        print(url)
-        return url
-        
