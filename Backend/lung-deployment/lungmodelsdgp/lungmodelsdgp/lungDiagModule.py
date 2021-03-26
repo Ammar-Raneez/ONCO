@@ -117,7 +117,7 @@ class LungDiagModule:
         superimposed_img.save(fileName)
 
         # storing the image from local path to the firebase cloud storage
-        firebase_storage.child("superimposed-lung-image-uploads/" + fileName).put(superimposed_img)
+        firebase_storage.child("superimposed-lung-image-uploads/" + fileName).put(fileName)
 
     # Predict using the model
     def model_predict_lung(self, image_array, model):
