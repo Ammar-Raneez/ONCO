@@ -51,7 +51,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     #convert it into a numpy array, so that it can be passed into opencv
     np_blob_array = np.fromstring(blob_data_as_bytes, dtype='uint8')
     prediction, prediction_percentage = upload(np_blob_array, which_model)
-
     # getting download image URL
-    image_url = get_firebase_image(filename, filestream.read(), np_blob_array, firebase_storage, firebase)
-    return func.HttpResponse(json.dumps([{"predition": prediction, "prediction_percentage": prediction_percentage, "image_url": image_url}]), status_code = 200, headers = headers)
+    # image_url = get_firebase_image(filename, filestream.read(), np_blob_array, firebase_storage, firebase)
+    return func.HttpResponse(json.dumps([{"predition": prediction, "prediction_percentage": prediction_percentage, "image_url": "image_url"}]), status_code = 200, headers = headers)

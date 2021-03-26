@@ -22,10 +22,6 @@ def get_firebase_image(image_name, image_stream, image_array, firebase_storage, 
     url = firebase_storage.child(image_name).get_url(user["idToken"])
     return url
 
-def upload(image_array, which_model):        
-    prediction, prediction_percentage = model_predict(image_array, which_model)
-    return prediction, prediction_percentage
-
 # Calculate Prediction Percentage
 def calculate_prediction_percent_lung(prediction):
     return str(np.amax(prediction[0][1] * 100))
@@ -37,7 +33,10 @@ def construct_lung_output(prediction):
     return CATEGORIES[int(round(prediction[0][0]))], calculate_prediction_percent_lung(prediction)
 
 def model_predict(image_array, model):
-    if model == "lung":
-        lung_model = tf.keras.models.load_model(LUNG_MODEL_PATH)
-        prediction = lungDiagModule.model_predict_lung(image_array, lung_model)
-        return construct_lung_output(prediction)
+    lung_model = tf.keras.models.load_model(LUNG_MODEL_PATH)
+    prediction = lungDiagModule.model_predict_lung(image_array, lung_model)
+    return construct_lung_output(prediction)
+
+def upload(image_array, which_model):        
+    prediction, prediction_percentage = model_predict(image_array, which_model)
+    return prediction, prediction_percentage
