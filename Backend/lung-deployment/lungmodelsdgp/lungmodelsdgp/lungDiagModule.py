@@ -8,7 +8,7 @@ import matplotlib.cm as cm
 import numpy as np
 import tensorflow as tf
 from PIL import Image
-from google.cloud import storage
+# from google.cloud import storage
 
 scriptpath = os.path.abspath(__file__)
 scriptdir = os.path.dirname(scriptpath)
@@ -120,14 +120,13 @@ class LungDiagModule:
         generateImageName = str(uuid.uuid4())
         fileName = generateImageName + extension
 
-        client = storage.Client()
-        bucket = client.get_bucket("onco-127df.appspot.com")
-        blob = bucket.blob(fileName)
-        i = open(superimposed_img, 'rb')
-        blob.upload_from_file(i)
+        # client = storage.Client()
+        # bucket = client.get_bucket("onco-127df.appspot.com")
+        # blob = bucket.blob(fileName)
+        # blob.upload_from_file(img)
 
-        # storing the image from local path to the firebase cloud storage
-        # firebase_storage.child("superimposed-lung-image-uploads/" + fileName).put(fileName)
+        # superimposed_img.save(fileName)
+        firebase_storage.child("superimposed-lung-uploads/" + fileName).put(superimposed_img.tobytes())
 
     # Predict using the model
     def model_predict_lung(self, image_array, model):
