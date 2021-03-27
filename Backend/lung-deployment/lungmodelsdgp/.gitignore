@@ -5,6 +5,7 @@ csx
 edge
 Publish
 lungmodelsdgp/lung_model.h5
+lungmodelsdgp/onco-127df-ec1a1996c6e1.json
 
 *.user
 *.suo

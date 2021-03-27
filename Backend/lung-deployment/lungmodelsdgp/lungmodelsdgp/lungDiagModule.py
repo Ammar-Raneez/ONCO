@@ -8,9 +8,16 @@ import matplotlib.cm as cm
 import numpy as np
 import tensorflow as tf
 from PIL import Image
+from google.cloud import storage
 
+scriptpath = os.path.abspath(__file__)
+scriptdir = os.path.dirname(scriptpath)
+CREDENTIAL_PATH = os.path.join(scriptdir, 'onco-127df-ec1a1996c6e1.json')
 
 class LungDiagModule:
+    def __init__(self):
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=CREDENTIAL_PATH
+
     def get_img_array(self, image_array, size):
         #this is to decode the numpy byte array, and also make it a 3 channel array (224, 224, 3)
         img_array = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
@@ -112,11 +119,15 @@ class LungDiagModule:
         extension = ".jpg"
         generateImageName = str(uuid.uuid4())
         fileName = generateImageName + extension
-        # local storage
-        superimposed_img.save(fileName)
+
+        client = storage.Client()
+        bucket = client.get_bucket("onco-127df.appspot.com")
+        blob = bucket.blob(fileName)
+        i = open(superimposed_img, 'rb')
+        blob.upload_from_file(i)
 
         # storing the image from local path to the firebase cloud storage
-        firebase_storage.child("superimposed-lung-image-uploads/" + fileName).put(fileName)
+        # firebase_storage.child("superimposed-lung-image-uploads/" + fileName).put(fileName)
 
     # Predict using the model
     def model_predict_lung(self, image_array, model):
