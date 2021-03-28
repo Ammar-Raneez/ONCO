@@ -35,8 +35,8 @@ firebase = pyrebase.initialize_app(firebase_config)
 firebase_storage = firebase.storage()
 
 # Model paths
-LUNG_DIAGNOSIS_MODEL_PATH = "models/lungDiag.h5"
-SKIN_DIAGNOSIS_MODEL_PATH = "models/skinDiag.hdf5"
+LUNG_DIAGNOSIS_MODEL_PATH = "lung_model.h5"
+SKIN_DIAGNOSIS_MODEL_PATH = "skin_model.hdf5"
 BREAST_DIAGNOSIS_MODEL_PATH = ""
 
 # Loading all the models

@@ -9,20 +9,6 @@ scriptpath = os.path.abspath(__file__)
 scriptdir = os.path.dirname(scriptpath)
 SKIN_MODEL_PATH = os.path.join(scriptdir, 'skin_model.hdf5')
 
-
-# upload image to firebase storage
-def get_firebase_image(image_name, image_stream, firebase_storage, firebase):
-    # storing the image from local path to the firebase cloud storage
-    firebase_storage.child("skin-image-uploads/" + image_name).put(image_stream)
-    
-    # get the downloadable url and return it
-    auth = firebase.auth()
-    email = "onconashml@gmail.com"
-    password = "onconashml12345"
-    user = auth.sign_in_with_email_and_password(email, password)
-    url = firebase_storage.child(image_name).get_url(user["idToken"])
-    return url
-
 def construct_skin_output(prediction):
     INDEX_TO_TYPE = {
         0: 'Melanocytic nevi',
