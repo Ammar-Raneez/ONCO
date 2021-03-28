@@ -8,16 +8,12 @@ import matplotlib.cm as cm
 import numpy as np
 import tensorflow as tf
 from PIL import Image
-# from google.cloud import storage
+from azure.storage.blob import BlobServiceClient, BlobClient, ContentSettings
 
 scriptpath = os.path.abspath(__file__)
 scriptdir = os.path.dirname(scriptpath)
-CREDENTIAL_PATH = os.path.join(scriptdir, 'onco-127df-ec1a1996c6e1.json')
 
 class LungDiagModule:
-    def __init__(self):
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=CREDENTIAL_PATH
-
     def get_img_array(self, image_array, size):
         #this is to decode the numpy byte array, and also make it a 3 channel array (224, 224, 3)
         img_array = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
@@ -74,7 +70,7 @@ class LungDiagModule:
         return heatmap
 
     # Storing the Visualized GradCAM image to firebase storage
-    def store_gramcam_image(self, image_stream, image_array, model, firebase_storage):
+    def store_gramcam_image(self, image_array, model):
         img_size = 224
         preprocess_input = tf.keras.applications.xception.preprocess_input
         decode_predictions = tf.keras.applications.xception.decode_predictions
@@ -118,15 +114,26 @@ class LungDiagModule:
 
         extension = ".jpg"
         generateImageName = str(uuid.uuid4())
-        fileName = generateImageName + extension
+        filename = generateImageName + extension
+        superimposed_img.save(os.path.join(scriptdir, filename))
 
-        # client = storage.Client()
-        # bucket = client.get_bucket("onco-127df.appspot.com")
-        # blob = bucket.blob(fileName)
-        # blob.upload_from_file(img)
+        SUPERIMPOSED_IMAGE_PATH = os.path.join(scriptdir, filename)
 
-        # superimposed_img.save(fileName)
-        firebase_storage.child("superimposed-lung-uploads/" + fileName).put(superimposed_img.tobytes())
+        # save superimposed image to a different container
+        try:
+            blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=lungmodelsdgp;AccountKey=g8El0qrc+rk/+3IvYL3ir+Mqp49Qine7j1wftVFsSp+bOlqIYr0AZ23mxtLJUgZ9elDSEuiQ1ZxrXGFcu99nyA==", container_name="superimposed-images", blob_name=filename)
+            cnt_settings = ContentSettings(content_type="image/jpeg")
+
+            with open(SUPERIMPOSED_IMAGE_PATH, "rb") as f:
+                blob.upload_blob(f, blob_type="BlockBlob", content_settings=cnt_settings)
+
+            # blob.upload_blob(SUPERIMPOSED_IMAGE_PATH., blob_type="BlockBlob", content_settings=cnt_settings)
+        except:                                                                                                                                                                          
+            pass
+
+        # getting download image URL
+        image_url = f"https://lungmodelsdgp.blob.core.windows.net/superimposed-images/{filename}"
+        return image_url
 
     # Predict using the model
     def model_predict_lung(self, image_array, model):
