@@ -13,7 +13,7 @@ class SkinDiagModule:
 
             images = np.stack(images, axis=0)
             return images
-        
+
     def preprocess(self, image_array):
         return self.load_img_data(128, image_array)
 
