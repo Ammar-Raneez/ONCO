@@ -1,6 +1,5 @@
 import os
 import numpy as np
-import logging
 import tensorflow as tf
 from .lungDiagModule import LungDiagModule
 
@@ -17,7 +16,7 @@ def calculate_prediction_percent_lung(prediction):
 def construct_lung_output(prediction, image_url):
     CATEGORIES = ['CANCER', 'NORMAL']
 
-    # getting the prediction result from the categories
+    # getting the results
     return CATEGORIES[int(round(prediction[0][0]))], calculate_prediction_percent_lung(prediction), image_url
 
 def model_predict(image_array, model):

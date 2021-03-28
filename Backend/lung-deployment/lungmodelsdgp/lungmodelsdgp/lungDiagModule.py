@@ -1,17 +1,10 @@
-import glob
-import os
-import sys
-import logging
 import uuid
 import cv2
 import matplotlib.cm as cm
 import numpy as np
+import io
 import tensorflow as tf
-from PIL import Image
 from azure.storage.blob import BlobServiceClient, BlobClient, ContentSettings
-
-scriptpath = os.path.abspath(__file__)
-scriptdir = os.path.dirname(scriptpath)
 
 class LungDiagModule:
     def get_img_array(self, image_array, size):
@@ -115,19 +108,17 @@ class LungDiagModule:
         extension = ".jpg"
         generateImageName = str(uuid.uuid4())
         filename = generateImageName + extension
-        superimposed_img.save(os.path.join(scriptdir, filename))
-
-        SUPERIMPOSED_IMAGE_PATH = os.path.join(scriptdir, filename)
+        
+        temp_io_bytes = io.BytesIO()
+        # store the superimposed_img bytes in the temp variable
+        superimposed_img.save(temp_io_bytes, format="jpeg")
 
         # save superimposed image to a different container
         try:
             blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=lungmodelsdgp;AccountKey=g8El0qrc+rk/+3IvYL3ir+Mqp49Qine7j1wftVFsSp+bOlqIYr0AZ23mxtLJUgZ9elDSEuiQ1ZxrXGFcu99nyA==", container_name="superimposed-images", blob_name=filename)
             cnt_settings = ContentSettings(content_type="image/jpeg")
 
-            with open(SUPERIMPOSED_IMAGE_PATH, "rb") as f:
-                blob.upload_blob(f, blob_type="BlockBlob", content_settings=cnt_settings)
-
-            # blob.upload_blob(SUPERIMPOSED_IMAGE_PATH., blob_type="BlockBlob", content_settings=cnt_settings)
+            blob.upload_blob(temp_io_bytes.getvalue(), blob_type="BlockBlob", content_settings=cnt_settings)
         except:                                                                                                                                                                          
             pass
 
