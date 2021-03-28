@@ -2,25 +2,9 @@ import numpy as np
 import azure.functions as func
 import cv2
 import json
-from .app import upload, get_firebase_image
-from azure.storage.blob import BlobServiceClient, BlobClient
-from pyrebase import pyrebase
+from .app import upload
+from azure.storage.blob import BlobServiceClient, BlobClient, ContentSettings
 import uuid
-
-# Initializing Firebase App
-firebase_config = {
-    "apiKey": "AIzaSyCTCf6EWg_Mthy590c8JpkX5CsOdIlpEA4",
-    "authDomain": "onco-127df.firebaseapp.com",
-    "projectId": "onco-127df",
-    "databaseURL": "https://onco-127df-default-rtdb.firebaseio.com",
-    "storageBucket": "onco-127df.appspot.com",
-    "messagingSenderId": "425803825049",
-    "appId": "1:425803825049:web:3f261cd2ecf11241065d08",
-    "measurementId": "G-S3DZNYJLXT"
-}
-# firebase will store the image to be accessed in the frontend for the report generation
-firebase = pyrebase.initialize_app(firebase_config)
-firebase_storage = firebase.storage()
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     headers = {
@@ -40,7 +24,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     #wrap inside try and catch to prevent errors thrown upon same image trying to be saved
     try:
         blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=skinmodelsdgp;AccountKey=WugXQYizUnx2W7Apf/RQV0wVtV29nI2GhG1ZiD3SsryK887JvGj/N0zJZIy0cgOwWRNAy3ggdLCRE0X8vUN2Cg==", container_name="images", blob_name=filename)
-        blob.upload_blob(filestream.read(), blob_type="BlockBlob")
+        cnt_settings = ContentSettings(content_type="image/jpeg")
+        blob.upload_blob(filestream.read(), blob_type="BlockBlob", content_settings=cnt_settings)
     except:                                                                                                                                                                          
         pass
 
@@ -53,5 +38,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     prediction = upload(np_blob_array, which_model)
 
     # getting download image URL
-    image_url = get_firebase_image(filename, filestream.read(), firebase_storage, firebase)
+    image_url = f"https://skinmodelsdgp.blob.core.windows.net/images/{filename}"
+
     return func.HttpResponse(json.dumps([{"imageDownloadURL": image_url, "result_string": prediction}]), status_code = 200, headers = headers)
