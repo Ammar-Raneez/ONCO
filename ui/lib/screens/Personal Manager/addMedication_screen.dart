@@ -146,6 +146,7 @@ class _AddMedicationState extends State<AddMedication> {
                                   SizedBox(
                                     height: 11,
                                   ),
+
                                   Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -168,7 +169,8 @@ class _AddMedicationState extends State<AddMedication> {
                                           fontSize: 15,
                                           fontFamily: 'Poppins-Semibold',
                                           color:Color(0xFFE84848),
-                                        ),),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
