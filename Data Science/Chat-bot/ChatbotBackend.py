@@ -14,12 +14,11 @@ model = chatbot_functions.create_model(True)
 class ChatbotChat(Resource):
     @staticmethod
     def post():
-        username = "bro"
         parser = reqparse.RequestParser()
         parser.add_argument('UserIn')
         args = parser.parse_args()
         print(args['UserIn'])
-        chatbot_response = {'Chatbot Response' : chatbot_functions.chat( args['UserIn'], username, model)}
+        chatbot_response = {'Chatbot Response' : chatbot_functions.chat( args['UserIn'], model)}
         return chatbot_response, 200
 
 api.add_resource(ChatbotChat, '/chatbot-predict')
