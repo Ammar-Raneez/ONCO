@@ -9,7 +9,7 @@ chatbot_functions = ChatbotFunctions()
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 api = Api(app)
-model = chatbot_functions.create_model(True)
+model = chatbot_functions.create_model()
 
 class ChatbotChat(Resource):
     @staticmethod
