@@ -17,7 +17,6 @@ class ChatbotChat(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('UserIn')
         args = parser.parse_args()
-        print(args['UserIn'])
         chatbot_response = {'Chatbot Response' : chatbot_functions.chat( args['UserIn'], model)}
         return chatbot_response, 200
 
