@@ -66,7 +66,7 @@
     
         {"tag": "sc_main",
          "patterns": ["unhealable sore", "sore not healed", "waxy bump", "pearly bump", "brown scar", "crusty skin", "returning scab", 
-"mole", "brown spots", "painful lesion", "dark lesions", "bleeding sore", ],
+"mole", "brown spots", "painful lesion", "dark lesions", "bleeding sore" ],
          "responses": ["Hmm... these may be signs of skin cancer, but please do not panic. There are several types: some are harmless; some can be easily healed too! But there are several types, so to confirm I would suggest that you please upload a picture of the infected area, so that we can get a better view of it! :)"],
          "context": "sc"
         }
