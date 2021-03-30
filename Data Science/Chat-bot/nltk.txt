@@ -1,1 +1,1 @@
-wornet
+wordnet
