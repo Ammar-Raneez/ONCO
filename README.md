@@ -9,6 +9,8 @@ ONCO is an Open Source mobile platform that specializes in the diagnosis and pro
 # Tech-Stack
 * Flutter
 * Python
-* Firebase
+* Azure
 * TensorFlow | Keras | Sci-kit Learn | NLTK | TfLearn
 * Flask
+* OpenCV
+* Heroku
