@@ -107,7 +107,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
           bottomNavigationBar: CurvedNavigationBar(
             height:52,
             color: Color(0xff01CDFA),
-            backgroundColor: Color(0x00000000),
+            backgroundColor: Colors.transparent,
             index: currentIndex,
 
             // Logic for the switching of MAIN SCREENS (HOME, CANCER, CHATBOT)
