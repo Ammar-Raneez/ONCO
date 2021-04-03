@@ -96,7 +96,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                         child: TreatmentCard(cardTitle: 'Prognosis'),
                     ),
                     SizedBox(
-                      height: 46,
+                      height: 40,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -104,41 +104,46 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                           context
                         );
                       },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 20
                         ),
-                        child: Container(
-                          decoration: ShapeDecoration(
-                            gradient: LinearGradient(
-                              colors: [Color(0xFF38819c), Color(0xFF286880)],
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topRight,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18),
-                            ),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
                           ),
-                          padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                          width: 250.0,
-                          height: 65.0,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: new Icon(Icons.arrow_back, color: Colors.white,),
+                          child: Container(
+                            decoration: ShapeDecoration(
+                              gradient: LinearGradient(
+                                colors: [Color(0xFF38819c), Color(0xFF286880)],
+                                begin: Alignment.bottomLeft,
+                                end: Alignment.topRight,
                               ),
-                              SizedBox(
-                                width: 10,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
                               ),
-                              Text(
-                                "Back To Home Page",
-                                style: TextStyle(
-                                    fontSize: 17.0,
-                                    fontFamily: 'Poppins-Regular',
-                                    color: Colors.white),
-                              )
-                            ],
+                            ),
+                            padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                            width: 250.0,
+                            height: 65.0,
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: new Icon(Icons.arrow_back, color: Colors.white,),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Back To Home Page",
+                                  style: TextStyle(
+                                      fontSize: 17.0,
+                                      fontFamily: 'Poppins-Regular',
+                                      color: Colors.white),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
