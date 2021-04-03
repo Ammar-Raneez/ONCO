@@ -58,8 +58,8 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                         cardTitle: 'Skin Cancer',
-                        cardColor: '0xFFC6E7EE',
-                        textColor: '0xFF63888F'),
+                        cardColor: '0xFFe0a75c',
+                        textColor: '0xFFFFFFFF'),
                   ),
                   //generates a cancer card with text passed.
                   SizedBox(
@@ -76,7 +76,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                       cardTitle: 'Lung Cancer',
-                      cardColor: '0xFFABD8E2',
+                      cardColor: '0xFF5cade0',
                       textColor: '0xFFFFFFFF',
                     ),
                   ),
@@ -94,7 +94,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                       cardTitle: 'Breast Cancer',
-                      cardColor: '0xFF7EB9C7',
+                      cardColor: '0xFF9c5ce0',
                       textColor: '0xFFFFFFFF',
                     ),
                   ),
