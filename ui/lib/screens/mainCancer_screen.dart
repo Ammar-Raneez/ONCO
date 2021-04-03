@@ -30,8 +30,8 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
           child: Container(
             padding: EdgeInsets.only(
               //* might need to change when adding top row and nav
-              left: 33.0,
-              right: 36.0,
+              left: 22,
+              right: 22,
             ),
             child: Center(
               child: Column(
@@ -40,7 +40,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     'Prognosis & Diagnosis of Cancers',
                     style: TextStyle(
                       fontFamily: 'Poppins-SemiBold',
-                      fontSize: 27.0,
+                      fontSize: 24,
                       color: Color(0xFF373737),
                     ),
                   ),
@@ -63,7 +63,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                   ),
                   //generates a cancer card with text passed.
                   SizedBox(
-                    height: 15,
+                    height: 6,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -81,7 +81,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 12,
+                    height: 6,
                   ),
                   GestureDetector(
                     onTap: () {
