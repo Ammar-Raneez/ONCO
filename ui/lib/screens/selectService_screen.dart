@@ -6,6 +6,7 @@ import 'package:ui/components/treatment_card.dart';
 import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
+import 'package:ui/screens/home_screen.dart';
 import 'package:ui/screens/mainCancer_screen.dart';
 import 'diagnosis/skinDiagnosis_screen.dart';
 
@@ -34,8 +35,8 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
             child: SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(
-                  left: 33.0,
-                  right: 36.0,
+                  left: 22.0,
+                  right: 22,
                 ),
                 child: Center(
                   child: Column(children: [
@@ -99,11 +100,8 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MainCancerTypesScreen(),
-                          ),
+                        Navigator.pop(
+                          context
                         );
                       },
                       child: Card(
@@ -113,12 +111,12 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                         child: Container(
                           decoration: ShapeDecoration(
                             gradient: LinearGradient(
-                              colors: [Color(0xFF01D1FF), Color(0xFF006377)],
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
+                              colors: [Color(0xFF38819c), Color(0xFF286880)],
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight,
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
+                              borderRadius: BorderRadius.circular(18),
                             ),
                           ),
                           padding: EdgeInsets.only(left: 10.0, right: 10.0),
@@ -126,9 +124,12 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                           height: 65.0,
                           child: Row(
                             children: [
-                              new Icon(Icons.arrow_back),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: new Icon(Icons.arrow_back, color: Colors.white,),
+                              ),
                               SizedBox(
-                                width: 25,
+                                width: 10,
                               ),
                               Text(
                                 "Back To Home Page",
