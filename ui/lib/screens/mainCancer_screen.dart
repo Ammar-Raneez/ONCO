@@ -101,7 +101,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                       cardTitle: 'Breast Cancer',
-                      cardColor: '0xFFf57ae9',
+                      cardColor: '0xFFe34f94',
                       textColor: '0xFFFFFFFF',
                     ),
                   ),
