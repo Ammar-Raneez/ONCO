@@ -32,16 +32,23 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
               //* might need to change when adding top row and nav
               left: 22,
               right: 22,
+              bottom: 20
             ),
             child: Center(
               child: Column(
                 children: [
-                  Text(
-                    'Prognosis & Diagnosis of Cancers',
-                    style: TextStyle(
-                      fontFamily: 'Poppins-SemiBold',
-                      fontSize: 24,
-                      color: Color(0xFF373737),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 5,
+                      bottom: 15
+                    ),
+                    child: Text(
+                      'Prognosis & Diagnosis of Cancers',
+                      style: TextStyle(
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 24,
+                        color: Color(0xFF373737),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -94,7 +101,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                       cardTitle: 'Breast Cancer',
-                      cardColor: '0xFF9c5ce0',
+                      cardColor: '0xFFf57ae9',
                       textColor: '0xFFFFFFFF',
                     ),
                   ),

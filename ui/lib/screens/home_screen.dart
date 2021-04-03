@@ -131,10 +131,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             )
                         ),
                         Container(
-                            child: HomeCard(cardTitle: 'Exercise Plan', cardColor: '0xFF4ad4b1', textColor: '0xFFFFFFFF', )
+                            child: HomeCard(cardTitle: 'Exercise Plan', cardColor: '0xFFa4d44a', textColor: '0xFFFFFFFF', )
                         ),
                         Container(
-                            child: HomeCard(cardTitle: 'Meal Plan', cardColor: '0xFFa4d44a', textColor: '0xFFFFFFFF', )
+                            child: HomeCard(cardTitle: 'Meal Plan', cardColor: '0xFF4ad4b1', textColor: '0xFFFFFFFF', )
                         ),
                       ]
               ),

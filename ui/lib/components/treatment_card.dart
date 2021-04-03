@@ -17,11 +17,11 @@ class TreatmentCard extends StatelessWidget {
             colors: [Color(0xFFC6E7EE), Color(0xFF637477)],
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
-          ), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0),),
+          ), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18),),
         ),
-        padding: EdgeInsets.only(top: 120.0, left: 20.0),
+        padding: EdgeInsets.only(top: 100, left: 25),
         width: 322.0,
-        height: 164.0,
+        height: 150,
         child: Text(
           cardTitle,
           style: TextStyle(
