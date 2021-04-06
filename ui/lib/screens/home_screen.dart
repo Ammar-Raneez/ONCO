@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   alignment: Alignment.topLeft,
                   child:Container(
                     child: Text(
-                      'Hello, ${username.toString()}!',
+                      'Hello,\n${username.toString()}!',
                       style: TextStyle(
                         fontFamily: 'Poppins-SemiBold',
                         fontSize: 27.0,
@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               SizedBox(
-                height: 2,
+                height: 15,
               ),
 
               Padding(
@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               Expanded(
                 child: Padding(
