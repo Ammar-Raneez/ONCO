@@ -8,7 +8,7 @@ class Utils {
       Scaffold.of(context)
         ..removeCurrentSnackBar()
         ..showSnackBar(SnackBar(content: Text(text)));
-  
+
 
   static StreamTransformer transformer<T>(
       T Function(Map<String, dynamic> json) fromJson) =>
