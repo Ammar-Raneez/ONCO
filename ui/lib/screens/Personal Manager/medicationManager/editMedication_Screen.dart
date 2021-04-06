@@ -26,9 +26,9 @@ class _EditMedicationState extends State<EditMedication> {
   String _medicationDose;
   String _medicationTime;
 
-  // String _updatedMedicationName;
-  // String _updatedMedicationDose;
-  // String _updatedMedicationTime;
+  String _updatedMedicationName;
+  String _updatedMedicationDose;
+  String _updatedMedicationTime;
 
   // var name = TextEditingController();
   // var dose = TextEditingController();
@@ -136,10 +136,15 @@ class _EditMedicationState extends State<EditMedication> {
                                         initialValue: _medicationName,
                                         maxLength: 20,
                                           onChanged: (value) async{
+                                            final provider = Provider.of<MedicationProvider>(context, listen: false);
+                                            provider.removeMedication(widget.medication);
                                           //Check if the field is not empty
                                           if(value !="") {
                                             setState(() {
+                                              print(_medicationName);
                                               _medicationName = value;
+                                              print(_medicationName);
+
                                             });
 
                                           }
@@ -248,10 +253,9 @@ class _EditMedicationState extends State<EditMedication> {
                                           dosage: _medicationDose,
                                           doseTime: _medicationTime,
                                         );
-
-
                                         final provider = Provider.of<MedicationProvider>(context, listen: false);
-                                        provider.updateMedication(medication, _medicationName, _medicationDose, _medicationTime);
+                                        provider.removeMedication(widget.medication);
+                                        MedicationFirebaseApi.createMedication(medication);
                                       }
                                       Navigator.pop(context);
                                     },
