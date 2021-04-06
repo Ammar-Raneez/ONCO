@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ui/screens/Personal%20Manager/editMedication_Screen.dart';
-import 'package:ui/screens/Personal%20Manager/models/medication_model.dart';
+import 'package:ui/screens/Personal%20Manager/medicationManager/editMedication_Screen.dart';
+import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
+
 
 class MedicationCard extends StatelessWidget {
 

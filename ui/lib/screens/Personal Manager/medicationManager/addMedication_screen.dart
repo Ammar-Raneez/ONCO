@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/medication_card.dart';
-import 'package:ui/screens/Personal%20Manager/api/medicationFirebaseAPI.dart';
-import 'package:ui/screens/Personal%20Manager/models/medication_model.dart';
-
+import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationFirebaseAPI.dart';
+import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
 
 class AddMedication extends StatefulWidget {
 

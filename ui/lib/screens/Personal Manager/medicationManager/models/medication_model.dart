@@ -1,10 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ui/screens/Personal%20Manager/api/utils.dart';
-
-class MedicationTime {
-  static const createdTime = 'createdTime';
-}
-
 class Medication {
 
   String id;

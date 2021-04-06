@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/medication_card.dart';
 import 'package:ui/components/widgets.dart';
-import 'package:ui/screens/Personal%20Manager/addMedication_screen.dart';
-import 'package:ui/screens/Personal%20Manager/api/medicationFirebaseAPI.dart';
-import 'package:ui/screens/Personal%20Manager/api/medicationsProvider.dart';
-import 'package:ui/screens/Personal%20Manager/editMedication_Screen.dart';
+import 'file:///C:/Users/hamma/Documents/GitHub/SDGP-ONCO/ui/lib/screens/Personal%20Manager/medicationManager/addMedication_screen.dart';
+import 'api/medicationFirebaseAPI.dart';
+import 'api/medicationsProvider.dart';
+import 'editMedication_Screen.dart';
 import 'medicationWidgets/MedicationListWidget.dart';
 import 'models/medication_model.dart';
 

@@ -4,9 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/medication_card.dart';
-import 'package:ui/screens/Personal%20Manager/api/medicationFirebaseAPI.dart';
-import 'package:ui/screens/Personal%20Manager/api/medicationsProvider.dart';
-import 'package:ui/screens/Personal%20Manager/models/medication_model.dart';
+import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationFirebaseAPI.dart';
+import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationsProvider.dart';
+import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
+
 
 
 class EditMedication extends StatefulWidget {
@@ -24,6 +25,11 @@ class _EditMedicationState extends State<EditMedication> {
   String _medicationName;
   String _medicationDose;
   String _medicationTime;
+
+  // String _updatedMedicationName;
+  // String _updatedMedicationDose;
+  // String _updatedMedicationTime;
+
   // var name = TextEditingController();
   // var dose = TextEditingController();
   // var time = TextEditingController();
@@ -235,13 +241,17 @@ class _EditMedicationState extends State<EditMedication> {
                                   ),
                                   GestureDetector(
                                     onTap: (){
+
                                       if(_medicationName !="") {
-                                        Medication _newMedication = Medication(
+                                        Medication medication = Medication(
                                           medicationName: _medicationName,
                                           dosage: _medicationDose,
                                           doseTime: _medicationTime,
                                         );
-                                        MedicationFirebaseApi.createMedication(_newMedication);
+
+
+                                        final provider = Provider.of<MedicationProvider>(context, listen: false);
+                                        provider.updateMedication(medication, _medicationName, _medicationDose, _medicationTime);
                                       }
                                       Navigator.pop(context);
                                     },
@@ -259,7 +269,7 @@ class _EditMedicationState extends State<EditMedication> {
                                           ),
                                           child: Center(
                                             child: Text(
-                                              "Add Medication",
+                                              "Save",
                                               style: TextStyle( // text style
                                                 fontSize: 15,
                                                 fontFamily: 'Poppins-Semibold',
