@@ -84,12 +84,17 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
-          "http://192.168.1.2/predict",
+          "https://lungmodelsdgp.azurewebsites.net/api/lungmodelsdgp?model=lung",
           data: formData,
         );
 
         // Converting the Json String into an actual Json Object
-        responseBody = json.decode(response.toString());
+        // responseBody = json.decode(response.toString());
+        // print(responseBody);
+
+        String resultString = response.data[0]['prediction'];
+        String imageDownloadURL = response.data[0]['image_url'];
+        String resultPercentage = response.data[0]['prediction_percentage'];
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -98,9 +103,9 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
             .collection("imageDetections")
             .add({
           "type": "lung",
-          "result": responseBody["result"],
-          "imageUrl": responseBody["imageUrl"],
-          "percentage": responseBody["percentage"],
+          "result": resultString,
+          "imageUrl": imageDownloadURL,
+          "percentage": resultPercentage,
           'timestamp': Timestamp.now(),
         });
 

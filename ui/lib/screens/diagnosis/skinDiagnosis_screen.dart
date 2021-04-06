@@ -82,13 +82,16 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
-          "http://192.168.1.2/skin-diagnosis",
+          "https://skinmodelsdgp.azurewebsites.net/api/skinmodelsdgp?model=skin",
           data: formData,
         );
 
         // Converting the Json String into an actual Json Object
-        responseBody = json.decode(response.toString());
+        // responseBody = json.decode(response.toString());
         // print(responseBody);
+
+        String resultString = response.data[0]['result_string'];
+        String imageDownloadURL = response.data[0]['imageDownloadURL'];
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -97,8 +100,8 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .collection("imageDetections")
             .add({
                     "type": "skin",
-                    "result": responseBody["result_string"],
-                    "imageUrl": responseBody["imageDownloadURL"],
+                    "result": resultString,
+                    "imageUrl": imageDownloadURL,
                     'timestamp': Timestamp.now(),
                   });
 
