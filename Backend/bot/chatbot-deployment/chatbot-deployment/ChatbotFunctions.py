@@ -1,3 +1,4 @@
+import os
 import nltk
 import numpy
 import tflearn
@@ -6,7 +7,12 @@ import json
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.stem.snowball import SnowballStemmer
 
-with open("intents.json") as intents:
+scriptpath = os.path.abspath(__file__)
+scriptdir = os.path.dirname(scriptpath)
+INTENT_PATH = os.path.join(scriptdir, 'intents.json')
+MODEL_PATH = os.path.join(scriptdir, 'chatbot.tflearn')
+
+with open(INTENT_PATH) as intents:
     intent_data = json.load(intents)
 
 class ChatbotFunctions:
