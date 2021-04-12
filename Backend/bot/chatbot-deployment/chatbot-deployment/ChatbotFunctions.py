@@ -78,10 +78,10 @@ class ChatbotFunctions:
         model = tflearn.DNN(net)
         
         if not retrain:
-            model.load("model/chatbot.tflearn")
+            model.load(MODEL_PATH)
         else:
             model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
-            model.save("model/chatbot.tflearn")
+            model.save(MODEL_PATH)
         return model
 
     def bag_of_words(self, text):
