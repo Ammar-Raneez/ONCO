@@ -27,7 +27,7 @@ class ChatbotFunctions:
     def __init__(self):
         self.stemmer = SnowballStemmer("english")
         self.lemmatizer = WordNetLemmatizer()
-  
+
     def prep_data(self):
         for intent in intent_data['intents']:
             for pattern in intent['patterns']:
