@@ -62,21 +62,21 @@ class ChatbotFunctions:
         self.training = numpy.array(self.training)
         self.output = numpy.array(self.output)
 
-    def create_model(self, retrain = False):
-        self.create_training_and_test()
-        net = tflearn.input_data(shape=[None, len(self.training[0])])   
-        net = tflearn.fully_connected(net, 8)
-        net = tflearn.fully_connected(net, 8)
-        net = tflearn.fully_connected(net, len(self.output[0]), activation='softmax')
-        net = tflearn.regression(net)
-        model = tflearn.DNN(net)
+#     def create_model(self, retrain = False):
+#         self.create_training_and_test()
+#         net = tflearn.input_data(shape=[None, len(self.training[0])])   
+#         net = tflearn.fully_connected(net, 8)
+#         net = tflearn.fully_connected(net, 8)
+#         net = tflearn.fully_connected(net, len(self.output[0]), activation='softmax')
+#         net = tflearn.regression(net)
+#         model = tflearn.DNN(net)
         
-        if not retrain:
-            model.load("model/chatbot.tflearn")
-        else:
-            model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
-            model.save("model/chatbot.tflearn")
-        return model
+#         if not retrain:
+#             model.load("model/chatbot.tflearn")
+#         else:
+#             model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
+#             model.save("model/chatbot.tflearn")
+#         return model
 
     def bag_of_words(self, text):
         bag = [0 for _ in range(len(self.all_words))]                  
@@ -96,6 +96,7 @@ class ChatbotFunctions:
         ]
 
         bag = self.bag_of_words(user_input)
+        bag = bag.reshape(1, -1)
         results = model.predict([bag])[0]
         result_index = numpy.argmax(results)
         result_tag = self.all_labels[result_index]

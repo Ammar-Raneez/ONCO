@@ -1,6 +1,7 @@
 from flask import Flask
 import numpy as np
 from flask_cors import CORS
+from tensorflow import keras
 from flask_restful import Api, Resource, reqparse
 from ChatbotFunctions import ChatbotFunctions
 
@@ -9,7 +10,7 @@ chatbot_functions = ChatbotFunctions()
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 api = Api(app)
-model = chatbot_functions.create_model()
+model = keras.models.load_model('chatbot.h5')
 
 class ChatbotChat(Resource):
     @staticmethod
