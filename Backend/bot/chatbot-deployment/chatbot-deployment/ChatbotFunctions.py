@@ -1,17 +1,18 @@
 import os
 import nltk
 import numpy
-import tflearn
+import logging
 import random
 import json
+# import tflearn
+from tensorflow import keras
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.stem.snowball import SnowballStemmer
 
 scriptpath = os.path.abspath(__file__)
 scriptdir = os.path.dirname(scriptpath)
 INTENT_PATH = os.path.join(scriptdir, 'intents.json')
-MODEL_PATH = os.path.join(scriptdir, 'chatbot.tflearn')
-
+MODEL_PATH = os.path.join(scriptdir, 'chatbot.h5')
 with open(INTENT_PATH) as intents:
     intent_data = json.load(intents)
 
@@ -68,19 +69,27 @@ class ChatbotFunctions:
         self.training = numpy.array(self.training)
         self.output = numpy.array(self.output)
 
-    def create_model(self, retrain = False):
+    def create_model(self, retrain = True):
         self.create_training_and_test()
-        net = tflearn.input_data(shape=[None, len(self.training[0])])   
-        net = tflearn.fully_connected(net, 8)
-        net = tflearn.fully_connected(net, 8)
-        net = tflearn.fully_connected(net, len(self.output[0]), activation='softmax')
-        net = tflearn.regression(net)
-        model = tflearn.DNN(net)
+        model = keras.models.Sequential()
+        model.add(keras.layers.Input(shape=[None, len(self.training[0])]))
+        model.add(keras.layers.Dense(8, activation='relu'))
+        model.add(keras.layers.Dense(8, activation='relu'))
+        model.add(keras.layers.Dense(len(self.output[0]), activation='softmax'))
+
+        # net = tflearn.input_data(shape=[None, len(self.training[0])])
+        # net = tflearn.fully_connected(net, 8)
+        # net = tflearn.fully_connected(net, 8)
+        # net = tflearn.fully_connected(net, len(self.output[0]), activation='softmax')
+        # net = tflearn.regression(net)
+        # model = tflearn.DNN(net)
         
         if not retrain:
             model.load(MODEL_PATH)
         else:
-            model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
+            model.compile(optimizer=keras.optimizers.Adam(lr=1e-5), metrics=['accuracy'], loss='sparse_categorical_crossentropy')
+            model.fit(self.training, self.output, epochs=1000, batch_size=8, verbose=1)
+            # model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
             model.save(MODEL_PATH)
         return model
 
