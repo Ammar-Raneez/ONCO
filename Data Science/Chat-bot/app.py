@@ -9,7 +9,7 @@ chatbot_functions = ChatbotFunctions()
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 api = Api(app)
-model = chatbot_functions.create_model()
+chatbot_functions.prep_data()
 
 class ChatbotChat(Resource):
     @staticmethod
@@ -17,7 +17,7 @@ class ChatbotChat(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('UserIn')
         args = parser.parse_args()
-        chatbot_response = {'Chatbot Response' : chatbot_functions.chat( args['UserIn'], model)}
+        chatbot_response = {'Chatbot Response' : chatbot_functions.chat( args['UserIn'])}
         return chatbot_response, 200
 
 api.add_resource(ChatbotChat, '/chatbot-predict')
