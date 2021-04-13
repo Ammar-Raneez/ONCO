@@ -1,7 +1,6 @@
 from flask import Flask
 import numpy as np
 from flask_cors import CORS
-from tensorflow import keras
 from flask_restful import Api, Resource, reqparse
 from ChatbotFunctions import ChatbotFunctions
 
@@ -11,7 +10,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 api = Api(app)
 chatbot_functions.prep_data()
-model = keras.models.load_model('chatbot.h5')
 
 class ChatbotChat(Resource):
     @staticmethod
@@ -19,7 +17,7 @@ class ChatbotChat(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('UserIn')
         args = parser.parse_args()
-        chatbot_response = {'Chatbot Response' : chatbot_functions.chat( args['UserIn'], model)}
+        chatbot_response = {'Chatbot Response' : chatbot_functions.chat( args['UserIn'])}
         return chatbot_response, 200
 
 api.add_resource(ChatbotChat, '/chatbot-predict')

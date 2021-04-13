@@ -1,6 +1,7 @@
 import nltk
 import numpy
-import tflearn
+# import tflearn
+from tensorflow import keras
 import random
 import json
 from nltk.stem.wordnet import WordNetLemmatizer
@@ -17,6 +18,7 @@ class ChatbotFunctions:
     stemmer = None
     lemmatizer = None 
     context = None
+    model = None
     all_words = [] 
     all_labels = []
     all_patterns = [] 
@@ -27,6 +29,7 @@ class ChatbotFunctions:
     def __init__(self):
         self.stemmer = SnowballStemmer("english")
         self.lemmatizer = WordNetLemmatizer()
+        self.model = keras.models.load_model('chatbot.h5')
   
     def prep_data(self):
         for intent in intent_data['intents']:
@@ -76,7 +79,7 @@ class ChatbotFunctions:
 #         else:
 #             model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
 #             model.save("model/chatbot.tflearn")
-#         return model
+#         return model 
 
     def bag_of_words(self, text):
         bag = [0 for _ in range(len(self.all_words))]                  
@@ -89,7 +92,7 @@ class ChatbotFunctions:
                     bag[index] = 1
         return numpy.array(bag)
     
-    def chat(self, user_input, model):          
+    def chat(self, user_input):          
         default_responses = [
         "Sorry, can't understand you, I am not perfect :'(", "Please give me more info :(", "Not sure I understand :(",
         "Please be more specific", "Please provide me more information"
@@ -97,7 +100,7 @@ class ChatbotFunctions:
 
         bag = self.bag_of_words(user_input)
         bag = bag.reshape(1, -1)
-        results = model.predict([bag])[0]
+        results = self.model.predict([bag])[0]
         result_index = numpy.argmax(results)
         result_tag = self.all_labels[result_index]
 
