@@ -119,7 +119,8 @@ class LungDiagModule:
             cnt_settings = ContentSettings(content_type="image/jpeg")
 
             blob.upload_blob(temp_io_bytes.getvalue(), blob_type="BlockBlob", content_settings=cnt_settings)
-        except:                                                                                                                                                                          
+        except:     
+            print("same image uploaded")
             pass
 
         # getting download image URL
