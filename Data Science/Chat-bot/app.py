@@ -10,6 +10,7 @@ chatbot_functions = ChatbotFunctions()
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 api = Api(app)
+chatbot_functions.prep_data()
 model = keras.models.load_model('chatbot.h5')
 
 class ChatbotChat(Resource):

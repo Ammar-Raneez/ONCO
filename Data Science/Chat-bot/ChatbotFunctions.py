@@ -43,24 +43,24 @@ class ChatbotFunctions:
         self.all_words = sorted(list(set(self.all_words)))
         self.all_labels = sorted(self.all_labels)
         
-    def create_training_and_test(self):
-        self.prep_data()
-        out_empty = [0 for _ in range(len(self.all_labels))]
-        for index, pattern in enumerate(self.all_patterns):
-            bag = []
-            words = [self.lemmatizer.lemmatize(word.lower()) for word in pattern]
-            words = [self.stemmer.stem(word.lower()) for word in words]
-            for word in self.all_words:
-                if word in words:
-                    bag.append(1)
-                else:
-                    bag.append(0)
-            output_row = out_empty[:]
-            output_row[self.all_labels.index(self.all_responses[index])] = 1
-            self.training.append(bag)
-            self.output.append(output_row)
-        self.training = numpy.array(self.training)
-        self.output = numpy.array(self.output)
+#     def create_training_and_test(self):
+#         self.prep_data()
+#         out_empty = [0 for _ in range(len(self.all_labels))]
+#         for index, pattern in enumerate(self.all_patterns):
+#             bag = []
+#             words = [self.lemmatizer.lemmatize(word.lower()) for word in pattern]
+#             words = [self.stemmer.stem(word.lower()) for word in words]
+#             for word in self.all_words:
+#                 if word in words:
+#                     bag.append(1)
+#                 else:
+#                     bag.append(0)
+#             output_row = out_empty[:]
+#             output_row[self.all_labels.index(self.all_responses[index])] = 1
+#             self.training.append(bag)
+#             self.output.append(output_row)
+#         self.training = numpy.array(self.training)
+#         self.output = numpy.array(self.output)
 
 #     def create_model(self, retrain = False):
 #         self.create_training_and_test()
