@@ -81,8 +81,6 @@ sniffio==1.2.0
 tensorflow-cpu==2.4.0
 typing-extensions==3.7.4.3
 urllib3==1.26.4
-uuid==1.30
-virtualenv==20.4.3
 wcwidth==0.2.5
 webencodings==0.5.1
 wrapt==1.12.1

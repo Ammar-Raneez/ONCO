@@ -1,5 +1,7 @@
 import os
 import nltk
+nltk.download('punkt')
+nltk.download('wordnet')
 import numpy
 from tensorflow import keras
 import random
