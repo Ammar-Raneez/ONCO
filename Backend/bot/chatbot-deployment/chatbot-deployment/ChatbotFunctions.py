@@ -87,7 +87,7 @@ class ChatbotFunctions:
                         else:
                             self.context = None
                         return random.choice(responses) + "\n"
-                    elif intent.get('direct_access'):
+                    if intent.get('direct_access'):
                         responses = intent['responses']
                         return random.choice(responses) + "\n"
                     return random.choice(default_responses) + "\n"
