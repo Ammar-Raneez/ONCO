@@ -30,7 +30,7 @@ def model_predict(image_array, model):
         skin_model = tf.keras.models.load_model(SKIN_MODEL_PATH)
         predictions = skinDiagModule.model_predict_skin(image_array, skin_model)
         return construct_skin_output(predictions)
-    elif model == "breast":
+    if model == "breast":
         return "breast"
     return "lung"
 

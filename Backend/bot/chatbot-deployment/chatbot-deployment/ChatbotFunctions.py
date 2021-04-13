@@ -1,4 +1,7 @@
+import os
 import nltk
+nltk.download('punkt')
+nltk.download('wordnet')
 import numpy
 from tensorflow import keras
 import random
@@ -6,7 +9,12 @@ import json
 from nltk.stem.wordnet import WordNetLemmatizer
 from nltk.stem.snowball import SnowballStemmer
 
-with open("intents.json") as intents:
+scriptpath = os.path.abspath(__file__)
+scriptdir = os.path.dirname(scriptpath)
+INTENTS_PATH = os.path.join(scriptdir, 'intents.json')
+MODEL_PATH = os.path.join(scriptdir, 'chatbot.h5')
+
+with open(INTENTS_PATH) as intents:
     intent_data = json.load(intents)
 
 class ChatbotFunctions:  
@@ -24,8 +32,9 @@ class ChatbotFunctions:
     def __init__(self):
         self.stemmer = SnowballStemmer("english")
         self.lemmatizer = WordNetLemmatizer()
-        self.model = keras.models.load_model('chatbot.h5')
-  
+        self.prep_data()
+        self.model = keras.models.load_model(MODEL_PATH)
+
     def prep_data(self):
         for intent in intent_data['intents']:
             for pattern in intent['patterns']:

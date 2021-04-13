@@ -45,20 +45,20 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
       listItems.add(
           Container(
               height: 190,
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))
+                  borderRadius: BorderRadius.circular(18)
               ),
               child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                   child: Container(
                     child: Container(
-                        padding: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                         margin: EdgeInsets.only(top: 0, bottom: 50),
                         width: double.infinity,
 
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(18),
                           color: Color(0xFFABD8E2),
                         ),
                         child: Column(
@@ -67,23 +67,25 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                                   margin: EdgeInsets.only(bottom: 10),
                                   child:Text(
                                     post,
-                                    style: kTextStyle.copyWith(
+                                    style:TextStyle(
+                                      fontFamily: 'Poppins-SemiBold',
                                       color: Colors.blueGrey,
-                                      fontSize: 18,
+                                      fontSize: 20,
                                     ),
                                   )
                               ),
                               TextField(
+
                                 decoration: InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: new BorderSide(color: Colors.white),
-                                      borderRadius: new BorderRadius.circular(25.7),
+                                      borderRadius: new BorderRadius.circular(16),
                                     ),
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide: new BorderSide(color: Colors.white),
-                                      borderRadius: new BorderRadius.circular(25.7),
+                                      borderRadius: new BorderRadius.circular(16),
                                     ),
                                     hintText: 'Enter the Value for the Input'
                                 ),
@@ -131,9 +133,10 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
                   cancerType,
-                  style: kTextStyle.copyWith(
-                    color: Colors.blueGrey,
-                    fontSize: 25,
+                  style: TextStyle(
+                    fontFamily: 'Poppins-SemiBold',
+                    fontSize: 27,
+                    color: Color(0xFF93ACB1),
                   ),
                 ),
               ),
@@ -142,9 +145,10 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                 padding: EdgeInsets.only(left: 20),
                 child: Text(
                   "Prognosis",
-                  style: kTextStyle.copyWith(
-                    color: Colors.black54,
-                    fontSize: 25,
+                  style: TextStyle(
+                    fontFamily: 'Poppins-SemiBold',
+                    fontSize: 27.0,
+                    color: Color(0xFF565D5E),
                   ),
                 ),
               ),

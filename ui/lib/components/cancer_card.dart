@@ -16,10 +16,11 @@ class CancerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(18),
       ),
       child: Container(
-        width: 320.0, height: 120.0,
+        width: 400,
+        height: 120.0,
         child: Padding(
           padding: const EdgeInsets.only(top: 70.0, left: 20.0),
           child: Text(

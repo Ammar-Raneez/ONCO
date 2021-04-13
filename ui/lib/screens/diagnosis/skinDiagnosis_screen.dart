@@ -82,13 +82,16 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
-          "http://192.168.1.2/skin-diagnosis",
+          "https://skinmodelsdgp.azurewebsites.net/api/skinmodelsdgp?model=skin",
           data: formData,
         );
 
         // Converting the Json String into an actual Json Object
-        responseBody = json.decode(response.toString());
+        // responseBody = json.decode(response.toString());
         // print(responseBody);
+
+        String resultString = response.data[0]['result_string'];
+        String imageDownloadURL = response.data[0]['imageDownloadURL'];
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -97,8 +100,8 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .collection("imageDetections")
             .add({
                     "type": "skin",
-                    "result": responseBody["result_string"],
-                    "imageUrl": responseBody["imageDownloadURL"],
+                    "result": resultString,
+                    "imageUrl": imageDownloadURL,
                     'timestamp': Timestamp.now(),
                   });
 
@@ -161,15 +164,16 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // LUNG CANCER DIAGNOSIS TEXT CONTENT
+                        //SKIN CANCER DIAGNOSIS TEXT CONTENT
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.only(left: 20),
                           child: Text(
                             "Skin Cancer",
-                            style: kTextStyle.copyWith(
-                              color: Colors.blueGrey,
-                              fontSize: 25,
+                            style: TextStyle(
+                              fontFamily: 'Poppins-SemiBold',
+                              fontSize: 27.0,
+                              color: Color(0xFF93ACB1),
                             ),
                           ),
                         ),
@@ -178,9 +182,10 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                           padding: EdgeInsets.only(left: 20),
                           child: Text(
                             "Diagnosis",
-                            style: kTextStyle.copyWith(
-                              color: Colors.black54,
-                              fontSize: 25,
+                            style: TextStyle(
+                              fontFamily: 'Poppins-SemiBold',
+                              fontSize: 27.0,
+                              color: Color(0xFF565D5E),
                             ),
                           ),
                         ),
@@ -189,7 +194,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: imageFile == null
-                                ? Image.asset('images/uploadImageGrey1.png')
+                                ? Image.asset('images/uploadImageGrey1.png', scale: 15,)
                                 : Image.file(
                                     imageFile,
                                     width: 500,
@@ -202,37 +207,49 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RaisedButton(
-                              elevation: 3.0,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 25.0, vertical: 10.0),
-                              color: Colors.lightBlueAccent,
-                              onPressed: () {
-                                // OPEN THE CAMERA TO CAPTURE IMAGE
+                            GestureDetector(
+                              onTap:(){
                                 _openCamera();
                               },
-                              child: Icon(
-                                Icons.camera_alt_rounded,
-                                color: Colors.white,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Colors.lightBlueAccent,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 50,
+                                    vertical: 15
+                                ),
+
+                                child: Icon(
+                                  Icons.camera_alt_rounded,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             SizedBox(
                               width: 20.0,
                             ),
-                            RaisedButton(
-                              elevation: 3.0,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 25.0, vertical: 10.0),
-                              color: Colors.lightBlueAccent,
-                              onPressed: () {
-                                // OPEN GALLERY TO SELECT AN IMAGE
+                            GestureDetector(
+                              onTap:(){
                                 _openGallery();
                               },
-                              child: Icon(
-                                Icons.photo,
-                                color: Colors.white,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Colors.lightBlueAccent,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 50,
+                                    vertical: 15
+                                ),
+
+                                child: Icon(
+                                  Icons.photo,
+                                  color: Colors.white,
+                                ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -261,7 +278,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                     height: 30.0,
                                   ),
                                   Text(
-                                    "Predict",
+                                    "Scan Image",
                                     maxLines: 1,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,

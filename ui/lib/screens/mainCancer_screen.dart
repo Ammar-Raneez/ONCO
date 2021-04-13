@@ -30,18 +30,25 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
           child: Container(
             padding: EdgeInsets.only(
               //* might need to change when adding top row and nav
-              left: 33.0,
-              right: 36.0,
+              left: 22,
+              right: 22,
+              bottom: 20
             ),
             child: Center(
               child: Column(
                 children: [
-                  Text(
-                    'Prognosis & Diagnosis of Cancers',
-                    style: TextStyle(
-                      fontFamily: 'Poppins-SemiBold',
-                      fontSize: 27.0,
-                      color: Color(0xFF373737),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 5,
+                      bottom: 15
+                    ),
+                    child: Text(
+                      'Prognosis & Diagnosis of Cancers',
+                      style: TextStyle(
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 24,
+                        color: Color(0xFF373737),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -58,12 +65,12 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                         cardTitle: 'Skin Cancer',
-                        cardColor: '0xFFC6E7EE',
-                        textColor: '0xFF63888F'),
+                        cardColor: '0xFFe0a75c',
+                        textColor: '0xFFFFFFFF'),
                   ),
                   //generates a cancer card with text passed.
                   SizedBox(
-                    height: 15,
+                    height: 6,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -76,12 +83,12 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                       cardTitle: 'Lung Cancer',
-                      cardColor: '0xFFABD8E2',
+                      cardColor: '0xFF5cade0',
                       textColor: '0xFFFFFFFF',
                     ),
                   ),
                   SizedBox(
-                    height: 12,
+                    height: 6,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -94,7 +101,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                       cardTitle: 'Breast Cancer',
-                      cardColor: '0xFF7EB9C7',
+                      cardColor: '0xFFe34f94',
                       textColor: '0xFFFFFFFF',
                     ),
                   ),

@@ -206,6 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
+          resizeToAvoidBottomInset : false,
           backgroundColor: Colors.white,
           body: ModalProgressHUD(
             inAsyncCall: showSpinner,

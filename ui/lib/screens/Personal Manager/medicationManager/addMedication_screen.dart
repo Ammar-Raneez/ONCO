@@ -1,20 +1,47 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/medication_card.dart';
-import 'package:ui/screens/Personal%20Manager/models/medication_model.dart';
+import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationFirebaseAPI.dart';
+import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
 
 class AddMedication extends StatefulWidget {
-  // final Medication medication;
-  // AddMedication({@required this.medication});
+
+  final Medication medication;
+  AddMedication({@required this.medication}); // Constructor
 
   @override
   _AddMedicationState createState() => _AddMedicationState();
 }
 
 class _AddMedicationState extends State<AddMedication> {
-  String dropdownValue = 'One';
+
+  // Variables used within file
+  String _medicationId = "";
+  String _medicationName = "";
+  String _medicationDose = "";
+  String _medicationTime = "";
+
+  FocusNode _nameFocus;
+  FocusNode _doseFocus;
+  FocusNode _timeFocus;
+
+  @override
+  void initState() {
+    if(widget.medication !=null){
+      // contentVisible = true;
+      _medicationName = widget.medication.medicationName;
+      _medicationId = widget.medication.id;
+      _medicationDose = widget.medication.dosage;
+    }
+
+    // initializing focus nodes
+    _nameFocus = FocusNode();
+    _doseFocus = FocusNode();
+    _timeFocus = FocusNode();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +65,7 @@ class _AddMedicationState extends State<AddMedication> {
 
                           alignment: Alignment.topLeft,
                           child: Text(
-                            "Add a Medication",
+                              "Add Medication",
                             style: TextStyle(
                               fontFamily: 'Poppins-SemiBold',
                               fontSize: 24,
@@ -55,7 +82,7 @@ class _AddMedicationState extends State<AddMedication> {
                         child: Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            "Enter the details of the medication, click the delete button to remove the medication",
+                            "Enter the details of the medication",
                             style: TextStyle(
                                 fontFamily: 'Poppins-SemiBold',
                                 fontSize: 13.0,
@@ -88,10 +115,13 @@ class _AddMedicationState extends State<AddMedication> {
                               ),
                               child: ListView(
                                 children: [
+                                  SizedBox(
+                                    height: 15,
+                                  ),
                                     Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: Color(0xFFCDDDF6)
+                                        color: Color(0xFFEEEEEE)
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.only(
@@ -102,6 +132,17 @@ class _AddMedicationState extends State<AddMedication> {
                                         ),
                                         child: TextField(
                                           maxLength: 20,
+                                          onSubmitted: (value) async{
+                                            //Check if the field is not empty
+                                            if(value !="") {
+                                              setState(() {
+                                                _medicationName = value;
+                                              });
+
+                                              print("New Medication Name : $_medicationId "); // to notify on console when new task created
+                                              _doseFocus.requestFocus(); // to move focus to description node
+                                            }
+                                          },
                                           decoration: InputDecoration(
                                             hintText: "Name of Medication", // temporary text
                                             border:InputBorder.none,
@@ -120,7 +161,7 @@ class _AddMedicationState extends State<AddMedication> {
                                   Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: Color(0xFFCDDDF6)
+                                        color: Color(0xFFEEEEEE)
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.only(
@@ -131,6 +172,17 @@ class _AddMedicationState extends State<AddMedication> {
                                       ),
                                       child: TextField(
                                         maxLength: 15,
+                                        onSubmitted: (value) async{
+                                          //Check if the field is not empty
+                                          if(value !="") {
+                                            setState(() {
+                                              _medicationDose = value;
+                                            });
+
+                                            print("New Medication Dose for : $_medicationId "); // to notify on console when new task created
+                                            _timeFocus.requestFocus(); // to move focus to description node
+                                          }
+                                        },
                                         decoration: InputDecoration(
                                           hintText: "Dose - eg: 'Two tablets', '5 ml'", // temporary text
                                           border:InputBorder.none,
@@ -146,10 +198,11 @@ class _AddMedicationState extends State<AddMedication> {
                                   SizedBox(
                                     height: 11,
                                   ),
+
                                   Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        color: Color(0xFFCDDDF6)
+                                        color: Color(0xFFEEEEEE)
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.only(
@@ -160,6 +213,17 @@ class _AddMedicationState extends State<AddMedication> {
                                       ),
                                       child: TextField(
                                         maxLength: 35,
+                                        onSubmitted: (value) async{
+                                          //Check if the field is not empty
+                                          if(value !="") {
+                                            setState(() {
+                                              _medicationTime = value;
+                                            });
+
+                                            print("New Medication time for : $_medicationId "); // to notify on console when new task created
+                                            // _doseFocus.requestFocus(); // to move focus to description node
+                                          }
+                                        },
                                         decoration: InputDecoration(
                                           hintText: "Time - eg: 'every 5 hours','after lunch'", // temporary text
                                           border:InputBorder.none,
@@ -167,10 +231,52 @@ class _AddMedicationState extends State<AddMedication> {
                                         style: TextStyle( // text style
                                           fontSize: 15,
                                           fontFamily: 'Poppins-Semibold',
-                                          color:Color(0xFFE84848),
-                                        ),),
+                                          color:Color(0xFF1F1F1F),
+                                        ),
+                                      ),
                                     ),
                                   ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  GestureDetector(
+                                    onTap: (){
+                                      if(_medicationName !="") {
+                                        Medication _newMedication = Medication(
+                                          medicationName: _medicationName,
+                                          dosage: _medicationDose,
+                                          doseTime: _medicationTime,
+                                        );
+                                        MedicationFirebaseApi.createMedication(_newMedication);
+                                      }
+                                      Navigator.pop(context);
+                                    },
+                                    child: Center(
+                                      child: Container(
+                                        width: 200,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFE84848),
+                                          borderRadius: BorderRadius.circular(18),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top:20,
+                                            bottom: 20
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "Add Medication",
+                                              style: TextStyle( // text style
+                                                fontSize: 15,
+                                                fontFamily: 'Poppins-Semibold',
+                                                color:Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -181,26 +287,7 @@ class _AddMedicationState extends State<AddMedication> {
 
                 ],
               ),
-              Positioned(
-                bottom:17,
-                right: 17,
-                child: GestureDetector(
-                  onTap: (){
 
-                  },
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        color: Color(0xFF1c374a),
-                        borderRadius: BorderRadius.circular(18)
-                    ),
-                    child: Image(
-                        image:AssetImage('images/add_icon.png') // Add icon
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
