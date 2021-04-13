@@ -95,9 +95,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 
     //send data to chat bot api and get back response
     try {
-      Response response = await dio.post('http://192.168.8.100/chatbot-predict',
+      Response response = await dio.post('https://chatbot-deployment.azurewebsites.net/api/chatbot-deployment',
           data: {'UserIn': messageText});
-      responseText = response.data['Chatbot Response'];
+      responseText = response.toString();
 
       //add chat bot response to firestore
       _firestore
@@ -105,7 +105,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
           .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
           .collection("chatbot-messages")
           .add({
-        'text': response.data['Chatbot Response'],
+        'text': responseText,
         'sender': 'CHANCO',
         'timestamp': Timestamp.now(),
       });
