@@ -1,6 +1,6 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Hi", "How are you", "hey", "yo", "Is anyone there", "Hello", "Good day", "Whats up", "sup", "what are you", "who are you"],
+         "patterns": ["Hi", "How are you", "hey", "yo", "Is anyone there", "Hello", "Good day", "Whats up", "sup"],
          "responses": ["Hello!", "Good to see you again!", "Hi there, how can I help?", "Hello there!, how are you feeling today?"]
         },
   
@@ -10,7 +10,7 @@
         },
  
         {"tag": "name",
-         "patterns": ["what is your name", "what should I call you", "whats your name", "name", "your name"],
+         "patterns": ["what is your name", "what should I call you", "whats your name", "name", "your name",  "what are you", "who are you"],
          "responses": ["You can call me CHANCO (Chatbot + ONCO :P). Hope it sounds catch!", "I am CHANCO! does it fit?", "I am CHANCO aka chatbot + ONCO! Do you like it?"],
          "context": "name"
         },
@@ -22,7 +22,7 @@
         },
 
         {"tag": "name_no",
-         "patterns": ["nah", "no", "nope", "not really", "Ew", "cringe"],
+         "patterns": ["nah", "no", "nope", "not really", "Ew", "cringe", "i do not", "it does not"],
          "responses": ["oh. :/", "For reals?? :'[", "Aww.. I really thought it would be nice :/"],
          "context_filter": "name"
         },
@@ -35,25 +35,30 @@
         {"tag": "first",
          "patterns": ["sick", "i do not feel good", "not well", "I am not feeling well", "I feel sick", "something is wrong with me", "I do not think I am of perfect health"],
          "responses": ["I am sorry to hear that, but do not panic! I can be of help :) What symptoms do you have?", "not to worry, you have me! lets get started, what do have?",
-                       "oh is that so :( Not to worry I am the 'chanciest' :P out there, please tell me, what do you have?", "I can be of help! What symptoms do you have?", "Please dont worry, you got me!", "Not to worry! I am very dependable when it comes to your health! Tell me, what do you have"]
+                       "oh is that so :( Not to worry I am the 'chanciest' :P out there, please tell me, what do you have?", "I can be of help! What symptoms do you have?", "Please dont worry, you got me! What do you have?", "Not to worry! I am dependable! Tell me, what do you have?"]
+        },
+    
+        {"tag": "not_certain_condition",
+         "patterns": ["sore", "bump", "lump", "i have a sore", "skin itches", "my skin itches", "i have a bump", "i have a lump", "im bleeding", "blood", "i have blood", "dry skin", "red skin", "blackheads", "i have blackheads", "i have whiteheads"],
+         "responses": ["hmm... I cannot say anything for certain, could you be be more specific? (cough blood / breast lump / waxy bump)", "This can be for many reasons, so please could you be more specific? (cough blood / lump on breast / bump on skin)", "I do not want to jump the gun, so please could you be more specific? (cough blood / lump on breast / bump on skin)"]
         },
 
         {"tag": "lc_initial",
          "patterns": ["cough", "i have a cough", "i have a chest pain", "chest pain", "i have a chest ache", "chest aches", "i feel unusually tired", "i feel too tired", "i feel exhausted", "i get tired too easily", "no energy", "lack in energy", "i dont want to eat", "i dont have an appetite", "i dont want to eat"],
-         "responses": ["I am sorry to hear that... These symptoms however can be less serious than you think! :) So please let me know further symptoms that you might have (Coughing up blood, a cough that does not stop, breathlessness)"],
+         "responses": ["I am sorry to hear that... These symptoms however can be less serious than you think! :) So please let me know further symptoms that you might have (Coughing up blood, a cough that does not stop, breathing difficulties)", "These are normal symptoms, for common viral flu's too, So please let me know any worser symptoms (Coughing up blood, breathing difficulties)"],
          "context": "lc"
         },
-    
+
         {"tag": "lc_main",
          "patterns": ["cough blood", "i cough blood", "out of breathe", "breathing difficulties", "hard to breathe", "non stop cough", "long cough"],
-         "responses": ["I suspect a chance of you having lung cancer... But there's always a chance of positivity! I suggest that you please get an x-ray uploaded on our detection section so that we can confirm"],
+         "responses": ["I suspect a chance of you having lung cancer... But there's always a chance of positivity! I suggest that you please get an x-ray uploaded on our detection section so that we can confirm", "There could be a possibility for lung cancer :/ Please get a x-ray uploaded to make sure", "Lung cancer is possible... Please get an x-ray uploaded ASAP"],
          "context_filter": "lc",
          "direct_access": "lc_m"
         },
     
         {"tag": "bc_initial",
          "patterns": ["breast size change", "my breast looks larger than usual", "my breast has swelled", "my breast is swollen", "breast swelling", "breast darkening", "breast warmth"],
-         "responses": ["I am sorry to hear that... But fret not! Please do not be alarmed, because this can be not as serious as you think :), but just for confirmation, could you let me know any further symptoms that you might have (breast pain, any lumps near shoulder or breast, any peeling/flaking of skin surrounding the nipple)"],
+         "responses": ["Please do not be alarmed, because this can be not as serious as you think :), but just for confirmation, could you let me know any further symptoms that you might have (breast pain, any lumps near shoulder or breast)"],
          "context": "bc"
         },
         
@@ -65,8 +70,7 @@
         },
     
         {"tag": "sc_main",
-         "patterns": ["unhealable sore", "sore not healed", "waxy bump", "pearly bump", "brown scar", "crusty skin", "returning scab", 
-"mole", "brown spots", "painful lesion", "dark lesions", "bleeding sore" ],
+         "patterns": ["unhealable sore", "sore not healed", "waxy bump", "pearly bump", "brown scar", "returning scab", "mole", "brown spots", "painful lesion", "dark lesions", "bleeding sore", "a waxy bump on skin", "a pearly bump on skin"],
          "responses": ["Hmm... these may be signs of skin cancer, but please do not panic. There are several types: some are harmless; some can be easily healed too! But there are several types, so to confirm I would suggest that you please upload a picture of the infected area, so that we can get a better view of it! :)"],
          "context": "sc"
         }
