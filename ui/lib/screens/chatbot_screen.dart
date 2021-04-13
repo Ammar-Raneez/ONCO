@@ -120,46 +120,54 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          MessageStream(),
-          Container(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 10.0,
-                      right: 10.0,
-                    ),
-                    child: TextField(
-                      onChanged: (value) {
-                        messageText = value;
-                      },
-                      controller: messageTextController,
-                      decoration: kTextFieldDecoration.copyWith(
-                          suffixIcon: IconButton(
-                              icon: Icon(Icons.send),
-                              onPressed: handleSendMessage,
-                              color: Colors.lightBlueAccent),
-                          prefixIcon: Container(
-                            width: 0,
-                            height: 0,
-                          ),
-                          hintText: 'Write a message'),
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/clouds.png'),
+            fit: BoxFit.cover
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            MessageStream(),
+            Container(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 10.0,
+                        right: 10.0,
+                      ),
+                      child: TextField(
+                        onChanged: (value) {
+                          messageText = value;
+                        },
+                        controller: messageTextController,
+                        decoration: kTextFieldDecoration.copyWith(
+                            suffixIcon: IconButton(
+                                icon: Icon(Icons.send),
+                                onPressed: handleSendMessage,
+                                color: Colors.lightBlueAccent),
+                            prefixIcon: Container(
+                              width: 0,
+                              height: 0,
+                            ),
+                            hintText: 'Write a message'),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-        ],
+            SizedBox(
+              height: 10.0,
+            ),
+          ],
+        ),
       ),
     );
   }
