@@ -6,8 +6,9 @@ class MessageBubble extends StatelessWidget {
   final String messageSender;
   final String messageText;
   final bool isMe;
+  final String time;
 
-  MessageBubble({this.messageSender, this.messageText, this.isMe});
+  MessageBubble({this.messageSender, this.messageText, this.isMe, this.time});
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,13 @@ class MessageBubble extends StatelessWidget {
                   fontSize: 12.0,
                 ),
               ),
+            ),
+          ),
+          Text(
+            '$time',
+            style: kTextStyle.copyWith(
+              color: Colors.grey,
+              fontSize: 8.0,
             ),
           ),
         ],

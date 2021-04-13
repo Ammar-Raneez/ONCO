@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/chatbot_message_bubble.dart';
@@ -95,7 +96,8 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 
     //send data to chat bot api and get back response
     try {
-      Response response = await dio.post('https://chatbot-deployment.azurewebsites.net/api/chatbot-deployment',
+      Response response = await dio.post(
+          'https://chatbot-deployment.azurewebsites.net/api/chatbot-deployment',
           data: {'UserIn': messageText});
       responseText = response.toString();
 
@@ -199,6 +201,10 @@ class MessageStream extends StatelessWidget {
             messageSender: messageSender,
             messageText: messageText,
             isMe: username == messageSender,
+            time: DateFormat.yMMMd()
+                .add_jm()
+                .format(message.data()['timestamp'].toDate())
+                .toString(),
           );
           messageBubbles.add(messageBubble);
         }
@@ -210,6 +216,7 @@ class MessageStream extends StatelessWidget {
           messageText:
               'Hi ${username.toString().toUpperCase()}! How can I help you today?',
           isMe: false,
+          time: "",
         ));
 
         return Expanded(
