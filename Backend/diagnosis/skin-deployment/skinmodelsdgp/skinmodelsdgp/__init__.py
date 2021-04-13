@@ -26,7 +26,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=skinmodelsdgp;AccountKey=WugXQYizUnx2W7Apf/RQV0wVtV29nI2GhG1ZiD3SsryK887JvGj/N0zJZIy0cgOwWRNAy3ggdLCRE0X8vUN2Cg==", container_name="images", blob_name=filename)
         cnt_settings = ContentSettings(content_type="image/jpeg")
         blob.upload_blob(filestream.read(), blob_type="BlockBlob", content_settings=cnt_settings)
-    except:                                                                                                                                                                          
+    except: 
+        print("same image uploaded")
         pass
 
     which_model = req.params.get('model')
