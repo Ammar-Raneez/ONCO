@@ -1,6 +1,5 @@
 import nltk
 import numpy
-# import tflearn
 from tensorflow import keras
 import random
 import json
@@ -10,11 +9,7 @@ from nltk.stem.snowball import SnowballStemmer
 with open("intents.json") as intents:
     intent_data = json.load(intents)
 
-class ChatbotFunctions:
-    #Store the entire chat between user and bot
-    user_messages = []
-    bot_messages = []
-    
+class ChatbotFunctions:  
     stemmer = None
     lemmatizer = None 
     context = None
@@ -45,41 +40,6 @@ class ChatbotFunctions:
         self.all_words = [self.stemmer.stem(word.lower()) for word in self.all_words]
         self.all_words = sorted(list(set(self.all_words)))
         self.all_labels = sorted(self.all_labels)
-        
-#     def create_training_and_test(self):
-#         self.prep_data()
-#         out_empty = [0 for _ in range(len(self.all_labels))]
-#         for index, pattern in enumerate(self.all_patterns):
-#             bag = []
-#             words = [self.lemmatizer.lemmatize(word.lower()) for word in pattern]
-#             words = [self.stemmer.stem(word.lower()) for word in words]
-#             for word in self.all_words:
-#                 if word in words:
-#                     bag.append(1)
-#                 else:
-#                     bag.append(0)
-#             output_row = out_empty[:]
-#             output_row[self.all_labels.index(self.all_responses[index])] = 1
-#             self.training.append(bag)
-#             self.output.append(output_row)
-#         self.training = numpy.array(self.training)
-#         self.output = numpy.array(self.output)
-
-#     def create_model(self, retrain = False):
-#         self.create_training_and_test()
-#         net = tflearn.input_data(shape=[None, len(self.training[0])])   
-#         net = tflearn.fully_connected(net, 8)
-#         net = tflearn.fully_connected(net, 8)
-#         net = tflearn.fully_connected(net, len(self.output[0]), activation='softmax')
-#         net = tflearn.regression(net)
-#         model = tflearn.DNN(net)
-        
-#         if not retrain:
-#             model.load("model/chatbot.tflearn")
-#         else:
-#             model.fit(X_inputs=self.training, Y_targets=self.output, n_epoch=1000, batch_size=8, show_metric=True)
-#             model.save("model/chatbot.tflearn")
-#         return model 
 
     def bag_of_words(self, text):
         bag = [0 for _ in range(len(self.all_words))]                  
