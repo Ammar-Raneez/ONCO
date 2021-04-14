@@ -34,7 +34,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 
   Dio dio = new Dio();
 
+  // user message
   String messageText;
+  // bot response
   var responseText;
 
   bool showSpinner = false;
@@ -219,10 +221,6 @@ class MessageStream extends StatelessWidget {
             height: 0,
             width: 0,
           );
-          /* Align(
-            child: CircularProgressIndicator(),
-            alignment: Alignment.center,
-          );*/
         }
 
         //order it based on most recent text
@@ -267,5 +265,3 @@ class MessageStream extends StatelessWidget {
     );
   }
 }
-
-//Replace IP address here with deployment address
