@@ -2,31 +2,33 @@ import 'package:flutter/material.dart';
 
 class TreatmentCard extends StatelessWidget {
   final String cardTitle;
+  final String cardImage;
 
-  const TreatmentCard({@required this.cardTitle});
+  const TreatmentCard({@required this.cardTitle, @required this.cardImage});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(18.0),
       ),
       child: Container(
-        decoration: ShapeDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFC6E7EE), Color(0xFF637477)],
-            begin: Alignment.bottomLeft,
-            end: Alignment.topRight,
-          ), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18),),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          image: DecorationImage(
+            image: AssetImage("images/" + cardImage),
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.center,
+          ),
         ),
         padding: EdgeInsets.only(top: 100, left: 25),
         width: 322.0,
-        height: 150,
+        height: 180,
         child: Text(
           cardTitle,
           style: TextStyle(
             fontSize: 23.0,
-            color: Color(0xFF63888F),
+            color: Color(0xFFFFFFFF),
             fontFamily: 'Poppins-SemiBold',
           ),
         ),

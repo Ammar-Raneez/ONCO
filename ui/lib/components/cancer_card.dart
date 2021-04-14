@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 class CancerCard extends StatelessWidget {
   //properties that are passed in
   final String cardTitle;
-  final String cardColor;
+  final String cardImage;
   final String textColor;
 
-  CancerCard({@required this.cardTitle, @required this.cardColor, @required this.textColor}); //constructor to init values
+  CancerCard({@required this.cardTitle, @required this.cardImage, @required this.textColor}); //constructor to init values
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,18 @@ class CancerCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
       ),
+      elevation: 10,
       child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          image: DecorationImage(
+            image: AssetImage("images/" + cardImage),
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.center,
+          ),
+        ),
         width: 400,
-        height: 120.0,
+        height: 150.0,
         child: Padding(
           padding: const EdgeInsets.only(top: 70.0, left: 20.0),
           child: Text(
@@ -33,7 +42,7 @@ class CancerCard extends StatelessWidget {
           ),
         ),
       ),
-      color: Color(int.parse(cardColor)),
+      // color: Color(int.parse(cardColor)),
     );
     // width: 320.0,
     // height: 120.0,

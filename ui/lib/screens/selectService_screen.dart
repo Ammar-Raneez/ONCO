@@ -68,7 +68,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                           ),
                         );
                       },
-                      child: TreatmentCard(cardTitle: 'Diagnosis'),
+                      child: TreatmentCard(cardTitle: 'Diagnosis', cardImage: "diagnosis.jpg",),
                     ),
                     SizedBox(
                       height: 2,
@@ -93,7 +93,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                             ),
                           );
                         },
-                        child: TreatmentCard(cardTitle: 'Prognosis'),
+                        child: TreatmentCard(cardTitle: 'Prognosis', cardImage: 'prognosis.jpg',),
                     ),
                     SizedBox(
                       height: 40,
