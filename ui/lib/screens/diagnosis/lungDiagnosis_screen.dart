@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,8 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/rounded_button.dart';
-import 'package:ui/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:ui/services/UserDetails.dart';
 
@@ -88,13 +85,11 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
           data: formData,
         );
 
-        // Converting the Json String into an actual Json Object
-        // responseBody = json.decode(response.toString());
-        // print(responseBody);
-
-        String resultString = response.data[0]['prediction'];
-        String imageDownloadURL = response.data[0]['image_url'];
-        String resultPercentage = response.data[0]['prediction_percentage'];
+        // RESPONSE RESULT FROM THE BACKEND
+        responseBody = response.data[0];
+        String resultPrediction = responseBody['predition'];
+        String resultImageURL = responseBody['superimposed_image_url'];
+        String resultPercentage = responseBody['prediction_percentage'];
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -103,27 +98,11 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
             .collection("imageDetections")
             .add({
           "type": "lung",
-          "result": resultString,
-          "imageUrl": imageDownloadURL,
+          "result": resultPrediction,
+          "imageUrl": resultImageURL,
           "percentage": resultPercentage,
           'timestamp': Timestamp.now(),
         });
-
-        // Output Results
-        // print(responseBody["result"]);
-        // print(responseBody["imageUrl"]);
-        // print(responseBody["percentage"]);
-
-        // Creating fake response at the moment to create the ui functionality and stuff-----
-        // await Future.delayed(const Duration(seconds: 5), () {
-        //   response = {
-        //     "result": "CANCER",
-        //     "imageFileName": "https://firebasestorage.googleapis.com/v0/b/onco-127df.appspot.com/o",
-        //     "percentPredict": 100.0
-        //   };
-        // });
-        //
-        // print(response["result"]);
 
         // Display the spinner to indicate that its loading
         setState(() {
@@ -134,7 +113,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         // checking if the response is not null and displaying the result
         if (response != null) {
           // Displaying the alert dialog
-          createAlertDialog(context, "Diagnosis", responseBody["result"], 201);
+          createAlertDialog(context, "Diagnosis", "Detection result:" + resultPrediction, 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -229,7 +208,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: FadeInImage.assetNetwork(
                                     placeholder: 'images/loading.gif',
-                                    image: responseBody["imageUrl"],
+                                    image: responseBody["superimposed_image_url"],
                                   ),
                                 ),
                         ),

@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_slidable:
-  provider: ^5.0.0
+  provider:
   cupertino_icons: ^1.0.0
   animated_text_kit: ^3.1.0
   firebase_core:
