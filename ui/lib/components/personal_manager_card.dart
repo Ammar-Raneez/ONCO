@@ -12,13 +12,23 @@ class PersonalCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 15,
               vertical: 7,
             ),
             child: Container(
-
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0), //(x,y)
+                    blurRadius: 6.0,
+                  ),
+                ],
+              ),
               child: Container(
                 height: 130.0,
                 child: Padding(

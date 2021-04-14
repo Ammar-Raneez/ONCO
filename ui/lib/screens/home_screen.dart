@@ -19,11 +19,9 @@ class HomeScreen extends StatefulWidget {
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
-
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   final _firestore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser;
 
@@ -49,8 +47,8 @@ class _HomeScreenState extends State<HomeScreen> {
           .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
           .get()
           .then((value) => {
-        username = value.data()["username"],
-      });
+                username = value.data()["username"],
+              });
     } catch (e) {
       print(e);
     }
@@ -63,12 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         child: Center(
           child: Column(
-              children: [
+            children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: Align(
                   alignment: Alignment.topLeft,
-                  child:Container(
+                  child: Container(
                     child: Text(
                       'Hello,\n${username.toString()}!',
                       style: TextStyle(
@@ -79,70 +77,72 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-
               SizedBox(
                 height: 15,
               ),
-
               Padding(
-                padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Container(
                     child: Text(
                       'How can we help you?',
-                        style: TextStyle(
-                          color: Color(0xff59939F),
+                      style: TextStyle(
+                        color: Color(0xff59939F),
                         fontFamily: 'Poppins-SemiBold',
-                        fontSize: 16.0,),
+                        fontSize: 16.0,
+                      ),
                     ),
                   ),
                 ),
               ),
-
               SizedBox(
                 height: 20,
               ),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-
-                    right: 10,
-                    bottom: 5
-                  ),
-                  child: ScrollConfiguration(
-                    behavior: ScrollEffectBehaviour(),
-                    child: ListView(
+                  child: Padding(
+                padding: const EdgeInsets.only(right: 10, bottom: 5),
+                child: ScrollConfiguration(
+                  behavior: ScrollEffectBehaviour(),
+                  child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
                         Container(
-                            child:GestureDetector(
-                              onTap: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context)=> PersonalManager()
-                                  ),
-                                );
-                              },
-                                  child: HomeCard(cardTitle: 'Personal Manager', cardColor: '0xFFdb5682', textColor: '0xFFFFFFFF', ),
-                            )
-                        ),
+                            child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PersonalManager()),
+                            );
+                          },
+                          child: HomeCard(
+                            cardTitle: 'Personal Manager',
+                            cardColor: '0xFFdb5682',
+                            textColor: '0xFFFFFFFF',
+                            imageName: "personalManager.jpg",
+                          ),
+                        )),
                         Container(
-                            child: HomeCard(cardTitle: 'Exercise Plan', cardColor: '0xFFa4d44a', textColor: '0xFFFFFFFF', )
-                        ),
+                            child: HomeCard(
+                          cardTitle: 'Exercise Plan',
+                          cardColor: '0xFFa4d44a',
+                          textColor: '0xFFFFFFFF',
+                          imageName: "exercise.jpg",
+                        )),
                         Container(
-                            child: HomeCard(cardTitle: 'Meal Plan', cardColor: '0xFF4ad4b1', textColor: '0xFFFFFFFF', )
-                        ),
-                      ]
-              ),
-                  ),
-                )
-              ),
+                            child: HomeCard(
+                          cardTitle: 'Meal Plan',
+                          cardColor: '0xFF4ad4b1',
+                          textColor: '0xFFFFFFFF',
+                          imageName: "mealPlan.jpg",
+                        )),
+                      ]),
+                ),
+              )),
               SizedBox(
                 height: 21,
               ),
-
             ],
           ),
         ),

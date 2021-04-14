@@ -7,8 +7,9 @@ class HomeCard extends StatelessWidget {
   final String cardTitle;
   final String cardColor;
   final String textColor;
+  final String imageName;
 
-  HomeCard({@required this.cardTitle, @required this.cardColor, @required this.textColor}); //constructor to init values
+  HomeCard({@required this.cardTitle, @required this.cardColor, @required this.textColor, @required this.imageName}); //constructor to init values
 
   @override
   Widget build(BuildContext buildContext) => Padding(
@@ -17,8 +18,15 @@ class HomeCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
         ),
-
         child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            image: DecorationImage(
+              image: AssetImage("images/" + imageName),
+              fit: BoxFit.fill,
+              alignment: Alignment.center,
+            ),
+          ),
           width: 290.0,
           height: 480.0,
 
@@ -30,7 +38,7 @@ class HomeCard extends StatelessWidget {
               child:Text(
               cardTitle,
               style: TextStyle(
-                fontSize: 20.0,
+                fontSize: 22.0,
                 color: Color(int.parse(textColor)),
                 fontFamily: 'Poppins-SemiBold',
               ),
@@ -38,8 +46,8 @@ class HomeCard extends StatelessWidget {
           ),
           ),
         ),
-
-        color: Color(int.parse(cardColor)),
+        elevation: 2,
+        // color: Color(int.parse(cardColor)),
       ),
   );
 }

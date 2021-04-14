@@ -12,12 +12,13 @@ class TreatmentCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18.0),
       ),
+      elevation: 10,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           image: DecorationImage(
             image: AssetImage("images/" + cardImage),
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.fill,
             alignment: Alignment.center,
           ),
         ),
