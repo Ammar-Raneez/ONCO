@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/screens/settings_screen.dart';
 
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -25,7 +26,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: Icon(Icons.settings,
             color: Colors.white,
             size: 25.0,),
-        onPressed: () {  },
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context)=> SettingsScreen()
+            ),
+          );
+        },
       );
     }
   }

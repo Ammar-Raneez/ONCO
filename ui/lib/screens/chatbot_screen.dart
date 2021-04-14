@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/chatbot_message_bubble.dart';
@@ -11,11 +12,11 @@ import 'package:ui/constants.dart';
 final _firestore = FirebaseFirestore.instance;
 
 //To fetch username, and check current user
-var loggedInUserEP;
-var loggedInUserGoogle;
+var loggedInUserEP = "";
+var loggedInUserGoogle = "";
 
 //store current username
-var username;
+var username = "";
 
 class ChatBotScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -33,8 +34,12 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 
   Dio dio = new Dio();
 
+  // user message
   String messageText;
+  // bot response
   var responseText;
+
+  bool showSpinner = false;
 
   @override
   void initState() {
@@ -43,6 +48,10 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   }
 
   void getCurrentUser() async {
+    setState(() {
+      showSpinner = true;
+    });
+
     try {
       if (user != null) {
         // This will run when the user logs in using the normal username and password way
@@ -53,16 +62,21 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       }
 
       //fetch username
-      _firestore
+      var userDocument = await _firestore
           .collection("users")
           .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
-          .get()
-          .then((value) => {
-                username = value.data()["username"],
-              });
+          .get();
+
+      setState(() {
+        username = userDocument.data()['username'];
+      });
     } catch (e) {
       print(e);
     }
+
+    setState(() {
+      showSpinner = false;
+    });
   }
 
   createAlertDialog(
@@ -94,12 +108,20 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       'timestamp': Timestamp.now(),
     });
 
+    // use this flag to disable the text field, since it takes
+    // a few seconds for the initial response
+    setState(() {
+      responseText = "empty";
+    });
+
     //send data to chat bot api and get back response
     try {
       Response response = await dio.post(
           'https://chatbot-deployment.azurewebsites.net/api/chatbot-deployment',
           data: {'UserIn': messageText});
-      responseText = response.toString();
+      setState(() {
+        responseText = response.toString();
+      });
 
       //add chat bot response to firestore
       _firestore
@@ -120,54 +142,59 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/clouds.png'),
-            fit: BoxFit.cover
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            MessageStream(),
-            Container(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10.0,
-                        right: 10.0,
-                      ),
-                      child: TextField(
-                        onChanged: (value) {
-                          messageText = value;
-                        },
-                        controller: messageTextController,
-                        decoration: kTextFieldDecoration.copyWith(
-                            suffixIcon: IconButton(
-                                icon: Icon(Icons.send),
-                                onPressed: handleSendMessage,
-                                color: Colors.lightBlueAccent),
-                            prefixIcon: Container(
-                              width: 0,
-                              height: 0,
+      child: ModalProgressHUD(
+        inAsyncCall: showSpinner,
+        // if user is being fetched display a loading spinner
+        child: username == ""
+            ? Align(
+                child: CircularProgressIndicator(),
+                alignment: Alignment.center,
+              )
+            : Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('images/clouds.png'),
+                      fit: BoxFit.cover),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    MessageStream(),
+                    Container(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10.0,
+                                right: 10.0,
+                              ),
+                              child: TextField(
+                                onChanged: (value) {
+                                  messageText = value;
+                                },
+                                enabled: responseText == "empty" ? false : true,
+                                controller: messageTextController,
+                                decoration: kTextFieldDecoration.copyWith(
+                                    suffixIcon: IconButton(
+                                        icon: Icon(Icons.send),
+                                        onPressed: handleSendMessage,
+                                        color: Colors.lightBlueAccent),
+                                    hintText: 'Write a message'),
+                              ),
                             ),
-                            hintText: 'Write a message'),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -190,10 +217,9 @@ class MessageStream extends StatelessWidget {
       builder: (context, snapshot) {
         //while fetching display a spinner
         if (!snapshot.hasData) {
-          return Center(
-            child: CircularProgressIndicator(
-              backgroundColor: Colors.lightBlueAccent,
-            ),
+          return Container(
+            height: 0,
+            width: 0,
           );
         }
 
@@ -218,14 +244,15 @@ class MessageStream extends StatelessWidget {
         }
 
         //initial prompt message
-
-        messageBubbles.add(new MessageBubble(
-          messageSender: 'CHANCO',
-          messageText:
-              'Hi ${username.toString().toUpperCase()}! How can I help you today?',
-          isMe: false,
-          time: "",
-        ));
+        messageBubbles.add(
+          new MessageBubble(
+            messageSender: 'CHANCO',
+            messageText:
+                'Hi ${username.toString().toUpperCase()}! How can I help you today?',
+            isMe: false,
+            time: "",
+          ),
+        );
 
         return Expanded(
           child: ListView(
@@ -238,5 +265,3 @@ class MessageStream extends StatelessWidget {
     );
   }
 }
-
-//Replace IP address here with deployment address

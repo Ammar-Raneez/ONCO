@@ -12,7 +12,7 @@ const kTextFieldDecoration = InputDecoration(
   fillColor: Colors.white,
   filled: true,
   hintText: '',
-  prefixIcon: Icon(Icons.done),
+//  prefixIcon: Icon(Icons.done),
   hintStyle: TextStyle(color: Colors.grey),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border: OutlineInputBorder(

@@ -7,9 +7,7 @@ import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'Personal Manager/personalManager_screen.dart';
 
 //store current username
-var username;
-
-
+var username = "";
 
 //To fetch username, and check current user
 var loggedInUserEP;
