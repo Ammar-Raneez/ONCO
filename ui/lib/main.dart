@@ -48,10 +48,6 @@ class MyApp extends StatelessWidget {
   );
 }
 
-
-
-
-
 // // Main method CALLED at which the APP STARTS INITIALLY
 // void main() {
 //   // String name = "";
