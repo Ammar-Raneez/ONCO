@@ -19,17 +19,6 @@ class CancerCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
       ),
       child: Container(
-<<<<<<< HEAD
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-          image: DecorationImage(
-            image: AssetImage("images/" + cardImage),
-            fit: BoxFit.fitWidth,
-            alignment: Alignment.center,
-          ),
-        ),
-=======
->>>>>>> parent of 3713b55 (added styles adjustments for main cancer screen page, select service screen page and treatment card)
         width: 400,
         height: 120.0,
         child: Padding(
