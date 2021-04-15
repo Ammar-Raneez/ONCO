@@ -148,7 +148,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         // displaying the spinner for async tasks
         inAsyncCall: showSpinner,
         child: Scaffold(
-          appBar: CustomAppBar("arrow", context),
+          appBar: CustomAppBar.arrow(context),
           body: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

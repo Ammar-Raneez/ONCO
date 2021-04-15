@@ -23,13 +23,13 @@ class _MedicationManagerState extends State<MedicationManager> {
     @override
     Widget build(BuildContext context) {
       return Scaffold(
+        appBar: CustomAppBar.arrow(context),
         body: SafeArea(
           child: Stack(
             children: [
 
               Column(
                 children: [
-                  CustomAppBar("arrow", context),
                   Column(
                     children: [
 

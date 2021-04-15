@@ -30,7 +30,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar("arrow", context),
+        appBar: CustomAppBar.arrow(context),
         body: Container(
           child: SingleChildScrollView(
             child: Container(

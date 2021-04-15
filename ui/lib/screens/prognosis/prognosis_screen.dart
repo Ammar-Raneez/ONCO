@@ -123,7 +123,7 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: CustomAppBar("arrow", context),
+        appBar: CustomAppBar.arrow(context),
         body:  Container(
           height: size.height,
           child: Column(

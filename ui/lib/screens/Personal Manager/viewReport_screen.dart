@@ -12,11 +12,11 @@ class _ViewReportState extends State<ViewReport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar.arrow(context),
       body: SafeArea(
         child: Container(
           child:Column(
             children: [
-              CustomAppBar("arrow", context),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

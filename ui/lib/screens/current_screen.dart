@@ -39,7 +39,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
   // Getting the current user details
   void getCurrentUser() async {
-
+    print(loggedInUser.email);
     try {
       // getting the current user (email/pass auth)
       final user = _auth.currentUser;
@@ -63,6 +63,8 @@ class _CurrentScreenState extends State<CurrentScreen> {
     } catch (e) {
       print(e);
     }
+    print(username);
+
   }
 
   // pageController for the navigation bar
@@ -98,7 +100,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
           return true;
         },
         child: Scaffold(
-          appBar: CustomAppBar("settings", context),
+          appBar: CustomAppBar.settings(username, loggedInUser.email, context),
 
           // under this body only the screen go into
           body: PageView(
