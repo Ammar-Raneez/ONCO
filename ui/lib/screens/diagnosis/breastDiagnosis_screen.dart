@@ -192,13 +192,6 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
                                   color: Colors.lightBlueAccent,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      offset: Offset(0.0, 1.0), //(x,y)
-                                      blurRadius: 6.0,
-                                    ),
-                                  ],
                                 ),
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 50,
@@ -222,13 +215,6 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
                                   color: Colors.lightBlueAccent,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      offset: Offset(0.0, 1.0), //(x,y)
-                                      blurRadius: 6.0,
-                                    ),
-                                  ],
                                 ),
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 50,

@@ -24,7 +24,7 @@ class CancerCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(18),
           image: DecorationImage(
             image: AssetImage("images/" + cardImage),
-            fit: BoxFit.fill,
+            fit: BoxFit.fitWidth,
             alignment: Alignment.center,
           ),
         ),
