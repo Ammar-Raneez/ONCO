@@ -75,9 +75,6 @@ class _LoginScreenState extends State<LoginScreen> {
             if (document.data()['userEmail'] == user.user.email) {
               // setting the user name and its email to the global user details variable
               UserDetails.setUserData(user.user.email, document.data()['username']);
-              print("// Getting a snapshot of the users (to get username of logged in user)");
-              print(UserDetails.getUserData()["email"]);
-              print(UserDetails.getUserData()["username"]);
             }
           });
 
@@ -136,8 +133,6 @@ class _LoginScreenState extends State<LoginScreen> {
             emailDoesExist = true;
             // adding user details for global access
             UserDetails.setUserData(GoogleUserSignInDetails.googleSignInUserEmail, document.data()['username']);
-            print(UserDetails.getUserData()["email"]);
-            print(UserDetails.getUserData()["username"]);
           }
         });
 

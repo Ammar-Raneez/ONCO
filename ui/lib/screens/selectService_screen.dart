@@ -30,6 +30,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar("arrow", context),
+<<<<<<< HEAD
         body: Container(
           child: SingleChildScrollView(
             child: Container(
@@ -45,6 +46,49 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                       fontFamily: 'Poppins-SemiBold',
                       fontSize: 27.0,
                       color: Color(0xFF565D5E),
+=======
+           body: Container(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: 22.0,
+                  right: 22,
+                ),
+                child: Center(
+                  child: Column(children: [
+                    Text(
+                      "Select an option",
+                      style: TextStyle(
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 27.0,
+                        color: Color(0xFF565D5E),
+                      ),
+                    ),
+                    Text(
+                      widget.cancerType,
+                      style: TextStyle(
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 27.0,
+                        color: Color(0xFF93ACB1),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => widget.diagnosisRoute,
+                          ),
+                        );
+                      },
+                      child: TreatmentCard(cardTitle: 'Diagnosis'),
+                    ),
+                    SizedBox(
+                      height: 2,
+>>>>>>> parent of 3713b55 (added styles adjustments for main cancer screen page, select service screen page and treatment card)
                     ),
                   ),
                   Text(
@@ -71,6 +115,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                       cardTitle: 'Diagnosis',
                       cardImage: "diagnosis.jpg",
                     ),
+<<<<<<< HEAD
                   ),
                   SizedBox(
                     height: 2,
@@ -81,6 +126,18 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                       fontFamily: 'Poppins-SemiBold',
                       fontSize: 18.0,
                       color: Color(0xFF959595),
+=======
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => widget.prognosisRoute,
+                            ),
+                          );
+                        },
+                        child: TreatmentCard(cardTitle: 'Prognosis'),
+>>>>>>> parent of 3713b55 (added styles adjustments for main cancer screen page, select service screen page and treatment card)
                     ),
                   ),
                   SizedBox(
