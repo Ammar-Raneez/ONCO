@@ -1,6 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 
+class AlertWidget extends StatelessWidget {
+  // Variables
+  final String title;
+  final String message;
+  final int status;
+
+  // Constructor
+  AlertWidget({this.title, this.message, this.status});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: new RoundedRectangleBorder(
+        borderRadius: new BorderRadius.circular(20.0),
+      ),
+      title: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 1.0, color: Colors.grey),
+          ),
+        ),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.notification_important,
+                  color: Colors.redAccent,
+                  size: 25,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  title,
+                  style: TextStyle(
+                      color: Colors.black54,
+                      fontFamily: 'Poppins-Regular',
+                      fontSize: 19,
+                      fontWeight: FontWeight.w900),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 15,
+            )
+          ],
+        ),
+      ),
+      content: Text(
+        message,
+        style: TextStyle(color: Colors.black54),
+      ),
+      elevation: 2.0,
+      actions: [
+        Container(
+          margin: const EdgeInsets.only(right: 10.0, bottom: 5.0),
+          child: MaterialButton(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+            color: Color(0xff01CDFA),
+            shape: new RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(10.0),
+            ),
+            onPressed: () {
+
+            },
+            child: Text(
+              "Change",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
+// creating an alert
+createAlertDialog(
+    BuildContext context, String title, String message, int status) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertWidget(
+        title: title,
+        message: message,
+        status: status,
+      );
+    },
+  );
+}
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -18,8 +112,7 @@ class SettingsScreen extends StatefulWidget {
   String userName;
   String email;
 
-  SettingsScreen(String userName, String email)
-  {
+  SettingsScreen(String userName, String email) {
     this.userName = userName;
     this.email = email;
   }
@@ -44,6 +137,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: CustomAppBar.arrow(context),
           body: Container(
             child: Center(
@@ -97,7 +191,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     userName,
                                     style: TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
-                                      fontSize: 16.0,
+                                      fontSize: 20.0,
                                       color: Color(0xFFE1F6FD),
                                     ),
                                 ),
@@ -105,7 +199,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     email,
                                     style:TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
-                                      fontSize: 14.0,
+                                      fontSize: 16.0,
                                       color: Color(0xFF565D5E),
                                     ),
                                   ),
@@ -115,9 +209,79 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ],
                       ),
-
                       )
                     ),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, bottom: 20, top: 20),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                          style:TextStyle(
+                            fontFamily: 'Poppins-SemiBold',
+                            fontSize: 16.0,
+                            color: Color(0xFF565D5E),
+                          ),
+                          cursorColor: Theme.of(context).cursorColor,
+                          initialValue: userName,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () {
+
+                              },
+                              icon: Icon(Icons.edit),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF637477)),
+                            ),
+                          ),
+                        ),
+                        TextFormField(
+                          style:TextStyle(
+                            fontFamily: 'Poppins-SemiBold',
+                            fontSize: 16.0,
+                            color: Color(0xFF565D5E),
+                          ),
+                          obscureText: true,
+                          cursorColor: Theme.of(context).cursorColor,
+                          initialValue: 'Password',
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () => {
+                                createAlertDialog(context, "GOOD", "WOW", 2),
+                              },
+                              icon: Icon(Icons.edit),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF637477)),
+                            ),
+                          ),
+                        ),
+                        TextFormField(
+                          style:TextStyle(
+                            fontFamily: 'Poppins-SemiBold',
+                            fontSize: 16.0,
+                            color: Color(0xFF565D5E),
+                          ),
+                          cursorColor: Theme.of(context).cursorColor,
+                          initialValue: email,
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(
+                              Icons.edit,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF637477)),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
