@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/screens/Personal%20Manager/reportManager/models/prognosis_report.dart';
+import 'package:ui/screens/Personal%20Manager/reportManager/api/ReportProvider.dart';
+import 'package:ui/screens/Personal%20Manager/reportManager/models/report.dart';
+import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
 
 class ViewReport extends StatefulWidget {
   @override
@@ -83,30 +86,7 @@ class _ViewReportState extends State<ViewReport> {
 
                 ListView(
                   children: [
-                    Container(
 
-                      child: StreamBuilder<List<Prognosis>>(
-                          // stream: ReportFirebaseApi.),
-                          builder: (context, snapshot) {
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.waiting:
-                                return Center(
-                                    child: CircularProgressIndicator());
-                              default:
-                                if (snapshot.hasError) {
-                                  return buildText(
-                                      'Something went wrong, Try later');
-                                } else {
-                                  final reports = snapshot.data;
-
-                                  final provider = Provider.of<MedicationProvider>(context);
-                                  provider.setMedications(medications);
-
-                                  return MedicationListWidget();
-                                }
-                            }
-                          }
-                      ),
                   ],
                 )
 
