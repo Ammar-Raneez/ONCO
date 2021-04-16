@@ -4,8 +4,9 @@ class ReportCard extends StatelessWidget {
 
   final String reportDate;
   final String reportType;
+  Re
 
-  ReportCard({@required this.reportDate,@required this.reportType});
+  ReportCard({@required this.report,@required this.reportType});
 
   @override
   Widget build(BuildContext context) {
