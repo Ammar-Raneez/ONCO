@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/reports_card.dart';
+import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
 
+import 'api/ReportProvider.dart';
+import 'models/report.dart';
 import 'viewReport_screen.dart';
 
 class ReportManager extends StatefulWidget {
@@ -64,21 +68,44 @@ class _ReportManagerState extends State<ReportManager> {
                     ),
                   ],
                 ),
-                GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ViewReport() // Navigates to Task Page
-                        ),
-                      ).then((value){
-                        setState(() {}); // Setting and Refreshing State
-                      });
-                    },
-                    child: ReportCard(reportDate: "28th April 2021", reportType: "Lung Cancer Prognosis")
+                // GestureDetector(
+                //     onTap: (){
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => ViewReport() // Navigates to Task Page
+                //         ),
+                //       ).then((value){
+                //         setState(() {}); // Setting and Refreshing State
+                //       });
+                //     },
+                //     child: ReportCard(reportDate: "28th April 2021", reportType: "Lung Cancer Prognosis")
+                // ),
+                Container(
+
+                  child: StreamBuilder<List<Report>>(
+                    // stream: ReportFirebaseApi.),
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.waiting:
+                            return Center(
+                                child: CircularProgressIndicator());
+                          default:
+                            if (snapshot.hasError) {
+                              return buildText(
+                                  'Something went wrong, Try later');
+                            } else {
+                              final reports = snapshot.data;
+
+                              final provider = Provider.of<ReportProvider>(context);
+                              provider.setReports(reports);
+
+                              return ReportListWidget();
+                            }
+                        }
+                      }
+                  ),
                 ),
-                ReportCard(reportDate: "24th April 2021", reportType: "Breast Cancer Prognosis"),
-                ReportCard(reportDate: "5th April 2021", reportType: "Lung Cancer Diagnosis"),
 
               ],
             )
@@ -88,3 +115,10 @@ class _ReportManagerState extends State<ReportManager> {
     );
   }
 }
+
+Widget buildText(String text) => Center(
+  child: Text(
+    text,
+    style: TextStyle(fontSize: 24, color: Colors.white),
+  ),
+);
