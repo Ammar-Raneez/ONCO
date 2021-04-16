@@ -97,7 +97,8 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
             .doc(UserDetails.getUserData()["email"])
             .collection("imageDetections")
             .add({
-          "type": "lung",
+          "cancerType": "lung",
+          "reportType": "diagnosis",
           "result": resultPrediction,
           "imageUrl": resultImageURL,
           "percentage": resultPercentage,
