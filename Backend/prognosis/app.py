@@ -51,7 +51,12 @@ class LungCancerPrognosis(Resource):
 
         args = parser.parse_args()  # creates dictionary
         prognosis_input = np.fromiter(args.values(), dtype=float)  # convert input to array
+
+        print(prognosis_input)
+
         out = {'Prediction': LUNG_PROGNOSIS_MODEL.predict([prognosis_input])[0]}
+
+        print(out)
 
         return out, 200  # returns 200 Status Code if successful with the Output
 
@@ -88,10 +93,20 @@ class BreastCancerPrognosis(Resource):
 
         args = parser.parse_args()  # creates dictionary
         prognosis_input = np.fromiter(args.values(), dtype=float)  # convert input to array
+
+        print(prognosis_input)
+
         out = {'Prediction': BREAST_PROGNOSIS_MODEL.predict([prognosis_input])[0]}
+
+        print(out)
 
         return out, 200  # returns 200 Status Code if successful with the Output
 
+
+# ### Adding the predict class as a resource to the API
+
+API.add_resource(BreastCancerPrognosis, '/prognosis_breast')
+API.add_resource(LungCancerPrognosis, '/prognosis_lung')
 
 # Running the Main Application
 if __name__ == "__main__":
