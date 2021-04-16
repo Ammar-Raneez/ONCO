@@ -1,7 +1,7 @@
 import requests
 
-LUNG_CANCER_PROGNOSIS_URL = 'http://127.0.0.1:5000/prognosis_lung'  # localhost and the defined port + endpoint
-BREAST_CANCER_PROGNOSIS_URL = 'http://127.0.0.1:5000/prognosis_breast'  # localhost and the defined port + endpoint
+LUNG_CANCER_PROGNOSIS_URL = 'https://onco-prognosis-backend.herokuapp.com/prognosis_lung'  # localhost and the defined port + endpoint
+BREAST_CANCER_PROGNOSIS_URL = 'https://onco-prognosis-backend.herokuapp.com/prognosis_breast'  # localhost and the defined port + endpoint
 
 lung_cancer_prognosis_body = {
     "Age": 44,
