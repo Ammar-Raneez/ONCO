@@ -55,6 +55,44 @@ class LungCancerPrognosis(Resource):
 
         return out, 200  # returns 200 Status Code if successful with the Output
 
+
+# ### Creating a class which is responsible for the prognosis of Breast Cancer
+
+class BreastCancerPrognosis(Resource):
+
+    @staticmethod
+    def post():
+        parser = reqparse.RequestParser()
+        parser.add_argument('radius_mean')
+        parser.add_argument('texture_mean')
+        parser.add_argument('perimeter_mean')
+        parser.add_argument('compactness_mean')
+        parser.add_argument('concavity_mean')
+        parser.add_argument('concave points_mean')
+        parser.add_argument('fractal_dimension_mean')
+        parser.add_argument('radius_se')
+        parser.add_argument('texture_se')
+        parser.add_argument('perimeter_se')
+        parser.add_argument('compactness_se')
+        parser.add_argument('concavity_se')
+        parser.add_argument('concave points_se')
+        parser.add_argument('symmetry_se')
+        parser.add_argument('fractal_dimension_se')
+        parser.add_argument('compactness_worst')
+        parser.add_argument('concavity_worst')
+        parser.add_argument('concave points_worst')
+        parser.add_argument('symmetry_worst')
+        parser.add_argument('fractal_dimension_worst')
+        parser.add_argument('tumor_size')
+        parser.add_argument('positive_axillary_lymph_node')
+
+        args = parser.parse_args()  # creates dictionary
+        prognosis_input = np.fromiter(args.values(), dtype=float)  # convert input to array
+        out = {'Prediction': BREAST_PROGNOSIS_MODEL.predict([prognosis_input])[0]}
+
+        return out, 200  # returns 200 Status Code if successful with the Output
+
+
 # Running the Main Application
 if __name__ == "__main__":
     APP.run(debug=True)
