@@ -97,7 +97,8 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .doc(UserDetails.getUserData()["email"])
             .collection("imageDetections")
             .add({
-                    "type": "skin",
+                    "cancerType": "skin",
+                    "reportType": "diagnosis",
                     "result": resultDetection,
                     "imageUrl": imageDownloadURL,
                     'timestamp': Timestamp.now(),
