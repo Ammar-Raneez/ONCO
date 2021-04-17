@@ -153,8 +153,8 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
             : Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('images/clouds.png'),
-                      fit: BoxFit.cover),
+                      image: AssetImage('images/bot.png'),
+                      fit: BoxFit.contain),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
