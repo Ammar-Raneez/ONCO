@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:ui/screens/settings_screen.dart';
 
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   var iconButton; // This Variable holds the Icon type required for the left part of the App Bar
   // Constructor for the RoundedAppBar Component
-  CustomAppBar(String iconName, BuildContext context) {
+  CustomAppBar.arrow(BuildContext context) {
 
-    if (iconName == "arrow")
-    {
       this.iconButton = new IconButton(
 
         icon: Icon(Icons.arrow_back_sharp,
@@ -18,16 +17,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Navigator.pop(context);
         },
       );
-    }
-    else if (iconName == "settings")
-    {
-      this.iconButton = new IconButton(
-          icon: Icon(Icons.settings,
-            color: Colors.white,
-            size: 25.0,),
-        onPressed: () {  },
-      );
-    }
+  }
+
+  CustomAppBar.settings(String userName, String email, BuildContext context) {
+
+    this.iconButton = new IconButton(
+      icon: Icon(Icons.settings,
+        color: Colors.white,
+        size: 25.0,),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context)=> SettingsScreen(userName, email)
+          ),
+        );
+      },
+    );
   }
 
   @override

@@ -1,15 +1,13 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/rounded_button.dart';
-import 'package:ui/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:ui/services/UserDetails.dart';
 
@@ -18,10 +16,10 @@ class LungCancerDiagnosis extends StatefulWidget {
   static String id = "lungCancerDiagnosisScreen";
 
   @override
-  _LungCancerDiagnosisState createState() => _LungCancerDiagnosisState();
+  LungCancerDiagnosisState createState() => LungCancerDiagnosisState();
 }
 
-class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
+class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   //  VARIABLES
   File imageFile;
   Dio dio = new Dio();
@@ -83,18 +81,17 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         print(formData);
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
-        Response response = await dio.post(
-          "https://lungmodelsdgp.azurewebsites.net/api/lungmodelsdgp?model=lung",
-          data: formData,
-        );
+        await getResponse(formData);
+        // Response response = await dio.post(
+        //   "https://lungmodelsdgp.azurewebsites.net/api/lungmodelsdgp?model=lung",
+        //   data: formData,
+        // );
 
-        // Converting the Json String into an actual Json Object
-        // responseBody = json.decode(response.toString());
-        // print(responseBody);
-
-        String resultString = response.data[0]['prediction'];
-        String imageDownloadURL = response.data[0]['image_url'];
-        String resultPercentage = response.data[0]['prediction_percentage'];
+        // RESPONSE RESULT FROM THE BACKEND
+        // responseBody = response.data[0];
+        String resultPrediction = responseBody['predition'];
+        String resultImageURL = responseBody['superimposed_image_url'];
+        String resultPercentage = responseBody['prediction_percentage'];
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -102,28 +99,13 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
             .doc(UserDetails.getUserData()["email"])
             .collection("imageDetections")
             .add({
-          "type": "lung",
-          "result": resultString,
-          "imageUrl": imageDownloadURL,
+          "cancerType": "lung",
+          "reportType": "diagnosis",
+          "result": resultPrediction,
+          "imageUrl": resultImageURL,
           "percentage": resultPercentage,
           'timestamp': Timestamp.now(),
         });
-
-        // Output Results
-        // print(responseBody["result"]);
-        // print(responseBody["imageUrl"]);
-        // print(responseBody["percentage"]);
-
-        // Creating fake response at the moment to create the ui functionality and stuff-----
-        // await Future.delayed(const Duration(seconds: 5), () {
-        //   response = {
-        //     "result": "CANCER",
-        //     "imageFileName": "https://firebasestorage.googleapis.com/v0/b/onco-127df.appspot.com/o",
-        //     "percentPredict": 100.0
-        //   };
-        // });
-        //
-        // print(response["result"]);
 
         // Display the spinner to indicate that its loading
         setState(() {
@@ -132,9 +114,10 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         });
 
         // checking if the response is not null and displaying the result
-        if (response != null) {
+        if (responseBody != null) {
           // Displaying the alert dialog
-          createAlertDialog(context, "Diagnosis", responseBody["result"], 201);
+          createAlertDialog(context, "Diagnosis",
+              "Detection result:" + resultPrediction, 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -150,6 +133,16 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
       }
     }
   }
+
+  // Getting the detection response
+   getResponse(FormData formData) async{
+    Response response =  await dio.post(
+      "https://lungmodelsdgp.azurewebsites.net/api/lungmodelsdgp?model=lung",
+      data: formData,
+    );
+    responseBody = response.data[0];
+  }
+
 
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
   _openCamera() async {
@@ -171,7 +164,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         // displaying the spinner for async tasks
         inAsyncCall: showSpinner,
         child: Scaffold(
-          appBar: CustomAppBar("arrow", context),
+          appBar: CustomAppBar.arrow(context),
           body: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -218,7 +211,9 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   padding: const EdgeInsets.all(22),
                                   child: imageFile == null
                                       ? Image.asset(
-                                          'images/uploadImageGrey1.png', scale: 15,)
+                                          'images/uploadImageGrey1.png',
+                                          scale: 15,
+                                        )
                                       : Image.file(
                                           imageFile,
                                           width: 500,
@@ -229,7 +224,8 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: FadeInImage.assetNetwork(
                                     placeholder: 'images/loading.gif',
-                                    image: responseBody["imageUrl"],
+                                    image:
+                                        responseBody["superimposed_image_url"],
                                   ),
                                 ),
                         ),
@@ -239,8 +235,8 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
-                              onTap:(){
-                              _openCamera();
+                              onTap: () {
+                                _openCamera();
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -248,10 +244,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: 50,
-                                  vertical: 15
-                                ),
-
+                                    horizontal: 50, vertical: 15),
                                 child: Icon(
                                   Icons.camera_alt_rounded,
                                   color: Colors.white,
@@ -262,7 +255,7 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               width: 20.0,
                             ),
                             GestureDetector(
-                              onTap:(){
+                              onTap: () {
                                 _openGallery();
                               },
                               child: Container(
@@ -271,17 +264,13 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 50,
-                                    vertical: 15
-                                ),
-
+                                    horizontal: 50, vertical: 15),
                                 child: Icon(
                                   Icons.photo,
                                   color: Colors.white,
                                 ),
                               ),
                             ),
-
                           ],
                         ),
                         SizedBox(
@@ -296,7 +285,8 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                 topLeft: Radius.circular(20.0)),
                           ),
                           width: double.infinity,
-                          padding: const EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
+                          padding: const EdgeInsets.only(
+                              top: 20, bottom: 20, left: 50, right: 50),
                           child: RawMaterialButton(
                             fillColor: Colors.black54,
                             child: Padding(
@@ -314,14 +304,15 @@ class _LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Poppins-Regular',
-                                        color: Colors.white
-                                    ),
+                                        color: Colors.white),
                                   ),
                                 ],
                               ),
                             ),
                             shape: const StadiumBorder(),
-                            onPressed: () {_detect();},
+                            onPressed: () {
+                              _detect();
+                            },
                           ),
                         ),
                       ],

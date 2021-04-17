@@ -78,20 +78,18 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
           "file":
               await MultipartFile.fromFile(imageFile.path, filename: fileName),
         });
-        print(formData);
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         Response response = await dio.post(
           "https://skinmodelsdgp.azurewebsites.net/api/skinmodelsdgp?model=skin",
           data: formData,
         );
+        print(response.data[0]);
+        // RESPONSE DATA FROM THE BACKEND
+        responseBody = response.data[0];
 
-        // Converting the Json String into an actual Json Object
-        // responseBody = json.decode(response.toString());
-        // print(responseBody);
-
-        String resultString = response.data[0]['result_string'];
-        String imageDownloadURL = response.data[0]['imageDownloadURL'];
+        String resultDetection = responseBody['result_string'];
+        String imageDownloadURL = responseBody['imageDownloadURL'];
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -99,8 +97,9 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .doc(UserDetails.getUserData()["email"])
             .collection("imageDetections")
             .add({
-                    "type": "skin",
-                    "result": resultString,
+                    "cancerType": "skin",
+                    "reportType": "diagnosis",
+                    "result": resultDetection,
                     "imageUrl": imageDownloadURL,
                     'timestamp': Timestamp.now(),
                   });
@@ -114,7 +113,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         if (response != null) {
           // Displaying the alert dialog
           createAlertDialog(
-              context, "Diagnosis", responseBody["result_string"], 201);
+              context, "Diagnosis", resultDetection, 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -150,7 +149,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         // displaying the spinner for async tasks
         inAsyncCall: showSpinner,
         child: Scaffold(
-          appBar: CustomAppBar("arrow", context),
+          appBar: CustomAppBar.arrow(context),
           body: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

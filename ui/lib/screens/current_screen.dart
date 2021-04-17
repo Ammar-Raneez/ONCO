@@ -16,6 +16,8 @@ class CurrentScreen extends StatefulWidget {
   _CurrentScreenState createState() => _CurrentScreenState();
 }
 
+var username = "";
+
 class _CurrentScreenState extends State<CurrentScreen> {
   // Page controller is used to control the flow of the main pages
   // (HOME, CANCER AND CHATBOT PAGE/SCREEN)
@@ -24,8 +26,9 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
   // using this User instance we can access the details of the logged user using
   // the normal email/pass auth method not the (Google Auth)
-  User loggedInUser;
+  User loggedInUser = FirebaseAuth.instance.currentUser;
   final _firestore = FirebaseFirestore.instance;
+  var loggedInUserGoogle = "";
 
   @override
   void initState() {
@@ -36,22 +39,32 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
   // Getting the current user details
   void getCurrentUser() async {
+    print(loggedInUser.email);
     try {
       // getting the current user (email/pass auth)
       final user = _auth.currentUser;
-
       if (user != null) {
         // This will run when the user logs in using the normal username and password way
         print("(Email-Password login) User is Present!");
         print(user.email);
       } else {
-        // This will fire when user logs in using the Google Authentication way
-        print("(Google Auth login) User is Present!");
-        print(GoogleUserSignInDetails.googleSignInUserEmail);
+        loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
       }
+
+      //fetch username
+      var userDocument = await _firestore
+          .collection("users")
+          .doc(loggedInUser.email != null ? loggedInUser.email : loggedInUserGoogle)
+          .get();
+
+      setState(() {
+        username = userDocument.data()['username'];
+      });
     } catch (e) {
       print(e);
     }
+    print(username);
+
   }
 
   // pageController for the navigation bar
@@ -87,7 +100,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
           return true;
         },
         child: Scaffold(
-          appBar: CustomAppBar("settings", context),
+          appBar: CustomAppBar.settings(username, loggedInUser.email, context),
 
           // under this body only the screen go into
           body: PageView(

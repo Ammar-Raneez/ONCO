@@ -12,13 +12,13 @@ class _ReportManagerState extends State<ReportManager> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar.arrow(context),
       body: SafeArea(
         child: Container(
           child:Column(
             children: [
               Column(
                 children: [
-                  CustomAppBar("arrow", context),
                   Column(
                     children: [
                       Padding(

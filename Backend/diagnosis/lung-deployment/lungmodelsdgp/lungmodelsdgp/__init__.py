@@ -27,7 +27,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         blob.upload_blob(filestream.read(), blob_type="BlockBlob", content_settings=cnt_settings)
     except:
         print("same image uploaded")
-        pass
 
     which_model = req.params.get('model')
     blob_data = blob.download_blob()
