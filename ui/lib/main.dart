@@ -16,7 +16,6 @@ import 'package:ui/screens/welcome_screen.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Color(0xff01CDFA), // status bar color
   ));
