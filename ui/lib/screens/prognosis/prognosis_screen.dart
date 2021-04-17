@@ -5,6 +5,7 @@ import 'package:ui/constants.dart';
 class CancerPrognosis extends StatefulWidget {
 
   var cancerType;
+  var url = "https://onco-prognosis-backend.herokuapp.com/";
   var cancerPrognosisAttributes;
 
   CancerPrognosis(String cancerType)
@@ -14,10 +15,12 @@ class CancerPrognosis extends StatefulWidget {
     if (cancerType == "Breast Cancer")
     {
       cancerPrognosisAttributes = BREAST_CANCER_PROGNOSIS_QUESTIONS;
+      url += "prognosis_breast";
     }
     else if (cancerType == "Lung Cancer")
     {
       cancerPrognosisAttributes = LUNG_CANCER_PROGNOSIS_QUESTIONS;
+      url += "prognosis_lung";
     }
     else if (cancerType == "Skin Cancer")
     {
@@ -26,7 +29,7 @@ class CancerPrognosis extends StatefulWidget {
   }
 
   @override
-  _CancerPrognosisState createState() => _CancerPrognosisState(cancerType, cancerPrognosisAttributes);
+  _CancerPrognosisState createState() => _CancerPrognosisState(cancerType, cancerPrognosisAttributes, url);
 }
 
 class _CancerPrognosisState extends State<CancerPrognosis> {
@@ -38,12 +41,14 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
   List<TextEditingController> textFieldControllers = [];
   var cancerType;
   var cancerPrognosisAttributes;
+  var url;
   var count = 0;
 
-  _CancerPrognosisState(var cancerType, var cancerPrognosisAttributes)
+  _CancerPrognosisState(var cancerType, var cancerPrognosisAttributes, var url)
   {
     this.cancerType = cancerType;
     this.cancerPrognosisAttributes = cancerPrognosisAttributes;
+    this.url = url;
   }
 
   void getPostsData() {
@@ -204,33 +209,32 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
 
                 padding: const EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
                 child: RawMaterialButton(
-                  fillColor: Colors.black54,
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const <Widget>[
-                        SizedBox(
-                          width: 10.0,
-                          height: 30.0,
-                        ),
-                        Text(
-                          "Predict",
-                          maxLines: 1,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins-Regular',
-                              color: Colors.white
+                    fillColor: Colors.black54,
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const <Widget>[
+                          SizedBox(
+                            width: 10.0,
+                            height: 30.0,
                           ),
-                        ),
-                      ],
+                          Text(
+                            "Predict",
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Poppins-Regular',
+                                color: Colors.white
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  shape: const StadiumBorder(), onPressed: () async {
+                    shape: const StadiumBorder(), onPressed: () async {
 
-                    print(textFieldControllers[0].text);
-                    print(textFieldControllers[11].text);
-                  }
+                      print(url);
+                    }
                 ),
               ),
             ],
