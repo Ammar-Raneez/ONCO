@@ -1,10 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/constants.dart';
 
 class CancerPrognosis extends StatefulWidget {
 
-  String cancerType;
+  var cancerType;
+  var url = "https://onco-prognosis-backend.herokuapp.com/";
   var cancerPrognosisAttributes;
 
   CancerPrognosis(String cancerType)
@@ -12,15 +15,23 @@ class CancerPrognosis extends StatefulWidget {
     this.cancerType = cancerType;
 
     if (cancerType == "Breast Cancer")
+    {
       cancerPrognosisAttributes = BREAST_CANCER_PROGNOSIS_QUESTIONS;
+      url += "prognosis_breast";
+    }
     else if (cancerType == "Lung Cancer")
+    {
       cancerPrognosisAttributes = LUNG_CANCER_PROGNOSIS_QUESTIONS;
+      url += "prognosis_lung";
+    }
     else if (cancerType == "Skin Cancer")
+    {
       cancerPrognosisAttributes = SKIN_CANCER_PROGNOSIS_QUESTIONS;
+    }
   }
 
   @override
-  _CancerPrognosisState createState() => _CancerPrognosisState(cancerType, cancerPrognosisAttributes);
+  _CancerPrognosisState createState() => _CancerPrognosisState(cancerType, cancerPrognosisAttributes, url);
 }
 
 class _CancerPrognosisState extends State<CancerPrognosis> {
@@ -29,19 +40,39 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
   bool closeTopContainer = false;
   double topContainer = 0;
   List<Widget> itemsData = [];
-  String cancerType;
+  List<TextEditingController> textFieldControllers = [];
+  Map prognosisBody;
+  var cancerType;
   var cancerPrognosisAttributes;
+  var url;
+  var count = 0;
 
-  _CancerPrognosisState(String cancerType, var cancerPrognosisAttributes)
+  // https://stackoverflow.com/questions/50278258/http-post-with-json-on-body-flutter-dart <- REFERENCE
+  Future<String> apiRequest() async {
+    HttpClient httpClient = new HttpClient();
+    HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+    request.headers.set('content-type', 'application/json');
+    request.add(utf8.encode(json.encode(prognosisBody)));
+    HttpClientResponse response = await request.close();
+    // todo - you should check the response.statusCode
+    String reply = await response.transform(utf8.decoder).join();
+    httpClient.close();
+    return reply;
+  }
+
+  _CancerPrognosisState(var cancerType, var cancerPrognosisAttributes, var url)
   {
     this.cancerType = cancerType;
     this.cancerPrognosisAttributes = cancerPrognosisAttributes;
+    this.url = url;
   }
 
   void getPostsData() {
     List<dynamic> responseList = cancerPrognosisAttributes;
     List<Widget> listItems = [];
     responseList.forEach((post) {
+      count ++;
+      textFieldControllers.add(new TextEditingController());
       listItems.add(
           Container(
               height: 190,
@@ -75,7 +106,7 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                                   )
                               ),
                               TextField(
-
+                                controller: textFieldControllers[count - 1],
                                 decoration: InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
@@ -194,29 +225,87 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
 
                 padding: const EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
                 child: RawMaterialButton(
-                  fillColor: Colors.black54,
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const <Widget>[
-                        SizedBox(
-                          width: 10.0,
-                          height: 30.0,
-                        ),
-                        Text(
-                          "Predict",
-                          maxLines: 1,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins-Regular',
-                              color: Colors.white
+                    fillColor: Colors.black54,
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const <Widget>[
+                          SizedBox(
+                            width: 10.0,
+                            height: 30.0,
                           ),
-                        ),
-                      ],
+                          Text(
+                            "Predict",
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Poppins-Regular',
+                                color: Colors.white
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  shape: const StadiumBorder(),
+                    shape: const StadiumBorder(), onPressed: () async {
+
+                      if (cancerType == "Lung Cancer") {
+                        prognosisBody = {
+                          "Age": textFieldControllers[0].text,
+                          "Gender": textFieldControllers[1].text,
+                          "AirPollution": textFieldControllers[2].text,
+                          "Alcoholuse": textFieldControllers[3].text,
+                          "DustAllergy": textFieldControllers[4].text,
+                          "OccuPationalHazards": textFieldControllers[5].text,
+                          "GeneticRisk": textFieldControllers[6].text,
+                          "chronicLungDisease": textFieldControllers[7].text,
+                          "BalancedDiet": textFieldControllers[8].text,
+                          "Obesity": textFieldControllers[9].text,
+                          "Smoking": textFieldControllers[10].text,
+                          "PassiveSmoker": textFieldControllers[11].text,
+                          "ChestPain": textFieldControllers[12].text,
+                          "CoughingofBlood": textFieldControllers[13].text,
+                          "Fatigue": textFieldControllers[14].text,
+                          "WeightLoss": textFieldControllers[15].text,
+                          "ShortnessofBreath": textFieldControllers[16].text,
+                          "Wheezing": textFieldControllers[17].text,
+                          "SwallowingDifficulty": textFieldControllers[18].text,
+                          "ClubbingofFingerNails": textFieldControllers[19].text,
+                          "FrequentCold": textFieldControllers[20].text,
+                          "DryCough": textFieldControllers[21].text,
+                          "Snoring": textFieldControllers[22].text,
+                        };
+                      }
+                      else if (cancerType == "Breast Cancer")
+                      {
+                        prognosisBody = {
+                          "radius_mean": textFieldControllers[0].text,
+                          "texture_mean": textFieldControllers[1].text,
+                          "perimeter_mean": textFieldControllers[2].text,
+                          "compactness_mean": textFieldControllers[3].text,
+                          "concavity_mean": textFieldControllers[4].text,
+                          "concave points_mean": textFieldControllers[5].text,
+                          "fractal_dimension_mean": textFieldControllers[6].text,
+                          "radius_se": textFieldControllers[7].text,
+                          "texture_se": textFieldControllers[8].text,
+                          "perimeter_se": textFieldControllers[9].text,
+                          "compactness_se": textFieldControllers[10].text,
+                          "concavity_se": textFieldControllers[11].text,
+                          "concave points_se": textFieldControllers[12].text,
+                          "symmetry_se": textFieldControllers[13].text,
+                          "fractal_dimension_se": textFieldControllers[14].text,
+                          "compactness_worst": textFieldControllers[15].text,
+                          "concavity_worst": textFieldControllers[16].text,
+                          "concave points_worst": textFieldControllers[17].text,
+                          "symmetry_worst": textFieldControllers[18].text,
+                          "fractal_dimension_worst": textFieldControllers[19].text,
+                          "tumor_size": textFieldControllers[20].text,
+                          "positive_axillary_lymph_node": textFieldControllers[21].text
+                        };
+                      }
+                      print(prognosisBody);
+                      print(await apiRequest());
+                    }
                 ),
               ),
             ],
