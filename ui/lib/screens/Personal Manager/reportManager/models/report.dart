@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class Report {
 
@@ -7,11 +8,11 @@ class Report {
   String result;
   String percentage;
   String reportType;
-  String reportDate;
+  Timestamp reportDate;
 
   Report({
     this.reportType = '',
-    this.reportDate='',
+    this.reportDate,
     this.imageUrl='',
     this.percentage='',
   }); // Constructor
@@ -20,7 +21,7 @@ class Report {
     reportType: json['reportType'],
     reportDate: json['timestamp'],
     imageUrl: json['imageUrl'],
-    percentage: json['percentage'],
+    percentage: json['percentage']
   );
 
 }
