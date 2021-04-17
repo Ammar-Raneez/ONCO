@@ -4,7 +4,7 @@ import 'package:ui/constants.dart';
 
 class CancerPrognosis extends StatefulWidget {
 
-  String cancerType;
+  var cancerType;
   var cancerPrognosisAttributes;
 
   CancerPrognosis(String cancerType)
@@ -12,11 +12,17 @@ class CancerPrognosis extends StatefulWidget {
     this.cancerType = cancerType;
 
     if (cancerType == "Breast Cancer")
+    {
       cancerPrognosisAttributes = BREAST_CANCER_PROGNOSIS_QUESTIONS;
+    }
     else if (cancerType == "Lung Cancer")
+    {
       cancerPrognosisAttributes = LUNG_CANCER_PROGNOSIS_QUESTIONS;
+    }
     else if (cancerType == "Skin Cancer")
+    {
       cancerPrognosisAttributes = SKIN_CANCER_PROGNOSIS_QUESTIONS;
+    }
   }
 
   @override
@@ -29,10 +35,12 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
   bool closeTopContainer = false;
   double topContainer = 0;
   List<Widget> itemsData = [];
-  String cancerType;
+  List<TextEditingController> textFieldControllers = [];
+  var cancerType;
   var cancerPrognosisAttributes;
+  var count = 0;
 
-  _CancerPrognosisState(String cancerType, var cancerPrognosisAttributes)
+  _CancerPrognosisState(var cancerType, var cancerPrognosisAttributes)
   {
     this.cancerType = cancerType;
     this.cancerPrognosisAttributes = cancerPrognosisAttributes;
@@ -42,6 +50,8 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
     List<dynamic> responseList = cancerPrognosisAttributes;
     List<Widget> listItems = [];
     responseList.forEach((post) {
+      count ++;
+      textFieldControllers.add(new TextEditingController());
       listItems.add(
           Container(
               height: 190,
@@ -75,7 +85,7 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                                   )
                               ),
                               TextField(
-
+                                controller: textFieldControllers[count - 1],
                                 decoration: InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
@@ -216,7 +226,11 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                       ],
                     ),
                   ),
-                  shape: const StadiumBorder(),
+                  shape: const StadiumBorder(), onPressed: () async {
+
+                    print(textFieldControllers[0].text);
+                    print(textFieldControllers[11].text);
+                  }
                 ),
               ),
             ],
