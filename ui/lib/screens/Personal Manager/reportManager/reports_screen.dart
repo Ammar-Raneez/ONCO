@@ -4,6 +4,7 @@ import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/reports_card.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
 
+import 'api/ReportFirebaseApi.dart';
 import 'api/ReportProvider.dart';
 import 'models/report.dart';
 import 'viewReport_screen.dart';
@@ -55,7 +56,7 @@ class _ReportManagerState extends State<ReportManager> {
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Here you can manage your medications, click add a medication to create one and drag the medication to delete it",
+                              "Here you can view your reports",
                               style: TextStyle(
                                   fontFamily: 'Poppins-SemiBold',
                                   fontSize: 13.0,
@@ -68,42 +69,34 @@ class _ReportManagerState extends State<ReportManager> {
                     ),
                   ],
                 ),
-                // GestureDetector(
-                //     onTap: (){
-                //       Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) => ViewReport() // Navigates to Task Page
-                //         ),
-                //       ).then((value){
-                //         setState(() {}); // Setting and Refreshing State
-                //       });
-                //     },
-                //     child: ReportCard(reportDate: "28th April 2021", reportType: "Lung Cancer Prognosis")
-                // ),
-                Container(
 
-                  child: StreamBuilder<List<Report>>(
-                    // stream: ReportFirebaseApi.),
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting:
-                            return Center(
-                                child: CircularProgressIndicator());
-                          default:
-                            if (snapshot.hasError) {
-                              return buildText(
-                                  'Something went wrong, Try later');
-                            } else {
-                              final reports = snapshot.data;
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Container(
 
-                              final provider = Provider.of<ReportProvider>(context);
-                              provider.setReports(reports);
+                    child: StreamBuilder<List<Report>>(
+                      stream: ReportFirebaseApi.readReports(),
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting:
+                              return Center(
+                                  child: CircularProgressIndicator());
+                            default:
+                              print(snapshot);
+                              if (snapshot.hasError) {
+                                return buildText(
+                                    'Something went wrong, Try later');
+                              } else {
+                                final reports = snapshot.data;
 
-                              return ReportListWidget();
-                            }
+                                final provider = Provider.of<ReportProvider>(context);
+                                provider.setReports(reports);
+
+                                return ReportListWidget();
+                              }
+                          }
                         }
-                      }
+                    ),
                   ),
                 ),
 
@@ -119,6 +112,6 @@ class _ReportManagerState extends State<ReportManager> {
 Widget buildText(String text) => Center(
   child: Text(
     text,
-    style: TextStyle(fontSize: 24, color: Colors.white),
+    style: TextStyle(fontSize: 24, color: Colors.black),
   ),
 );
