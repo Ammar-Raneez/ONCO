@@ -15,6 +15,7 @@ class ReportFirebaseApi {
       .collection("users")
       .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
       .collection("imageDetections")
+      .orderBy('timestamp')
       .snapshots()
       .transform(Utils.transformer(Report.fromJson)
   );
