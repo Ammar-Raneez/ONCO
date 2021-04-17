@@ -6,13 +6,30 @@ import 'package:ui/screens/Personal%20Manager/reportManager/models/report.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
 
 class ViewReport extends StatefulWidget {
+
+  final Report report;
+  ViewReport({@required this.report});
+
   @override
   _ViewReportState createState() => _ViewReportState();
 }
 
 class _ViewReportState extends State<ViewReport> {
-  var reportType="Name";
-  var reportDate="Date";
+
+  // Variables used within file
+  String _reportType;
+  String _reportDate;
+  String _reportPercentage;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _reportType = widget.report.reportType;
+    _reportDate = widget.report.reportDate.toString();
+    _reportPercentage = widget.report.percentage;
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +51,7 @@ class _ViewReportState extends State<ViewReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          reportDate,
+                          _reportDate,
                           style: TextStyle(
                               fontFamily: 'Poppins-SemiBold',
                               fontSize: 27,
@@ -53,7 +70,7 @@ class _ViewReportState extends State<ViewReport> {
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          reportType,
+                          _reportType,
                           style: TextStyle(
                               fontFamily: 'Poppins-SemiBold',
                               fontSize: 19,
