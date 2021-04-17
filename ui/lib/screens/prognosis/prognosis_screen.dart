@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/constants.dart';
@@ -39,10 +41,24 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   List<TextEditingController> textFieldControllers = [];
+  Map prognosisBody;
   var cancerType;
   var cancerPrognosisAttributes;
   var url;
   var count = 0;
+
+  // https://stackoverflow.com/questions/50278258/http-post-with-json-on-body-flutter-dart <- REFERENCE
+  Future<String> apiRequest() async {
+    HttpClient httpClient = new HttpClient();
+    HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+    request.headers.set('content-type', 'application/json');
+    request.add(utf8.encode(json.encode(prognosisBody)));
+    HttpClientResponse response = await request.close();
+    // todo - you should check the response.statusCode
+    String reply = await response.transform(utf8.decoder).join();
+    httpClient.close();
+    return reply;
+  }
 
   _CancerPrognosisState(var cancerType, var cancerPrognosisAttributes, var url)
   {
@@ -233,62 +249,62 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                     ),
                     shape: const StadiumBorder(), onPressed: () async {
 
-                      var prognosisBody;
-
                       if (cancerType == "Lung Cancer") {
                         prognosisBody = {
-                          "Age": itemsData[0],
-                          "Gender": itemsData[1],
-                          "AirPollution": itemsData[2],
-                          "Alcoholuse": itemsData[3],
-                          "DustAllergy": itemsData[4],
-                          "OccuPationalHazards": itemsData[5],
-                          "GeneticRisk": itemsData[6],
-                          "chronicLungDisease": itemsData[7],
-                          "BalancedDiet": itemsData[8],
-                          "Obesity": itemsData[9],
-                          "Smoking": itemsData[10],
-                          "PassiveSmoker": itemsData[11],
-                          "ChestPain": itemsData[12],
-                          "CoughingofBlood": itemsData[13],
-                          "Fatigue": itemsData[14],
-                          "WeightLoss": itemsData[15],
-                          "ShortnessofBreath": itemsData[16],
-                          "Wheezing": itemsData[17],
-                          "SwallowingDifficulty": itemsData[18],
-                          "ClubbingofFingerNails": itemsData[19],
-                          "FrequentCold": itemsData[20],
-                          "DryCough": itemsData[21],
-                          "Snoring": itemsData[22],
-                          };
-                        }
-                        else if (cancerType == "Lung Cancer")
-                        {
-                          prognosisBody = {
-                          "radius_mean": itemsData[1],
-                          "texture_mean": itemsData[2],
-                          "perimeter_mean": itemsData[3],
-                          "compactness_mean": itemsData[4],
-                          "concavity_mean": itemsData[5],
-                          "concave points_mean": itemsData[6],
-                          "fractal_dimension_mean": itemsData[7],
-                          "radius_se": itemsData[8],
-                          "texture_se": itemsData[9],
-                          "perimeter_se": itemsData[10],
-                          "compactness_se": itemsData[11],
-                          "concavity_se": itemsData[12],
-                          "concave points_se": itemsData[13],
-                          "symmetry_se": itemsData[14],
-                          "fractal_dimension_se": itemsData[15],
-                          "compactness_worst": itemsData[16],
-                          "concavity_worst": itemsData[17],
-                          "concave points_worst": itemsData[18],
-                          "symmetry_worst": itemsData[19],
-                          "fractal_dimension_worst": itemsData[20],
-                          "tumor_size": itemsData[21],
-                          "positive_axillary_lymph_node": itemsData[22]
-                          };
-                        }
+                          "Age": textFieldControllers[0].text,
+                          "Gender": textFieldControllers[1].text,
+                          "AirPollution": textFieldControllers[2].text,
+                          "Alcoholuse": textFieldControllers[3].text,
+                          "DustAllergy": textFieldControllers[4].text,
+                          "OccuPationalHazards": textFieldControllers[5].text,
+                          "GeneticRisk": textFieldControllers[6].text,
+                          "chronicLungDisease": textFieldControllers[7].text,
+                          "BalancedDiet": textFieldControllers[8].text,
+                          "Obesity": textFieldControllers[9].text,
+                          "Smoking": textFieldControllers[10].text,
+                          "PassiveSmoker": textFieldControllers[11].text,
+                          "ChestPain": textFieldControllers[12].text,
+                          "CoughingofBlood": textFieldControllers[13].text,
+                          "Fatigue": textFieldControllers[14].text,
+                          "WeightLoss": textFieldControllers[15].text,
+                          "ShortnessofBreath": textFieldControllers[16].text,
+                          "Wheezing": textFieldControllers[17].text,
+                          "SwallowingDifficulty": textFieldControllers[18].text,
+                          "ClubbingofFingerNails": textFieldControllers[19].text,
+                          "FrequentCold": textFieldControllers[20].text,
+                          "DryCough": textFieldControllers[21].text,
+                          "Snoring": textFieldControllers[22].text,
+                        };
+                      }
+                      else if (cancerType == "Breast Cancer")
+                      {
+                        prognosisBody = {
+                          "radius_mean": textFieldControllers[0].text,
+                          "texture_mean": textFieldControllers[1].text,
+                          "perimeter_mean": textFieldControllers[2].text,
+                          "compactness_mean": textFieldControllers[3].text,
+                          "concavity_mean": textFieldControllers[4].text,
+                          "concave points_mean": textFieldControllers[5].text,
+                          "fractal_dimension_mean": textFieldControllers[6].text,
+                          "radius_se": textFieldControllers[7].text,
+                          "texture_se": textFieldControllers[8].text,
+                          "perimeter_se": textFieldControllers[9].text,
+                          "compactness_se": textFieldControllers[10].text,
+                          "concavity_se": textFieldControllers[11].text,
+                          "concave points_se": textFieldControllers[12].text,
+                          "symmetry_se": textFieldControllers[13].text,
+                          "fractal_dimension_se": textFieldControllers[14].text,
+                          "compactness_worst": textFieldControllers[15].text,
+                          "concavity_worst": textFieldControllers[16].text,
+                          "concave points_worst": textFieldControllers[17].text,
+                          "symmetry_worst": textFieldControllers[18].text,
+                          "fractal_dimension_worst": textFieldControllers[19].text,
+                          "tumor_size": textFieldControllers[20].text,
+                          "positive_axillary_lymph_node": textFieldControllers[21].text
+                        };
+                      }
+                      print(prognosisBody);
+                      print(await apiRequest());
                     }
                 ),
               ),
