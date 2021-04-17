@@ -233,7 +233,62 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                     ),
                     shape: const StadiumBorder(), onPressed: () async {
 
-                      print(url);
+                      var prognosisBody;
+
+                      if (cancerType == "Lung Cancer") {
+                        prognosisBody = {
+                          "Age": itemsData[0],
+                          "Gender": itemsData[1],
+                          "AirPollution": itemsData[2],
+                          "Alcoholuse": itemsData[3],
+                          "DustAllergy": itemsData[4],
+                          "OccuPationalHazards": itemsData[5],
+                          "GeneticRisk": itemsData[6],
+                          "chronicLungDisease": itemsData[7],
+                          "BalancedDiet": itemsData[8],
+                          "Obesity": itemsData[9],
+                          "Smoking": itemsData[10],
+                          "PassiveSmoker": itemsData[11],
+                          "ChestPain": itemsData[12],
+                          "CoughingofBlood": itemsData[13],
+                          "Fatigue": itemsData[14],
+                          "WeightLoss": itemsData[15],
+                          "ShortnessofBreath": itemsData[16],
+                          "Wheezing": itemsData[17],
+                          "SwallowingDifficulty": itemsData[18],
+                          "ClubbingofFingerNails": itemsData[19],
+                          "FrequentCold": itemsData[20],
+                          "DryCough": itemsData[21],
+                          "Snoring": itemsData[22],
+                          };
+                        }
+                        else if (cancerType == "Lung Cancer")
+                        {
+                          prognosisBody = {
+                          "radius_mean": itemsData[1],
+                          "texture_mean": itemsData[2],
+                          "perimeter_mean": itemsData[3],
+                          "compactness_mean": itemsData[4],
+                          "concavity_mean": itemsData[5],
+                          "concave points_mean": itemsData[6],
+                          "fractal_dimension_mean": itemsData[7],
+                          "radius_se": itemsData[8],
+                          "texture_se": itemsData[9],
+                          "perimeter_se": itemsData[10],
+                          "compactness_se": itemsData[11],
+                          "concavity_se": itemsData[12],
+                          "concave points_se": itemsData[13],
+                          "symmetry_se": itemsData[14],
+                          "fractal_dimension_se": itemsData[15],
+                          "compactness_worst": itemsData[16],
+                          "concavity_worst": itemsData[17],
+                          "concave points_worst": itemsData[18],
+                          "symmetry_worst": itemsData[19],
+                          "fractal_dimension_worst": itemsData[20],
+                          "tumor_size": itemsData[21],
+                          "positive_axillary_lymph_node": itemsData[22]
+                          };
+                        }
                     }
                 ),
               ),
