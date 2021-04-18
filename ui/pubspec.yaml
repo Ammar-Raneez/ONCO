@@ -19,7 +19,6 @@ dependencies:
   firebase_core:
   firebase_auth: ^0.20.0+1
   firebase_storage:
-  fluttertoast:
   cloud_firestore:
   intl: ^0.16.0
   firebase_analytics:
