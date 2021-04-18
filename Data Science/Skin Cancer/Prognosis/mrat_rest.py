@@ -4,27 +4,27 @@ from mrat_constants import MRATConstants
 
 class MelanomaRiskAssessmentTool:
     @staticmethod
-    def getAbsoluteRisk(parameters, age):
+    def getAbsoluteRisk(req_params, age):
         sex = None
         # assess male or female
-        if parameters['gender'] == 'Male':
+        if req_params['gender'] == 'Male':
             sex = 0
-        elif parameters['gender'] == 'Female':
+        elif req_params['gender'] == 'Female':
             sex = 1
 
         risk = 1
         if sex == 0:
-            risk *= MRATConstants.SUNBURN[int(parameters['sunburn'] )]
-            risk *= MRATConstants.MALE_COMPLEXION[int(parameters['complexion'] )]
-            risk *= MRATConstants.BIG_MOLES[int(parameters['big-moles'] )]
-            risk *= MRATConstants.MALE_SMALL_MOLES[int(parameters['small-moles'] )]
-            risk *= MRATConstants.MALE_FRECKLING[int(parameters['freckling'] )]
-            risk *= MRATConstants.DAMAGE[int(parameters['damage'] )]
+            risk *= MRATConstants.SUNBURN[int(req_params['sunburn'] )]
+            risk *= MRATConstants.MALE_COMPLEXION[int(req_params['complexion'] )]
+            risk *= MRATConstants.BIG_MOLES[int(req_params['big-moles'] )]
+            risk *= MRATConstants.MALE_SMALL_MOLES[int(req_params['small-moles'] )]
+            risk *= MRATConstants.MALE_FRECKLING[int(req_params['freckling'] )]
+            risk *= MRATConstants.DAMAGE[int(req_params['damage'] )]
         else:
-            risk *= MRATConstants.TAN[int(parameters['tan'] )]
-            risk *= MRATConstants.FEMALE_COMPLEXION[int(parameters['complexion'] )]
-            risk *= MRATConstants.FEMALE_SMALL_MOLES[int(parameters['small-moles'] )]
-            risk *= MRATConstants.FEMALE_FRECKLING[int(parameters['freckling'] )]
+            risk *= MRATConstants.TAN[int(req_params['tan'] )]
+            risk *= MRATConstants.FEMALE_COMPLEXION[int(req_params['complexion'] )]
+            risk *= MRATConstants.FEMALE_SMALL_MOLES[int(req_params['small-moles'] )]
+            risk *= MRATConstants.FEMALE_FRECKLING[int(req_params['freckling'] )]
 
         # to get incidence and mortality values
         age_index = int((age - 20) / 5)
@@ -44,7 +44,7 @@ class MelanomaRiskAssessmentTool:
         results = {
             'absolute_risk': absolute_risk,
             'result_string': f'A {absolute_risk} estimated risk of developing melanoma over the next 5 years.',
-            'gender': str(parameters['gender']).lower(),
+            'gender': str(req_params['gender']).lower(),
             'ratio': int(ratio),
             'status': 200
         }
