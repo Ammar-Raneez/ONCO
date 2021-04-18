@@ -116,4 +116,43 @@ void main() {
     expect(actual, expected);
 
   });
+
+  test("Testing breast cancer prognosis", () async {
+
+    // ACTUAL
+    CancerPrognosisState cancerPrognosisState = new CancerPrognosisState("Breast Cancer",BREAST_CANCER_PROGNOSIS_QUESTIONS,
+        "https://onco-prognosis-backend.herokuapp.com/prognosis_breast");
+    cancerPrognosisState.prognosisBody = {
+      "radius_mean": 2,
+      "texture_mean": 5,
+      "perimeter_mean": 2,
+      "compactness_mean": 3,
+      "concavity_mean": 6,
+      "concave points_mean": 3,
+      "fractal_dimension_mean": 4,
+      "radius_se": 3,
+      "texture_se": 9,
+      "perimeter_se": 3,
+      "compactness_se": 3,
+      "concavity_se": 1,
+      "concave points_se": 2,
+      "symmetry_se": 3,
+      "fractal_dimension_se": 5,
+      "compactness_worst": 3,
+      "concavity_worst": 2,
+      "concave points_worst": 1,
+      "symmetry_worst": 2,
+      "fractal_dimension_worst": 5,
+      "tumor_size": 2,
+      "positive_axillary_lymph_node": 4
+    };
+    actual = await cancerPrognosisState.apiRequest();
+
+    // EXPECTED
+    expected = '{"Prediction": "N"}\n';
+
+    // TEST
+    expect(actual, expected);
+
+  });
 }
