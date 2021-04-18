@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationsProvider.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/api/ReportProvider.dart';
@@ -16,6 +17,9 @@ import 'package:ui/screens/welcome_screen.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Color(0xff01CDFA), // status bar color
+  ));
 
   runApp(MyApp());
 }

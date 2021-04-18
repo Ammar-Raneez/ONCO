@@ -38,6 +38,8 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   String messageText;
   // bot response
   var responseText;
+  // bot initial response
+  var initialResponseText;
 
   bool showSpinner = false;
 
@@ -45,6 +47,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   void initState() {
     super.initState();
     getCurrentUser();
+    initialMessageSend();
   }
 
   void getCurrentUser() async {
@@ -91,6 +94,21 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
         );
       },
     );
+  }
+
+  void initialMessageSend() async {
+    // initial message sent while bot loads to warm it up - this is cuz the initial
+    // message after some time can take a while
+    try {
+      Response response = await dio.post(
+          'https://chatbot-deployment.azurewebsites.net/api/chatbot-deployment',
+          data: {'UserIn': "hello"});
+      setState(() {
+        initialResponseText = response.toString();
+      });
+    } catch (e) {
+      createAlertDialog(context, "Error", e.message, 404);
+    }
   }
 
   void handleSendMessage() async {
@@ -153,46 +171,80 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
             : Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('images/clouds.png'),
-                      fit: BoxFit.cover),
+                      image: AssetImage(initialResponseText == null
+                          ? 'images/botGif5.gif'
+                          : 'images/bot.png'),
+                      fit: BoxFit.contain),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    MessageStream(),
-                    Container(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 10.0,
-                                right: 10.0,
+                  children: initialResponseText == null
+                      ? [
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(
+                                  "Hi ${username.substring(0, 1).toUpperCase() + username.substring(1, username.length)}, Chanco here!",
+                                  style: kTextStyle.copyWith(fontSize: 24),
+                                  textAlign: TextAlign.left,
+                                ),
                               ),
-                              child: TextField(
-                                onChanged: (value) {
-                                  messageText = value;
-                                },
-                                enabled: responseText == "empty" ? false : true,
-                                controller: messageTextController,
-                                decoration: kTextFieldDecoration.copyWith(
-                                    suffixIcon: IconButton(
-                                        icon: Icon(Icons.send),
-                                        onPressed: handleSendMessage,
-                                        color: Colors.lightBlueAccent),
-                                    hintText: 'Write a message'),
-                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    "Please wait while I load all my necessary components...",
+                                    style: kTextStyle,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ]
+                      : [
+                          MessageStream(),
+                          Container(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 10.0,
+                                      right: 10.0,
+                                    ),
+                                    child: TextField(
+                                      onChanged: (value) {
+                                        messageText = value;
+                                      },
+                                      enabled: responseText == "empty"
+                                          ? false
+                                          : true,
+                                      controller: messageTextController,
+                                      decoration: kTextFieldDecoration.copyWith(
+                                          suffixIcon: IconButton(
+                                              icon: Icon(Icons.send),
+                                              onPressed: handleSendMessage,
+                                              color: Colors.lightBlueAccent),
+                                          hintText: 'Write a message'),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
                         ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                  ],
                 ),
               ),
       ),
@@ -248,7 +300,7 @@ class MessageStream extends StatelessWidget {
           new MessageBubble(
             messageSender: 'CHANCO',
             messageText:
-                'Hi ${username.toString().toUpperCase()}! How can I help you today?',
+                'Hi ${username.substring(0, 1).toUpperCase() + username.substring(1, username.length)}! How can I help you today?',
             isMe: false,
             time: "",
           ),
