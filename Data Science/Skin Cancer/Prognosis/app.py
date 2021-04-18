@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import reqparse
 from mrat_rest import MelanomaRiskAssessmentTool
+import json
 
 app = Flask('onco_cancer_prognosis')
 mrat = MelanomaRiskAssessmentTool()
@@ -20,8 +21,7 @@ def skin_cancer_prognosis():
 
     args = parser.parse_args()
     out = mrat.getAbsoluteRisk(args)
-    print(out)
-    return jsonify(out)
+    return out
 
 # Running the Main Application
 if __name__ == "__main__":
