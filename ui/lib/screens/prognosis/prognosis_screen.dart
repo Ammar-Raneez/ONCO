@@ -9,37 +9,30 @@ import 'dart:convert';
 import 'dart:io';
 
 class CancerPrognosis extends StatefulWidget {
-
   var cancerType;
   var url = "https://onco-prognosis-backend.herokuapp.com/";
   var cancerPrognosisAttributes;
 
-  CancerPrognosis(String cancerType)
-  {
+  CancerPrognosis(String cancerType) {
     this.cancerType = cancerType;
 
-    if (cancerType == "Breast Cancer")
-    {
+    if (cancerType == "Breast Cancer") {
       cancerPrognosisAttributes = BREAST_CANCER_PROGNOSIS_QUESTIONS;
       url += "prognosis_breast";
-    }
-    else if (cancerType == "Lung Cancer")
-    {
+    } else if (cancerType == "Lung Cancer") {
       cancerPrognosisAttributes = LUNG_CANCER_PROGNOSIS_QUESTIONS;
       url += "prognosis_lung";
-    }
-    else if (cancerType == "Skin Cancer")
-    {
+    } else if (cancerType == "Skin Cancer") {
       cancerPrognosisAttributes = SKIN_CANCER_PROGNOSIS_QUESTIONS;
     }
   }
 
   @override
-  _CancerPrognosisState createState() => _CancerPrognosisState(cancerType, cancerPrognosisAttributes, url);
+  CancerPrognosisState createState() =>
+      CancerPrognosisState(cancerType, cancerPrognosisAttributes, url);
 }
 
-class _CancerPrognosisState extends State<CancerPrognosis> {
-
+class CancerPrognosisState extends State<CancerPrognosis> {
   ScrollController controller = ScrollController();
   bool closeTopContainer = false;
   double topContainer = 0;
@@ -52,7 +45,7 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
   var url;
   var count = 0;
 
-  _CancerPrognosisState(var cancerType, var cancerPrognosisAttributes, var url) {
+  CancerPrognosisState(var cancerType, var cancerPrognosisAttributes, var url) {
     this.cancerType = cancerType;
     this.cancerPrognosisAttributes = cancerPrognosisAttributes;
     this.url = url;
@@ -92,63 +85,52 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
     List<dynamic> responseList = cancerPrognosisAttributes;
     List<Widget> listItems = [];
     responseList.forEach((post) {
-      count ++;
+      count++;
       textFieldControllers.add(new TextEditingController());
-      listItems.add(
-          Container(
-              height: 190,
-              // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18)
-              ),
-              child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                  child: Container(
-                    child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        margin: EdgeInsets.only(top: 0, bottom: 50),
-                        width: double.infinity,
-
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18),
-                          color: Color(0xFFABD8E2),
-                        ),
-                        child: Column(
-                            children: <Widget>[
-                              Container(
-                                  margin: EdgeInsets.only(bottom: 10),
-                                  child:Text(
-                                    post,
-                                    style:TextStyle(
-                                      fontFamily: 'Poppins-SemiBold',
-                                      color: Colors.blueGrey,
-                                      fontSize: 20,
-                                    ),
-                                  )
-                              ),
-                              TextField(
-                                controller: textFieldControllers[count - 1],
-                                decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: new BorderSide(color: Colors.white),
-                                      borderRadius: new BorderRadius.circular(16),
-                                    ),
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: new BorderSide(color: Colors.white),
-                                      borderRadius: new BorderRadius.circular(16),
-                                    ),
-                                    hintText: 'Enter the Value for the Input'
-                                ),
-                              ),
-                            ]
-                        )
+      listItems.add(Container(
+          height: 190,
+          // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
+          child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: Container(
+                child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    margin: EdgeInsets.only(top: 0, bottom: 50),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      color: Color(0xFFABD8E2),
                     ),
-                  )
-              )
-          )
-      );
+                    child: Column(children: <Widget>[
+                      Container(
+                          margin: EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            post,
+                            style: TextStyle(
+                              fontFamily: 'Poppins-SemiBold',
+                              color: Colors.blueGrey,
+                              fontSize: 20,
+                            ),
+                          )),
+                      TextField(
+                        controller: textFieldControllers[count - 1],
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: new BorderSide(color: Colors.white),
+                              borderRadius: new BorderRadius.circular(16),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: new BorderSide(color: Colors.white),
+                              borderRadius: new BorderRadius.circular(16),
+                            ),
+                            hintText: 'Enter the Value for the Input'),
+                      ),
+                    ])),
+              ))));
     });
     setState(() {
       itemsData = listItems;
@@ -176,7 +158,7 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: CustomAppBar.arrow(context),
-        body:  Container(
+        body: Container(
           height: size.height,
           child: Column(
             children: <Widget>[
@@ -233,8 +215,7 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                                 child: itemsData[index]),
                           ),
                         );
-                      })
-              ),
+                      })),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.blueGrey,
@@ -243,8 +224,8 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                       topLeft: Radius.circular(20.0)),
                 ),
                 width: double.infinity,
-
-                padding: const EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
+                padding: const EdgeInsets.only(
+                    top: 20, bottom: 20, left: 50, right: 50),
                 child: RawMaterialButton(
                     fillColor: Colors.black54,
                     child: Padding(
@@ -262,14 +243,13 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Poppins-Regular',
-                                color: Colors.white
-                            ),
+                                color: Colors.white),
                           ),
                         ],
                       ),
                     ),
-                    shape: const StadiumBorder(), onPressed: () async {
-
+                    shape: const StadiumBorder(),
+                    onPressed: () async {
                       /* If Else Conditions here to take each Input from the
                        * textFieldControllers Array, and setting the Input to
                        * each Attribute required by a Model in a Dictionary
@@ -277,35 +257,74 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                        * required by the Model
                        */
                       if (cancerType == "Lung Cancer") {
-
                         prognosisBody = {
                           "Age": textFieldControllers[0].text,
                           "Gender": textFieldControllers[1].text,
-                          "AirPollution": textFieldControllers[2].text,
-                          "Alcoholuse": textFieldControllers[3].text,
-                          "DustAllergy": textFieldControllers[4].text,
-                          "OccuPationalHazards": textFieldControllers[5].text,
-                          "GeneticRisk": textFieldControllers[6].text,
-                          "chronicLungDisease": textFieldControllers[7].text,
-                          "BalancedDiet": textFieldControllers[8].text,
-                          "Obesity": textFieldControllers[9].text,
-                          "Smoking": textFieldControllers[10].text,
-                          "PassiveSmoker": textFieldControllers[11].text,
-                          "ChestPain": textFieldControllers[12].text,
-                          "CoughingofBlood": textFieldControllers[13].text,
-                          "Fatigue": textFieldControllers[14].text,
-                          "WeightLoss": textFieldControllers[15].text,
-                          "ShortnessofBreath": textFieldControllers[16].text,
-                          "Wheezing": textFieldControllers[17].text,
-                          "SwallowingDifficulty": textFieldControllers[18].text,
-                          "ClubbingofFingerNails": textFieldControllers[19].text,
-                          "FrequentCold": textFieldControllers[20].text,
-                          "DryCough": textFieldControllers[21].text,
-                          "Snoring": textFieldControllers[22].text,
+                          "AirPollution":
+                              (int.parse(textFieldControllers[2].text) / 10) *
+                                  8,
+                          "Alcoholuse":
+                              (int.parse(textFieldControllers[3].text) / 10) *
+                                  8,
+                          "DustAllergy":
+                              (int.parse(textFieldControllers[4].text) / 10) *
+                                  8,
+                          "OccuPationalHazards":
+                              (int.parse(textFieldControllers[5].text) / 10) *
+                                  8,
+                          "GeneticRisk":
+                              (int.parse(textFieldControllers[6].text) / 10) *
+                                  7,
+                          "chronicLungDisease":
+                              (int.parse(textFieldControllers[7].text) / 10) *
+                                  7,
+                          "BalancedDiet":
+                              (int.parse(textFieldControllers[8].text) / 10) *
+                                  7,
+                          "Obesity":
+                              (int.parse(textFieldControllers[9].text) / 10) *
+                                  7,
+                          "Smoking":
+                              (int.parse(textFieldControllers[10].text) / 10) *
+                                  8,
+                          "PassiveSmoker":
+                              (int.parse(textFieldControllers[11].text) / 10) *
+                                  8,
+                          "ChestPain":
+                              (int.parse(textFieldControllers[12].text) / 10) *
+                                  9,
+                          "CoughingofBlood":
+                              (int.parse(textFieldControllers[13].text) / 10) *
+                                  9,
+                          "Fatigue":
+                              (int.parse(textFieldControllers[14].text) / 10) *
+                                  9,
+                          "WeightLoss":
+                              (int.parse(textFieldControllers[15].text) / 10) *
+                                  8,
+                          "ShortnessofBreath":
+                              (int.parse(textFieldControllers[16].text) / 10) *
+                                  9,
+                          "Wheezing":
+                              (int.parse(textFieldControllers[17].text) / 10) *
+                                  8,
+                          "SwallowingDifficulty":
+                              (int.parse(textFieldControllers[18].text) / 10) *
+                                  8,
+                          "ClubbingofFingerNails":
+                              (int.parse(textFieldControllers[19].text) / 10) *
+                                  9,
+                          "FrequentCold":
+                              (int.parse(textFieldControllers[20].text) / 10) *
+                                  7,
+                          "DryCough":
+                              (int.parse(textFieldControllers[21].text) / 10) *
+                                  7,
+                          "Snoring":
+                              (int.parse(textFieldControllers[22].text) / 10) *
+                                  7,
                         };
-                      }
-                      else if (cancerType == "Breast Cancer") {
-
+                      } else if (cancerType == "Breast Cancer") {
                         prognosisBody = {
                           "radius_mean": textFieldControllers[0].text,
                           "texture_mean": textFieldControllers[1].text,
@@ -313,7 +332,8 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                           "compactness_mean": textFieldControllers[3].text,
                           "concavity_mean": textFieldControllers[4].text,
                           "concave points_mean": textFieldControllers[5].text,
-                          "fractal_dimension_mean": textFieldControllers[6].text,
+                          "fractal_dimension_mean":
+                              textFieldControllers[6].text,
                           "radius_se": textFieldControllers[7].text,
                           "texture_se": textFieldControllers[8].text,
                           "perimeter_se": textFieldControllers[9].text,
@@ -326,16 +346,20 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                           "concavity_worst": textFieldControllers[16].text,
                           "concave points_worst": textFieldControllers[17].text,
                           "symmetry_worst": textFieldControllers[18].text,
-                          "fractal_dimension_worst": textFieldControllers[19].text,
+                          "fractal_dimension_worst":
+                              textFieldControllers[19].text,
                           "tumor_size": textFieldControllers[20].text,
-                          "positive_axillary_lymph_node": textFieldControllers[21].text
+                          "positive_axillary_lymph_node":
+                              textFieldControllers[21].text
                         };
                       }
 
                       // Progress Dialog that will run till API Request is received
-                      final ProgressDialog progressDialog =
-                      ProgressDialog(context,type: ProgressDialogType.Normal,
-                          isDismissible: false, showLogs: true);
+                      final ProgressDialog progressDialog = ProgressDialog(
+                          context,
+                          type: ProgressDialogType.Normal,
+                          isDismissible: false,
+                          showLogs: true);
 
                       // Styling Progress Dialog
                       progressDialog.style(
@@ -343,7 +367,9 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                           padding: EdgeInsets.all(20),
                           borderRadius: 10.0,
                           backgroundColor: Colors.white,
-                          progressWidget: LinearProgressIndicator(backgroundColor: Colors.lightBlueAccent,),
+                          progressWidget: LinearProgressIndicator(
+                            backgroundColor: Colors.lightBlueAccent,
+                          ),
                           elevation: 10.0,
                           insetAnimCurve: Curves.easeInCubic,
                           progress: 0.0,
@@ -359,8 +385,7 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                             fontSize: 19.0,
                             fontWeight: FontWeight.w600,
                             fontFamily: 'Poppins-SemiBold',
-                          )
-                      );
+                          ));
 
                       // Showing the Progress Dialog and Dismissing it After the API Request is Received
                       progressDialog.show();
@@ -371,7 +396,6 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
 
                       // checking if the response is not null and displaying the result
                       if (reply != null) {
-
                         final body = json.decode(reply);
                         var prognosisResult = body["Prediction"];
 
@@ -380,40 +404,36 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                          * is used to set the Result to a more User Friendly
                          * message
                          */
-                        if (prognosisResult == "N" && cancerType == "Breast Cancer")
-
+                        if (prognosisResult == "N" &&
+                            cancerType == "Breast Cancer")
                           prognosisResult = "Non-Recurring";
-
-                        else if (prognosisResult == "R" && cancerType == "Breast Cancer")
-
+                        else if (prognosisResult == "R" &&
+                            cancerType == "Breast Cancer")
                           prognosisResult = "Recurring";
 
                         // Displaying the alert dialog
-                        createAlertDialog(context, "Prognosis", prognosisResult, 201);
+                        createAlertDialog(
+                            context, "Prognosis", prognosisResult, 201);
 
                         print("OK");
                         // Adding the response data into the database for report creation purpose
                         _firestore
-                             .collection("users")
-                             .doc(UserDetails.getUserData()["email"])
-                             .collection("InputPrognosis")
+                            .collection("users")
+                            .doc(UserDetails.getUserData()["email"])
+                            .collection("InputPrognosis")
                             .add({
-
                           "prognosisInputs": prognosisBody,
                           "cancerType": cancerType,
                           "reportType": "prognosis",
                           "result": prognosisResult,
                           'timestamp': Timestamp.now(),
                         });
-                      }
-                      else {
-
+                      } else {
                         // Displaying the alert dialog
-                        createAlertDialog(
-                            context, "Error", "Oops something went wrong!", 404);
+                        createAlertDialog(context, "Error",
+                            "Oops something went wrong!", 404);
                       }
-                    }
-                ),
+                    }),
               ),
             ],
           ),

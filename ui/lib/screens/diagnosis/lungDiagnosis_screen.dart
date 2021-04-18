@@ -82,10 +82,6 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         await getResponse(formData);
-        // Response response = await dio.post(
-        //   "https://lungmodelsdgp.azurewebsites.net/api/lungmodelsdgp?model=lung",
-        //   data: formData,
-        // );
 
         // RESPONSE RESULT FROM THE BACKEND
         // responseBody = response.data[0];
