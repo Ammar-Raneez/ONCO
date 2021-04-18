@@ -11,13 +11,21 @@ var loggedInUserGoogle =  GoogleUserSignInDetails.googleSignInUserEmail;
 
 class ReportFirebaseApi {
 
-  static Stream<List<Report>> readReports() => FirebaseFirestore.instance
+  static Stream<List<Report>> readDiagnosisReports() => FirebaseFirestore.instance
       .collection("users")
       .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
       .collection("imageDetections")
+      .snapshots()
+      .transform(Utils.transformer(Report.fromDiagnosisJson)
+  );
+
+  static Stream<List<Report>> readPrognosisReports() => FirebaseFirestore.instance
+      .collection("users")
+      .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
+      .collection("InputPrognosis")
       .orderBy('timestamp')
       .snapshots()
-      .transform(Utils.transformer(Report.fromJson)
+      .transform(Utils.transformer(Report.fromPrognosisJson)
   );
 
 }
