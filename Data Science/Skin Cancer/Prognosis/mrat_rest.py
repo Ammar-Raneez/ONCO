@@ -19,3 +19,8 @@ class MelanomaRiskAssessmentTool:
             r *= MRATConstants.MALE_SMALL_MOLES[int(parameters['small-moles'] )]
             r *= MRATConstants.MALE_FRECKLING[int(parameters['freckling'] )]
             r *= MRATConstants.DAMAGE[int(parameters['damage'] )]
+        else:
+            r *= MRATConstants.TAN[int(parameters['tan'] )]
+            r *= MRATConstants.FEMALE_COMPLEXION[int(parameters['complexion'] )]
+            r *= MRATConstants.FEMALE_SMALL_MOLES[int(parameters['small-moles'] )]
+            r *= MRATConstants.FEMALE_FRECKLING[int(parameters['freckling'] )]
