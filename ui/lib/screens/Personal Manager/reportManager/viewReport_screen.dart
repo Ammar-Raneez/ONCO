@@ -396,27 +396,27 @@ List<Widget> itemsData) {
             );
 
   }
-  Widget getMapValues(Map prognosisBody) {
-    prognosisBody.forEach((k, v) =>
-    {
-      // print('$k: $v')
-      Padding(
-        padding: const EdgeInsets.only(
-            left: 20,
-            top: 5,
-            bottom: 10
-        ),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text('$k: $v',
-            style: TextStyle(
-                fontFamily: 'Poppins-SemiBold',
-                fontSize: 14,
-                color: Color(0xFF1F1F1F)
-            ),
-          ),
-        ),
-      ),
-    });
-  }
+//   Widget getMapValues(Map prognosisBody) {
+//     prognosisBody.forEach((k, v) =>
+//     {
+//       // print('$k: $v')
+//       Padding(
+//         padding: const EdgeInsets.only(
+//             left: 20,
+//             top: 5,
+//             bottom: 10
+//         ),
+//         child: Align(
+//           alignment: Alignment.centerLeft,
+//           child: Text('$k: $v',
+//             style: TextStyle(
+//                 fontFamily: 'Poppins-SemiBold',
+//                 fontSize: 14,
+//                 color: Color(0xFF1F1F1F)
+//             ),
+//           ),
+//         ),
+//       ),
+//     });
+//   }
 }
