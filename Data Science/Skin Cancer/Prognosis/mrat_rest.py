@@ -40,3 +40,13 @@ class MelanomaRiskAssessmentTool:
             absolute_risk += next_incident_rate * risk * math.exp((age - t2) * (incident_rate * risk + mortality_rate)) * (1 - math.exp((t1 - age) * (next_incident_rate * risk + next_mortality_rate))) / (next_incident_rate * absolute_risk + next_mortality_rate)
         absolute_risk = round(absolute_risk * 10000) / 100
         ratio = round((absolute_risk * 0.01) * 1000)
+
+        results = {
+            'absolute_risk': absolute_risk,
+            'result_string': f'A {absolute_risk} estimated risk of developing melanoma over the next 5 years.',
+            'gender': str(parameters['gender']).lower(),
+            'ratio': int(ratio),
+            'status': 200
+        }
+
+        return json.dumps(results)
