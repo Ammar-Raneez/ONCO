@@ -1,10 +1,12 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ui/services/UserDetails.dart';
+import 'dart:convert';
+import 'dart:io';
 
 class CancerPrognosis extends StatefulWidget {
 
@@ -44,6 +46,7 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
   List<Widget> itemsData = [];
   List<TextEditingController> textFieldControllers = [];
   Map prognosisBody;
+  final _firestore = FirebaseFirestore.instance;
   var cancerType;
   var cancerPrognosisAttributes;
   var url;
@@ -387,6 +390,21 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
 
                         // Displaying the alert dialog
                         createAlertDialog(context, "Prognosis", prognosisResult, 201);
+
+                        print("OK");
+                        // Adding the response data into the database for report creation purpose
+                        _firestore
+                             .collection("users")
+                             .doc(UserDetails.getUserData()["email"])
+                             .collection("InputPrognosis")
+                            .add({
+
+                          "prognosisInputs": prognosisBody,
+                          "cancerType": cancerType,
+                          "reportType": "prognosis",
+                          "result": prognosisResult,
+                          'timestamp': Timestamp.now(),
+                        });
                       }
                       else {
 
@@ -394,8 +412,6 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                         createAlertDialog(
                             context, "Error", "Oops something went wrong!", 404);
                       }
-
-                        // Closing Dialog after API Request
                     }
                 ),
               ),
