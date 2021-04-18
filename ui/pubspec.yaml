@@ -19,11 +19,13 @@ dependencies:
   firebase_core:
   firebase_auth: ^0.20.0+1
   firebase_storage:
+  fluttertoast:
   cloud_firestore:
   intl: ^0.16.0
   firebase_analytics:
   modal_progress_hud: ^0.1.3
   curved_navigation_bar: ^0.3.7
+
   image_picker: ^0.6.7+21
   mockito:
   flutter_native_splash: ^0.1.4

@@ -4,10 +4,11 @@ class UserDetails{
   static Map _userData;
 
   // setter
-  static void setUserData(String email, String username){
+  static void setUserData(String email, String username, String gender){
     _userData = {
       "email": email,
-      "username": username
+      "username": username,
+      "gender": gender
     };
     // print("---------------------------------------------------------");
     // print(_userData);
