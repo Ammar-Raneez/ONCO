@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_restful import reqparse
 from mrat_rest import MelanomaRiskAssessmentTool
-import json
 
 app = Flask('onco_cancer_prognosis')
 mrat = MelanomaRiskAssessmentTool()

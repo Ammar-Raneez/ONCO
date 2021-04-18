@@ -5,7 +5,6 @@ import random
 
 class MelanomaRiskAssessmentTool:
     def getAbsoluteRisk(self, req_params):
-        print(req_params)
         age = int(req_params['age'])
         sex = None
         # assess male or female
