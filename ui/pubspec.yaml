@@ -30,6 +30,7 @@ dependencies:
   http: ^0.12.2
   dio: ^3.0.10
   google_sign_in: ^4.5.9
+  progress_dialog: ^1.2.4
 
 dev_dependencies:
   flutter_test:
