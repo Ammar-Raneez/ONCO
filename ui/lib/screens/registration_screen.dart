@@ -23,8 +23,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String username;
   String email;
   String password;
+  String gender;
+  int _radioValue = 0;
 
-  bool visibleFavouriteFood = false;
   bool visiblePassword = false;
 
   var _usernameController = TextEditingController();
@@ -33,6 +34,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
+
+ @override
+  void initState() {
+    super.initState();
+    gender = "male";
+  }
+
+  // handle radio button
+  void _handleRadioValueChange(int value) {
+    setState(() {
+      _radioValue = value;
+
+      switch (_radioValue) {
+        case 0:
+          gender = "male";
+          break;
+        case 1:
+          gender = "female";
+          break;
+      }
+    });
+  }
+
 
   // creating an alert
   createAlertDialog(
@@ -167,6 +191,33 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                     ),
                   ),
+                  new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Radio(
+                        value: 0,
+                        groupValue: _radioValue,
+                        onChanged: _handleRadioValueChange,
+                      ),
+                      new Text(
+                        'Male',
+                        style: kTextStyle.copyWith(
+                          fontSize: 16,
+                        ),
+                      ),
+                      new Radio(
+                        value: 1,
+                        groupValue: _radioValue,
+                        onChanged: _handleRadioValueChange,
+                      ),
+                      new Text(
+                        'Female',
+                        style: kTextStyle.copyWith(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
                   GestureDetector(
                     onTap: () {
                       // GO TO THE LOGIN SCREEN
@@ -208,6 +259,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           _firestore.collection("users").doc(email).set({
                             "userEmail": email,
                             "username": username,
+                            "gender": gender,
                             'timestamp': Timestamp.now(),
                           });
 
