@@ -90,18 +90,19 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         String resultPercentage = responseBody['prediction_percentage'];
 
         // Adding the response data into the database for report creation purpose
-        // _firestore
-        //     .collection("users")
-        //     .doc(UserDetails.getUserData()["email"])
-        //     .collection("imageDetections")
-        //     .add({
-        //   "cancerType": "lung",
-        //   "reportType": "diagnosis",
-        //   "result": resultPrediction,
-        //   "imageUrl": resultImageURL,
-        //   "percentage": resultPercentage,
-        //   'timestamp': Timestamp.now(),
-        // });
+        _firestore
+            .collection("users")
+            .doc(UserDetails.getUserData()["email"])
+            .collection("imageDetections")
+            .add({
+          "cancerType": "lung",
+          "reportType": "diagnosis",
+          "result": resultPrediction,
+          "result_string": "$resultPrediction was detected",
+          "imageUrl": resultImageURL,
+          "percentage": resultPercentage,
+          'timestamp': Timestamp.now(),
+        });
 
         // Display the spinner to indicate that its loading
         setState(() {
