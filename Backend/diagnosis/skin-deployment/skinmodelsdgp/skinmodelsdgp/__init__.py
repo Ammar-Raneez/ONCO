@@ -35,9 +35,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     #convert it into a numpy array, so that it can be passed into opencv
     np_blob_array = np.fromstring(blob_data_as_bytes, dtype='uint8')
-    prediction = upload(np_blob_array, which_model)
+    result_string, prediction, prediction_percentage = upload(np_blob_array, which_model)
 
     # getting download image URL
     image_url = f"https://skinmodelsdgp.blob.core.windows.net/images/{filename}"
 
-    return func.HttpResponse(json.dumps([{"imageDownloadURL": image_url, "result_string": prediction, "status": 200}]), status_code = 200, headers = headers)
+    return func.HttpResponse(json.dumps([{"predition": prediction, "prediction_percentage": prediction_percentage, "superimposed_image_url": image_url, "result_string": result_string, "status": 200}]), status_code = 200, headers = headers)

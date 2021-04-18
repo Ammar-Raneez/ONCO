@@ -79,8 +79,10 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         await getResponse(formData);
 
-        String resultDetection = responseBody['result_string'];
-        String imageDownloadURL = responseBody['imageDownloadURL'];
+        String resultPercentage = responseBody['prediction_percentage'];
+        String resultPrediction = responseBody['predition'];
+        String resultString = responseBody['result_string'];
+        String resultImageURL = responseBody['superimposed_image_url'];
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -90,8 +92,10 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .add({
                     "cancerType": "skin",
                     "reportType": "diagnosis",
-                    "result": resultDetection,
-                    "imageUrl": imageDownloadURL,
+                    "result": resultPrediction,
+                    "result_string": resultString,
+                    "imageUrl": resultImageURL,
+                    "percentage": resultPercentage,
                     'timestamp': Timestamp.now(),
                   });
 
@@ -213,7 +217,15 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -236,7 +248,15 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -278,7 +298,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                     height: 30.0,
                                   ),
                                   Text(
-                                    "Scan Image",
+                                    "SCAN IMAGE",
                                     maxLines: 1,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,

@@ -113,15 +113,17 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                         child: Container(
-                          decoration: ShapeDecoration(
-                            gradient: LinearGradient(
-                              colors: [Color(0xFF38819c), Color(0xFF286880)],
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topRight,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18),
-                            ),
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 1,
+                                blurRadius: 7,
+                                offset: Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(18),
+                            color: Colors.lightBlueAccent,
                           ),
                           padding: EdgeInsets.only(left: 10.0, right: 10.0),
                           width: 250.0,

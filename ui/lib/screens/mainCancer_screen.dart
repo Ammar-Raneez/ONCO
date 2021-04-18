@@ -6,7 +6,6 @@ import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
 import 'package:ui/screens/prognosis/prognosis_screen.dart';
 import 'package:ui/screens/selectService_screen.dart';
 
-
 //TODO - Add nav to bottom also add passing colors into card. Might need to adjust padding after(Appbar done only for nav)
 
 /* This is the Cancer Page that displays an appbar with a gradient and a logo, three cards that allow the user to click on a
@@ -21,7 +20,6 @@ class MainCancerTypesScreen extends StatefulWidget {
 }
 
 class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,25 +27,21 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.only(
-              //* might need to change when adding top row and nav
-              left: 22,
-              right: 22,
-              bottom: 20
-            ),
+                //* might need to change when adding top row and nav
+                left: 22,
+                right: 22,
+                bottom: 20),
             child: Center(
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                      left: 5,
-                      bottom: 15
-                    ),
+                    padding: const EdgeInsets.only(left: 5, bottom: 15),
                     child: Text(
                       'Prognosis & Diagnosis of Cancers',
                       style: TextStyle(
                         fontFamily: 'Poppins-SemiBold',
                         fontSize: 24,
-                        color: Color(0xFF373737),
+                        color: Color(0xFF565D5E),
                       ),
                     ),
                   ),
@@ -59,7 +53,10 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(cancerType: 'Skin Cancer', diagnosisRoute: SkinCancerDiagnosis(), prognosisRoute: CancerPrognosis("Skin Cancer")),
+                          builder: (context) => SelectServiceScreen(
+                              cancerType: 'Skin Cancer',
+                              diagnosisRoute: SkinCancerDiagnosis(),
+                              prognosisRoute: CancerPrognosis("Skin Cancer")),
                         ),
                       );
                     },
@@ -77,7 +74,10 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(cancerType: 'Lung Cancer', diagnosisRoute: LungCancerDiagnosis(), prognosisRoute: CancerPrognosis("Lung Cancer")),
+                          builder: (context) => SelectServiceScreen(
+                              cancerType: 'Lung Cancer',
+                              diagnosisRoute: LungCancerDiagnosis(),
+                              prognosisRoute: CancerPrognosis("Lung Cancer")),
                         ),
                       );
                     },
@@ -95,7 +95,10 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(cancerType: 'Breast Cancer',  diagnosisRoute: BreastCancerDiagnosis(),  prognosisRoute: CancerPrognosis("Breast Cancer")),
+                          builder: (context) => SelectServiceScreen(
+                              cancerType: 'Breast Cancer',
+                              diagnosisRoute: BreastCancerDiagnosis(),
+                              prognosisRoute: CancerPrognosis("Breast Cancer")),
                         ),
                       );
                     },

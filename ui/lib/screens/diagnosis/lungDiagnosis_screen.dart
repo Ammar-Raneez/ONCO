@@ -26,7 +26,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   bool showSpinner = false;
   bool showHighlightedImage = false;
   dynamic responseBody;
-  // final _firestore = FirebaseFirestore.instance;
+  final _firestore = FirebaseFirestore.instance;
 
   // CREATING AN ALERT
   createAlertDialog(
@@ -90,18 +90,19 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         String resultPercentage = responseBody['prediction_percentage'];
 
         // Adding the response data into the database for report creation purpose
-        // _firestore
-        //     .collection("users")
-        //     .doc(UserDetails.getUserData()["email"])
-        //     .collection("imageDetections")
-        //     .add({
-        //   "cancerType": "lung",
-        //   "reportType": "diagnosis",
-        //   "result": resultPrediction,
-        //   "imageUrl": resultImageURL,
-        //   "percentage": resultPercentage,
-        //   'timestamp': Timestamp.now(),
-        // });
+        _firestore
+            .collection("users")
+            .doc(UserDetails.getUserData()["email"])
+            .collection("imageDetections")
+            .add({
+          "cancerType": "lung",
+          "reportType": "diagnosis",
+          "result": resultPrediction,
+          "result_string": "$resultPrediction was detected",
+          "imageUrl": resultImageURL,
+          "percentage": resultPercentage,
+          'timestamp': Timestamp.now(),
+        });
 
         // Display the spinner to indicate that its loading
         setState(() {
@@ -131,14 +132,13 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   }
 
   // Getting the detection response
-   getResponse(FormData formData) async{
-    Response response =  await dio.post(
+  getResponse(FormData formData) async {
+    Response response = await dio.post(
       "https://lungmodelsdgp.azurewebsites.net/api/lungmodelsdgp?model=lung",
       data: formData,
     );
     responseBody = response.data[0];
   }
-
 
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
   _openCamera() async {
@@ -236,7 +236,15 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -256,7 +264,15 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -295,7 +311,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                     height: 30.0,
                                   ),
                                   Text(
-                                    "Scan Image",
+                                    "SCAN IMAGE",
                                     maxLines: 1,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
