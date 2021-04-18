@@ -372,6 +372,19 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                         final body = json.decode(reply);
                         var prognosisResult = body["Prediction"];
 
+                        /* For Breast Cancer Prognosis the Result is either 'R'
+                         * for Recurring and 'N' for Non-Recurring, so an If Condition
+                         * is used to set the Result to a more User Friendly
+                         * message
+                         */
+                        if (prognosisResult == "N" && cancerType == "Breast Cancer")
+
+                          prognosisResult = "Non-Recurring";
+
+                        else if (prognosisResult == "R" && cancerType == "Breast Cancer")
+
+                          prognosisResult = "Recurring";
+
                         // Displaying the alert dialog
                         createAlertDialog(context, "Prognosis", prognosisResult, 201);
                       }
