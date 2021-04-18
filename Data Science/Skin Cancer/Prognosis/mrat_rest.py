@@ -1,6 +1,7 @@
 import math
 import json
 from mrat_constants import MRATConstants
+import random
 
 class MelanomaRiskAssessmentTool:
     def getAbsoluteRisk(self, req_params):
@@ -31,12 +32,13 @@ class MelanomaRiskAssessmentTool:
         age_index = int((age - 20) / 5)
         t1 = age_index * 5 + 20
         t2 = t1 + 5
-        incident_rate = MRATConstants.SEX[sex] * MRATConstants.INCIDENCE[sex][age_index]
+        region_index = random.choice(MRATConstants.INCIDENCE[sex][age_index])
+        incident_rate = MRATConstants.SEX[sex] * MRATConstants.INCIDENCE[sex][age_index][region_index]
         mortality_rate = MRATConstants.MORTALITY[sex][age_index]
         absolute_risk = incident_rate * risk * (1 - math.exp((age - t2) * (incident_rate * risk + mortality_rate))) / (incident_rate * risk + mortality_rate)
 
         if age != t1:
-            next_incident_rate = MRATConstants.SEX[sex] * MRATConstants.INCIDENCE[sex][age_index + 1]
+            next_incident_rate = MRATConstants.SEX[sex] * MRATConstants.INCIDENCE[sex][age_index + 1][region_indexs]
             next_mortality_rate = MRATConstants.MORTALITY[sex][age_index + 1]
             absolute_risk += next_incident_rate * risk * math.exp((age - t2) * (incident_rate * risk + mortality_rate)) * (1 - math.exp((t1 - age) * (next_incident_rate * risk + next_mortality_rate))) / (next_incident_rate * absolute_risk + next_mortality_rate)
         absolute_risk = round(absolute_risk * 10000) / 100
