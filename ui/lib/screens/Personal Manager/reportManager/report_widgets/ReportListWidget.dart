@@ -26,7 +26,6 @@ class ReportListWidget extends StatelessWidget {
           itemCount: reports.length,
           itemBuilder: (context, index) {
           final report = reports[index];
-
           return ReportCard(report: report);
       },
     );

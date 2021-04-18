@@ -55,7 +55,6 @@ class ReportCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-
                         formattedDate,
                         style: TextStyle(
                             fontFamily: 'Poppins-SemiBold',

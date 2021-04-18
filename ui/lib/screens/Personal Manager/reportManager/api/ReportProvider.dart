@@ -6,10 +6,11 @@ class ReportProvider extends ChangeNotifier {
 
   List<Report> get reports => _reports.toList();
 
-  void setReports(List<Report> medications) =>
+  void setReports(List<Report> reports) =>
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        print(_reports);
+        // print(_reports);
         _reports = reports;
         notifyListeners();
+        // print(_reports);
       });
 }
