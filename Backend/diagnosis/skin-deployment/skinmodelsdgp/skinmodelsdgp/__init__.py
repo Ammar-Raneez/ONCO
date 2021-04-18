@@ -40,4 +40,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # getting download image URL
     image_url = f"https://skinmodelsdgp.blob.core.windows.net/images/{filename}"
 
-    return func.HttpResponse(json.dumps([{"imageDownloadURL": image_url, "result_string": prediction}]), status_code = 200, headers = headers)
+    return func.HttpResponse(json.dumps([{"imageDownloadURL": image_url, "result_string": prediction, "status": 200}]), status_code = 200, headers = headers)
