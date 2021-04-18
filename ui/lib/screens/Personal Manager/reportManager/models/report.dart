@@ -9,18 +9,22 @@ class Report {
   String percentage;
   String reportType;
   Timestamp reportDate;
+  Map prognosisBody;
 
   Report({
     this.reportType = '',
     this.reportDate,
     this.imageUrl='',
     this.percentage='',
-    this.cancerType=''
+    this.cancerType='',
+    this.result='',
+    this.prognosisBody
   }); // Constructor
 
   static Report fromDiagnosisJson(Map<String, dynamic> json) => Report(
     reportType: json['reportType'],
     reportDate: json['timestamp'],
+    result: json['result'],
     cancerType: json['cancerType'],
     imageUrl: json['imageUrl'],
     percentage: json['percentage']
@@ -29,8 +33,9 @@ class Report {
   static Report fromPrognosisJson(Map<String, dynamic> json) => Report(
       reportType: json['reportType'],
       reportDate: json['timestamp'],
-      imageUrl: json['imageUrl'],
-      percentage: json['percentage']
+      result: json['result'],
+      cancerType: json['cancerType'],
+      prognosisBody: json['prognosisBody']
   );
 
 }
