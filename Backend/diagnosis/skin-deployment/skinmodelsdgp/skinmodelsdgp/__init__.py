@@ -23,7 +23,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # save image to azure storage blob
     #wrap inside try and catch to prevent errors thrown upon same image trying to be saved
     try:
-        blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=skinmodelsdgp;AccountKey=WugXQYizUnx2W7Apf/RQV0wVtV29nI2GhG1ZiD3SsryK887JvGj/N0zJZIy0cgOwWRNAy3ggdLCRE0X8vUN2Cg==", container_name="images", blob_name=filename)
+        blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=skinmodelsdgp;AccountKey=YIV5zXtTbejGxrtY7+b1GtVlUKShSkjllqLX0MtOYv0lUipmVy+PDJ3HUUmuaILwwxoE81nO0n983Q49wbrZIw==", container_name="images", blob_name=filename)
         cnt_settings = ContentSettings(content_type="image/jpeg")
         blob.upload_blob(filestream.read(), blob_type="BlockBlob", content_settings=cnt_settings)
     except: 
@@ -35,9 +35,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     #convert it into a numpy array, so that it can be passed into opencv
     np_blob_array = np.fromstring(blob_data_as_bytes, dtype='uint8')
-    prediction = upload(np_blob_array, which_model)
+    result_string, prediction, prediction_percentage = upload(np_blob_array, which_model)
 
     # getting download image URL
     image_url = f"https://skinmodelsdgp.blob.core.windows.net/images/{filename}"
 
-    return func.HttpResponse(json.dumps([{"imageDownloadURL": image_url, "result_string": prediction}]), status_code = 200, headers = headers)
+    return func.HttpResponse(json.dumps([{"predition": prediction, "prediction_percentage": prediction_percentage, "superimposed_image_url": image_url, "result_string": result_string, "status": 200}]), status_code = 200, headers = headers)

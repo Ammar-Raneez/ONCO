@@ -82,10 +82,6 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         await getResponse(formData);
-        // Response response = await dio.post(
-        //   "https://lungmodelsdgp.azurewebsites.net/api/lungmodelsdgp?model=lung",
-        //   data: formData,
-        // );
 
         // RESPONSE RESULT FROM THE BACKEND
         // responseBody = response.data[0];
@@ -102,6 +98,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
           "cancerType": "lung",
           "reportType": "diagnosis",
           "result": resultPrediction,
+          "result_string": "$resultPrediction was detected",
           "imageUrl": resultImageURL,
           "percentage": resultPercentage,
           'timestamp': Timestamp.now(),
@@ -135,14 +132,13 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   }
 
   // Getting the detection response
-   getResponse(FormData formData) async{
-    Response response =  await dio.post(
+  getResponse(FormData formData) async {
+    Response response = await dio.post(
       "https://lungmodelsdgp.azurewebsites.net/api/lungmodelsdgp?model=lung",
       data: formData,
     );
     responseBody = response.data[0];
   }
-
 
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
   _openCamera() async {
@@ -240,7 +236,15 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -260,7 +264,15 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -299,7 +311,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                     height: 30.0,
                                   ),
                                   Text(
-                                    "Scan Image",
+                                    "SCAN IMAGE",
                                     maxLines: 1,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,

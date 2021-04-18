@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,8 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/rounded_button.dart';
-import 'package:ui/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:ui/services/UserDetails.dart';
 
@@ -18,10 +15,10 @@ class SkinCancerDiagnosis extends StatefulWidget {
   static String id = "skinCancerDiagnosisScreen";
 
   @override
-  _SkinCancerDiagnosisState createState() => _SkinCancerDiagnosisState();
+  SkinCancerDiagnosisState createState() => SkinCancerDiagnosisState();
 }
 
-class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
+class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   //  VARIABLES
   File imageFile;
   Dio dio = new Dio();
@@ -80,16 +77,12 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         });
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
-        Response response = await dio.post(
-          "https://skinmodelsdgp.azurewebsites.net/api/skinmodelsdgp?model=skin",
-          data: formData,
-        );
-        print(response.data[0]);
-        // RESPONSE DATA FROM THE BACKEND
-        responseBody = response.data[0];
+        await getResponse(formData);
 
-        String resultDetection = responseBody['result_string'];
-        String imageDownloadURL = responseBody['imageDownloadURL'];
+        String resultPercentage = responseBody['prediction_percentage'];
+        String resultPrediction = responseBody['predition'];
+        String resultString = responseBody['result_string'];
+        String resultImageURL = responseBody['superimposed_image_url'];
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -99,8 +92,10 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .add({
                     "cancerType": "skin",
                     "reportType": "diagnosis",
-                    "result": resultDetection,
-                    "imageUrl": imageDownloadURL,
+                    "result": resultPrediction,
+                    "result_string": resultString,
+                    "imageUrl": resultImageURL,
+                    "percentage": resultPercentage,
                     'timestamp': Timestamp.now(),
                   });
 
@@ -110,7 +105,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         });
 
         // checking if the response is not null and displaying the result
-        if (response != null) {
+        if (responseBody != null) {
           // Displaying the alert dialog
           createAlertDialog(
               context, "Diagnosis", resultDetection, 201);
@@ -128,6 +123,16 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         });
       }
     }
+  }
+
+  // Getting the detection response
+  getResponse(FormData formData) async{
+    Response response =  await dio.post(
+      "https://skinmodelsdgp.azurewebsites.net/api/skinmodelsdgp?model=skin",
+      data: formData,
+    );
+    // RESPONSE DATA FROM THE BACKEND
+    responseBody = response.data[0];
   }
 
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
@@ -212,7 +217,15 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -235,7 +248,15 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -277,7 +298,7 @@ class _SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                     height: 30.0,
                                   ),
                                   Text(
-                                    "Scan Image",
+                                    "SCAN IMAGE",
                                     maxLines: 1,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,

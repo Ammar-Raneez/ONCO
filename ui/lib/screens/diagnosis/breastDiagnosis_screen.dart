@@ -5,8 +5,6 @@ import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/alert_widget.dart';
-import 'package:ui/components/rounded_button.dart';
-import 'package:ui/constants.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -190,7 +188,15 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -213,7 +219,15 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                               },
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 3,
+                                      blurRadius: 7,
+                                      offset: Offset(0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
@@ -254,7 +268,7 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                                     height: 30.0,
                                   ),
                                   Text(
-                                    "Scan Image",
+                                    "SCAN IMAGE",
                                     maxLines: 1,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
