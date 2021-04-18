@@ -24,7 +24,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   Dio dio = new Dio();
   bool showSpinner = false;
   dynamic responseBody;
-  // final _firestore = FirebaseFirestore.instance;
+  final _firestore = FirebaseFirestore.instance;
 
   // CREATING AN ALERT
   createAlertDialog(
@@ -83,17 +83,17 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         String imageDownloadURL = responseBody['imageDownloadURL'];
 
         // Adding the response data into the database for report creation purpose
-        // _firestore
-        //     .collection("users")
-        //     .doc(UserDetails.getUserData()["email"])
-        //     .collection("imageDetections")
-        //     .add({
-        //             "cancerType": "skin",
-        //             "reportType": "diagnosis",
-        //             "result": resultDetection,
-        //             "imageUrl": imageDownloadURL,
-        //             'timestamp': Timestamp.now(),
-        //           });
+        _firestore
+            .collection("users")
+            .doc(UserDetails.getUserData()["email"])
+            .collection("imageDetections")
+            .add({
+                    "cancerType": "skin",
+                    "reportType": "diagnosis",
+                    "result": resultDetection,
+                    "imageUrl": imageDownloadURL,
+                    'timestamp': Timestamp.now(),
+                  });
 
         // Display the spinner to indicate that its loading
         setState(() {
@@ -103,7 +103,8 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         // checking if the response is not null and displaying the result
         if (responseBody != null) {
           // Displaying the alert dialog
-          createAlertDialog(context, "Diagnosis", resultDetection, 201);
+          createAlertDialog(
+              context, "Diagnosis", resultDetection, 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -121,8 +122,8 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   }
 
   // Getting the detection response
-  getResponse(FormData formData) async {
-    Response response = await dio.post(
+  getResponse(FormData formData) async{
+    Response response =  await dio.post(
       "https://skinmodelsdgp.azurewebsites.net/api/skinmodelsdgp?model=skin",
       data: formData,
     );
@@ -193,10 +194,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: imageFile == null
-                                ? Image.asset(
-                                    'images/uploadImageGrey1.png',
-                                    scale: 15,
-                                  )
+                                ? Image.asset('images/uploadImageGrey1.png', scale: 15,)
                                 : Image.file(
                                     imageFile,
                                     width: 500,
@@ -210,7 +208,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
-                              onTap: () {
+                              onTap:(){
                                 _openCamera();
                               },
                               child: Container(
@@ -219,7 +217,10 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 50, vertical: 15),
+                                    horizontal: 50,
+                                    vertical: 15
+                                ),
+
                                 child: Icon(
                                   Icons.camera_alt_rounded,
                                   color: Colors.white,
@@ -230,7 +231,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                               width: 20.0,
                             ),
                             GestureDetector(
-                              onTap: () {
+                              onTap:(){
                                 _openGallery();
                               },
                               child: Container(
@@ -239,7 +240,10 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 50, vertical: 15),
+                                    horizontal: 50,
+                                    vertical: 15
+                                ),
+
                                 child: Icon(
                                   Icons.photo,
                                   color: Colors.white,
@@ -260,8 +264,8 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                 topLeft: Radius.circular(20.0)),
                           ),
                           width: double.infinity,
-                          padding: const EdgeInsets.only(
-                              top: 20, bottom: 20, left: 50, right: 50),
+
+                          padding: const EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
                           child: RawMaterialButton(
                             fillColor: Colors.black54,
                             child: Padding(
@@ -279,15 +283,14 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Poppins-Regular',
-                                        color: Colors.white),
+                                        color: Colors.white
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                             shape: const StadiumBorder(),
-                            onPressed: () {
-                              _detect();
-                            },
+                            onPressed: () {_detect();},
                           ),
                         ),
                       ],
