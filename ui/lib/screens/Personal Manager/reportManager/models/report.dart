@@ -15,13 +15,23 @@ class Report {
     this.reportDate,
     this.imageUrl='',
     this.percentage='',
+    this.cancerType=''
   }); // Constructor
 
-  static Report fromJson(Map<String, dynamic> json) => Report(
+  static Report fromDiagnosisJson(Map<String, dynamic> json) => Report(
     reportType: json['reportType'],
     reportDate: json['timestamp'],
+    cancerType: json['cancerType'],
     imageUrl: json['imageUrl'],
     percentage: json['percentage']
   );
 
+  static Report fromPrognosisJson(Map<String, dynamic> json) => Report(
+      reportType: json['reportType'],
+      reportDate: json['timestamp'],
+      imageUrl: json['imageUrl'],
+      percentage: json['percentage']
+  );
+
 }
+
