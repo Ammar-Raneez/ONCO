@@ -4,11 +4,12 @@ from mrat_constants import MRATConstants
 
 class MelanomaRiskAssessmentTool:
     @staticmethod
-    def getAbsoluteRisk(parameters, age, sex):
+    def getAbsoluteRisk(parameters, age):
         sex = None
+        # assess male or female
         if parameters['gender'] == 'Male':
             sex = 0
-        elif (parameters['gender'] == 'Female'):
+        elif parameters['gender'] == 'Female':
             sex = 1
 
         risk = 1
@@ -31,12 +32,11 @@ class MelanomaRiskAssessmentTool:
         t2 = t1 + 5
         incident_rate = MRATConstants.SEX[sex] * MRATConstants.INCIDENCE[sex][age_index]
         mortality_rate = MRATConstants.MORTALITY[sex][age_index]
-        
         absolute_risk = incident_rate * risk * (1 - math.exp((age - t2) * (incident_rate * risk + mortality_rate))) / (incident_rate * risk + mortality_rate)
 
         if age != t1:
             next_incident_rate = MRATConstants.SEX[sex] * MRATConstants.INCIDENCE[sex][age_index + 1]
             next_mortality_rate = MRATConstants.MORTALITY[sex][age_index + 1]
             absolute_risk += next_incident_rate * risk * math.exp((age - t2) * (incident_rate * risk + mortality_rate)) * (1 - math.exp((t1 - age) * (next_incident_rate * risk + next_mortality_rate))) / (next_incident_rate * absolute_risk + next_mortality_rate)
-        absolute_risk = round(risk * 10000) / 100
-        ratio = round((risk * 0.01) * 1000)
+        absolute_risk = round(absolute_risk * 10000) / 100
+        ratio = round((absolute_risk * 0.01) * 1000)
