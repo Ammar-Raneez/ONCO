@@ -12,22 +12,46 @@ void main() {
   String actual;
   String expected;
 
-  test("Testing lung cancer diagnosis", () async {
+  test("Testing lung cancer diagnosis (Healthy lung)", () async {
     // Comment Out all the firebase stuff from the lungDiagnosis_screen.dart when running the test.
+
     // ACTUAL
     LungCancerDiagnosisState lungCancerDiagnosisState =
         new LungCancerDiagnosisState();
     FormData formData = new FormData.fromMap({
       "file": await MultipartFile.fromFile(
-          "images/officialLogo.png",
+          "images/healthy-lung-test.jpeg",
           filename: "testingImage"),
     });
-    print(formData);
+
     await lungCancerDiagnosisState.getResponse(formData);
     actual = lungCancerDiagnosisState.responseBody['predition'];
 
     // EXPECTED
-    String expected = "CANCER";
+    expected = "NORMAL";
+
+    // TEST
+    expect(actual, expected);
+
+  });
+
+  test("Testing lung cancer diagnosis (Infected lung)", () async {
+    // Comment Out all the firebase stuff from the lungDiagnosis_screen.dart when running the test.
+
+    // ACTUAL
+    LungCancerDiagnosisState lungCancerDiagnosisState =
+    new LungCancerDiagnosisState();
+    FormData formData = new FormData.fromMap({
+      "file": await MultipartFile.fromFile(
+          "images/infected-lung-test.png",
+          filename: "testingImage"),
+    });
+
+    await lungCancerDiagnosisState.getResponse(formData);
+    actual = lungCancerDiagnosisState.responseBody['predition'];
+
+    // EXPECTED
+    expected = "CANCER";
 
     // TEST
     expect(actual, expected);

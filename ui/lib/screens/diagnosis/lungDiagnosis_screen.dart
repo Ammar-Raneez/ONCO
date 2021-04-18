@@ -26,7 +26,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   bool showSpinner = false;
   bool showHighlightedImage = false;
   dynamic responseBody;
-  final _firestore = FirebaseFirestore.instance;
+  // final _firestore = FirebaseFirestore.instance;
 
   // CREATING AN ALERT
   createAlertDialog(
@@ -94,18 +94,18 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         String resultPercentage = responseBody['prediction_percentage'];
 
         // Adding the response data into the database for report creation purpose
-        _firestore
-            .collection("users")
-            .doc(UserDetails.getUserData()["email"])
-            .collection("imageDetections")
-            .add({
-          "cancerType": "lung",
-          "reportType": "diagnosis",
-          "result": resultPrediction,
-          "imageUrl": resultImageURL,
-          "percentage": resultPercentage,
-          'timestamp': Timestamp.now(),
-        });
+        // _firestore
+        //     .collection("users")
+        //     .doc(UserDetails.getUserData()["email"])
+        //     .collection("imageDetections")
+        //     .add({
+        //   "cancerType": "lung",
+        //   "reportType": "diagnosis",
+        //   "result": resultPrediction,
+        //   "imageUrl": resultImageURL,
+        //   "percentage": resultPercentage,
+        //   'timestamp': Timestamp.now(),
+        // });
 
         // Display the spinner to indicate that its loading
         setState(() {
