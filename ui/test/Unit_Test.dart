@@ -1,19 +1,17 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
-import 'package:ui/main.dart';
+import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
 
-class MockBuildContext extends Mock implements BuildContext {}
+// Comment out firebase stuff for testing purposes
 
 void main() {
   String actual;
   String expected;
 
   test("Testing lung cancer diagnosis (Healthy lung)", () async {
-    // Comment Out all the firebase stuff from the lungDiagnosis_screen.dart when running the test.
 
     // ACTUAL
     LungCancerDiagnosisState lungCancerDiagnosisState =
@@ -36,7 +34,6 @@ void main() {
   });
 
   test("Testing lung cancer diagnosis (Infected lung)", () async {
-    // Comment Out all the firebase stuff from the lungDiagnosis_screen.dart when running the test.
 
     // ACTUAL
     LungCancerDiagnosisState lungCancerDiagnosisState =
@@ -52,6 +49,28 @@ void main() {
 
     // EXPECTED
     expected = "CANCER";
+
+    // TEST
+    expect(actual, expected);
+
+  });
+
+  test("Testing skin cancer diagnosis", () async {
+
+    // ACTUAL
+    SkinCancerDiagnosisState skinCancerDiagnosisState =
+    new SkinCancerDiagnosisState();
+    FormData formData = new FormData.fromMap({
+      "file": await MultipartFile.fromFile(
+          "images/skin-infected-test.jpg",
+          filename: "testingImage"),
+    });
+
+    await skinCancerDiagnosisState.getResponse(formData);
+    actual = skinCancerDiagnosisState.responseBody['status'].toString();
+
+    // EXPECTED
+    expected = "200";
 
     // TEST
     expect(actual, expected);
