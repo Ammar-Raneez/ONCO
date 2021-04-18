@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/models/report.dart';
+import 'package:intl/intl.dart';
+import 'package:ui/screens/Personal%20Manager/reportManager/viewReport_screen.dart';
 
 class ReportCard extends StatelessWidget {
 
   final Report report;
+
 
   ReportCard({
     @required this.report
@@ -11,8 +15,21 @@ class ReportCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var timestamp;
+    var formattedDate="";
+    timestamp = report.reportDate;
+    var date = DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
+    formattedDate = DateFormat.yMMMd().format(date); // Apr 8, 2020
+
     return GestureDetector(
-      // onTap: () => viewReport(context, report),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                ViewReport(context, report), // Navigates to Task Page
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
             vertical:5.0,
@@ -38,7 +55,8 @@ class ReportCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        report.reportDate.toString(),
+
+                        formattedDate,
                         style: TextStyle(
                             fontFamily: 'Poppins-SemiBold',
                             fontSize: 17,
@@ -46,7 +64,7 @@ class ReportCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        report.reportType,
+                        report.cancerType.toUpperCase() + " CANCER",
                         style: TextStyle(
                             fontFamily: 'Poppins-SemiBold',
                             fontSize: 13,
