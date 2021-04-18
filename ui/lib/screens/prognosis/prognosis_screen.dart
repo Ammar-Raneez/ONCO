@@ -313,17 +313,26 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                       // Styling Progress Dialog
                       progressDialog.style(
                           message: '   Analyzing Input',
+                          padding: EdgeInsets.all(20),
                           borderRadius: 10.0,
                           backgroundColor: Colors.white,
-                          progressWidget: CircularProgressIndicator(),
+                          progressWidget: LinearProgressIndicator(backgroundColor: Colors.lightBlueAccent,),
                           elevation: 10.0,
-                          insetAnimCurve: Curves.easeInOut,
+                          insetAnimCurve: Curves.easeInCubic,
                           progress: 0.0,
                           maxProgress: 100.0,
                           progressTextStyle: TextStyle(
-                              color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+                            color: Colors.black,
+                            fontSize: 13.0,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Poppins-SemiBold',
+                          ),
                           messageTextStyle: TextStyle(
-                              color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
+                            color: Colors.black,
+                            fontSize: 19.0,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Poppins-SemiBold',
+                          )
                       );
 
                       progressDialog.show();
