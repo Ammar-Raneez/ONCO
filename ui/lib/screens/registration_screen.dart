@@ -35,7 +35,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   bool showSpinner = false;
 
- @override
+  @override
   void initState() {
     super.initState();
     gender = "male";
@@ -56,7 +56,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       }
     });
   }
-
 
   // creating an alert
   createAlertDialog(
@@ -264,18 +263,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           });
 
                           //clear chat bot messages on login/register
-                          _firestore.collection("chatbot-messages").doc(email)
-                              .collection("chatbot-messages").get()
+                          _firestore
+                              .collection("chatbot-messages")
+                              .doc(email)
+                              .collection("chatbot-messages")
+                              .get()
                               .then((value) => {
-                            for (var msg in value.docs) {
-                              msg.reference.delete()
-                            }
-                          });
+                                    for (var msg in value.docs)
+                                      {msg.reference.delete()}
+                                  });
 
                           // displaying alerts according to the progress
                           if (newUser != null) {
                             // Adding the new registered user details to the global variable
-                            UserDetails.setUserData(email, username);
+                            UserDetails.setUserData(email, username, gender);
 
                             // Displaying the alert dialog
                             createAlertDialog(context, "Success",
