@@ -80,7 +80,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         await getResponse(formData);
 
         String resultPercentage = responseBody['prediction_percentage'];
-        String resultPrediction = responseBody['predition'];
+        String resultDetection = responseBody['predition'];
         String resultString = responseBody['result_string'];
         String resultImageURL = responseBody['superimposed_image_url'];
 
