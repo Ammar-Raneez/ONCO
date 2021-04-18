@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/constants.dart';
 
@@ -60,8 +61,7 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
     return reply;
   }
 
-  _CancerPrognosisState(var cancerType, var cancerPrognosisAttributes, var url)
-  {
+  _CancerPrognosisState(var cancerType, var cancerPrognosisAttributes, var url) {
     this.cancerType = cancerType;
     this.cancerPrognosisAttributes = cancerPrognosisAttributes;
     this.url = url;
@@ -250,6 +250,7 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                     shape: const StadiumBorder(), onPressed: () async {
 
                       if (cancerType == "Lung Cancer") {
+
                         prognosisBody = {
                           "Age": textFieldControllers[0].text,
                           "Gender": textFieldControllers[1].text,
@@ -276,8 +277,8 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                           "Snoring": textFieldControllers[22].text,
                         };
                       }
-                      else if (cancerType == "Breast Cancer")
-                      {
+                      else if (cancerType == "Breast Cancer") {
+
                         prognosisBody = {
                           "radius_mean": textFieldControllers[0].text,
                           "texture_mean": textFieldControllers[1].text,
@@ -303,8 +304,33 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                           "positive_axillary_lymph_node": textFieldControllers[21].text
                         };
                       }
-                      print(prognosisBody);
+
+                      // Progress Dialog that will run till API Request is received
+                      final ProgressDialog progressDialog =
+                      ProgressDialog(context,type: ProgressDialogType.Normal,
+                          isDismissible: false, showLogs: true);
+
+                      // Styling Progress Dialog
+                      progressDialog.style(
+                          message: '   Analyzing Input',
+                          borderRadius: 10.0,
+                          backgroundColor: Colors.white,
+                          progressWidget: CircularProgressIndicator(),
+                          elevation: 10.0,
+                          insetAnimCurve: Curves.easeInOut,
+                          progress: 0.0,
+                          maxProgress: 100.0,
+                          progressTextStyle: TextStyle(
+                              color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+                          messageTextStyle: TextStyle(
+                              color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
+                      );
+
+                      progressDialog.show();
+
                       print(await apiRequest());
+
+                      progressDialog.hide();  // Closing Dialog after API Request
                     }
                 ),
               ),
