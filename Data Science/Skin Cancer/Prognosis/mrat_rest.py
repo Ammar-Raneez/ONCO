@@ -3,13 +3,14 @@ import json
 from mrat_constants import MRATConstants
 
 class MelanomaRiskAssessmentTool:
-    @staticmethod
-    def getAbsoluteRisk(req_params, age):
+    def getAbsoluteRisk(self, req_params):
+        print(req_params)
+        age = int(req_params['age'])
         sex = None
         # assess male or female
-        if req_params['gender'] == 'Male':
+        if req_params['gender'] == 'male':
             sex = 0
-        elif req_params['gender'] == 'Female':
+        elif req_params['gender'] == 'female':
             sex = 1
 
         risk = 1
