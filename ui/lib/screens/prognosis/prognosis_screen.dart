@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/constants.dart';
 
@@ -48,6 +49,12 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
   var url;
   var count = 0;
 
+  _CancerPrognosisState(var cancerType, var cancerPrognosisAttributes, var url) {
+    this.cancerType = cancerType;
+    this.cancerPrognosisAttributes = cancerPrognosisAttributes;
+    this.url = url;
+  }
+
   // https://stackoverflow.com/questions/50278258/http-post-with-json-on-body-flutter-dart <- REFERENCE
   Future<String> apiRequest() async {
     HttpClient httpClient = new HttpClient();
@@ -61,10 +68,21 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
     return reply;
   }
 
-  _CancerPrognosisState(var cancerType, var cancerPrognosisAttributes, var url) {
-    this.cancerType = cancerType;
-    this.cancerPrognosisAttributes = cancerPrognosisAttributes;
-    this.url = url;
+  /* This Method Creates a Custom AlertDialog with the AlertWidget we made
+   * and uses the showDialog method to show the Dialog on the main UI Thread
+   */
+  createAlertDialog(
+      BuildContext context, String title, String message, int status) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertWidget(
+          title: title,
+          message: message,
+          status: status,
+        );
+      },
+    );
   }
 
   void getPostsData() {
@@ -249,6 +267,12 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                     ),
                     shape: const StadiumBorder(), onPressed: () async {
 
+                      /* If Else Conditions here to take each Input from the
+                       * textFieldControllers Array, and setting the Input to
+                       * each Attribute required by a Model in a Dictionary
+                       * the Number Controllers will match the number of Attributes
+                       * required by the Model
+                       */
                       if (cancerType == "Lung Cancer") {
 
                         prognosisBody = {
@@ -335,11 +359,30 @@ class _CancerPrognosisState extends State<CancerPrognosis> {
                           )
                       );
 
+                      // Showing the Progress Dialog and Dismissing it After the API Request is Received
                       progressDialog.show();
 
-                      print(await apiRequest());
+                      String reply = await apiRequest();
 
-                      progressDialog.hide();  // Closing Dialog after API Request
+                      progressDialog.hide();
+
+                      // checking if the response is not null and displaying the result
+                      if (reply != null) {
+
+                        final body = json.decode(reply);
+                        var prognosisResult = body["Prediction"];
+
+                        // Displaying the alert dialog
+                        createAlertDialog(context, "Prognosis", prognosisResult, 201);
+                      }
+                      else {
+
+                        // Displaying the alert dialog
+                        createAlertDialog(
+                            context, "Error", "Oops something went wrong!", 404);
+                      }
+
+                        // Closing Dialog after API Request
                     }
                 ),
               ),
