@@ -21,93 +21,95 @@ class _DiagnosisReportsState extends State<DiagnosisReports> {
       child: Scaffold(
         appBar: CustomAppBar.arrow(context),
         body: SafeArea(
-          child: Container(
-              child:Column(
-                children: [
+          child: Expanded(
+            child: Container(
+                child:Column(
+                  children: [
 
 
-                  Column(
-                    children: [
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20,
-                              bottom: 8,
-                            ),
-                            child: Align(
-
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Diagnosis Reports",
-                                style: TextStyle(
-                                    fontFamily: 'Poppins-SemiBold',
-                                    fontSize: 32,
-                                    color: Color(0xFF00404E)
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          Padding(
-                            padding: const EdgeInsets.only(
+                    Column(
+                      children: [
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
                                 left: 20,
-                                right: 20,
-                                bottom:15
-                            ),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Here you can view your reports",
-                                style: TextStyle(
-                                    fontFamily: 'Poppins-SemiBold',
-                                    fontSize: 13.0,
-                                    color: Color(0xFF3C707B)
+                                bottom: 8,
+                              ),
+                              child: Align(
+
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  "Diagnosis Reports",
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 32,
+                                      color: Color(0xFF00404E)
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
 
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Container(
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20,
+                                  right: 20,
+                                  bottom:15
+                              ),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  "Here you can view your reports",
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins-SemiBold',
+                                      fontSize: 13.0,
+                                      color: Color(0xFF3C707B)
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
 
-                        child: StreamBuilder<List<Report>>(
-                            stream: ReportFirebaseApi.readDiagnosisReports(),
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Container(
 
-                                case ConnectionState.waiting:
+                          child: StreamBuilder<List<Report>>(
+                              stream: ReportFirebaseApi.readDiagnosisReports(),
+                              builder: (context, snapshot) {
+                                switch (snapshot.connectionState) {
 
-                                  return Center(
-                                      child: CircularProgressIndicator());
-                                default:
+                                  case ConnectionState.waiting:
 
-                                  if (snapshot.hasError) {
-                                    return buildText(
-                                        'Something went wrong, Try later');
-                                  } else {
-                                    final reports = snapshot.data;
+                                    return Center(
+                                        child: CircularProgressIndicator());
+                                  default:
 
-                                    final provider = Provider.of<ReportProvider>(context);
-                                    provider.setReports(reports);
+                                    if (snapshot.hasError) {
+                                      return buildText(
+                                          'Something went wrong, Try later');
+                                    } else {
+                                      final reports = snapshot.data;
 
-                                    return ReportListWidget();
-                                  }
+                                      final provider = Provider.of<ReportProvider>(context);
+                                      provider.setReports(reports);
+
+                                      return ReportListWidget();
+                                    }
+                                }
                               }
-                            }
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
-                ],
-              )
+                  ],
+                )
+            ),
           ),
         ),
       ),
