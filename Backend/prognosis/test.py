@@ -3,7 +3,7 @@ import requests
 # localhost and the defined port + endpoint
 LUNG_CANCER_PROGNOSIS_URL = 'https://onco-prognosis-backend.herokuapp.com/prognosis_lung'  
 BREAST_CANCER_PROGNOSIS_URL = 'https://onco-prognosis-backend.herokuapp.com/prognosis_breast'
-SKIN_CANCER_PROGNOSIS_URL = 'http://127.0.0.1:5000/prognosis_skin'  
+SKIN_CANCER_PROGNOSIS_URL = 'https://onco-prognosis-backend.herokuapp.com/prognosis_skin'  
 
 lung_cancer_prognosis_body = {
     "Age": 44,
@@ -60,12 +60,12 @@ skin_cancer_prognosis_body = {
 
     "age": 30,
     "gender": "male",
-    "sunburn": 0,
+    "sunburn": 1,
     "complexion": 0,
-    "big-moles": 0,
+    "big-moles": 1,
     "small-moles": 0,
     "freckling": 0,
-    "damage": 0,
+    "damage": 2,
     "tan": 0
 }
 

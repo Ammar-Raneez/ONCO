@@ -45,7 +45,6 @@ const kTextStyle = TextStyle(
 const SKIN_CANCER_PROGNOSIS_QUESTIONS_MALE =
 [
   "Age",
-  "Race",
   "Complexion",
   "Blistering sunburn (one or more)",
   "Number of moles larger than 5mm in diameter on patient's back",
@@ -55,7 +54,6 @@ const SKIN_CANCER_PROGNOSIS_QUESTIONS_MALE =
 ];
 
 const SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_MALE = [
-  ["Non-Hispanic white", "Other"],
   ["Light", "Medium", "Dark"],
   ["Yes", "No"],
   ["Less than 2","2 or more"],
@@ -66,14 +64,12 @@ const SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_MALE = [
 const SKIN_CANCER_PROGNOSIS_QUESTIONS_FEMALE =
 [
   "Age",
-  "Race",
   "Complexion",
   "Skin result of repeated and prolonged exposure to sunlight",
   "Number of moles less than or equal to 5mm in diameter on patient's back",
   "How extensive is the freckling on the patient's back and shoulders?"
 ];
 const SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_FEMALE = [
-  ["Non-Hispanic white", "Other"],
   ["Light", "Medium", "Dark"],
   ["Very brown and deeply tanned", "Moderately tanned", "Lightly tanned", "No tan at all"],
   ["Less than 5","5 to 11", "12 or more"],

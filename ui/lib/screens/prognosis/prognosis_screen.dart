@@ -613,11 +613,11 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                         if (cancerType != "Skin Cancer")
 
-                          var prognosisResult = body["Prediction"];
+                          prognosisResult = body["Prediction"];
 
                         else
                         {
-                          var prognosisResult = body["result_string"];
+                          prognosisResult = body["result_string"];
                         }
 
                         /* For Breast Cancer Prognosis the Result is either 'R'
