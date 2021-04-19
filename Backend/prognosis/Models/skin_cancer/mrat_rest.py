@@ -1,10 +1,12 @@
 import math
 import json
-from mrat_constants import MRATConstants
+from Models.skin_cancer.mrat_constants import MRATConstants
 import random
 
 class MelanomaRiskAssessmentTool:
+
     def getAbsoluteRisk(self, req_params):
+
         age = int(req_params['age'])
         sex = None
         # assess male or female
