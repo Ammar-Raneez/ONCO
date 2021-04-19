@@ -25,8 +25,6 @@ class _PrognosisReportsState extends State<PrognosisReports> {
             child: Container(
                 child:Column(
                   children: [
-
-
                     Column(
                       children: [
                         Column(
@@ -59,7 +57,7 @@ class _PrognosisReportsState extends State<PrognosisReports> {
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  "Here you can view your reports",
+                                  "Here you can view the reports created after a prognosis.",
                                   style: TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
                                       fontSize: 13.0,
