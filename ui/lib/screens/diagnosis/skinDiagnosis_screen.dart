@@ -80,7 +80,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         await getResponse(formData);
 
         String resultPercentage = responseBody['prediction_percentage'];
-        String resultDetection = responseBody['predition'];
+        String resultPrediction = responseBody['predition'];
         String resultString = responseBody['result_string'];
         String resultImageURL = responseBody['superimposed_image_url'];
 
@@ -92,7 +92,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .add({
                     "cancerType": "skin",
                     "reportType": "diagnosis",
-                    "result": resultDetection,
+                    "result": resultPrediction,
                     "result_string": resultString,
                     "imageUrl": resultImageURL,
                     "percentage": resultPercentage,
@@ -108,7 +108,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         if (responseBody != null) {
           // Displaying the alert dialog
           createAlertDialog(
-              context, "Diagnosis", resultDetection, 201);
+              context, "Diagnosis", resultPrediction, 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
