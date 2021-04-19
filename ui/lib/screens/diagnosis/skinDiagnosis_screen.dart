@@ -92,7 +92,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .add({
                     "cancerType": "skin",
                     "reportType": "diagnosis",
-                    "result": resultDetection,
+                    "result": resultPrediction,
                     "result_string": resultString,
                     "imageUrl": resultImageURL,
                     "percentage": resultPercentage,
