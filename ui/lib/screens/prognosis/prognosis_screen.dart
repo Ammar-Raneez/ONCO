@@ -23,7 +23,7 @@ class CancerPrognosis extends StatefulWidget {
       cancerPrognosisAttributes = LUNG_CANCER_PROGNOSIS_QUESTIONS;
       url += "prognosis_lung";
     } else if (cancerType == "Skin Cancer") {
-      cancerPrognosisAttributes = SKIN_CANCER_PROGNOSIS_QUESTIONS;
+      // Bye bye
     }
   }
 

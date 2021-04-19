@@ -4,6 +4,7 @@ import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
 import 'package:ui/screens/prognosis/prognosis_screen.dart';
+import 'package:ui/screens/prognosis/skin_prognosis_screen.dart';
 import 'package:ui/screens/selectService_screen.dart';
 
 //TODO - Add nav to bottom also add passing colors into card. Might need to adjust padding after(Appbar done only for nav)
@@ -56,7 +57,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                           builder: (context) => SelectServiceScreen(
                               cancerType: 'Skin Cancer',
                               diagnosisRoute: SkinCancerDiagnosis(),
-                              prognosisRoute: CancerPrognosis("Skin Cancer")),
+                              prognosisRoute: SkinPrognosisScreen()),
                         ),
                       );
                     },
