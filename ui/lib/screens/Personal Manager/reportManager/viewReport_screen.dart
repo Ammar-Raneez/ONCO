@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/screens/Personal%20Manager/reportManager/api/ReportProvider.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/models/report.dart';
-import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
 
 class ViewReport extends StatefulWidget {
 
@@ -17,20 +14,20 @@ class ViewReport extends StatefulWidget {
 
 class _ViewReportState extends State<ViewReport> {
 
-  // Variables used within file
   String _reportType;
   String _cancerType;
-  var _reportDate;
   String _reportPercentage;
   String _reportResult;
   String imageURL;
+
+  var _reportDate;
   var timestamp;
   var formattedDate="";
+
   Map prognosisVariables;
+
   List<Widget> itemsData = [];
   ScrollController controller = ScrollController();
-
-
 
   @override
   void initState() {
@@ -38,30 +35,22 @@ class _ViewReportState extends State<ViewReport> {
     _reportType = widget.report.reportType;
     _reportDate = widget.report.reportDate;
     var date = DateTime.fromMillisecondsSinceEpoch(_reportDate.millisecondsSinceEpoch);
-    formattedDate = DateFormat.yMMMd().format(date); // Apr 8, 2020
+    formattedDate = DateFormat.yMMMd().format(date);
     _reportPercentage = widget.report.percentage;
     imageURL = widget.report.imageUrl;
     _cancerType = widget.report.cancerType;
-
     if(widget.report.result=="CANCER"){
       _reportResult = widget.report.result+" Detected";
     }else{
       _reportResult = widget.report.result;
     }
-
     prognosisVariables = widget.report.prognosisInputs;
-    print(prognosisVariables);
 
-    var _list = prognosisVariables.entries.toList();
-    // print(_list);
     getPostsData(prognosisVariables);
-
-
   }
 
   void getPostsData(Map prognosisBody) {
     List<dynamic> responseList = new List();
-
     prognosisBody.forEach((k, v) =>
     {
       responseList.add(k + " : " + v)
@@ -111,7 +100,6 @@ class _ViewReportState extends State<ViewReport> {
                     ),
                   ),
                 ),
-
               ],
             ),
 
@@ -167,7 +155,8 @@ class _ViewReportState extends State<ViewReport> {
               ),
             ),
           ],
-        ));
+        )
+    );
 
     responseList.forEach((post) {
       listItems.add(Padding(
@@ -188,13 +177,11 @@ class _ViewReportState extends State<ViewReport> {
         ),
       ),
       );
-
     });
     setState(() {
       itemsData = listItems;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -210,10 +197,9 @@ class _ViewReportState extends State<ViewReport> {
       ),
     );
   }
-
 }
 
-Widget percentagess(String percentages) {
+Widget percentageContainer(String percentages) {
   if (percentages != null) {
     return Column(
       children: [
@@ -257,11 +243,9 @@ Widget percentagess(String percentages) {
   }
 }
 
-Widget cancerDetails(BuildContext context, String Date, String reportType, String cancerType,
-String reportResult, String percentage, String Imageurl, Map prognosisBody, ScrollController controller,
-List<Widget> itemsData) {
-  // DIAGNOSIS
+Widget cancerDetails(BuildContext context, String date, String reportType, String cancerType, String reportResult, String percentage, String Imageurl, Map prognosisBody, ScrollController controller, List<Widget> itemsData) {
 
+  // DIAGNOSIS
   if (reportType.toLowerCase() == "diagnosis") {
     return ListView(
       children: [
@@ -278,7 +262,7 @@ List<Widget> itemsData) {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      Date,
+                      date,
                       style: TextStyle(
                           fontFamily: 'Poppins-SemiBold',
                           fontSize: 27,
@@ -310,7 +294,7 @@ List<Widget> itemsData) {
               ],
             ),
 
-            percentagess(percentage),
+            percentageContainer(percentage),
 
             Padding(
               padding: const EdgeInsets.only(
@@ -377,15 +361,14 @@ List<Widget> itemsData) {
                     .width),
               ),
             ),
-
-
           ],
         ),
       ],
     );
-  } else {
-    // PROGNOSIS
 
+  } else {
+
+    // PROGNOSIS
     return  ListView.builder(
                 controller: controller,
                 itemCount: itemsData.length,
@@ -396,27 +379,5 @@ List<Widget> itemsData) {
             );
 
   }
-//   Widget getMapValues(Map prognosisBody) {
-//     prognosisBody.forEach((k, v) =>
-//     {
-//       // print('$k: $v')
-//       Padding(
-//         padding: const EdgeInsets.only(
-//             left: 20,
-//             top: 5,
-//             bottom: 10
-//         ),
-//         child: Align(
-//           alignment: Alignment.centerLeft,
-//           child: Text('$k: $v',
-//             style: TextStyle(
-//                 fontFamily: 'Poppins-SemiBold',
-//                 fontSize: 14,
-//                 color: Color(0xFF1F1F1F)
-//             ),
-//           ),
-//         ),
-//       ),
-//     });
-//   }
+
 }
