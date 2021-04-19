@@ -12,6 +12,8 @@ import tensorflow as tf
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from pyrebase import pyrebase
 
+from breastDiagModule import (calculatePredictionPercentBreast,
+                              model_predictBreast)
 from lungDiagModule import (calculatePredictionPercentLung, getImageUrlLung,
                             model_predictLung, storeGradCamImageLung)
 from skinDiagModule import model_predict_skin, uploadSkinImg
@@ -37,12 +39,12 @@ firebase_storage = firebase.storage()
 # Model paths
 LUNG_DIAGNOSIS_MODEL_PATH = "lung_model.h5"
 SKIN_DIAGNOSIS_MODEL_PATH = "skin_model.hdf5"
-BREAST_DIAGNOSIS_MODEL_PATH = ""
+BREAST_DIAGNOSIS_MODEL_PATH = "breast_model.h5"
 
 # Loading all the models
 lung_diag_model = tf.keras.models.load_model(LUNG_DIAGNOSIS_MODEL_PATH)
-skin_diag_model = tf.keras.models.load_model(SKIN_DIAGNOSIS_MODEL_PATH)
-# breast_diag_model = tf.keras.models.load_model(BREAST_DIAGNOSIS_MODEL_PATH)
+# skin_diag_model = tf.keras.models.load_model(SKIN_DIAGNOSIS_MODEL_PATH)
+breast_diag_model = tf.keras.models.load_model(BREAST_DIAGNOSIS_MODEL_PATH)
 print("Loaded Models . . .")
 
 # Index route
@@ -137,7 +139,44 @@ def skinCancerDiagnosis():
     # if not a 'POST' request we then return None
     return None
 
+# Skin Cancer Diagnosis route
+@app.route('/breast-cancer/diagnosis', methods=['GET', 'POST'])
+def breastCancerDiagnosis():
+    if request.method == 'POST':
+        # Get the file from post request
+        f = request.files['file']
+
+        # Save the file to ./uploads
+        file_path = "uploads/" + str(uuid.uuid4()) + ".jpg"
+        print(file_path)
+        f.save(file_path)
+        
+        # Getting the prediction percentage value
+        prediction_percentage = calculatePredictionPercentBreast(file_path, breast_diag_model)
+        
+        # Getting the image download URL link
+        image_download_Url = "https://www.gettingImageFromAzureStorage.com"
+        
+        # Make prediction
+        prediction = model_predictBreast(file_path, breast_diag_model)
+
+        # These are the prediction categories 
+        CATEGORIES = ['CANCER', 'NORMAL']
+        
+        # getting the prediction result from the categories
+        output = CATEGORIES[int(round(prediction[0][0]))]
+        
+        # returning the result
+        return jsonify(
+            result = output,
+            imageUrl = image_download_Url,
+            percentage = prediction_percentage
+        )
+    
+    # if not a 'POST' request we then return None
+    return None     
+
 
 # Running the main application
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=80, debug=True)
