@@ -28,7 +28,6 @@ class _AddMedicationState extends State<AddMedication> {
   @override
   void initState() {
     if(widget.medication !=null){
-      // contentVisible = true;
       _medicationName = widget.medication.medicationName;
       _medicationId = widget.medication.id;
       _medicationDose = widget.medication.dosage;
@@ -54,14 +53,12 @@ class _AddMedicationState extends State<AddMedication> {
                 children: [
                   Column(
                     children: [
-
                       Padding(
                         padding: const EdgeInsets.only(
                           left: 20,
                           bottom: 8,
                         ),
                         child: Align(
-
                           alignment: Alignment.topLeft,
                           child: Text(
                               "Add Medication",
@@ -90,7 +87,6 @@ class _AddMedicationState extends State<AddMedication> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
 
@@ -137,8 +133,6 @@ class _AddMedicationState extends State<AddMedication> {
                                               setState(() {
                                                 _medicationName = value;
                                               });
-
-                                              print("New Medication Name : $_medicationId "); // to notify on console when new task created
                                               _doseFocus.requestFocus(); // to move focus to description node
                                             }
                                           },
@@ -177,8 +171,6 @@ class _AddMedicationState extends State<AddMedication> {
                                             setState(() {
                                               _medicationDose = value;
                                             });
-
-                                            print("New Medication Dose for : $_medicationId "); // to notify on console when new task created
                                             _timeFocus.requestFocus(); // to move focus to description node
                                           }
                                         },
@@ -218,13 +210,11 @@ class _AddMedicationState extends State<AddMedication> {
                                             setState(() {
                                               _medicationTime = value;
                                             });
-
-                                            print("New Medication time for : $_medicationId "); // to notify on console when new task created
-                                            // _doseFocus.requestFocus(); // to move focus to description node
+                                            _doseFocus.requestFocus(); // to move focus to description node
                                           }
                                         },
                                         decoration: InputDecoration(
-                                          hintText: "Time - eg: 'every 5 hours','after lunch'", // temporary text
+                                          hintText: "Time - eg: 'every 5 hours','after lunch'", // placeholder text
                                           border:InputBorder.none,
                                         ),
                                         style: TextStyle( // text style
@@ -283,10 +273,8 @@ class _AddMedicationState extends State<AddMedication> {
                         ),
                       )
                   ),
-
                 ],
               ),
-
             ],
           ),
         ),

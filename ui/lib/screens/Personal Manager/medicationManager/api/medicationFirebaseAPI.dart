@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
 import 'package:ui/screens/Personal%20Manager/utils.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
