@@ -53,7 +53,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   List<TextEditingController> textFieldControllers = [];
-  List<String> skinCancerUserAnswers= ["", "", "", "", "", "", ""];
+  List<String> skinCancerUserAnswers= [];
   Map prognosisBody;
   final _firestore = FirebaseFirestore.instance;
   var cancerType;
@@ -103,6 +103,17 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   }
 
   void getPostsDataSkin() {
+
+    for (String question in cancerPrognosisAttributes) {
+
+      if (question != "Age") {
+        skinCancerUserAnswers.add("");
+        print(question);
+      }
+    }
+
+    print(skinCancerUserAnswers);
+
     List<dynamic> responseList = cancerPrognosisAttributes;
     List<Widget> listItems = [];
     responseList.forEach((post) {
@@ -518,10 +529,38 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             answerInQuestionCount ++;
                           }
                           questionCount ++;
-
                         }
 
                         print(skinCancerUserAnswersIndices);
+
+                        if (UserDetails.getUserData()['gender'] == "male")
+                          prognosisBody = {
+
+                            "age": textFieldControllers[0].text,
+                            "gender": "male",
+                            "sunburn": skinCancerUserAnswersIndices[1],
+                            "complexion": skinCancerUserAnswersIndices[0],
+                            "big-moles": skinCancerUserAnswersIndices[2],
+                            "small-moles": skinCancerUserAnswersIndices[3],
+                            "freckling": skinCancerUserAnswersIndices[4],
+                            "damage": skinCancerUserAnswersIndices[5],
+                            "tan": 0
+                          };
+                        else if (UserDetails.getUserData()['gender'] == "female")
+                          prognosisBody = {
+
+                            "age": textFieldControllers[0].text,
+                            "gender": "female",
+                            "sunburn": skinCancerUserAnswersIndices[1],
+                            "complexion": skinCancerUserAnswersIndices[0],
+                            "big-moles": 0,
+                            "small-moles": skinCancerUserAnswersIndices[2],
+                            "freckling": skinCancerUserAnswersIndices[3],
+                            "damage": 0,
+                            "tan": 0
+                          };
+
+                        print(prognosisBody);
                       }
 
                       // Progress Dialog that will run till API Request is received
@@ -557,17 +596,29 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             fontFamily: 'Poppins-SemiBold',
                           ));
 
+                      print(url);
                       // Showing the Progress Dialog and Dismissing it After the API Request is Received
-                     //progressDialog.show();
+                     progressDialog.show();
 
                      String reply = await apiRequest();
 
-                     //progressDialog.hide();
+                     print(reply);
+                     progressDialog.hide();
 
                       // checking if the response is not null and displaying the result
                       if (reply != null) {
                         final body = json.decode(reply);
-                        var prognosisResult = body["Prediction"];
+
+                        var prognosisResult;
+
+                        if (cancerType != "Skin Cancer")
+
+                          var prognosisResult = body["Prediction"];
+
+                        else
+                        {
+                          var prognosisResult = body["result_string"];
+                        }
 
                         /* For Breast Cancer Prognosis the Result is either 'R'
                          * for Recurring and 'N' for Non-Recurring, so an If Condition
@@ -581,6 +632,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             cancerType == "Breast Cancer")
                           prognosisResult = "Recurring";
 
+                        print(prognosisResult);
                         // Displaying the alert dialog
                         createAlertDialog(
                             context, "Prognosis", prognosisResult, 201);
