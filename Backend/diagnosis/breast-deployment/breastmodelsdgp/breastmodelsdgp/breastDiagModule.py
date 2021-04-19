@@ -11,4 +11,4 @@ class BreastDiagModule:# Predict using the model
     def model_predict_breast(self, img_array, model):
         new_arr = self.preprocess()
         prediction = model.predict([new_arr])
-        return prediction
+        return prediction[0][0] * 100
