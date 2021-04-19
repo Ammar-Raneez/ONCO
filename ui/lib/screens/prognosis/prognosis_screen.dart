@@ -160,11 +160,10 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     List<dynamic> responseList = cancerPrognosisAttributes;
     List<Widget> listItems = [];
     responseList.forEach((post) {
-      count ++;
       textFieldControllers.add(new TextEditingController());
       listItems.add(
           Container(
-            height: 190,
+            height: 150,
             // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
             child: Padding(
@@ -173,7 +172,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                 child: Container(
                   child: Container(
                       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      margin: EdgeInsets.only(top: 0, bottom: 50),
+                      margin: EdgeInsets.only(top: 0, bottom: 10),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
@@ -230,15 +229,6 @@ class CancerPrognosisState extends State<CancerPrognosis> {
       getPostsDataSkin();
 
     else getPostsData();
-
-    controller.addListener(() {
-      double value = controller.offset / 150;
-
-      setState(() {
-        topContainer = value;
-        closeTopContainer = controller.offset > 50;
-      });
-    });
   }
 
   @override
@@ -285,27 +275,11 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                       itemCount: itemsData.length,
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
-                        double scale = 1.0;
-                        if (topContainer > 0.5) {
-                          scale = index + 0.5 - topContainer;
-                          if (scale < 0) {
-                            scale = 0;
-                          } else if (scale > 1) {
-                            scale = 1;
-                          }
-                        }
-                        return Opacity(
-                          opacity: scale,
-                          child: Transform(
-                            transform: Matrix4.identity()..scale(scale, scale),
-                            alignment: Alignment.bottomCenter,
-                            child: Align(
-                                heightFactor: 0.7,
-                                alignment: Alignment.topCenter,
-                                child: itemsData[index]),
-                          ),
-                        );
-                      })),
+
+                        return itemsData[index];
+                      }
+                  )
+              ),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.blueGrey,
