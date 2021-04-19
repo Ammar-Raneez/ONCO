@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/components/alert_widget.dart';
@@ -12,6 +13,7 @@ class CancerPrognosis extends StatefulWidget {
   var cancerType;
   var url = "https://onco-prognosis-backend.herokuapp.com/";
   var cancerPrognosisAttributes;
+  var skinCancerAnswers;
 
   CancerPrognosis(String cancerType) {
     this.cancerType = cancerType;
@@ -23,13 +25,25 @@ class CancerPrognosis extends StatefulWidget {
       cancerPrognosisAttributes = LUNG_CANCER_PROGNOSIS_QUESTIONS;
       url += "prognosis_lung";
     } else if (cancerType == "Skin Cancer") {
-      // Bye bye
+
+      url += "prognosis_skin";
+
+      if (UserDetails.getUserData()['gender'] == "male") {
+
+        cancerPrognosisAttributes = SKIN_CANCER_PROGNOSIS_QUESTIONS_MALE;
+        skinCancerAnswers = SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_MALE;
+      }
+      else if (UserDetails.getUserData()['gender'] == "female") {
+
+        cancerPrognosisAttributes = SKIN_CANCER_PROGNOSIS_QUESTIONS_FEMALE;
+        skinCancerAnswers = SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_FEMALE;
+      }
     }
   }
 
   @override
   CancerPrognosisState createState() =>
-      CancerPrognosisState(cancerType, cancerPrognosisAttributes, url);
+      CancerPrognosisState(cancerType, cancerPrognosisAttributes, skinCancerAnswers, url);
 }
 
 class CancerPrognosisState extends State<CancerPrognosis> {
@@ -38,16 +52,21 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   List<TextEditingController> textFieldControllers = [];
+  List<String> skinCancerUserAnswers = [];
   Map prognosisBody;
   final _firestore = FirebaseFirestore.instance;
   var cancerType;
   var cancerPrognosisAttributes;
+  var skinCancerAnswers;
   var url;
   var count = 0;
 
-  CancerPrognosisState(var cancerType, var cancerPrognosisAttributes, var url) {
+  CancerPrognosisState(var cancerType, var cancerPrognosisAttributes,
+      var skinCancerAnswers,var url) {
+
     this.cancerType = cancerType;
     this.cancerPrognosisAttributes = cancerPrognosisAttributes;
+    this.skinCancerAnswers = skinCancerAnswers;
     this.url = url;
   }
 
@@ -87,10 +106,11 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     responseList.forEach((post) {
 
       if (count == 0) {
+
         textFieldControllers.add(new TextEditingController());
         listItems.add(
             Container(
-                height: 190,
+                height: 150,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18)),
                 child: Padding(
@@ -100,7 +120,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                       child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
-                          margin: EdgeInsets.only(top: 0, bottom: 50),
+                          margin: EdgeInsets.only(top: 0, bottom: 10),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(18),
@@ -115,7 +135,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                       style: TextStyle(
                                         fontFamily: 'Poppins-SemiBold',
                                         color: Colors.blueGrey,
-                                        fontSize: 20,
+                                        fontSize: 16,
                                       ),
                                     )),
                                 TextField(
@@ -147,7 +167,72 @@ class CancerPrognosisState extends State<CancerPrognosis> {
       }
       else
       {
+        listItems.add(
+            Container(
+                margin: EdgeInsets.only(bottom: 10),
+                height: 290,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18)),
+                child: Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                    child: Container(
+                      child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          margin: EdgeInsets.only(top: 0, bottom: 10),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            color: Color(0xFFABD8E2),
+                          ),
+                          child: Column(
+                              children: <Widget>[
+                                Container(
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    child: Text(
+                                      post,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins-SemiBold',
+                                        color: Colors.blueGrey,
+                                        fontSize: 16,
+                                      ),
+                                    )
+                                ),
 
+                                Column(
+                                  children: <Widget>[
+                                    for (int i = 1; i <= 3; i++)
+
+                                      ListTile(
+                                        title: Text(
+                                          'Radio $i',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins-SemiBold',
+                                            color: Colors.blueGrey,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        leading: Radio(
+                                          value: "TEST",
+                                          groupValue: 1,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              skinCancerUserAnswers.add(value);
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                  ],
+                                )
+                              ]
+                          )
+                      ),
+                    )
+                )
+            )
+        );
       }
       count ++;
     });
@@ -163,53 +248,53 @@ class CancerPrognosisState extends State<CancerPrognosis> {
       textFieldControllers.add(new TextEditingController());
       listItems.add(
           Container(
-            height: 150,
-            // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
-            child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                child: Container(
+              height: 150,
+              // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
+              child: Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                   child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      margin: EdgeInsets.only(top: 0, bottom: 10),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: Color(0xFFABD8E2),
-                      ),
-                      child: Column(
-                          children: <Widget>[
-                            Container(
-                                margin: EdgeInsets.only(bottom: 10),
-                                child: Text(
-                                  post,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins-SemiBold',
-                                    color: Colors.blueGrey,
-                                    fontSize: 20,
-                                  ),
-                                )),
-                            TextField(
-                              controller: textFieldControllers[count],
-                              decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: new BorderSide(color: Colors.white),
-                                    borderRadius: new BorderRadius.circular(16),
-                                  ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: new BorderSide(color: Colors.white),
-                                    borderRadius: new BorderRadius.circular(16),
-                                  ),
-                                  hintText: 'Enter the Value for the Input'),
-                            ),
-                          ]
-                      )
-                  ),
-                )
-            )
+                    child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        margin: EdgeInsets.only(top: 0, bottom: 10),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          color: Color(0xFFABD8E2),
+                        ),
+                        child: Column(
+                            children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.only(bottom: 10),
+                                  child: Text(
+                                    post,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins-SemiBold',
+                                      color: Colors.blueGrey,
+                                      fontSize: 20,
+                                    ),
+                                  )),
+                              TextField(
+                                controller: textFieldControllers[count],
+                                decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: new BorderSide(color: Colors.white),
+                                      borderRadius: new BorderRadius.circular(16),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: new BorderSide(color: Colors.white),
+                                      borderRadius: new BorderRadius.circular(16),
+                                    ),
+                                    hintText: 'Enter the Value for the Input'),
+                              ),
+                            ]
+                        )
+                    ),
+                  )
+              )
           )
       );
 
@@ -227,6 +312,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     if (cancerType == "Skin Cancer")
 
       getPostsDataSkin();
+
 
     else getPostsData();
   }
@@ -325,68 +411,68 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                           "Age": textFieldControllers[0].text,
                           "Gender": textFieldControllers[1].text,
                           "AirPollution":
-                              ((int.parse(textFieldControllers[2].text) / 10) *
-                                  8).toString(),
+                          ((int.parse(textFieldControllers[2].text) / 10) *
+                              8).toString(),
                           "Alcoholuse":
-                              ((int.parse(textFieldControllers[3].text) / 10) *
-                                  8).toString(),
+                          ((int.parse(textFieldControllers[3].text) / 10) *
+                              8).toString(),
                           "DustAllergy":
-                              ((int.parse(textFieldControllers[4].text) / 10) *
-                                  8).toString(),
+                          ((int.parse(textFieldControllers[4].text) / 10) *
+                              8).toString(),
                           "OccuPationalHazards":
-                              ((int.parse(textFieldControllers[5].text) / 10) *
-                                  8).toString(),
+                          ((int.parse(textFieldControllers[5].text) / 10) *
+                              8).toString(),
                           "GeneticRisk":
-                              ((int.parse(textFieldControllers[6].text) / 10) *
-                                  7).toString(),
+                          ((int.parse(textFieldControllers[6].text) / 10) *
+                              7).toString(),
                           "chronicLungDisease":
-                              ((int.parse(textFieldControllers[7].text) / 10) *
-                                  7).toString(),
+                          ((int.parse(textFieldControllers[7].text) / 10) *
+                              7).toString(),
                           "BalancedDiet":
-                              ((int.parse(textFieldControllers[8].text) / 10) *
-                                  7).toString(),
+                          ((int.parse(textFieldControllers[8].text) / 10) *
+                              7).toString(),
                           "Obesity":
-                              ((int.parse(textFieldControllers[9].text) / 10) *
-                                  7).toString(),
+                          ((int.parse(textFieldControllers[9].text) / 10) *
+                              7).toString(),
                           "Smoking":
-                              ((int.parse(textFieldControllers[10].text) / 10) *
-                                  8).toString(),
+                          ((int.parse(textFieldControllers[10].text) / 10) *
+                              8).toString(),
                           "PassiveSmoker":
-                              ((int.parse(textFieldControllers[11].text) / 10) *
-                                  8).toString(),
+                          ((int.parse(textFieldControllers[11].text) / 10) *
+                              8).toString(),
                           "ChestPain":
-                              ((int.parse(textFieldControllers[12].text) / 10) *
-                                  9).toString(),
+                          ((int.parse(textFieldControllers[12].text) / 10) *
+                              9).toString(),
                           "CoughingofBlood":
-                              ((int.parse(textFieldControllers[13].text) / 10) *
-                                  9).toString(),
+                          ((int.parse(textFieldControllers[13].text) / 10) *
+                              9).toString(),
                           "Fatigue":
-                              ((int.parse(textFieldControllers[14].text) / 10) *
-                                  9).toString(),
+                          ((int.parse(textFieldControllers[14].text) / 10) *
+                              9).toString(),
                           "WeightLoss":
-                              ((int.parse(textFieldControllers[15].text) / 10) *
-                                  8).toString(),
+                          ((int.parse(textFieldControllers[15].text) / 10) *
+                              8).toString(),
                           "ShortnessofBreath":
-                              ((int.parse(textFieldControllers[16].text) / 10) *
-                                  9).toString(),
+                          ((int.parse(textFieldControllers[16].text) / 10) *
+                              9).toString(),
                           "Wheezing":
-                              ((int.parse(textFieldControllers[17].text) / 10) *
-                                  8).toString(),
+                          ((int.parse(textFieldControllers[17].text) / 10) *
+                              8).toString(),
                           "SwallowingDifficulty":
-                              ((int.parse(textFieldControllers[18].text) / 10) *
-                                  8).toString(),
+                          ((int.parse(textFieldControllers[18].text) / 10) *
+                              8).toString(),
                           "ClubbingofFingerNails":
-                              ((int.parse(textFieldControllers[19].text) / 10) *
-                                  9).toString(),
+                          ((int.parse(textFieldControllers[19].text) / 10) *
+                              9).toString(),
                           "FrequentCold":
-                              ((int.parse(textFieldControllers[20].text) / 10) *
-                                  7).toString(),
+                          ((int.parse(textFieldControllers[20].text) / 10) *
+                              7).toString(),
                           "DryCough":
-                              ((int.parse(textFieldControllers[21].text) / 10) *
-                                  7).toString(),
+                          ((int.parse(textFieldControllers[21].text) / 10) *
+                              7).toString(),
                           "Snoring":
-                              ((int.parse(textFieldControllers[22].text) / 10) *
-                                  7).toString(),
+                          ((int.parse(textFieldControllers[22].text) / 10) *
+                              7).toString(),
                         };
                       } else if (cancerType == "Breast Cancer") {
                         prognosisBody = {
@@ -397,7 +483,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                           "concavity_mean": textFieldControllers[4].text,
                           "concave points_mean": textFieldControllers[5].text,
                           "fractal_dimension_mean":
-                              textFieldControllers[6].text,
+                          textFieldControllers[6].text,
                           "radius_se": textFieldControllers[7].text,
                           "texture_se": textFieldControllers[8].text,
                           "perimeter_se": textFieldControllers[9].text,
@@ -411,10 +497,10 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                           "concave points_worst": textFieldControllers[17].text,
                           "symmetry_worst": textFieldControllers[18].text,
                           "fractal_dimension_worst":
-                              textFieldControllers[19].text,
+                          textFieldControllers[19].text,
                           "tumor_size": textFieldControllers[20].text,
                           "positive_axillary_lymph_node":
-                              textFieldControllers[21].text
+                          textFieldControllers[21].text
                         };
                       }
 
@@ -498,7 +584,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             "Oops something went wrong!", 404);
                       }
                     }
-                    ),
+                ),
               ),
             ],
           ),

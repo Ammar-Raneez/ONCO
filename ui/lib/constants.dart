@@ -48,8 +48,8 @@ const SKIN_CANCER_PROGNOSIS_QUESTIONS_MALE =
   "Race",
   "Complexion",
   "Blistering sunburn (one or more)",
-  "Number of moles larger than 5mm in diameter on patient's back",
-  "Number of moles less than or equal to 5mm in diameter on patient's back",
+  "No. of moles larger than 5mm in diameter on patient's back",
+  "No. of moles less than or equal to 5mm in diameter on patient's back",
   "How extensive is the freckling on the patient's back and shoulders?",
   "Does the patient have severe solar damage on the shoulders?"
 ];
