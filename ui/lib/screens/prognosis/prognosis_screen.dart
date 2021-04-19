@@ -53,8 +53,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   List<TextEditingController> textFieldControllers = [];
-  List<String> skinCancerUserAnswers = [];
-  List<int> skinGroupValues= [0, 0, 0, 0, 0, 0, 0];
+  List<String> skinCancerUserAnswers= ["", "", "", "", "", "", ""];
   Map prognosisBody;
   final _firestore = FirebaseFirestore.instance;
   var cancerType;
@@ -175,6 +174,8 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
           skinCancerOptions.add(skinCancerAnswers[count - 1][i]);
 
+        int currentQuestion = 0;
+        currentQuestion = count - 1;
 
 
         listItems.add(
@@ -216,7 +217,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                       RadioButtonGroup(
 
                                           labels: skinCancerOptions,
-                                          onSelected: (String selected) => print(selected)
+                                          onSelected: (String selected) => skinCancerUserAnswers[currentQuestion] = selected
                                       ),
                                   ],
                                 )
@@ -315,6 +316,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
   @override
   Widget build(BuildContext context) {
+
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -396,6 +398,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                     ),
                     shape: const StadiumBorder(),
                     onPressed: () async {
+
                       /* If Else Conditions here to take each Input from the
                        * textFieldControllers Array, and setting the Input to
                        * each Attribute required by a Model in a Dictionary
@@ -403,6 +406,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                        * required by the Model
                        */
                       if (cancerType == "Lung Cancer") {
+
                         prognosisBody = {
                           "Age": textFieldControllers[0].text,
                           "Gender": textFieldControllers[1].text,
@@ -471,6 +475,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                               7).toString(),
                         };
                       } else if (cancerType == "Breast Cancer") {
+                        print("B");
                         prognosisBody = {
                           "radius_mean": textFieldControllers[0].text,
                           "texture_mean": textFieldControllers[1].text,
@@ -478,8 +483,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                           "compactness_mean": textFieldControllers[3].text,
                           "concavity_mean": textFieldControllers[4].text,
                           "concave points_mean": textFieldControllers[5].text,
-                          "fractal_dimension_mean":
-                          textFieldControllers[6].text,
+                          "fractal_dimension_mean": textFieldControllers[6].text,
                           "radius_se": textFieldControllers[7].text,
                           "texture_se": textFieldControllers[8].text,
                           "perimeter_se": textFieldControllers[9].text,
@@ -492,12 +496,32 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                           "concavity_worst": textFieldControllers[16].text,
                           "concave points_worst": textFieldControllers[17].text,
                           "symmetry_worst": textFieldControllers[18].text,
-                          "fractal_dimension_worst":
-                          textFieldControllers[19].text,
+                          "fractal_dimension_worst": textFieldControllers[19].text,
                           "tumor_size": textFieldControllers[20].text,
-                          "positive_axillary_lymph_node":
-                          textFieldControllers[21].text
+                          "positive_axillary_lymph_node": textFieldControllers[21].text
                         };
+                      }
+                      else if (cancerType == "Skin Cancer")
+                      {
+                        List<int> skinCancerUserAnswersIndices = [];
+
+                        int questionCount = 0;
+                        int answerInQuestionCount;
+                        for (String userAnswer in skinCancerUserAnswers)
+                        {
+                          answerInQuestionCount = 0;
+                          for (String answer in skinCancerAnswers[questionCount]) {
+                            if (userAnswer == answer) {
+                              skinCancerUserAnswersIndices.add(answerInQuestionCount);
+                              break;
+                            }
+                            answerInQuestionCount ++;
+                          }
+                          questionCount ++;
+
+                        }
+
+                        print(skinCancerUserAnswersIndices);
                       }
 
                       // Progress Dialog that will run till API Request is received
@@ -534,11 +558,11 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                           ));
 
                       // Showing the Progress Dialog and Dismissing it After the API Request is Received
-                      progressDialog.show();
+                     //progressDialog.show();
 
-                      String reply = await apiRequest();
+                     String reply = await apiRequest();
 
-                      progressDialog.hide();
+                     //progressDialog.hide();
 
                       // checking if the response is not null and displaying the result
                       if (reply != null) {
