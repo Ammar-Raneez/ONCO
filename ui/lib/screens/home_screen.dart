@@ -29,8 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    super.initState();
     getCurrentUser();
+    super.initState();
   }
 
   void getCurrentUser() async {
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
 
       //fetch username
-      _firestore
+      await _firestore
           .collection("users")
           .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
           .get()
