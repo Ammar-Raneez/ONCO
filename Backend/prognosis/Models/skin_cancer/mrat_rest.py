@@ -39,7 +39,7 @@ class MelanomaRiskAssessmentTool:
         absolute_risk = incident_rate * risk * (1 - math.exp((age - t2) * (incident_rate * risk + mortality_rate))) / (incident_rate * risk + mortality_rate)
 
         if age != t1:
-            next_incident_rate = MRATConstants.SEX[sex] * MRATConstants.INCIDENCE[sex][age_index + 1][region_indexs]
+            next_incident_rate = MRATConstants.SEX[sex] * MRATConstants.INCIDENCE[sex][age_index + 1][region_index]
             next_mortality_rate = MRATConstants.MORTALITY[sex][age_index + 1]
             absolute_risk += next_incident_rate * risk * math.exp((age - t2) * (incident_rate * risk + mortality_rate)) * (1 - math.exp((t1 - age) * (next_incident_rate * risk + next_mortality_rate))) / (next_incident_rate * absolute_risk + next_mortality_rate)
         absolute_risk = round(absolute_risk * 10000) / 100
