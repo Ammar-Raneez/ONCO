@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/reports_card.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
-
 import 'api/ReportFirebaseApi.dart';
 import 'api/ReportProvider.dart';
 import 'models/report.dart';
-import 'viewReport_screen.dart';
 
 class DiagnosisReports extends StatefulWidget {
   @override
@@ -25,8 +22,6 @@ class _DiagnosisReportsState extends State<DiagnosisReports> {
             child: Container(
                 child:Column(
                   children: [
-
-
                     Column(
                       children: [
                         Column(
@@ -59,7 +54,7 @@ class _DiagnosisReportsState extends State<DiagnosisReports> {
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  "Here you can view your reports",
+                                  "Here you can view the reports created after a diagnosis",
                                   style: TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
                                       fontSize: 13.0,
@@ -77,7 +72,6 @@ class _DiagnosisReportsState extends State<DiagnosisReports> {
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Container(
-
                           child: StreamBuilder<List<Report>>(
                               stream: ReportFirebaseApi.readDiagnosisReports(),
                               builder: (context, snapshot) {
@@ -106,7 +100,6 @@ class _DiagnosisReportsState extends State<DiagnosisReports> {
                         ),
                       ),
                     ),
-
                   ],
                 )
             ),

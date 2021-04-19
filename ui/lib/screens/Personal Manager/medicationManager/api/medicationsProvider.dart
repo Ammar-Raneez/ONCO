@@ -8,7 +8,6 @@ class MedicationProvider extends ChangeNotifier {
 
   void setMedications(List<Medication> medications) =>
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        // print(_medications);
         _medications = medications;
         notifyListeners();
       });
