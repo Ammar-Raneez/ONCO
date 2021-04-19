@@ -81,56 +81,140 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     );
   }
 
+  void getPostsDataSkin() {
+    List<dynamic> responseList = cancerPrognosisAttributes;
+    List<Widget> listItems = [];
+    responseList.forEach((post) {
+
+      if (count == 0) {
+        textFieldControllers.add(new TextEditingController());
+        listItems.add(
+            Container(
+                height: 190,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18)),
+                child: Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                    child: Container(
+                      child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          margin: EdgeInsets.only(top: 0, bottom: 50),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            color: Color(0xFFABD8E2),
+                          ),
+                          child: Column(
+                              children: <Widget>[
+                                Container(
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    child: Text(
+                                      post,
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins-SemiBold',
+                                        color: Colors.blueGrey,
+                                        fontSize: 20,
+                                      ),
+                                    )),
+                                TextField(
+                                  controller: textFieldControllers[count],
+                                  decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: new BorderSide(
+                                            color: Colors.white),
+                                        borderRadius: new BorderRadius.circular(
+                                            16),
+                                      ),
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: new BorderSide(
+                                            color: Colors.white),
+                                        borderRadius: new BorderRadius.circular(
+                                            16),
+                                      ),
+                                      hintText: 'Enter the Value for the Input'),
+                                ),
+                              ]
+                          )
+                      ),
+                    )
+                )
+            )
+        );
+      }
+      else
+      {
+
+      }
+      count ++;
+    });
+    setState(() {
+      itemsData = listItems;
+    });
+  }
+
   void getPostsData() {
     List<dynamic> responseList = cancerPrognosisAttributes;
     List<Widget> listItems = [];
     responseList.forEach((post) {
-      count++;
+      count ++;
       textFieldControllers.add(new TextEditingController());
-      listItems.add(Container(
-          height: 190,
-          // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
-          child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-              child: Container(
+      listItems.add(
+          Container(
+            height: 190,
+            // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
+            child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    margin: EdgeInsets.only(top: 0, bottom: 50),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18),
-                      color: Color(0xFFABD8E2),
-                    ),
-                    child: Column(children: <Widget>[
-                      Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          child: Text(
-                            post,
-                            style: TextStyle(
-                              fontFamily: 'Poppins-SemiBold',
-                              color: Colors.blueGrey,
-                              fontSize: 20,
-                            ),
-                          )),
-                      TextField(
-                        controller: textFieldControllers[count - 1],
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(16),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(16),
-                            ),
-                            hintText: 'Enter the Value for the Input'),
+                  child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      margin: EdgeInsets.only(top: 0, bottom: 50),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: Color(0xFFABD8E2),
                       ),
-                    ])),
-              ))));
+                      child: Column(
+                          children: <Widget>[
+                            Container(
+                                margin: EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                  post,
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins-SemiBold',
+                                    color: Colors.blueGrey,
+                                    fontSize: 20,
+                                  ),
+                                )),
+                            TextField(
+                              controller: textFieldControllers[count],
+                              decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: new BorderSide(color: Colors.white),
+                                    borderRadius: new BorderRadius.circular(16),
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: new BorderSide(color: Colors.white),
+                                    borderRadius: new BorderRadius.circular(16),
+                                  ),
+                                  hintText: 'Enter the Value for the Input'),
+                            ),
+                          ]
+                      )
+                  ),
+                )
+            )
+          )
+      );
+
+      count ++;
     });
     setState(() {
       itemsData = listItems;
@@ -140,7 +224,13 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   @override
   void initState() {
     super.initState();
-    getPostsData();
+
+    if (cancerType == "Skin Cancer")
+
+      getPostsDataSkin();
+
+    else getPostsData();
+
     controller.addListener(() {
       double value = controller.offset / 150;
 
@@ -433,7 +523,8 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                         createAlertDialog(context, "Error",
                             "Oops something went wrong!", 404);
                       }
-                    }),
+                    }
+                    ),
               ),
             ],
           ),
