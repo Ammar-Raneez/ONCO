@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/models/report.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class ViewReport extends StatefulWidget {
 
@@ -23,7 +24,7 @@ class _ViewReportState extends State<ViewReport> {
   var _reportDate;
   var timestamp;
   var formattedDate="";
-
+  Color indicatorColor;
   Map prognosisVariables;
 
   List<Widget> itemsData = [];
@@ -40,13 +41,24 @@ class _ViewReportState extends State<ViewReport> {
     imageURL = widget.report.imageUrl;
     _cancerType = widget.report.cancerType;
     if(widget.report.result=="CANCER"){
-      _reportResult = widget.report.result+" Detected";
+      _reportResult = widget.report.result_string;
     }else{
       _reportResult = widget.report.result;
     }
     prognosisVariables = widget.report.prognosisInputs;
 
-    getPostsData(prognosisVariables);
+    if(_reportType=="prognosis") {
+      getPostsData(prognosisVariables);
+    }else{
+      if(double.parse(_reportPercentage)>70.0){
+        indicatorColor=Color(0XFFeb4034);
+      }else if(double.parse(_reportPercentage)>40.0){
+        indicatorColor=Color(0XFFf5cd3d);
+      }else if(double.parse(_reportPercentage)<40.0){
+        indicatorColor=Color(0XFF7bd130);
+      }
+
+    }
   }
 
   void getPostsData(Map prognosisBody) {
@@ -55,7 +67,6 @@ class _ViewReportState extends State<ViewReport> {
     {
       responseList.add(k + " : " + v)
     });
-
 
     List<Widget> listItems = [];
     listItems.add(
@@ -185,13 +196,12 @@ class _ViewReportState extends State<ViewReport> {
 
   @override
   Widget build(BuildContext context) {
-    print(prognosisVariables);
     return SafeArea(
       child: Scaffold(
         appBar: CustomAppBar.arrow(context),
         body: SafeArea(
           child: Container(
-            child: cancerDetails(context, formattedDate, _reportType, _cancerType, _reportResult, _reportPercentage, imageURL, prognosisVariables, controller, itemsData),
+            child: cancerDetails(context, formattedDate, _reportType, _cancerType, _reportResult, _reportPercentage, imageURL, prognosisVariables, controller, itemsData, indicatorColor),
           ),
         ),
       ),
@@ -243,30 +253,110 @@ Widget percentageContainer(String percentages) {
   }
 }
 
-Widget cancerDetails(BuildContext context, String date, String reportType, String cancerType, String reportResult, String percentage, String Imageurl, Map prognosisBody, ScrollController controller, List<Widget> itemsData) {
+Widget cancerDetails(BuildContext context, String date, String reportType, String cancerType, String reportResult, String percentage, String Imageurl, Map prognosisBody, ScrollController controller, List<Widget> itemsData, Color color) {
 
   // DIAGNOSIS
   if (reportType.toLowerCase() == "diagnosis") {
     return ListView(
       children: [
-        Column(
+        Stack(
           children: [
+
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 30,
+                right: 20
+              ),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: CircularPercentIndicator(
+                  radius: 150.0,
+                  lineWidth: 20,
+                  animation: true,
+                  animationDuration: 1000,
+                  percent: double.parse(percentage)/100,
+                  center: new Text(percentage + "%"),
+                  progressColor: color,
+                ),
+              ),
+            ),
+
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        left: 20,
+                      ),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          date,
+                          style: TextStyle(
+                              fontFamily: 'Poppins-SemiBold',
+                              fontSize: 27,
+                              color: Color(0xFF00404E)
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          bottom: 15
+                      ),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          cancerType.toUpperCase() + " " + reportType.toUpperCase(),
+                          style: TextStyle(
+                              fontFamily: 'Poppins-SemiBold',
+                              fontSize: 19,
+                              color: Color(0xFF3C707B)
+                          ),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+
+                percentageContainer(percentage),
+
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 10,
                     left: 20,
+                    top: 15,
                   ),
                   child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      date,
+                    alignment: Alignment.centerLeft,
+                    child: Text("Result :",
                       style: TextStyle(
                           fontFamily: 'Poppins-SemiBold',
-                          fontSize: 27,
-                          color: Color(0xFF00404E)
+                          fontSize: 18,
+                          color: Color(0xFF7CC2C4)
+                      ),
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    top: 5,
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(reportResult.toUpperCase(),
+                      style: TextStyle(
+                          fontFamily: 'Poppins-SemiBold',
+                          fontSize: 14,
+                          color: Color(0xFF1F1F1F)
                       ),
                     ),
                   ),
@@ -275,91 +365,35 @@ Widget cancerDetails(BuildContext context, String date, String reportType, Strin
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 20,
-                      right: 20,
-                      bottom: 15
+                      top: 20,
+                      bottom: 10
                   ),
                   child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      cancerType.toUpperCase() + " " + reportType.toUpperCase(),
+                    alignment: Alignment.centerLeft,
+                    child: Text("INPUTS PROVIDED",
                       style: TextStyle(
                           fontFamily: 'Poppins-SemiBold',
-                          fontSize: 19,
-                          color: Color(0xFF3C707B)
+                          fontSize: 18,
+                          color: Color(0xFF7CC2C4)
                       ),
                     ),
                   ),
                 ),
 
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 18
+                  ),
+                  child: Image.network(
+                    Imageurl,
+                    width: (MediaQuery
+                        .of(context)
+                        .size
+                        .width),
+                  ),
+                ),
               ],
-            ),
-
-            percentageContainer(percentage),
-
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20,
-                top: 15,
-              ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text("Result :",
-                  style: TextStyle(
-                      fontFamily: 'Poppins-SemiBold',
-                      fontSize: 18,
-                      color: Color(0xFF7CC2C4)
-                  ),
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20,
-                top: 5,
-              ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(reportResult.toUpperCase(),
-                  style: TextStyle(
-                      fontFamily: 'Poppins-SemiBold',
-                      fontSize: 14,
-                      color: Color(0xFF1F1F1F)
-                  ),
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 20,
-                  top: 20,
-                  bottom: 10
-              ),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text("INPUTS PROVIDED",
-                  style: TextStyle(
-                      fontFamily: 'Poppins-SemiBold',
-                      fontSize: 18,
-                      color: Color(0xFF7CC2C4)
-                  ),
-                ),
-              ),
-            ),
-
-
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 18
-              ),
-              child: Image.network(
-                Imageurl,
-                width: (MediaQuery
-                    .of(context)
-                    .size
-                    .width),
-              ),
             ),
           ],
         ),
@@ -367,7 +401,7 @@ Widget cancerDetails(BuildContext context, String date, String reportType, Strin
     );
 
   } else {
-
+    print(percentage);
     // PROGNOSIS
     return  ListView.builder(
                 controller: controller,

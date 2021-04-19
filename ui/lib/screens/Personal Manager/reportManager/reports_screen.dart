@@ -19,6 +19,25 @@ class _ReportManagerState extends State<ReportManager> {
           child: Container(
             child:Column(
               children: [
+
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 50,
+                  ),
+                  child: Align(
+
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      "Select Report Type",
+                      style: TextStyle(
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 24,
+                        color: Color(0xFF354042),
+                      ),
+                    ),
+                  ),
+                ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20
@@ -41,11 +60,11 @@ class _ReportManagerState extends State<ReportManager> {
                             end: Alignment.topRight,
                           ),
                       ),
-                      padding: EdgeInsets.only(top: 20, left: 25),
+                      padding: EdgeInsets.only(top: 100, left: 25),
                       width: (MediaQuery.of(context).size.width),
                       height: 150,
                       child: Text(
-                        "Diagnosis \nReports",
+                        "Diagnosis Reports",
                         style: TextStyle(
                           fontSize: 20,
                           color: Color(0xFF63888F),
@@ -79,11 +98,11 @@ class _ReportManagerState extends State<ReportManager> {
                           end: Alignment.topRight,
                         ),
                       ),
-                      padding: EdgeInsets.only(top: 20, left: 25),
+                      padding: EdgeInsets.only(top: 100, left: 25),
                       width: (MediaQuery.of(context).size.width),
                       height: 150,
                       child: Text(
-                        "Prognosis \nReports",
+                        "Prognosis Reports",
                         style: TextStyle(
                           fontSize: 20,
                           color: Color(0xFF63888F),
