@@ -105,12 +105,11 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     List<Widget> listItems = [];
     responseList.forEach((post) {
 
-      if (count == 0) {
+        if (count == 0) {
 
         textFieldControllers.add(new TextEditingController());
         listItems.add(
             Container(
-                height: 150,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18)),
                 child: Padding(
@@ -170,7 +169,6 @@ class CancerPrognosisState extends State<CancerPrognosis> {
         listItems.add(
             Container(
                 margin: EdgeInsets.only(bottom: 10),
-                height: 290,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18)),
                 child: Padding(
@@ -203,11 +201,11 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                                 Column(
                                   children: <Widget>[
-                                    for (int i = 1; i <= 3; i++)
+                                    for (String answer in skinCancerAnswers[count - 1])
 
                                       ListTile(
                                         title: Text(
-                                          'Radio $i',
+                                          answer,
                                           style: TextStyle(
                                             fontFamily: 'Poppins-SemiBold',
                                             color: Colors.blueGrey,
@@ -234,7 +232,9 @@ class CancerPrognosisState extends State<CancerPrognosis> {
             )
         );
       }
-      count ++;
+      if (count != 7)
+
+        count ++;
     });
     setState(() {
       itemsData = listItems;
