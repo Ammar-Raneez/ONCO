@@ -261,68 +261,68 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                           "Age": textFieldControllers[0].text,
                           "Gender": textFieldControllers[1].text,
                           "AirPollution":
-                              (int.parse(textFieldControllers[2].text) / 10) *
-                                  8,
+                              ((int.parse(textFieldControllers[2].text) / 10) *
+                                  8).toString(),
                           "Alcoholuse":
-                              (int.parse(textFieldControllers[3].text) / 10) *
-                                  8,
+                              ((int.parse(textFieldControllers[3].text) / 10) *
+                                  8).toString(),
                           "DustAllergy":
-                              (int.parse(textFieldControllers[4].text) / 10) *
-                                  8,
+                              ((int.parse(textFieldControllers[4].text) / 10) *
+                                  8).toString(),
                           "OccuPationalHazards":
-                              (int.parse(textFieldControllers[5].text) / 10) *
-                                  8,
+                              ((int.parse(textFieldControllers[5].text) / 10) *
+                                  8).toString(),
                           "GeneticRisk":
-                              (int.parse(textFieldControllers[6].text) / 10) *
-                                  7,
+                              ((int.parse(textFieldControllers[6].text) / 10) *
+                                  7).toString(),
                           "chronicLungDisease":
-                              (int.parse(textFieldControllers[7].text) / 10) *
-                                  7,
+                              ((int.parse(textFieldControllers[7].text) / 10) *
+                                  7).toString(),
                           "BalancedDiet":
-                              (int.parse(textFieldControllers[8].text) / 10) *
-                                  7,
+                              ((int.parse(textFieldControllers[8].text) / 10) *
+                                  7).toString(),
                           "Obesity":
-                              (int.parse(textFieldControllers[9].text) / 10) *
-                                  7,
+                              ((int.parse(textFieldControllers[9].text) / 10) *
+                                  7).toString(),
                           "Smoking":
-                              (int.parse(textFieldControllers[10].text) / 10) *
-                                  8,
+                              ((int.parse(textFieldControllers[10].text) / 10) *
+                                  8).toString(),
                           "PassiveSmoker":
-                              (int.parse(textFieldControllers[11].text) / 10) *
-                                  8,
+                              ((int.parse(textFieldControllers[11].text) / 10) *
+                                  8).toString(),
                           "ChestPain":
-                              (int.parse(textFieldControllers[12].text) / 10) *
-                                  9,
+                              ((int.parse(textFieldControllers[12].text) / 10) *
+                                  9).toString(),
                           "CoughingofBlood":
-                              (int.parse(textFieldControllers[13].text) / 10) *
-                                  9,
+                              ((int.parse(textFieldControllers[13].text) / 10) *
+                                  9).toString(),
                           "Fatigue":
-                              (int.parse(textFieldControllers[14].text) / 10) *
-                                  9,
+                              ((int.parse(textFieldControllers[14].text) / 10) *
+                                  9).toString(),
                           "WeightLoss":
-                              (int.parse(textFieldControllers[15].text) / 10) *
-                                  8,
+                              ((int.parse(textFieldControllers[15].text) / 10) *
+                                  8).toString(),
                           "ShortnessofBreath":
-                              (int.parse(textFieldControllers[16].text) / 10) *
-                                  9,
+                              ((int.parse(textFieldControllers[16].text) / 10) *
+                                  9).toString(),
                           "Wheezing":
-                              (int.parse(textFieldControllers[17].text) / 10) *
-                                  8,
+                              ((int.parse(textFieldControllers[17].text) / 10) *
+                                  8).toString(),
                           "SwallowingDifficulty":
-                              (int.parse(textFieldControllers[18].text) / 10) *
-                                  8,
+                              ((int.parse(textFieldControllers[18].text) / 10) *
+                                  8).toString(),
                           "ClubbingofFingerNails":
-                              (int.parse(textFieldControllers[19].text) / 10) *
-                                  9,
+                              ((int.parse(textFieldControllers[19].text) / 10) *
+                                  9).toString(),
                           "FrequentCold":
-                              (int.parse(textFieldControllers[20].text) / 10) *
-                                  7,
+                              ((int.parse(textFieldControllers[20].text) / 10) *
+                                  7).toString(),
                           "DryCough":
-                              (int.parse(textFieldControllers[21].text) / 10) *
-                                  7,
+                              ((int.parse(textFieldControllers[21].text) / 10) *
+                                  7).toString(),
                           "Snoring":
-                              (int.parse(textFieldControllers[22].text) / 10) *
-                                  7,
+                              ((int.parse(textFieldControllers[22].text) / 10) *
+                                  7).toString(),
                         };
                       } else if (cancerType == "Breast Cancer") {
                         prognosisBody = {
