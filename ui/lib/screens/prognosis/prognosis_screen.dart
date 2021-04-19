@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
@@ -53,6 +54,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   List<Widget> itemsData = [];
   List<TextEditingController> textFieldControllers = [];
   List<String> skinCancerUserAnswers = [];
+  List<int> skinGroupValues= [0, 0, 0, 0, 0, 0, 0];
   Map prognosisBody;
   final _firestore = FirebaseFirestore.instance;
   var cancerType;
@@ -60,6 +62,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   var skinCancerAnswers;
   var url;
   var count = 0;
+  var skinGroupValue = 0;
 
   CancerPrognosisState(var cancerType, var cancerPrognosisAttributes,
       var skinCancerAnswers,var url) {
@@ -166,6 +169,14 @@ class CancerPrognosisState extends State<CancerPrognosis> {
       }
       else
       {
+        List<String> skinCancerOptions = [];
+
+        for (int i = 0; i < skinCancerAnswers[count - 1].length; i ++)
+
+          skinCancerOptions.add(skinCancerAnswers[count - 1][i]);
+
+
+
         listItems.add(
             Container(
                 margin: EdgeInsets.only(bottom: 10),
@@ -201,26 +212,11 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                                 Column(
                                   children: <Widget>[
-                                    for (String answer in skinCancerAnswers[count - 1])
 
-                                      ListTile(
-                                        title: Text(
-                                          answer,
-                                          style: TextStyle(
-                                            fontFamily: 'Poppins-SemiBold',
-                                            color: Colors.blueGrey,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        leading: Radio(
-                                          value: "TEST",
-                                          groupValue: 1,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              skinCancerUserAnswers.add(value);
-                                            });
-                                          },
-                                        ),
+                                      RadioButtonGroup(
+
+                                          labels: skinCancerOptions,
+                                          onSelected: (String selected) => print(selected)
                                       ),
                                   ],
                                 )
