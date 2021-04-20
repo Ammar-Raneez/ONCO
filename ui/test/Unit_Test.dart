@@ -80,7 +80,7 @@ void main() {
   test("Testing lung cancer prognosis ", () async {
 
     // ACTUAL
-    CancerPrognosisState cancerPrognosisState = new CancerPrognosisState("Lung Cancer",LUNG_CANCER_PROGNOSIS_QUESTIONS,
+    CancerPrognosisState cancerPrognosisState = new CancerPrognosisState("Lung Cancer",LUNG_CANCER_PROGNOSIS_QUESTIONS, null,
     "https://onco-prognosis-backend.herokuapp.com/prognosis_lung");
     cancerPrognosisState.prognosisBody = {
       "Age": 44,
@@ -120,7 +120,7 @@ void main() {
   test("Testing breast cancer prognosis", () async {
 
     // ACTUAL
-    CancerPrognosisState cancerPrognosisState = new CancerPrognosisState("Breast Cancer",BREAST_CANCER_PROGNOSIS_QUESTIONS,
+    CancerPrognosisState cancerPrognosisState = new CancerPrognosisState("Breast Cancer",BREAST_CANCER_PROGNOSIS_QUESTIONS, null,
         "https://onco-prognosis-backend.herokuapp.com/prognosis_breast");
     cancerPrognosisState.prognosisBody = {
       "radius_mean": 2,
