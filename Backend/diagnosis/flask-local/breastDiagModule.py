@@ -23,7 +23,16 @@ def model_predictBreast(img_path, model):
 # Calculate Prediction Percentage
 def calculatePredictionPercentBreast(image_path, model):
     prediction = model_predictBreast(image_path, model)
-    return str(round(np.amax(prediction[0][0] * 100), 1))
+    result = int(prediction[0][0])
+    print(result)
+    # result = 0 --> Cancer
+    # result = 1 --> Normal
+    if(result == 0):
+        print("Detected Cancer ...")
+        return str(round(np.amax(prediction[0][0] * 100), 1))
+    
+    print("Detected Normal ...")
+    return str(100 - round(np.amax(prediction[0][0] * 100), 1))
 
 # Get image download URL based on the image file name
 # def getImageUrlBreast(imagePathName, firebase, firebase_storage):
