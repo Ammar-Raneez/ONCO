@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
-import 'package:ui/screens/Meal%20Plan/data.dart';
+import 'package:ui/constants.dart';
 import 'package:ui/screens/Meal%20Plan/model/recipe.dart';
 import 'package:ui/screens/Meal%20Plan/screens/meal_detail_screen.dart';
 
@@ -43,7 +43,7 @@ class AllMealScreen extends StatelessWidget {
                   filter: (recipes) => [
                     recipes.title,
                   ],
-                  items: recipes,
+                  items: RECIPES,
                   failure: Center(
                     child: Container(
                       child: Text('No Data Found'),
@@ -54,7 +54,7 @@ class AllMealScreen extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-          itemCount: recipes.length,
+          itemCount: RECIPES.length,
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
@@ -62,11 +62,11 @@ class AllMealScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => MealDetailScreen(
-                              title: recipes[index].title,
-                              imgUrl: recipes[index].imageUrl,
-                              ingredients: recipes[index].ingredients,
-                              steps: recipes[index].steps,
-                              duration: recipes[index].duration,
+                              title: RECIPES[index].title,
+                              imgUrl: RECIPES[index].imageUrl,
+                              ingredients: RECIPES[index].ingredients,
+                              steps: RECIPES[index].steps,
+                              duration: RECIPES[index].duration,
                             ),),);
               },
               child: Card(
@@ -82,7 +82,7 @@ class AllMealScreen extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15.0),
                       child: Image.network(
-                        recipes[index].imageUrl,
+                        RECIPES[index].imageUrl,
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: 150,
@@ -101,7 +101,7 @@ class AllMealScreen extends StatelessWidget {
                           color: Colors.black54,
                         ),
                         child: Text(
-                          recipes[index].title,
+                          RECIPES[index].title,
                           style: TextStyle(
                             fontSize: 17,
                             color: Colors.white,
@@ -122,7 +122,7 @@ class AllMealScreen extends StatelessWidget {
                           width: 100,
                           child: Center(
                             child: Text(
-                              '${recipes[index].duration}',
+                              '${RECIPES[index].duration}',
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.black,
