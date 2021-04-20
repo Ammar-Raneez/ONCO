@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 import 'package:ui/screens/Meal%20Plan/data.dart';
 import 'package:ui/screens/Meal%20Plan/model/recipe.dart';
-import 'package:ui/screens/Meal%20Plan/screens/detail_screen.dart';
+import 'package:ui/screens/Meal%20Plan/screens/meal_detail_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class AllMealScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomeScreen(
+                          builder: (context) => AllMealScreen(
                           ),),);
                     },
                   ),
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DetailScreen(
+                        builder: (context) => MealDetailScreen(
                               title: recipes[index].title,
                               imgUrl: recipes[index].imageUrl,
                               ingredients: recipes[index].ingredients,

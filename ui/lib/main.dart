@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
           LungCancerDiagnosis.id: (context) => LungCancerDiagnosis(),
           BreastCancerDiagnosis.id: (context) => BreastCancerDiagnosis(),
           SkinCancerDiagnosis.id: (context) => SkinCancerDiagnosis(),
+
         }
       ),
   );

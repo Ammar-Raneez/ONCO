@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DetailScreen extends StatelessWidget {
+class MealDetailScreen extends StatelessWidget {
 
   final String title;
   final String ingredients;
@@ -8,7 +8,7 @@ class DetailScreen extends StatelessWidget {
   final String imgUrl;
   final String duration;
 
-  DetailScreen({this.title,this.imgUrl,this.ingredients,this.duration,this.steps});
+  MealDetailScreen({this.title,this.imgUrl,this.ingredients,this.duration,this.steps});
 
 
 
