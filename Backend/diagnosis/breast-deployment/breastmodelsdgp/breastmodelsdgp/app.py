@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import tensorflow as tf
+import logging
 from .breastDiagModule import BreastDiagModule
 
 breastDiagModule = BreastDiagModule()
@@ -10,14 +11,16 @@ scriptdir = os.path.dirname(scriptpath)
 BREAST_MODEL_PATH = os.path.join(scriptdir, 'breast_model.h5')
 
 # Calculate Prediction Percentage
-def calculate_prediction_percent_breast(prediction):
+def calculate_prediction_percent_breast(prediction, result):
+    logging.info(result)
     return str(np.amax(prediction[0][0] * 100))
 
 def construct_breast_output(prediction):
+    result = int(prediction[0][0])
     CATEGORIES = ['CANCER', 'NORMAL']
 
     # getting the results
-    return CATEGORIES[int(round(prediction[0][0]))], calculate_prediction_percent_breast(prediction)
+    return CATEGORIES[int(round(prediction[0][0]))], calculate_prediction_percent_breast(prediction, result)
 
 def model_predict(image_array, model):
     if model == "breast":

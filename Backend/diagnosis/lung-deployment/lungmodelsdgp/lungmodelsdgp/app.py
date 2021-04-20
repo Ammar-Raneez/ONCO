@@ -11,12 +11,13 @@ LUNG_MODEL_PATH = os.path.join(scriptdir, 'lung_model.h5')
 
 # Calculate Prediction Percentage
 def calculate_prediction_percent_lung(prediction):
-    return str(np.amax(prediction[0][1] * 100))
+    return str(np.amax(prediction[0][1] * 100)) # percentage of cancer detected
 
 def construct_lung_output(prediction, image_url):
     CATEGORIES = ['CANCER', 'NORMAL']
 
     # getting the results
+    # first index = normal. If below 0.5, will return cancer as category
     return CATEGORIES[int(round(prediction[0][0]))], calculate_prediction_percent_lung(prediction), image_url
 
 def model_predict(image_array, model):
