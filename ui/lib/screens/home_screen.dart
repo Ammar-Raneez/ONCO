@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         alignment: Alignment.topLeft,
                         child: Container(
                           child: Text(
-                            'Hello,\n' + username,
+                            'Hello,\n' + username + '!',
                             style: TextStyle(
                               fontFamily: 'Poppins-SemiBold',
                               fontSize: 27.0,

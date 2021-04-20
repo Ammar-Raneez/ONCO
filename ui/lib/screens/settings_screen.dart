@@ -198,7 +198,9 @@ class SettingsScreenState extends State<SettingsScreen> {
 
                                 ConfirmChange confirmChange = new ConfirmChange(confirmChange: false);
 
-                                await createConfirmDialog(context, "Confirmation", "Are you Sure you want to Change your Username ?", confirmChange);
+                                await createConfirmDialog(context,
+                                    "Confirmation", "Are you Sure you want to Change your Username ?\n\n(Click outside the Alert Box to Cancel)",
+                                    confirmChange);
 
                                 if (confirmChange.getConfirmChange())
                                 {
