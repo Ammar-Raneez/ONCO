@@ -47,6 +47,8 @@ class SettingsScreenState extends State<SettingsScreen> {
     this._userName = userName;
     this._email = email;
     _userNameController.text = userName;
+    _emailController.text = email;
+    
   }
 
   void _changeUserName(String newDisplayName) async {
@@ -58,7 +60,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     user.updateProfile(displayName: newDisplayName).then((value){
 
     }).catchError((e){
-      
+
       createAlertDialog(context, "Error", "There was an error updating profile", 404);
       return;
     });
@@ -161,7 +163,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       )
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 20, bottom: 20, top: 20),
+                    margin: EdgeInsets.all(20),
                     child: Column(
                       children: [
                         TextFormField(
@@ -179,6 +181,15 @@ class SettingsScreenState extends State<SettingsScreen> {
                           ),
                           cursorColor: Theme.of(context).cursorColor,
                           decoration: InputDecoration(
+                            labelText: 'Username',
+                            labelStyle: TextStyle(
+                                color: Colors.blueAccent,
+                                fontSize: 15,
+                                fontFamily: 'Poppins-SemiBold'
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blueAccent),
+                            ),
                             suffixIcon: IconButton(
                               onPressed: () async {
 
@@ -206,8 +217,16 @@ class SettingsScreenState extends State<SettingsScreen> {
                           ),
                           obscureText: true,
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: 'Password',
                           decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                                color: Colors.blueAccent,
+                                fontSize: 15,
+                                fontFamily: 'Poppins-SemiBold'
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blueAccent),
+                            ),
                             suffixIcon: IconButton(
                               onPressed: () => {
 
@@ -228,6 +247,15 @@ class SettingsScreenState extends State<SettingsScreen> {
                           cursorColor: Theme.of(context).cursorColor,
                           initialValue: _email,
                           decoration: InputDecoration(
+                            labelText: 'Email',
+                            labelStyle: TextStyle(
+                                color: Colors.blueAccent,
+                                fontSize: 15,
+                                fontFamily: 'Poppins-SemiBold'
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blueAccent),
+                            ),
                             suffixIcon: Icon(
                               Icons.edit,
                             ),
