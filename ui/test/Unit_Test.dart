@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
 import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
 import 'package:ui/screens/prognosis/prognosis_screen.dart';
@@ -71,6 +72,50 @@ void main() {
 
     // EXPECTED
     expected = "200";
+
+    // TEST
+    expect(actual, expected);
+
+  });
+
+  test("Testing beast cancer diagnosis (Healthy Breast)", () async {
+
+    // ACTUAL
+    BreastCancerDiagnosisState breastCancerDiagnosisState =
+    new BreastCancerDiagnosisState();
+    FormData formData = new FormData.fromMap({
+      "file": await MultipartFile.fromFile(
+          "images/normal-breast-test.png",
+          filename: "testingImage"),
+    });
+
+    await breastCancerDiagnosisState.getResponse(formData);
+    actual = breastCancerDiagnosisState.responseBody['predition'];
+
+    // EXPECTED
+    expected = "NORMAL";
+
+    // TEST
+    expect(actual, expected);
+
+  });
+
+  test("Testing beast cancer diagnosis (Infected Breast)", () async {
+
+    // ACTUAL
+    BreastCancerDiagnosisState breastCancerDiagnosisState =
+    new BreastCancerDiagnosisState();
+    FormData formData = new FormData.fromMap({
+      "file": await MultipartFile.fromFile(
+          "images/infected-breast-test.png",
+          filename: "testingImage"),
+    });
+
+    await breastCancerDiagnosisState.getResponse(formData);
+    actual = breastCancerDiagnosisState.responseBody['predition'];
+
+    // EXPECTED
+    expected = "CANCER";
 
     // TEST
     expect(actual, expected);
