@@ -114,7 +114,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         if (responseBody != null) {
           // Displaying the alert dialog
           createAlertDialog(context, "Diagnosis",
-              "Detection result:" + resultPrediction, 201);
+              "Detection result: " + resultPrediction, 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(

@@ -21,6 +21,7 @@ dependencies:
   firebase_storage:
   cloud_firestore:
   intl: ^0.16.0
+  search_page:
   firebase_analytics:
   modal_progress_hud: ^0.1.3
   curved_navigation_bar: ^0.3.7
@@ -32,8 +33,8 @@ dependencies:
   dio: ^3.0.10
   google_sign_in: ^4.5.9
   progress_dialog: ^1.2.4
-  grouped_buttons: ^1.0.4
-  group_button: ^2.1.0
+  grouped_buttons:
+  group_button:
 
 dev_dependencies:
   flutter_test:
