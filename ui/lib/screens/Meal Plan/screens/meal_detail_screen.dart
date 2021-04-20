@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MealDetailScreen extends StatelessWidget {
+  static String id = "mealDetailScreen";
 
   final String title;
   final String ingredients;

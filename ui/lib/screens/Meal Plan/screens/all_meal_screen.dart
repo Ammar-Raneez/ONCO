@@ -5,6 +5,8 @@ import 'package:ui/screens/Meal%20Plan/model/recipe.dart';
 import 'package:ui/screens/Meal%20Plan/screens/meal_detail_screen.dart';
 
 class AllMealScreen extends StatelessWidget {
+  static String id = "allMealScreen";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
