@@ -58,7 +58,8 @@ class SettingsScreenState extends State<SettingsScreen> {
     user.updateProfile(displayName: newDisplayName).then((value){
 
     }).catchError((e){
-
+      
+      createAlertDialog(context, "Error", "There was an error updating profile", 404);
       return;
     });
 
