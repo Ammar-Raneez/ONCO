@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 import 'package:ui/constants.dart';
+import 'package:ui/screens/Meal%20Plan/meal_detail_screen.dart';
 import 'package:ui/screens/Meal%20Plan/model/recipe.dart';
-import 'package:ui/screens/Meal%20Plan/screens/meal_detail_screen.dart';
 
 class AllMealScreen extends StatelessWidget {
   static String id = "allMealScreen";
