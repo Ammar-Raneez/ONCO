@@ -1,7 +1,9 @@
 import requests
 
-LUNG_CANCER_PROGNOSIS_URL = 'https://onco-prognosis-backend.herokuapp.com/prognosis_lung'  # localhost and the defined port + endpoint
-BREAST_CANCER_PROGNOSIS_URL = 'https://onco-prognosis-backend.herokuapp.com/prognosis_breast'  # localhost and the defined port + endpoint
+# localhost and the defined port + endpoint
+LUNG_CANCER_PROGNOSIS_URL = 'https://onco-prognosis-backend.herokuapp.com/prognosis_lung'  
+BREAST_CANCER_PROGNOSIS_URL = 'https://onco-prognosis-backend.herokuapp.com/prognosis_breast'
+SKIN_CANCER_PROGNOSIS_URL = 'https://onco-prognosis-backend.herokuapp.com/prognosis_skin'  
 
 lung_cancer_prognosis_body = {
     "Age": 44,
@@ -54,8 +56,24 @@ breast_cancer_prognosis_body = {
     "positive_axillary_lymph_node": 0
 }
 
+skin_cancer_prognosis_body = {
+
+    "age": 30,
+    "gender": "male",
+    "sunburn": 1,
+    "complexion": 0,
+    "big-moles": 1,
+    "small-moles": 0,
+    "freckling": 0,
+    "damage": 2,
+    "tan": 0
+}
+
 response = requests.post(LUNG_CANCER_PROGNOSIS_URL, data=lung_cancer_prognosis_body)
 print(response.json())
 
 response = requests.post(BREAST_CANCER_PROGNOSIS_URL, data=breast_cancer_prognosis_body)
+print(response.json())
+
+response = requests.post(SKIN_CANCER_PROGNOSIS_URL, data=skin_cancer_prognosis_body)
 print(response.json())

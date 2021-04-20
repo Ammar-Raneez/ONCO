@@ -1,16 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/reports_card.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/diagnosis_reports_screen.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/prognosis_reports_screen.dart';
-import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
-
-import 'api/ReportFirebaseApi.dart';
-import 'api/ReportProvider.dart';
-import 'models/report.dart';
-import 'viewReport_screen.dart';
 
 class ReportManager extends StatefulWidget {
   @override
@@ -27,6 +19,25 @@ class _ReportManagerState extends State<ReportManager> {
           child: Container(
             child:Column(
               children: [
+
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 50,
+                  ),
+                  child: Align(
+
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      "Select Report Type",
+                      style: TextStyle(
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 24,
+                        color: Color(0xFF354042),
+                      ),
+                    ),
+                  ),
+                ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20
@@ -49,11 +60,11 @@ class _ReportManagerState extends State<ReportManager> {
                             end: Alignment.topRight,
                           ),
                       ),
-                      padding: EdgeInsets.only(top: 20, left: 25),
+                      padding: EdgeInsets.only(top: 100, left: 25),
                       width: (MediaQuery.of(context).size.width),
                       height: 150,
                       child: Text(
-                        "Diagnosis \nReports",
+                        "Diagnosis Reports",
                         style: TextStyle(
                           fontSize: 20,
                           color: Color(0xFF63888F),
@@ -87,11 +98,11 @@ class _ReportManagerState extends State<ReportManager> {
                           end: Alignment.topRight,
                         ),
                       ),
-                      padding: EdgeInsets.only(top: 20, left: 25),
+                      padding: EdgeInsets.only(top: 100, left: 25),
                       width: (MediaQuery.of(context).size.width),
                       height: 150,
                       child: Text(
-                        "Prognosis \nReports",
+                        "Prognosis Reports",
                         style: TextStyle(
                           fontSize: 20,
                           color: Color(0xFF63888F),

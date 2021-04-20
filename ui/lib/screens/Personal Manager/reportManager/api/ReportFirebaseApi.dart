@@ -23,7 +23,6 @@ class ReportFirebaseApi {
       .collection("users")
       .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
       .collection("InputPrognosis")
-      .orderBy('timestamp')
       .snapshots()
       .transform(Utils.transformer(Report.fromPrognosisJson)
   );

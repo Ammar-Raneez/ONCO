@@ -8,8 +8,6 @@ import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationFi
 import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationsProvider.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
 
-
-
 class EditMedication extends StatefulWidget {
 
   final Medication medication;
@@ -26,18 +24,9 @@ class _EditMedicationState extends State<EditMedication> {
   String _medicationDose;
   String _medicationTime;
 
-  String _updatedMedicationName;
-  String _updatedMedicationDose;
-  String _updatedMedicationTime;
-
-  // var name = TextEditingController();
-  // var dose = TextEditingController();
-  // var time = TextEditingController();
-
   @override
   void initState() {
     super.initState();
-
     _medicationName = widget.medication.medicationName;
     _medicationDose = widget.medication.dosage;
     _medicationTime = widget.medication.doseTime;
@@ -52,12 +41,10 @@ class _EditMedicationState extends State<EditMedication> {
         child: Container(
           child: Stack(
             children: [
-
               Column(
                 children: [
                   Column(
                     children: [
-
                       Padding(
                         padding: const EdgeInsets.only(
                           left: 20,
@@ -141,10 +128,7 @@ class _EditMedicationState extends State<EditMedication> {
                                           //Check if the field is not empty
                                           if(value !="") {
                                             setState(() {
-                                              print(_medicationName);
                                               _medicationName = value;
-                                              print(_medicationName);
-
                                             });
 
                                           }
@@ -225,8 +209,6 @@ class _EditMedicationState extends State<EditMedication> {
                                             setState(() {
                                               _medicationTime = value;
                                             });
-
-                                            // _doseFocus.requestFocus(); // to move focus to description node
                                           }
                                         },
                                         decoration: InputDecoration(
@@ -292,15 +274,14 @@ class _EditMedicationState extends State<EditMedication> {
                         ),
                       )
                   ),
-
                 ],
               ),
+
               Positioned(
                 bottom: 17,
                 right: 17,
                 child: GestureDetector(
                   onTap: () {
-
                     final provider = Provider.of<MedicationProvider>(context, listen: false);
                     provider.removeMedication(widget.medication);
 

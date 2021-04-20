@@ -4,8 +4,6 @@ csx
 .vs
 edge
 Publish
-lungmodelsdgp/lung_model.h5
-lungmodelsdgp/onco-127df-ec1a1996c6e1.json
 
 *.user
 *.suo
@@ -22,7 +20,6 @@ project.lock.json
 /data
 .secrets
 appsettings.json
-local.settings.json
 
 node_modules
 dist
@@ -43,3 +40,5 @@ venv.bak/
 __pycache__/
 *.py[cod]
 *$py.class
+
+breastmodelsdgp/breast_model.h5

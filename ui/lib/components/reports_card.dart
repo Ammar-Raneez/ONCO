@@ -33,12 +33,12 @@ class ReportCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(
             vertical:5.0,
-            horizontal: 15
+            horizontal: 9
         ),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(15),
               color: Color(0xFF034D5D)
           ),
           child: Container(

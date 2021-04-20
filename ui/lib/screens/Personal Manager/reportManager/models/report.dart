@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+
 class Report {
 
   String id;
   String cancerType;
   String imageUrl;
   String result;
+  String result_string;
   String percentage;
   String reportType;
   Timestamp reportDate;
@@ -18,6 +19,7 @@ class Report {
     this.percentage='',
     this.cancerType='',
     this.result='',
+    this.result_string='',
     this.prognosisInputs
   }); // Constructor
 
@@ -25,6 +27,7 @@ class Report {
     reportType: json['reportType'],
     reportDate: json['timestamp'],
     result: json['result'],
+    result_string: json['result_string'],
     cancerType: json['cancerType'],
     imageUrl: json['imageUrl'],
     percentage: json['percentage']
