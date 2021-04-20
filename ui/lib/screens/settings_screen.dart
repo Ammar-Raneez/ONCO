@@ -91,10 +91,11 @@ class SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           appBar: CustomAppBar.arrow(context),
-          body: Container(
-            child: Center(
+          body: ListView(
+            children: [
+              Center(
               child: Column(
                 children: [
                   Container(
@@ -278,6 +279,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
             ),
+            ]
           ),
         )
     );
