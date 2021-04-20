@@ -119,7 +119,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                             end: Alignment.topRight,
                           ), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18),),
                         ),
-                        padding: EdgeInsets.only(left: 25),
+                        padding: EdgeInsets.all(5),
                         width: 322.0,
                         height: 150,
                         child: Row(
@@ -129,7 +129,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                               child: Icon(
                                 Icons.account_box,
                                 color: Colors.white,
-                                size: 64,
+                                size: 50,
                               ),
                               flex: 1,
                             ),
@@ -142,7 +142,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                                     _userName,
                                     style: TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
-                                      fontSize: 20.0,
+                                      fontSize: 16.0,
                                       color: Color(0xFFE1F6FD),
                                     ),
                                   ),
@@ -150,7 +150,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                                     _email,
                                     style:TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
-                                      fontSize: 16.0,
+                                      fontSize: 14.0,
                                       color: Color(0xFF565D5E),
                                     ),
                                   ),
