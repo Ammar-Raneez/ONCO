@@ -42,7 +42,7 @@ SKIN_DIAGNOSIS_MODEL_PATH = "skin_model.hdf5"
 BREAST_DIAGNOSIS_MODEL_PATH = "breast_model.h5"
 
 # Loading all the models
-lung_diag_model = tf.keras.models.load_model(LUNG_DIAGNOSIS_MODEL_PATH)
+# lung_diag_model = tf.keras.models.load_model(LUNG_DIAGNOSIS_MODEL_PATH)
 # skin_diag_model = tf.keras.models.load_model(SKIN_DIAGNOSIS_MODEL_PATH)
 breast_diag_model = tf.keras.models.load_model(BREAST_DIAGNOSIS_MODEL_PATH)
 print("Loaded Models . . .")
@@ -164,7 +164,7 @@ def breastCancerDiagnosis():
         CATEGORIES = ['CANCER', 'NORMAL']
         
         # getting the prediction result from the categories
-        output = CATEGORIES[int(round(prediction[0][0]))]
+        output = CATEGORIES[int(prediction[0][0])]
         
         # returning the result
         return jsonify(
