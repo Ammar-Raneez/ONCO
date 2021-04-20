@@ -5,6 +5,7 @@ import 'package:ui/components/homepage_card.dart';
 import 'package:ui/components/widgets.dart';
 import 'package:ui/screens/Meal%20Plan/all_meal_screen.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
+import 'package:ui/services/UserDetails.dart';
 import 'Personal Manager/personalManager_screen.dart';
 
 //store current username
@@ -17,14 +18,29 @@ var loggedInUserGoogle;
 class HomeScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
   static String id = "homeScreen";
+  String updatedUsername;
+
+  HomeScreen();
+  HomeScreen.settingsNavigatorPush(this.updatedUsername);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenState createState() {
+
+    if (updatedUsername != null)
+
+      return _HomeScreenState.settingsNavigatorPush(updatedUsername);
+
+    else return _HomeScreenState();
+  }
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   final _firestore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser;
+  String username;
+
+  _HomeScreenState() {username = user.displayName;}
+  _HomeScreenState.settingsNavigatorPush(this.username);
 
   @override
   void initState() {
@@ -71,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         alignment: Alignment.topLeft,
                         child: Container(
                           child: Text(
-                            'Hello,\n${username.toString()}!',
+                            'Hello,\n' + username + '!',
                             style: TextStyle(
                               fontFamily: 'Poppins-SemiBold',
                               fontSize: 27.0,

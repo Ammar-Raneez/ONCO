@@ -10,25 +10,30 @@ class AlertWidget extends StatelessWidget {
   final int status;
   ConfirmChange confirmChange;
   String buttonMessage = "OK";
-  Widget _content;
 
   // Constructor
-  AlertWidget(this.title, this.message, this.status) {
+  AlertWidget(this.title, this.message, this.status);
 
+<<<<<<< HEAD
     _content = Text(
       title == "Error" ? "OK" : title,
       style: TextStyle(color: Colors.black54),
     );
   }
+=======
+>>>>>>> 2f1c133d721f3d8268ad29456e354e2fdab636de
 
 
   AlertWidget.settings(this.title, this.message, this.status, this.confirmChange)
   {
     buttonMessage = "Update";
+<<<<<<< HEAD
     _content = Text(
       title == "Error" ? "OK" : title,
       style: TextStyle(color: Colors.black54),
     );
+=======
+>>>>>>> 2f1c133d721f3d8268ad29456e354e2fdab636de
   }
 
   @override
@@ -100,7 +105,10 @@ class AlertWidget extends StatelessWidget {
               }
             },
 
-            child: _content,
+            child:  Text(
+              buttonMessage,
+              style: TextStyle(color: Colors.black54),
+            ),
           ),
         ),
       ],
