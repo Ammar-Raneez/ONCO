@@ -85,3 +85,17 @@ class AlertWidget extends StatelessWidget {
     );
   }
 }
+
+createAlertDialog(
+    BuildContext context, String title, String message, int status) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertWidget(
+        title: title,
+        message: message,
+        status: status,
+      );
+    },
+  );
+}
