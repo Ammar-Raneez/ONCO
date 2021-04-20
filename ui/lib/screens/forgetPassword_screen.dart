@@ -70,6 +70,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;
+    final node = FocusScope.of(context);
 
     return SafeArea(
       child: Scaffold(
@@ -133,6 +134,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       ),
                     ),
                   TextField(
+                    cursorColor: Colors.lightBlueAccent,
+                    onEditingComplete: () => {
+                      node.nextFocus(),
+                      _emailAddressTextFieldController.text = email,
+                    }, // Move focus to next
                     controller: _emailAddressTextFieldController,
                     keyboardType: TextInputType.emailAddress,
                     onChanged: (value) {

@@ -257,11 +257,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     TextField(
-                      onEditingComplete: () => node.nextFocus(), // Move focus to next
+                      cursorColor: Colors.lightBlueAccent,
+                      onEditingComplete: () => {
+                        node.nextFocus(),
+                        _emailAddressTextFieldController.text = email,
+                      }, // Move focus to next
                       controller: _emailAddressTextFieldController,
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (value) {
-                        email = value;
+                        email = value.trim();
                       },
                       decoration: kTextFieldDecoration.copyWith(
                         hintText: "Enter your email",
@@ -272,11 +276,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     TextField(
-                      onEditingComplete: () => node.nextFocus(), // Move focus to next
+                      cursorColor: Colors.lightBlueAccent,
+                      onEditingComplete: () => {
+                        node.nextFocus(),
+                        _passwordTextFieldController.text = password,
+                      }, // Move focus to next
                       controller: _passwordTextFieldController,
                       obscureText: !visiblePassword,
                       onChanged: (value) {
-                        password = value;
+                        password = value.trim();
                       },
                       decoration: kTextFieldDecoration.copyWith(
                         hintText: "Enter your password",

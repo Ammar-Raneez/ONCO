@@ -135,6 +135,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     onChanged: (value) {
                       username = value.trim();
                     },
+                    keyboardType: TextInputType.name,
                     decoration: kTextFieldDecoration.copyWith(
                       hintText: "Enter Full Name",
                       prefixIcon: Icon(
