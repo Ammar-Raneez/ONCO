@@ -540,13 +540,13 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                             "age": textFieldControllers[0].text,
                             "gender": "female",
-                            "sunburn": skinCancerUserAnswersIndices[1],
+                            "sunburn": 0,
                             "complexion": skinCancerUserAnswersIndices[0],
                             "big-moles": 0,
                             "small-moles": skinCancerUserAnswersIndices[2],
                             "freckling": skinCancerUserAnswersIndices[3],
                             "damage": 0,
-                            "tan": 0
+                            "tan": skinCancerUserAnswersIndices[1]
                           };
 
                         print(prognosisBody);
