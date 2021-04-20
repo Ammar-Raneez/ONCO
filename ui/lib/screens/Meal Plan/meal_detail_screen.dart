@@ -31,7 +31,7 @@ class MealDetailScreen extends StatelessWidget {
         headerSliverBuilder: (context, isScrollable) {
           return <Widget>[
             SliverAppBar(
-              expandedHeight: 200,
+              expandedHeight: 230,
               titleSpacing: 2.0,
               backgroundColor: const Color(0xFF09738D),
               centerTitle: true,
@@ -41,7 +41,10 @@ class MealDetailScreen extends StatelessWidget {
                 centerTitle: true,
                 title: Text(
                   title,
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 16, color: Colors.white,
+                    fontFamily: 'Poppins-SemiBold',
+
+                  ),
                 ),
                 background: Image.network(
                   imgUrl,
@@ -83,8 +86,9 @@ class MealDetailScreen extends StatelessWidget {
               Text(
                 ingredients,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Colors.black,
+                  fontFamily: 'Poppins-SemiBold',
                 ),
               ),
             ),
@@ -105,7 +109,8 @@ class MealDetailScreen extends StatelessWidget {
               child: _buildContainer(
                 Text(
                   steps,
-                  style: TextStyle(fontSize: 17, color: Colors.black),
+                  style: TextStyle(fontSize: 14, color: Colors.black, fontFamily: 'Poppins-SemiBold',
+                  ),
                 ),
               ),
             ),
