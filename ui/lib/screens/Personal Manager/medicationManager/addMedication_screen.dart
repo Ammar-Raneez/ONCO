@@ -127,7 +127,7 @@ class _AddMedicationState extends State<AddMedication> {
                                         ),
                                         child: TextField(
                                           maxLength: 20,
-                                          onSubmitted: (value) async{
+                                          onChanged: (value) async{
                                             //Check if the field is not empty
                                             if(value !="") {
                                               setState(() {
@@ -165,7 +165,7 @@ class _AddMedicationState extends State<AddMedication> {
                                       ),
                                       child: TextField(
                                         maxLength: 15,
-                                        onSubmitted: (value) async{
+                                        onChanged: (value) async{
                                           //Check if the field is not empty
                                           if(value !="") {
                                             setState(() {
@@ -204,7 +204,7 @@ class _AddMedicationState extends State<AddMedication> {
                                       ),
                                       child: TextField(
                                         maxLength: 35,
-                                        onSubmitted: (value) async{
+                                        onChanged: (value) async{
                                           //Check if the field is not empty
                                           if(value !="") {
                                             setState(() {
