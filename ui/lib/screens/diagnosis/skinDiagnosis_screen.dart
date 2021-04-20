@@ -108,7 +108,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         if (responseBody != null) {
           // Displaying the alert dialog
           createAlertDialog(
-              context, "Diagnosis", resultPrediction, 201);
+              context, "Diagnosis","Detection result: " +  resultPrediction, 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -137,13 +137,24 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
 
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
   _openCamera() async {
-    var selectedPicture =
-        await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      showSpinner = true;
+    });
 
-    // NOTE that selectedPicture may also contain null value, suppose user opens the camera and exits
-    // without capturing a picture.
+    var selectedPicture =
+    await ImagePicker.pickImage(source: ImageSource.camera);
+
     setState(() {
       imageFile = selectedPicture;
+    });
+
+    // This delay is for building the image when clicked from camera cuz it takes some time to build
+    Future.delayed(const Duration(milliseconds: 5000), () {
+      // NOTE that selectedPicture may also contain null value, suppose user opens the camera and exits
+      // without capturing a picture.
+      setState(() {
+        showSpinner = false;
+      });
     });
   }
 
