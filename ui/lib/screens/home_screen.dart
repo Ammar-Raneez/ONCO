@@ -58,106 +58,110 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      body: Container(
-        child: Center(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    child: Text(
-                      'Hello,\n${username.toString()}!',
-                      style: TextStyle(
-                        fontFamily: 'Poppins-SemiBold',
-                        fontSize: 27.0,
+        child: WillPopScope(
+          onWillPop: () async => false,
+            child: Scaffold(
+            body: Container(
+              child: Center(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          child: Text(
+                            'Hello,\n${username.toString()}!',
+                            style: TextStyle(
+                              fontFamily: 'Poppins-SemiBold',
+                              fontSize: 27.0,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    child: Text(
-                      'How can we help you?',
-                      style: TextStyle(
-                        color: Color(0xff59939F),
-                        fontFamily: 'Poppins-SemiBold',
-                        fontSize: 16.0,
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          child: Text(
+                            'How can we help you?',
+                            style: TextStyle(
+                              color: Color(0xff59939F),
+                              fontFamily: 'Poppins-SemiBold',
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10, bottom: 5),
+                        child: ScrollConfiguration(
+                          behavior: ScrollEffectBehaviour(),
+                          child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: <Widget>[
+                                Container(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PersonalManager()),
+                                      );
+                                    },
+                                    child: HomeCard(
+                                      cardTitle: 'Personal Manager',
+                                      cardColor: '0xFFdb5682',
+                                      textColor: '0xFFFFFFFF',
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  child: HomeCard(
+                                    cardTitle: 'Exercise Plan',
+                                    cardColor: '0xFFa4d44a',
+                                    textColor: '0xFFFFFFFF',
+                                  ),
+                                ),
+                                Container(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => AllMealScreen()),
+                                      );
+                                    },
+                                    child: HomeCard(
+                                      cardTitle: 'Meal Plan',
+                                      cardColor: '0xFF4ad4b1',
+                                      textColor: '0xFFFFFFFF',
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 21,
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10, bottom: 5),
-                  child: ScrollConfiguration(
-                    behavior: ScrollEffectBehaviour(),
-                    child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: <Widget>[
-                          Container(
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PersonalManager()),
-                                );
-                              },
-                              child: HomeCard(
-                                cardTitle: 'Personal Manager',
-                                cardColor: '0xFFdb5682',
-                                textColor: '0xFFFFFFFF',
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: HomeCard(
-                              cardTitle: 'Exercise Plan',
-                              cardColor: '0xFFa4d44a',
-                              textColor: '0xFFFFFFFF',
-                            ),
-                          ),
-                          Container(
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AllMealScreen()),
-                                );
-                              },
-                              child: HomeCard(
-                                cardTitle: 'Meal Plan',
-                                cardColor: '0xFF4ad4b1',
-                                textColor: '0xFFFFFFFF',
-                              ),
-                            ),
-                          ),
-                        ]),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 21,
-              ),
-            ],
-          ),
-        ),
-      ),
-    ));
+            ),
+          )
+        )
+    );
   }
 }
