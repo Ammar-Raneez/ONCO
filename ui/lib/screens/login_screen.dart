@@ -191,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;
-
+    final node = FocusScope.of(context);
     return SafeArea(
       child: WillPopScope(
         onWillPop: () async => false,
@@ -257,6 +257,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     TextField(
+                      onEditingComplete: () => node.nextFocus(), // Move focus to next
                       controller: _emailAddressTextFieldController,
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (value) {
@@ -271,6 +272,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     TextField(
+                      onEditingComplete: () => node.nextFocus(), // Move focus to next
                       controller: _passwordTextFieldController,
                       obscureText: !visiblePassword,
                       onChanged: (value) {
