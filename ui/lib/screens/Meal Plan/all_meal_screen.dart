@@ -23,7 +23,6 @@ class AllMealScreen extends StatelessWidget {
                 onTap: () {
                   showSearch(
                     context: context,
-
                     delegate: SearchPage<Recipe>(
                       searchLabel: 'Search Recipes',
                       suggestion: Center(
@@ -67,15 +66,12 @@ class AllMealScreen extends StatelessWidget {
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 18,
-                    right: 18,
-                    bottom: 20
-                  ),
+                  padding:
+                      const EdgeInsets.only(left: 18, right: 18, bottom: 20),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                        color: Color(0xFFEFEFEF),
+                      color: Color(0xFFEFEFEF),
                     ),
                     width: double.infinity,
                     height: 55,
@@ -87,21 +83,16 @@ class AllMealScreen extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 10),
-                              child: Icon(Icons.search,
-                                  color: Color(0xFF343434),
+                              child: Icon(
+                                Icons.search,
+                                color: Colors.black38,
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(
-                                left: 10
-                              ),
+                              padding: const EdgeInsets.only(left: 10),
                               child: Text(
-                              "Search Recipes",
-                                style: TextStyle(
-                                  fontFamily: 'Poppins-SemiBold',
-                                  fontSize: 16,
-                                  color: Color(0xFF343434),
-                                ),
+                                "Search Recipes",
+                                style: kTextStyle.copyWith(fontSize: 16),
                               ),
                             ),
                           ],
@@ -119,104 +110,100 @@ class AllMealScreen extends StatelessWidget {
                       return Column(
                         children: [
                           GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => MealDetailScreen(
-                                        title: RECIPES[index].title,
-                                        imgUrl: RECIPES[index].imageUrl,
-                                        ingredients: RECIPES[index].ingredients,
-                                        steps: RECIPES[index].steps,
-                                        duration: RECIPES[index].duration,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 2
-                                  ),
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)
-                                    ),
-                                    elevation: 9,
-                                    child: Stack(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(20),
-                                          child: Image.network(
-                                            RECIPES[index].imageUrl,
-                                            fit: BoxFit.cover,
-                                            width: double.infinity,
-                                            height: 180,
-                                          ),
-                                        ),
-                                        Positioned(
-                                          left: 0,
-                                          right: 0,
-                                          bottom: 0,
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                              vertical: 15,
-                                              horizontal: 15,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.black54,
-                                              borderRadius: BorderRadius.only(
-                                                bottomLeft: Radius.circular(20),
-                                                bottomRight: Radius.circular(20)
-                                              )
-                                            ),
-                                            child: Text(
-                                              RECIPES[index].title,
-                                              style: TextStyle(
-                                                fontFamily: 'Poppins-SemiBold',
-                                                fontSize: 19,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          right: 0,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
-                                                  color: Color(0xFF09738D)),
-                                              height: 50,
-                                              width: 120,
-                                              child: Center(
-                                                child: Text(
-                                                  '${RECIPES[index].duration}',
-                                                  style: TextStyle(
-                                                    fontFamily: 'Poppins-SemiBold',
-                                                    fontSize: 13,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MealDetailScreen(
+                                    title: RECIPES[index].title,
+                                    imgUrl: RECIPES[index].imageUrl,
+                                    ingredients: RECIPES[index].ingredients,
+                                    steps: RECIPES[index].steps,
+                                    duration: RECIPES[index].duration,
                                   ),
                                 ),
+                              );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 2),
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                elevation: 9,
+                                child: Stack(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Image.network(
+                                        RECIPES[index].imageUrl,
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                        height: 180,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      left: 0,
+                                      right: 0,
+                                      bottom: 0,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 15,
+                                          horizontal: 15,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.black54,
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(20),
+                                            bottomRight: Radius.circular(20),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          RECIPES[index].title,
+                                          style: kTextStyle.copyWith(
+                                              fontSize: 19,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      right: 0,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Color(0xFF09738D),
+                                          ),
+                                          height: 50,
+                                          width: 120,
+                                          child: Center(
+                                            child: Text(
+                                              '${RECIPES[index].duration}',
+                                              style: kTextStyle.copyWith(
+                                                color: Colors.white,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
+                            ),
+                          ),
                         ],
                       );
                     }),
               ),
             ],
-          )
-            ),
+          ),
+        ),
       ),
-      );
+    );
   }
 }
