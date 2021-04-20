@@ -12,7 +12,6 @@ BREAST_MODEL_PATH = os.path.join(scriptdir, 'breast_model.h5')
 
 # Calculate Prediction Percentage
 def calculate_prediction_percent_breast(prediction, result):
-    logging.info(result)
     return str(np.amax(prediction[0][0] * 100))
 
 def construct_breast_output(prediction):
@@ -20,7 +19,7 @@ def construct_breast_output(prediction):
     CATEGORIES = ['CANCER', 'NORMAL']
 
     # getting the results
-    return CATEGORIES[int(round(prediction[0][0]))], calculate_prediction_percent_breast(prediction, result)
+    return CATEGORIES[result], calculate_prediction_percent_breast(prediction, result)
 
 def model_predict(image_array, model):
     if model == "breast":

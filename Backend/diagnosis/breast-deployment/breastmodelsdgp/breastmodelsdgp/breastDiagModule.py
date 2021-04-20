@@ -3,7 +3,7 @@ import numpy as np
 class BreastDiagModule:# Predict using the model
     def preprocess(self, img_array, model):
         IMG_SIZE = 100
-        img = cv2.imdecode(img_array, cv2.IMREAD_UNCHANGED)
+        img = cv2.imdecode(img_array, cv2.IMREAD_GRAYSCALE)
         new_arr = cv2.resize(img, (IMG_SIZE, IMG_SIZE))
         new_arr = new_arr.reshape(-1, IMG_SIZE, IMG_SIZE, 1)
         return new_arr
