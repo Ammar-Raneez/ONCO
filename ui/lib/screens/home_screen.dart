@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/homepage_card.dart';
 import 'package:ui/components/widgets.dart';
-import 'file:///C:/Users/Public/Downloads/Learning/UNI/Semester%20II/SDGP/SDGP-ONCO/ui/lib/screens/Meal%20Plan/all_meal_screen.dart';
+import 'package:ui/screens/Meal%20Plan/all_meal_screen.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'Personal Manager/personalManager_screen.dart';
 
