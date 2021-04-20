@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:search_page/search_page.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/constants.dart';
 import 'package:ui/screens/Meal%20Plan/meal_detail_screen.dart';
-import 'package:ui/screens/Meal%20Plan/model/recipe.dart';
 
 class AllMealScreen extends StatelessWidget {
   static String id = "allMealScreen";
@@ -12,53 +10,7 @@ class AllMealScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-//        appBar: CustomAppBar.arrow(context),
-      appBar: AppBar(
-        title: Text('Dietary Plans'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () => showSearch(
-              context: context,
-              delegate: SearchPage<Recipe>(
-                searchLabel: 'Search Cancer Meal Recipes',
-                suggestion: Center(
-                  child: Container(
-                    height: 400,
-                    width: 350,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('images/recipe.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ),
-                builder: (recipes) => ListTile(
-                  title: Text(recipes.title),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AllMealScreen(),
-                      ),
-                    );
-                  },
-                ),
-                filter: (recipes) => [
-                  recipes.title,
-                ],
-                items: RECIPES,
-                failure: Center(
-                  child: Container(
-                    child: Text('No Data Found'),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+        appBar: CustomAppBar.arrow(context),
         body: ListView.builder(
           shrinkWrap: true,
             itemCount: RECIPES.length,
