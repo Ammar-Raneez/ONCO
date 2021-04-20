@@ -55,6 +55,19 @@ class MealDetailScreen extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(
+                  left: 25,bottom: 20
+              ),
+              child: Text(
+                'Made for '+duration,
+                style: TextStyle(
+                  fontFamily: 'Poppins-SemiBold',
+                  fontSize: 17,
+                  color: Color(0xFF09738D),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
                 left: 25
               ),
               child: Text(
@@ -62,7 +75,7 @@ class MealDetailScreen extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Poppins-SemiBold',
                   fontSize: 20,
-                  color: Color(0xFF343434),
+                  color: Color(0xFF0D3945),
                 ),
               ),
             ),
