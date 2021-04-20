@@ -15,6 +15,7 @@ class AllMealScreen extends StatelessWidget {
     return SafeArea(
       child: Container(
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: CustomAppBar.arrow(context),
           body: Column(
             children: [
@@ -22,15 +23,16 @@ class AllMealScreen extends StatelessWidget {
                 onTap: () {
                   showSearch(
                     context: context,
+
                     delegate: SearchPage<Recipe>(
                       searchLabel: 'Search Recipes',
                       suggestion: Center(
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
+                            color: Colors.white,
                             image: DecorationImage(
                               image: AssetImage('images/recipe.jpg'),
-
                             ),
                           ),
                         ),
@@ -73,17 +75,22 @@ class AllMealScreen extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                        color: Color(0xFFD2D2D2),
+                        color: Color(0xFFEFEFEF),
                     ),
                     width: double.infinity,
-                    height: 50,
+                    height: 55,
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Row(
                           children: [
-                            Icon(Icons.search),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Icon(Icons.search,
+                                  color: Color(0xFF343434),
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(
                                 left: 10
@@ -93,6 +100,7 @@ class AllMealScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'Poppins-SemiBold',
                                   fontSize: 16,
+                                  color: Color(0xFF343434),
                                 ),
                               ),
                             ),
