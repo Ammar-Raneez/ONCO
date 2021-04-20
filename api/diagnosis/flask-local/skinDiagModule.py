@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 
-
 def load_img_data(size, image_path):   
         img_height, img_width = size, size
         images = []
@@ -13,7 +12,7 @@ def load_img_data(size, image_path):
 
         images = np.stack(images, axis=0)
         return images
-    
+
 def preprocess(image_path):
     return load_img_data(128, image_path)
 

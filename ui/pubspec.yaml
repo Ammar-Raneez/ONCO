@@ -32,6 +32,7 @@ dependencies:
   dio: ^3.0.10
   google_sign_in: ^4.5.9
   progress_dialog: ^1.2.4
+  grouped_buttons: ^1.0.4
   group_button: ^2.1.0
 
 dev_dependencies:
