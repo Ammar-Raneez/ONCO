@@ -321,7 +321,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         appBar: CustomAppBar.arrow(context),
         body: Container(
           height: size.height,
@@ -585,18 +585,19 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             fontFamily: 'Poppins-SemiBold',
                           ));
 
-                      print(url);
                       // Showing the Progress Dialog and Dismissing it After the API Request is Received
-                     progressDialog.show();
+                      progressDialog.show();
 
-                     String reply = await apiRequest();
+                      String reply = await apiRequest();
 
-                     print(reply);
                      progressDialog.hide();
 
-                      // checking if the response is not null and displaying the result
+                     // checking if the response is not null and displaying the result
                       if (reply != null) {
+
                         final body = json.decode(reply);
+
+                        print(body);
 
                         var prognosisResult;
 
@@ -606,7 +607,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                         else
                         {
-                          prognosisResult = body["result_string"];
+                          prognosisResult = body['"result_string"'];
                         }
 
                         /* For Breast Cancer Prognosis the Result is either 'R'
