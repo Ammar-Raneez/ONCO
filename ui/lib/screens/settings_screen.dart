@@ -181,7 +181,14 @@ class SettingsScreenState extends State<SettingsScreen> {
                             suffixIcon: IconButton(
                               onPressed: () async {
 
-                                _changeUserName(_userNameController.text);
+                                ConfirmChange confirmChange = new ConfirmChange(confirmChange: false);
+
+                                await createConfirmDialog(context, "Confirmation", "Are you Sure you want to Change your Username ?", confirmChange);
+
+                                if (confirmChange.getConfirmChange())
+                                {
+                                  _changeUserName(_userNameController.text);
+                                }
                               },
                               icon: Icon(Icons.edit),
                             ),

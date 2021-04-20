@@ -8,13 +8,13 @@ class AlertWidget extends StatelessWidget {
   final String title;
   final String message;
   final int status;
-  ConfirmChange settings;
+  ConfirmChange confirmChange;
   String buttonMessage = "OK";
 
   // Constructor
   AlertWidget({this.title, this.message, this.status});
 
-  AlertWidget.settings(this.title, this.message, this.status, this.settings)
+  AlertWidget.settings(this.title, this.message, this.status, this.confirmChange)
   {
     buttonMessage = "Update";
   }
@@ -78,7 +78,12 @@ class AlertWidget extends StatelessWidget {
               if (status == 200) {
                 Navigator.pop(context); // pop the alert
                 Navigator.pushNamed(context, CurrentScreen.id);
-              } else {
+              }
+              else if (confirmChange != null) {
+                confirmChange.setConfirmChange(true);
+                Navigator.pop(context);
+              }
+              else {
                 Navigator.pop(context);
               }
             },
