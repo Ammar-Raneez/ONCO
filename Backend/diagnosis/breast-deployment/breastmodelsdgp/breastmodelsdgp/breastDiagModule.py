@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 class BreastDiagModule:# Predict using the model
     def preprocess(self, img_array, model):
         IMG_SIZE = 100

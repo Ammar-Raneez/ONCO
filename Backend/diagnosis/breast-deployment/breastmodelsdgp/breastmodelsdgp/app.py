@@ -1,7 +1,6 @@
 import os
 import numpy as np
 import tensorflow as tf
-import logging
 from .breastDiagModule import BreastDiagModule
 
 breastDiagModule = BreastDiagModule()
