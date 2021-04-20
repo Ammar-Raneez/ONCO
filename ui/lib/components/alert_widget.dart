@@ -16,7 +16,7 @@ class AlertWidget extends StatelessWidget {
   AlertWidget(this.title, this.message, this.status) {
 
     _content = Text(
-      title,
+      title == "Error" ? "OK" : title,
       style: TextStyle(color: Colors.black54),
     );
   }
@@ -26,7 +26,7 @@ class AlertWidget extends StatelessWidget {
   {
     buttonMessage = "Update";
     _content = Text(
-      title,
+      title == "Error" ? "OK" : title,
       style: TextStyle(color: Colors.black54),
     );
   }
