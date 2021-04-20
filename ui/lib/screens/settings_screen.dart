@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
+import 'package:ui/screens/current_screen.dart';
+import 'package:ui/screens/home_screen.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:ui/services/UserDetails.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -73,9 +75,10 @@ class SettingsScreenState extends State<SettingsScreen> {
     var updatedUser = {
       "gender": "male",
       "timestamp": userDocument.data()['timestamp'],
-      "userEmail": "admin@gmail.com",
+      "userEmail": _email,
       "username": newDisplayName
     };
+
 
     // Updating the username Field of the Document of a Specific User in Collections user
     FirebaseFirestore.instance
@@ -200,6 +203,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                                 if (confirmChange.getConfirmChange())
                                 {
                                   _changeUserName(_userNameController.text);
+
+                                  Navigator.push(context, MaterialPageRoute(builder:
+                                      (_) => CurrentScreen.settingsNavigatorPush(_userNameController.text)));
                                 }
                               },
                               icon: Icon(Icons.edit),

@@ -26,7 +26,7 @@ class AlertWidget extends StatelessWidget {
   {
     buttonMessage = "Update";
     _content = Text(
-      title,
+      "OK",
       style: TextStyle(color: Colors.black54),
     );
   }
