@@ -79,7 +79,8 @@ class AlertWidget extends StatelessWidget {
             onPressed: () {
               if (status == 200) {
                 Navigator.pop(context); // pop the alert
-                Navigator.pushNamed(context, CurrentScreen.id);
+                Navigator.push(context, MaterialPageRoute(builder:
+                    (_) => CurrentScreen()));
               }
               else if (confirmChange != null) {
                 confirmChange.setConfirmChange(true);

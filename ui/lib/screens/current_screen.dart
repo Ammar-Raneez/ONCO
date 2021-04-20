@@ -7,6 +7,7 @@ import 'package:ui/screens/chatbot_screen.dart';
 import 'package:ui/screens/home_screen.dart';
 import 'package:ui/screens/mainCancer_screen.dart';
 import 'package:ui/components/custom_app_bar.dart';
+import 'package:ui/services/UserDetails.dart';
 
 class CurrentScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -40,7 +41,13 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
     // getting the current user details on loading of the screen
     getCurrentUser();
-    swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
+    print(username);
+    if(username == null)
+    {
+      username = UserDetails.getUserData()["username"];
+      print(username);
+      swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
+    }
   }
   _CurrentScreenState.settingsNavigatorPush(this.username)
   {
@@ -56,14 +63,12 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
   // Getting the current user details
   void getCurrentUser() async {
-    print(loggedInUser.email);
     try {
       // getting the current user (email/pass auth)
       final user = _auth.currentUser;
       if (user != null) {
         // This will run when the user logs in using the normal username and password way
         print("(Email-Password login) User is Present!");
-        print(user.email);
       } else {
         loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
       }
@@ -74,10 +79,9 @@ class _CurrentScreenState extends State<CurrentScreen> {
           .doc(loggedInUser.email != null ? loggedInUser.email : loggedInUserGoogle)
           .get();
 
-      print(userDocument);
 
       setState(() {
-        username = user.displayName;
+        username = userDocument["username"];
       });
     } catch (e) {
       print(e);

@@ -39,14 +39,17 @@ class _HomeScreenState extends State<HomeScreen> {
   final user = FirebaseAuth.instance.currentUser;
   String username;
 
-  _HomeScreenState() {username = user.displayName;}
-  _HomeScreenState.settingsNavigatorPush(this.username);
+  _HomeScreenState() {
 
-  @override
-  void initState() {
     getCurrentUser();
-    super.initState();
+
+    if(username == null)
+
+      username = UserDetails.getUserData()["username"];
+
+    print(UserDetails.getUserData()["username"]);
   }
+  _HomeScreenState.settingsNavigatorPush(this.username);
 
   void getCurrentUser() async {
     try {
