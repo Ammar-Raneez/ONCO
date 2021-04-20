@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui/constants.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static String id = "mealDetailScreen";
@@ -11,13 +12,18 @@ class MealDetailScreen extends StatelessWidget {
   final String forCancer;
 
   MealDetailScreen(
-      {this.title, this.imgUrl, this.ingredients, this.duration, this.steps, this.forCancer});
+      {this.title,
+      this.imgUrl,
+      this.ingredients,
+      this.duration,
+      this.steps,
+      this.forCancer});
 
-  Widget _buildContainer(Widget child) {
+  Container _buildContainer(Widget child) {
     return Container(
       padding: EdgeInsets.all(25),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0)
+        borderRadius: BorderRadius.circular(10.0),
       ),
       width: double.infinity,
       child: child,
@@ -41,82 +47,61 @@ class MealDetailScreen extends StatelessWidget {
                 centerTitle: true,
                 title: Text(
                   title,
-                  style: TextStyle(fontSize: 16, color: Colors.white,
-                    fontFamily: 'Poppins-SemiBold',
-
-                  ),
+                  style: kTextStyle.copyWith(fontSize: 16, color: Colors.white),
                 ),
                 background: Image.network(
                   imgUrl,
                   fit: BoxFit.cover,
                 ),
               ),
-            )
+            ),
           ];
         },
         body: ListView(
           children: [
             Padding(
-              padding: EdgeInsets.only(
-                  left: 25,bottom: 20
-              ),
+              padding: EdgeInsets.only(left: 25, bottom: 20),
               child: Text(
-                'Made for '+duration,
-                style: TextStyle(
-                  fontFamily: 'Poppins-SemiBold',
+                'Made for ' + duration,
+                style: kTextStyle.copyWith(
                   fontSize: 17,
                   color: Color(0xFF09738D),
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 25
-              ),
-              child: Text(
-                'Ingredients',
-                style: TextStyle(
-                  fontFamily: 'Poppins-SemiBold',
-                  fontSize: 20,
-                  color: Color(0xFF0D3945),
-                ),
-              ),
-            ),
+            _commonText(text: 'Ingredients'),
             _buildContainer(
-              Text(
-                ingredients,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
-                  fontFamily: 'Poppins-SemiBold',
-                ),
-              ),
+              _commonParagraph(type: ingredients),
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: 25
-              ),
-              child: Text(
-                'Steps',
-                style: TextStyle(
-                  fontFamily: 'Poppins-SemiBold',
-                  fontSize: 20,
-                  color: Color(0xFF343434),
-                ),
-              ),
-            ),
+            _commonText(text: 'Steps'),
             Container(
               child: _buildContainer(
-                Text(
-                  steps,
-                  style: TextStyle(fontSize: 14, color: Colors.black, fontFamily: 'Poppins-SemiBold',
-                  ),
-                ),
+                _commonParagraph(type: steps),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Padding _commonText({String text}) {
+    return Padding(
+      padding: EdgeInsets.only(left: 25),
+      child: Text(
+        text,
+        style: kTextStyle.copyWith(
+          fontSize: 20,
+          color: Color(0xFF0D3945),
+        ),
+      ),
+    );
+  }
+
+  Text _commonParagraph({String type}) {
+    return Text(
+      type,
+      style: kTextStyle.copyWith(fontSize: 14, color: Colors.black),
     );
   }
 }
