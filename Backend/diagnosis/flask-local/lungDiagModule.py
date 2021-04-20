@@ -10,7 +10,6 @@ import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 
-
 def get_img_array(img_path, size):
     # `img` is a PIL image of size 299x299
     img = keras.preprocessing.image.load_img(img_path, target_size=size)
@@ -21,9 +20,7 @@ def get_img_array(img_path, size):
     array = np.expand_dims(array, axis=0)
     return array
 
-def make_gradcam_heatmap(
-    img_array, model, last_conv_layer_name, classifier_layer_names
-):
+def make_gradcam_heatmap(img_array, model, last_conv_layer_name, classifier_layer_names):
     # First, we create a model that maps the input image to the activations
     # of the last conv layer
     last_conv_layer = model.get_layer(last_conv_layer_name)
@@ -73,7 +70,6 @@ def make_gradcam_heatmap(
 
 # Storing the Visualized GradCAM image to firebase storage
 def storeGradCamImageLung(local_target_image_path, model, firebase_storage):
-
     img_size = (224, 224)
     preprocess_input = keras.applications.xception.preprocess_input
     decode_predictions = keras.applications.xception.decode_predictions
@@ -154,6 +150,5 @@ def getImageUrlLung(imagePathName, firebase, firebase_storage):
     p = "onconashml12345"
     user = auth.sign_in_with_email_and_password(e, p)
     url = firebase_storage.child(imagePathName).get_url(user["idToken"])
-    print(url)
     return url
     
