@@ -16,40 +16,43 @@ class AllMealScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () => showSearch(
-                context: context,
-                delegate: SearchPage<Recipe>(
-                  searchLabel: 'Search Cancer Meal Recipes',
-                  suggestion: Center(
-                    child: Container(
-                      height: 400,
-                      width: 350,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
+              context: context,
+              delegate: SearchPage<Recipe>(
+                searchLabel: 'Search Cancer Meal Recipes',
+                suggestion: Center(
+                  child: Container(
+                    height: 400,
+                    width: 350,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
                         image: AssetImage('images/recipe.jpg'),
                         fit: BoxFit.fill,
-                      )),
+                      ),
                     ),
                   ),
-                  builder: (recipes) => ListTile(
-                    title: Text(recipes.title),
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AllMealScreen(
-                          ),),);
-                    },
+                ),
+                builder: (recipes) => ListTile(
+                  title: Text(recipes.title),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AllMealScreen(),
+                      ),
+                    );
+                  },
+                ),
+                filter: (recipes) => [
+                  recipes.title,
+                ],
+                items: RECIPES,
+                failure: Center(
+                  child: Container(
+                    child: Text('No Data Found'),
                   ),
-                  filter: (recipes) => [
-                    recipes.title,
-                  ],
-                  items: RECIPES,
-                  failure: Center(
-                    child: Container(
-                      child: Text('No Data Found'),
-                    ),
-                  ),
-                )),
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -59,23 +62,26 @@ class AllMealScreen extends StatelessWidget {
             return InkWell(
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MealDetailScreen(
-                              title: RECIPES[index].title,
-                              imgUrl: RECIPES[index].imageUrl,
-                              ingredients: RECIPES[index].ingredients,
-                              steps: RECIPES[index].steps,
-                              duration: RECIPES[index].duration,
-                            ),),);
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MealDetailScreen(
+                      title: RECIPES[index].title,
+                      imgUrl: RECIPES[index].imageUrl,
+                      ingredients: RECIPES[index].ingredients,
+                      steps: RECIPES[index].steps,
+                      duration: RECIPES[index].duration,
+                    ),
+                  ),
+                );
               },
               child: Card(
                 margin: EdgeInsets.all(10),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                )),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                  ),
+                ),
                 elevation: 4.0,
                 child: Stack(
                   children: [
@@ -110,27 +116,28 @@ class AllMealScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                        right: 0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(15),
-                                bottomLeft: Radius.circular(15),
-                              ),
-                              color: Colors.white),
-                          height: 25,
-                          width: 100,
-                          child: Center(
-                            child: Text(
-                              '${RECIPES[index].duration}',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      right: 0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(15),
+                              bottomLeft: Radius.circular(15),
+                            ),
+                            color: Colors.white),
+                        height: 25,
+                        width: 100,
+                        child: Center(
+                          child: Text(
+                            '${RECIPES[index].duration}',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ))
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

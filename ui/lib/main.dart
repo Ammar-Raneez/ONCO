@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:ui/screens/Meal%20Plan/meal_home_screen.dart';
 import 'package:ui/screens/Meal%20Plan/screens/all_meal_screen.dart';
 import 'package:ui/screens/Meal%20Plan/screens/meal_detail_screen.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationsProvider.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
           LungCancerDiagnosis.id: (context) => LungCancerDiagnosis(),
           BreastCancerDiagnosis.id: (context) => BreastCancerDiagnosis(),
           SkinCancerDiagnosis.id: (context) => SkinCancerDiagnosis(),
+          MealHomeScreen.id: (context) => MealHomeScreen(),
           AllMealScreen.id: (context) => AllMealScreen(),
           MealDetailScreen.id: (context) => MealDetailScreen()
         }
