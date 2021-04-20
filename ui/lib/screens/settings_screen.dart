@@ -52,6 +52,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   void _changeUserName(String newDisplayName) async {
 
     var user = FirebaseAuth.instance.currentUser;
+    var loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
 
     // Updating the Username in Firebase Authentication
     user.updateProfile(displayName: newDisplayName).then((value){
@@ -60,6 +61,24 @@ class SettingsScreenState extends State<SettingsScreen> {
 
       return;
     });
+
+    var userDocument = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.email != null ? user.email : loggedInUserGoogle)
+        .get();
+
+    var updatedUser = {
+      "gender": "male",
+      "timestamp": userDocument.data()['timestamp'],
+      "userEmail": "admin@gmail.com",
+      "username": newDisplayName
+    };
+
+    // Updating the username Field of the Document of a Specific User in Collections user
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.email != null ? user.email : loggedInUserGoogle)
+        .set(updatedUser);
   }
 
   @override
