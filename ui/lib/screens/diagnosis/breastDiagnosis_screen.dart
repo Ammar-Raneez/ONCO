@@ -26,7 +26,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   bool showSpinner = false;
   bool showHighlightedImage = false;
   dynamic responseBody;
-  // final _firestore = FirebaseFirestore.instance;
+   final _firestore = FirebaseFirestore.instance;
 
   // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
@@ -80,19 +80,19 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         String resultPercentage = responseBody['prediction_percentage'];
 
         // Adding the response data into the database for report creation purpose
-        // _firestore
-        //     .collection("users")
-        //     .doc(UserDetails.getUserData()["email"])
-        //     .collection("imageDetections")
-        //     .add({
-        //   "cancerType": "Breast",
-        //   "reportType": "diagnosis",
-        //   "result": resultPrediction,
-        //   "result_string": "$resultPrediction was detected",
-        //   "imageUrl": resultImageURL,
-        //   "percentage": resultPercentage,
-        //   'timestamp': Timestamp.now(),
-        // });
+         _firestore
+             .collection("users")
+             .doc(UserDetails.getUserData()["email"])
+             .collection("imageDetections")
+             .add({
+           "cancerType": "Breast",
+           "reportType": "diagnosis",
+           "result": resultPrediction,
+           "result_string": "$resultPrediction was detected",
+           "imageUrl": resultImageURL,
+           "percentage": resultPercentage,
+           'timestamp': Timestamp.now(),
+         });
 
         // Display the spinner to indicate that its loading
         setState(() {
@@ -210,7 +210,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                                   child: imageFile == null
                                       ? Image.asset(
                                           'images/uploadImageGrey1.png',
-                                          scale: 15,
+                                          scale: 13,
                                         )
                                       : Image.file(
                                           imageFile,

@@ -194,7 +194,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: imageFile == null
-                                ? Image.asset('images/uploadImageGrey1.png', scale: 15,)
+                                ? Image.asset('images/uploadImageGrey1.png', scale: 13,)
                                 : Image.file(
                                     imageFile,
                                     width: 500,

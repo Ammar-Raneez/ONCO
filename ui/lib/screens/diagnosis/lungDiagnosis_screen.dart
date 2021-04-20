@@ -204,7 +204,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   child: imageFile == null
                                       ? Image.asset(
                                           'images/uploadImageGrey1.png',
-                                          scale: 15,
+                                          scale: 13,
                                         )
                                       : Image.file(
                                           imageFile,
