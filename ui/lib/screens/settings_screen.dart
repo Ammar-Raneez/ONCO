@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 
@@ -124,13 +125,16 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
 
-  String userName;
-  String email;
+  String _userName;
+  String _email;
+  TextEditingController _userNameController = new TextEditingController();
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
 
   _SettingsScreenState(String userName, String email)
   {
-    this.userName = userName;
-    this.email = email;
+    this._userName = userName;
+    this._email = email;
   }
 
   @override
@@ -188,7 +192,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                   Text(
-                                    userName,
+                                    _userName,
                                     style: TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
                                       fontSize: 20.0,
@@ -196,7 +200,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     ),
                                 ),
                                  Text(
-                                    email,
+                                    _email,
                                     style:TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
                                       fontSize: 16.0,
@@ -216,6 +220,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Column(
                       children: [
                         TextFormField(
+                          controller: _userNameController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter some text';
@@ -228,7 +233,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: Color(0xFF565D5E),
                           ),
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: userName,
+                          initialValue: _userName,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                               onPressed: () {
@@ -242,6 +247,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: _passwordController,
                           style:TextStyle(
                             fontFamily: 'Poppins-SemiBold',
                             fontSize: 16.0,
@@ -253,7 +259,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                               onPressed: () => {
-                                createAlertDialog(context, "GOOD", "WOW", 2),
+
                               },
                               icon: Icon(Icons.edit),
                             ),
@@ -263,13 +269,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: _emailController,
                           style:TextStyle(
                             fontFamily: 'Poppins-SemiBold',
                             fontSize: 16.0,
                             color: Color(0xFF565D5E),
                           ),
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: email,
+                          initialValue: _email,
                           decoration: InputDecoration(
                             suffixIcon: Icon(
                               Icons.edit,
