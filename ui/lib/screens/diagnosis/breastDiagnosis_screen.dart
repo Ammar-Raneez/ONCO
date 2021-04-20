@@ -16,17 +16,17 @@ class BreastCancerDiagnosis extends StatefulWidget {
   static String id = "breastCancerDiagnosisScreen";
 
   @override
-  _BreastCancerDiagnosisState createState() => _BreastCancerDiagnosisState();
+  BreastCancerDiagnosisState createState() => BreastCancerDiagnosisState();
 }
 
-class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
+class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   //  VARIABLES
   File imageFile;
   Dio dio = new Dio();
   bool showSpinner = false;
   bool showHighlightedImage = false;
   dynamic responseBody;
-  final _firestore = FirebaseFirestore.instance;
+  // final _firestore = FirebaseFirestore.instance;
 
   // CREATING AN ALERT
   createAlertDialog(
@@ -95,19 +95,19 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         String resultPercentage = responseBody['prediction_percentage'];
 
         // Adding the response data into the database for report creation purpose
-        _firestore
-            .collection("users")
-            .doc(UserDetails.getUserData()["email"])
-            .collection("imageDetections")
-            .add({
-          "cancerType": "Breast",
-          "reportType": "diagnosis",
-          "result": resultPrediction,
-          "result_string": "$resultPrediction was detected",
-          "imageUrl": resultImageURL,
-          "percentage": resultPercentage,
-          'timestamp': Timestamp.now(),
-        });
+        // _firestore
+        //     .collection("users")
+        //     .doc(UserDetails.getUserData()["email"])
+        //     .collection("imageDetections")
+        //     .add({
+        //   "cancerType": "Breast",
+        //   "reportType": "diagnosis",
+        //   "result": resultPrediction,
+        //   "result_string": "$resultPrediction was detected",
+        //   "imageUrl": resultImageURL,
+        //   "percentage": resultPercentage,
+        //   'timestamp': Timestamp.now(),
+        // });
 
         // Display the spinner to indicate that its loading
         setState(() {
