@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:grouped_buttons/grouped_buttons.dart';
+import 'package:group_button/group_button.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
@@ -76,11 +76,14 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   Future<String> apiRequest() async {
     HttpClient httpClient = new HttpClient();
     HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+    print(request);
     request.headers.set('content-type', 'application/json');
     request.add(utf8.encode(json.encode(prognosisBody)));
     HttpClientResponse response = await request.close();
+    print(response);
     // todo - you should check the response.statusCode
     String reply = await response.transform(utf8.decoder).join();
+    print(reply);
     httpClient.close();
     return reply;
   }
@@ -225,11 +228,14 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                 Column(
                                   children: <Widget>[
 
-                                      RadioButtonGroup(
-
-                                          labels: skinCancerOptions,
-                                          onSelected: (String selected) => skinCancerUserAnswers[currentQuestion] = selected
-                                      ),
+                                    GroupButton(
+                                      selectedTextStyle: TextStyle(color: Colors.white),
+                                      selectedColor: Colors.redAccent,
+                                      spacing: 20,
+                                      onSelected: (index, isSelected) => skinCancerUserAnswers[currentQuestion] = skinCancerAnswers[currentQuestion][index],
+                                      buttons: List.from(skinCancerOptions),
+                                      selectedButtons: [],
+                                    )
                                   ],
                                 )
                               ]
@@ -243,6 +249,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
       if (count != 7)
 
         count ++;
+
     });
     setState(() {
       itemsData = listItems;
@@ -368,7 +375,6 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                   child: ListView.builder(
                       controller: controller,
                       itemCount: itemsData.length,
-                      physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
 
                         return itemsData[index];
