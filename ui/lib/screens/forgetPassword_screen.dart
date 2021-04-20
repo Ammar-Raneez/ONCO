@@ -20,21 +20,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool showSpinner = false;
 
-  // creating an alert
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
-
   // Performing forget password functionality using firebase for resetting password
   forgetPasswordFunctionality(BuildContext context) async {
     if (email == null || email == "") {

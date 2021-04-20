@@ -188,21 +188,6 @@ class _LoginScreenState extends State<LoginScreen> {
     _googleSignIn.signOut();
   }
 
-  // creating an alert
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;

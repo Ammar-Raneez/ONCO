@@ -26,21 +26,6 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   dynamic responseBody;
   final _firestore = FirebaseFirestore.instance;
 
-  // CREATING AN ALERT
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
-
   // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
     var selectedPicture =

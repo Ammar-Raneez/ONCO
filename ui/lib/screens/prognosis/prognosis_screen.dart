@@ -88,23 +88,6 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     return reply;
   }
 
-  /* This Method Creates a Custom AlertDialog with the AlertWidget we made
-   * and uses the showDialog method to show the Dialog on the main UI Thread
-   */
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
-
   void getPostsDataSkin() {
 
     for (String question in cancerPrognosisAttributes) {

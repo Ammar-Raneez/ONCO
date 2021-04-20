@@ -82,20 +82,6 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     });
   }
 
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
-
   void initialMessageSend() async {
     // initial message sent while bot loads to warm it up - this is cuz the initial
     // message after some time can take a while

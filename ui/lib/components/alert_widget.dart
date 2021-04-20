@@ -10,13 +10,25 @@ class AlertWidget extends StatelessWidget {
   final int status;
   ConfirmChange confirmChange;
   String buttonMessage = "OK";
+  Widget _content;
 
   // Constructor
-  AlertWidget({this.title, this.message, this.status});
+  AlertWidget(this.title, this.message, this.status) {
+
+    _content = Text(
+      message,
+      style: TextStyle(color: Colors.black54),
+    );
+  }
+
 
   AlertWidget.settings(this.title, this.message, this.status, this.confirmChange)
   {
     buttonMessage = "Update";
+    _content = Text(
+      message,
+      style: TextStyle(color: Colors.black54),
+    );
   }
 
   @override
@@ -88,10 +100,7 @@ class AlertWidget extends StatelessWidget {
               }
             },
 
-            child: Text(
-              buttonMessage,
-              style: TextStyle(color: Colors.white),
-            ),
+            child: _content,
           ),
         ),
       ],
@@ -103,11 +112,7 @@ createAlertDialog(BuildContext context, String title, String message, int status
   return showDialog(
     context: context,
     builder: (context) {
-      return AlertWidget(
-        title: title,
-        message: message,
-        status: status,
-      );
+      return AlertWidget(title, message, status);
     },
   );
 }

@@ -57,21 +57,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     });
   }
 
-  // creating an alert
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // This variable is used to handle the screen widgets when the keyboard is opened
