@@ -20,6 +20,8 @@ class _AddAppointmentsState extends State<AddAppointments> {
   String _notes = "";
   DateTime _appointmentDate;
   TimeOfDay _appointmentTime;
+  DateTime newDate;
+  TimeOfDay newTime;
 
   FocusNode _nameFocus;
   FocusNode _doseFocus;
@@ -191,7 +193,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                       onTap: () async {
 
                                         _appointmentDate = DateTime.now();
-                                        final DateTime newDate = await showDatePicker(
+                                        newDate = await showDatePicker(
                                           context: context,
                                           initialDate: _appointmentDate,
                                           firstDate: DateTime.now(),
@@ -226,7 +228,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
 
                                         _appointmentTime = TimeOfDay.fromDateTime(DateTime.now());
 
-                                        await showTimePicker(
+                                        newTime = await showTimePicker(
                                           context: context,
                                           initialTime: _appointmentTime,
                                         );
@@ -259,6 +261,11 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                       onTap: (){
                                         if(_appointmentTime != null && _appointmentDate != null) {
 
+                                          setState(() {
+                                            _appointmentTime = newTime;
+                                            _appointmentDate = newDate;
+                                          });
+
                                           Appointment newApplication = Appointment(
                                             doctorName: _doctorName,
                                             notes: _notes,
@@ -267,14 +274,24 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                           );
 
                                           AppointmentsFirebaseApi.createAppointment(newApplication);
-                                          
+
+                                          print(_appointmentTime);
+                                          print("NONO");
+                                          print(_appointmentDate);
+                                          print("LESGO");
+                                          print(new DateTime(
+                                              _appointmentDate.year, _appointmentDate.month, _appointmentDate.day,
+                                              _appointmentTime.hour, _appointmentTime.minute));
+
                                           // add an event to systems default calendar
                                           final Event event = Event(
                                             title: _doctorName,
                                             description: _notes,
                                             timeZone: _appointmentDate.timeZoneName,
                                             startDate: _appointmentDate,
-                                            endDate: _appointmentDate,
+                                            endDate: new DateTime(
+                                                _appointmentDate.year, _appointmentDate.month, _appointmentDate.day,
+                                                _appointmentTime.hour, _appointmentTime.minute),
                                           );
                                           Add2Calendar.addEvent2Cal(event);
                                         }
