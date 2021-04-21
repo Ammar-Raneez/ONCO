@@ -51,14 +51,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               },
             )
             .catchError((e) {
-          createAlertDialog(context, "Error", e.message, 404);
+          createAlertDialog(context, "Error", e._message, 404);
           // stops displaying the spinner once the result comes back
           setState(() {
             showSpinner = false;
           });
         });
       } catch (e) {
-        createAlertDialog(context, "Error", e.message, 404);
+        createAlertDialog(context, "Error", e._message, 404);
         // stops displaying the spinner once the result comes back
         setState(() {
           showSpinner = false;

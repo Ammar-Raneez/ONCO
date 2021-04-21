@@ -107,7 +107,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         }
       } catch (e) {
         // Displaying alert to the user
-        createAlertDialog(context, "Error", e.message, 404);
+        createAlertDialog(context, "Error", e._message, 404);
 
         setState(() {
           showSpinner = false;
