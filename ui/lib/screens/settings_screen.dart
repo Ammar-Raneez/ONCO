@@ -178,11 +178,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child:
                       Container(
                         decoration: ShapeDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFFC6E7EE), Color(0xFF637477)],
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight,
-                          ), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18),),
+                          color: Color(0xFFABD8E2),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18),),
                         ),
                         width: double.infinity,
                         height: 100,
@@ -268,8 +265,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 {
                                   _changeUserName(_userNameController.text);
 
-                                  print("ADADS " + _userNameController.text);
-
                                   Navigator.push(context, MaterialPageRoute(builder:
                                       (_) => CurrentScreen.settingsNavigatorPush(_userNameController.text, _email, _gender)));
                                 }
@@ -278,35 +273,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xFF637477)),
-                            ),
-                          ),
-                        ),
-                        TextFormField(
-                          style:TextStyle(
-                            fontFamily: 'Poppins-SemiBold',
-                            fontSize: 16.0,
-                            color: Color(0xFF565D5E),
-                          ),
-                          obscureText: true,
-                          cursorColor: Theme.of(context).cursorColor,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            labelStyle: TextStyle(
-                                color: Color(0xff00b3d9),
-                                fontSize: 15,
-                                fontFamily: 'Poppins-SemiBold'
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff00b3d9)),
-                            ),
-                            suffixIcon: IconButton(
-                              onPressed: () => {
-
-                              },
-                              icon: Icon(Icons.edit, color: Color(0xff00b3d9),),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xff00b3d9)),
                             ),
                           ),
                         ),
@@ -361,7 +327,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
                             child: Padding(
                                 padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                                const EdgeInsets.symmetric(vertical: 10),
                                 child: Container(
                                   child: Container(
                                       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
