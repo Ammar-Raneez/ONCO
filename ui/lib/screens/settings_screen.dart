@@ -193,7 +193,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               child: Icon(
                                 Icons.account_box,
                                 color: Colors.white,
-                                size: 50,
+                                size: 64,
                               ),
                               flex: 1,
                             ),
@@ -248,12 +248,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           decoration: InputDecoration(
                             labelText: 'Username',
                             labelStyle: TextStyle(
-                                color: Colors.blueAccent,
+                                color: Color(0xff00b3d9),
                                 fontSize: 15,
                                 fontFamily: 'Poppins-SemiBold'
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blueAccent),
+                              borderSide: BorderSide(color: Color(0xff00b3d9),),
                             ),
                             suffixIcon: IconButton(
                               onPressed: () async {
@@ -274,7 +274,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       (_) => CurrentScreen.settingsNavigatorPush(_userNameController.text, _email, _gender)));
                                 }
                               },
-                              icon: Icon(Icons.edit),
+                              icon: Icon(Icons.edit, color: Color(0xff00b3d9),),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xFF637477)),
@@ -292,21 +292,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           decoration: InputDecoration(
                             labelText: 'Password',
                             labelStyle: TextStyle(
-                                color: Colors.blueAccent,
+                                color: Color(0xff00b3d9),
                                 fontSize: 15,
                                 fontFamily: 'Poppins-SemiBold'
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blueAccent),
+                              borderSide: BorderSide(color: Color(0xff00b3d9)),
                             ),
                             suffixIcon: IconButton(
                               onPressed: () => {
 
                               },
-                              icon: Icon(Icons.edit),
+                              icon: Icon(Icons.edit, color: Color(0xff00b3d9),),
                             ),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFF637477)),
+                              borderSide: BorderSide(color: Color(0xff00b3d9)),
                             ),
                           ),
                         ),
@@ -321,12 +321,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           decoration: InputDecoration(
                             labelText: 'Email',
                             labelStyle: TextStyle(
-                                color: Colors.blueAccent,
+                                color: Color(0xff00b3d9),
                                 fontSize: 15,
                                 fontFamily: 'Poppins-SemiBold'
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blueAccent),
+                              borderSide: BorderSide(color: Color(0xff00b3d9)),
                             ),
                             suffixIcon: IconButton(
                               onPressed: () async {
@@ -347,7 +347,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       (_) => CurrentScreen.settingsNavigatorPush(_userName, _emailController.text, _gender)));
                                 }
                               },
-                              icon: Icon(Icons.edit),
+                              icon: Icon(Icons.edit, color: Color(0xff00b3d9),),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xFF637477)),
@@ -373,37 +373,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       ),
                                       child: Column(
                                           children: <Widget>[
-                                            RawMaterialButton(
-                                              onPressed: () {  },
-                                              fillColor: Colors.white,
-                                                  child: Padding(
-                                                    padding: EdgeInsets.all(10.0),
-                                                    child: Row(
-                                                      mainAxisSize: MainAxisSize.min,
-                                                      children: const <Widget>[
-                                                        Text(
-                                                          "Update Gender  ",
-                                                          style: TextStyle(
-                                                            fontFamily: 'Poppins-SemiBold',
-                                                            color: Colors.blueGrey,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
-                                                        Icon(
-                                                          Icons.update,
-                                                          color: Colors.blueGrey,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                              shape: const StadiumBorder(),
-                                            ),
-
                                             Container(
-                                              margin: EdgeInsets.only(top: 20),
+                                              margin: EdgeInsets.only(bottom: 12),
                                               child:GroupButton(
-                                                selectedTextStyle: TextStyle(color: Colors.white),
-                                                selectedColor: Colors.blueAccent,
+
+                                                unselectedTextStyle: TextStyle(color: Colors.blueGrey, fontFamily: "Poppins-SemiBold"),
+                                                selectedTextStyle: TextStyle(color: Colors.white, fontFamily: "Poppins-SemiBold"),
+                                                selectedColor: Color(0xff00b3d9),
                                                 spacing: 20,
                                                 onSelected: (index, isSelected) {
 
@@ -416,7 +392,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                                 buttons: ["Male", "Female"],
                                                 selectedButtons: ["${_gender[0].toUpperCase()}${_gender.substring(1)}"],
                                               )
-                                            )
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(bottom: 10),
+                                              child: RawMaterialButton(
+                                                onPressed: () {  },
+                                                fillColor: Colors.white,
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(10.0),
+                                                  child: Row(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: const <Widget>[
+                                                      Text(
+                                                        "Update Gender  ",
+                                                        style: TextStyle(
+                                                          fontFamily: 'Poppins-SemiBold',
+                                                          color: Colors.blueGrey,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                      Icon(
+                                                        Icons.update,
+                                                        color: Colors.blueGrey,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                shape: const StadiumBorder(),
+                                              ),
+                                            ),
                                           ]
                                       )
                                   ),
