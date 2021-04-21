@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/rounded_button.dart';
-import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationFirebaseAPI.dart';
-import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
+import 'package:ui/screens/Personal%20Manager/appointmentsManager/api/appointmentsFirebaseAPI.dart';
+import 'package:ui/screens/Personal%20Manager/appointmentsManager/models/appointment_model.dart';
 
 class AddAppointments extends StatefulWidget {
 
@@ -16,10 +15,9 @@ class AddAppointments extends StatefulWidget {
 class _AddAppointmentsState extends State<AddAppointments> {
 
   // Variables used within file
-  String _medicationId = "";
-  String _medicationName = "";
-  String _medicationDose = "";
-  String _medicationTime = "";
+  String _appointmentId = "";
+  String _doctorName = "";
+  String _notes = "";
   DateTime _appointmentDate;
   TimeOfDay _appointmentTime;
 
@@ -130,7 +128,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                               //Check if the field is not empty
                                               if(value !="") {
                                                 setState(() {
-                                                  _medicationName = value;
+                                                  _doctorName = value;
                                                 });
                                                 _doseFocus.requestFocus(); // to move focus to description node
                                               }
@@ -168,7 +166,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                             //Check if the field is not empty
                                             if(value !="") {
                                               setState(() {
-                                                _medicationDose = value;
+                                                _notes = value;
                                               });
                                               _timeFocus.requestFocus(); // to move focus to description node
                                             }
@@ -261,12 +259,14 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                       onTap: (){
                                         if(_appointmentTime != null && _appointmentDate != null) {
 
-                                          Medication _newMedication = Medication(
-                                            medicationName: _medicationName,
-                                            dosage: _medicationDose,
-                                            doseTime: _medicationTime,
+                                          Appointment newApplication = Appointment(
+                                            doctorName: _doctorName,
+                                            notes: _notes,
+                                            time: _appointmentTime.toString(),
+                                            date: _appointmentDate.toString(),
                                           );
-                                          MedicationFirebaseApi.createMedication(_newMedication);
+
+                                          AppointmentsFirebaseApi.createAppointment(newApplication);
                                         }
                                         Navigator.pop(context);
                                       },
