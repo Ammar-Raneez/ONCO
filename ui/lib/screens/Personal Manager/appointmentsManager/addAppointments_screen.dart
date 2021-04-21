@@ -15,7 +15,6 @@ class AddAppointments extends StatefulWidget {
 class _AddAppointmentsState extends State<AddAppointments> {
 
   // Variables used within file
-  String _appointmentId = "";
   String _doctorName = "";
   String _notes = "";
   DateTime _appointmentDate;

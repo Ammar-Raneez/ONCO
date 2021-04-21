@@ -9,7 +9,7 @@ class AppointmentsProvider extends ChangeNotifier {
 
   List<Appointment> get appointments => _appointments;
 
-  void setMedications(List<Appointment> appointment) =>
+  void setAppointments(List<Appointment> appointment) =>
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _appointments = appointment;
         notifyListeners();
