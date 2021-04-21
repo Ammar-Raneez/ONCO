@@ -69,68 +69,65 @@ class _AppointmentsManagerState extends State<AppointmentsManager> {
                       ],
                     ),
 
-                //     Expanded(
-                //         child: Padding(
-                //           padding: const EdgeInsets.symmetric(
-                //               horizontal: 17,
-                //               vertical: 0
-                //           ),
-                //           child: Container(
-                //             decoration: BoxDecoration(
-                //               borderRadius: BorderRadius.circular(18),
-                //               // color: Color(0xFF57994D)
-                //             ),
-                //             child: Padding(
-                //               padding: const EdgeInsets.symmetric(vertical: 8.0),
-                //               child: Container(
-                //
-                //                 child: StreamBuilder<List<Medication>>(
-                //
-                //                 ),
-                //
-                //               ),
-                //             ),
-                //           ),
-                //         )
-                //     ),
-                //
-                //   ],
-                // ),
-                // Positioned(
-                //   bottom: 17,
-                //   right: 17,
-                //   child: GestureDetector(
-                //     onTap: () {
-                //       Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) =>
-                //                 AddMedication() // Navigates to Task Page
-                //         ),
-                //       ).then((value) {
-                //         setState(() {}); // Setting and Refreshing State
-                //       });
-                //     },
-                //     child: Container(
-                //       width: 60,
-                //       height: 60,
-                //       decoration: BoxDecoration(
-                //           color: Color(0xFF1c374a),
-                //           borderRadius: BorderRadius.circular(18)
-                //       ),
-                //       child: Image(
-                //           image: AssetImage('images/add_icon.png') // Add icon
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 17,
+                              vertical: 0
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              // color: Color(0xFF57994D)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Container(
+
+
+                                ),
+
+                              ),
+                            ),
+                          ),
+                        ),
+
+                  ],
+                ),
+                    Positioned(
+                      bottom: 17,
+                      right: 17,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    AddAppointments() // Navigates to Task Page
+                            ),
+                          ).then((value) {
+                            setState(() {}); // Setting and Refreshing State
+                          });
+                        },
+                        child: Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                              color: Color(0xFF1c374a),
+                              borderRadius: BorderRadius.circular(18)
+                          ),
+                          child: Image(
+                              image: AssetImage('images/add_icon.png') // Add icon
+                          ),
+                        ),
+                      ),
+                    ),
               ],
             ),
-            ],
           ),
         ),
-      )
       );
+
     }
   }
 // }
