@@ -53,4 +53,4 @@ class MelanomaRiskAssessmentTool:
             'status': 200
         }
 
-        return json.dumps(results)
+        return results
