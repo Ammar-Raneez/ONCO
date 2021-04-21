@@ -17,5 +17,5 @@ class AppointmentsProvider extends ChangeNotifier {
 
   void addMedication(Appointment appointment) => AppointmentsFirebaseApi.createAppointment(appointment);
 
-  void removeMedication(Appointment appointment) => AppointmentsFirebaseApi.deleteAppointment(appointment);
+  void removeAppointment(Appointment appointment) => AppointmentsFirebaseApi.deleteAppointment(appointment);
 }
