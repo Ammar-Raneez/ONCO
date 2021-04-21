@@ -109,7 +109,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
       setState(() {
         username = userDocument["username"];
         email = userDocument["email"];
-        print(email);
+        print(email + " ARE U THE ISSUE");
         gender = userDocument["gender"];
       });
     } catch (e) {

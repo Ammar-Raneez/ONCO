@@ -7,6 +7,7 @@ import 'package:ui/screens/current_screen.dart';
 import 'package:group_button/group_button.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ui/services/UserDetails.dart';
 
 void main() => runApp(MyApp());
 
@@ -123,8 +124,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         "username": _userName
       };
 
-      print(updatedUser);
-
       final firestore = FirebaseFirestore.instance;
 
       // Updating the username Field of the Document of a Specific User in Collections user
@@ -140,6 +139,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               firestore.collection("users").doc(newEmail).set(updatedUser).then((value){
                 // deletes the old document
               firestore.collection("users").doc(_email).delete();
+              UserDetails.setUserData(newEmail, _userName, _gender);
               });
             }
           });
