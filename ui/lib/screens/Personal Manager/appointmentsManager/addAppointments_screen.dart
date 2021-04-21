@@ -58,7 +58,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                                "Add Medication",
+                                "Add Appointment",
                               style: TextStyle(
                                 fontFamily: 'Poppins-SemiBold',
                                 fontSize: 24,
@@ -223,12 +223,10 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                     GestureDetector(
                                       onTap: () async {
 
-                                        final DateTime newDate = await showDatePicker(
+                                        await showTimePicker(
                                           context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime.now(),
-                                          lastDate: DateTime(2022),
-                                          helpText: 'Select a date',);
+                                          initialTime: TimeOfDay.fromDateTime(DateTime.now()),
+                                        );
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
