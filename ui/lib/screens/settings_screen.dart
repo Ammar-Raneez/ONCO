@@ -48,9 +48,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   _SettingsScreenState(this._userName, this._email, this._gender)
   {
+    print(_email + " EMAIL");
     _userNameController.text = _userName;
     _emailController.text = _email;
-    print(_gender);
+    print(_gender + " GENDER");
   }
 
   void _changeUserName(String newDisplayName) async {
@@ -270,7 +271,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   print("ADADS " + _userNameController.text);
 
                                   Navigator.push(context, MaterialPageRoute(builder:
-                                      (_) => CurrentScreen.settingsNavigatorPushUsername(_userNameController.text)));
+                                      (_) => CurrentScreen.settingsNavigatorPush(_userNameController.text, _email, _gender)));
                                 }
                               },
                               icon: Icon(Icons.edit),
@@ -343,7 +344,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   print(_emailController.text + "    ASIOdjasiodasiodasioda");
 
                                   Navigator.push(context, MaterialPageRoute(builder:
-                                      (_) => CurrentScreen.settingsNavigatorPushEmail(_emailController.text)));
+                                      (_) => CurrentScreen.settingsNavigatorPush(_userName, _emailController.text, _gender)));
                                 }
                               },
                               icon: Icon(Icons.edit),

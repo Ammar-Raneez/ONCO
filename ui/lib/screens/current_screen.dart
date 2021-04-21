@@ -17,24 +17,16 @@ class CurrentScreen extends StatefulWidget {
   String updatedGender;
 
   CurrentScreen();
-  CurrentScreen.settingsNavigatorPushUsername(this.updatedUsername);
-  CurrentScreen.settingsNavigatorPushEmail(this.updatedEmail);
-  CurrentScreen.settingsNavigatorPushGender(this.updatedGender);
+  CurrentScreen.settingsNavigatorPush(this.updatedUsername, this.updatedEmail, this.updatedGender);
+
 
   @override
   _CurrentScreenState createState() {
 
-    if (updatedUsername != null)
+    if (updatedUsername != null && updatedEmail != null && updatedGender != null )
 
-      return _CurrentScreenState.settingsNavigatorPush(updatedUsername);
+      return _CurrentScreenState.settingsNavigatorPush(updatedUsername, updatedEmail, updatedGender);
 
-    else if (updatedEmail != null)
-
-      return _CurrentScreenState.settingsNavigatorPushEmail(updatedEmail);
-
-    else if (updatedGender != null)
-
-      return _CurrentScreenState.settingsNavigatorPushGender(updatedGender);
 
     else return _CurrentScreenState();
   }
@@ -51,22 +43,26 @@ class _CurrentScreenState extends State<CurrentScreen> {
   String gender;
   List<Widget> swipeScreen;
 
-
-
   _CurrentScreenState() {
 
     // getting the current user details on loading of the screen
     getCurrentUser();
 
-    if(username == null)
-    {
+    if (username == null)
+
       username = UserDetails.getUserData()["username"];
+
+    if (gender == null)
+
       gender = UserDetails.getUserData()["gender"];
+
+    if (email == null)
+
       email = UserDetails.getUserData()["email"];
-      swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
-    }
+
+    swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
   }
-  _CurrentScreenState.settingsNavigatorPush(this.username)
+  _CurrentScreenState.settingsNavigatorPush(this.username, this.email, this.gender)
   {
     swipeScreen = [HomeScreen.settingsNavigatorPush(username), MainCancerTypesScreen(), ChatBotScreen()];
   }
