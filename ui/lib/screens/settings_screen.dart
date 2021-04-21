@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
+import 'package:ui/components/rounded_button.dart';
 import 'package:ui/constants.dart';
 import 'package:ui/screens/current_screen.dart';
 import 'package:group_button/group_button.dart';
 import 'package:ui/screens/forgetPassword_screen.dart';
+import 'package:ui/screens/login_screen.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ui/services/UserDetails.dart';
@@ -460,7 +462,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   ),
                                 )
                             )
-                        )
+                        ),
+                        RoundedButton(
+
+                          onPressed: () {
+
+                            Navigator.pushNamed(context, LoginScreen.id);
+                          },
+                          colour: Colors.redAccent,
+                          title: 'Log Out',
+                        ),
                       ],
                     ),
                   )
