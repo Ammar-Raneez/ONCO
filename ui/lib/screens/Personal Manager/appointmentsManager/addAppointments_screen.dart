@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
+import 'package:ui/components/rounded_button.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationFirebaseAPI.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
 
@@ -184,6 +185,71 @@ class _AddAppointmentsState extends State<AddAppointments> {
 
                                     SizedBox(
                                       height: 11,
+                                    ),
+
+                                    GestureDetector(
+                                      onTap: () async {
+
+                                        final DateTime newDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime.now(),
+                                        lastDate: DateTime(2022),
+                                        helpText: 'Select a date',);
+                                        },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Color(0xff01CDFA),
+                                          borderRadius: BorderRadius.circular(18),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+                                          child: Center(
+                                            child: Text(
+                                              "Set Date",
+                                              style: TextStyle( // text style
+                                                fontSize: 15,
+                                                fontFamily: 'Poppins-Semibold',
+                                                color:Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 11,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () async {
+
+                                        final DateTime newDate = await showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime.now(),
+                                          lastDate: DateTime(2022),
+                                          helpText: 'Select a date',);
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Color(0xff01CDFA),
+                                          borderRadius: BorderRadius.circular(18),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+
+                                          child: Center(
+                                            child: Text(
+                                              "Set Time",
+                                              style: TextStyle( // text style
+                                                fontSize: 15,
+                                                fontFamily: 'Poppins-Semibold',
+                                                color:Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                     SizedBox(
                                       height: 10,
