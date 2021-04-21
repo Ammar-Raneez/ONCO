@@ -30,10 +30,9 @@ def construct_skin_output(predictions):
     return result_string, str(prediction), str(round(prediction_percentage, 2))
 
 def model_predict(image_array, model):
-    if model == "skin":
-        skin_model = tf.keras.models.load_model(SKIN_MODEL_PATH)
-        predictions = skinDiagModule.model_predict_skin(image_array, skin_model)
-        return construct_skin_output(predictions)
+    skin_model = tf.keras.models.load_model(SKIN_MODEL_PATH)
+    predictions = skinDiagModule.model_predict_skin(image_array, skin_model)
+    return construct_skin_output(predictions)
 
 def upload(image_array, which_model):        
     result_string, prediction, prediction_percentage = model_predict(image_array, which_model)
