@@ -150,6 +150,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
+  void _changeGender(String newGender) async {
+
+    var user = FirebaseAuth.instance.currentUser;
+    var loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
+
+    var userDocument = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.email != null ? user.email : loggedInUserGoogle)
+        .get();
+
+    var updatedUser = {
+      "gender": newGender,
+      "timestamp": userDocument.data()['timestamp'],
+      "userEmail": _email,
+      "username": _userName
+    };
+
+    // Updating the gender Field of the Document of a Specific User in Collections user
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.email != null ? user.email : loggedInUserGoogle)
+        .set(updatedUser);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -376,7 +400,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                                 selectedTextStyle: TextStyle(color: Colors.white, fontFamily: "Poppins-SemiBold"),
                                                 selectedColor: Color(0xff00b3d9),
                                                 spacing: 20,
-                                                onSelected: (index, isSelected) {
+                                                onSelected: (index, isSelected) async {
 
                                                   if (index == 0)
 
@@ -391,7 +415,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                             Padding(
                                               padding: const EdgeInsets.only(bottom: 10),
                                               child: RawMaterialButton(
-                                                onPressed: () {  },
+                                                onPressed: () async {
+
+                                                  ConfirmChangePrimitiveWrapper confirmChangePrimitiveWrapper = new ConfirmChangePrimitiveWrapper(confirmChange: false);
+
+                                                  await createConfirmDialog(context,
+                                                      "Confirmation", "Are you Sure you want to Change your Gender ?\n\n(Click outside the Alert Box to Cancel)",
+                                                      confirmChangePrimitiveWrapper);
+
+                                                  if (confirmChangePrimitiveWrapper.getConfirmChange())
+                                                  {
+                                                    _changeGender(newGender);
+
+                                                    Navigator.push(context, MaterialPageRoute(builder:
+                                                        (_) => CurrentScreen.settingsNavigatorPush(_userName, _email, newGender)));
+                                                  }
+                                                },
                                                 fillColor: Colors.white,
                                                 child: Padding(
                                                   padding: EdgeInsets.all(10.0),
