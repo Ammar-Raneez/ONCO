@@ -22,131 +22,133 @@ class _MedicationManagerState extends State<MedicationManager> {
 
     @override
     Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: CustomAppBar.arrow(context),
-        body: SafeArea(
-          child: Stack(
-            children: [
+      return SafeArea(
+        child: Scaffold(
+          appBar: CustomAppBar.arrow(context),
+          body: SafeArea(
+            child: Stack(
+              children: [
 
-              Column(
-                children: [
-                  Column(
-                    children: [
+                Column(
+                  children: [
+                    Column(
+                      children: [
 
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20,
-                          bottom: 8,
-                        ),
-                        child: Align(
-
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Medications",
-                            style: TextStyle(
-                              fontFamily: 'Poppins-SemiBold',
-                              fontSize: 24,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(
+                        Padding(
+                          padding: const EdgeInsets.only(
                             left: 20,
-                            right: 20
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Here you can manage your medications, click add a medication to create one and drag the medication to delete it",
-                            style: TextStyle(
+                            bottom: 8,
+                          ),
+                          child: Align(
+
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Medications",
+                              style: TextStyle(
                                 fontFamily: 'Poppins-SemiBold',
-                                fontSize: 13.0,
-                                color: Color(0xFF3C707B)
-                            ),
-                          ),
-                        ),
-                      ),
-
-                    ],
-                  ),
-
-                  Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 17,
-                            vertical: 0
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18),
-                            // color: Color(0xFF57994D)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Container(
-
-                              child: StreamBuilder<List<Medication>>(
-                                  stream: MedicationFirebaseApi.readMedication(),
-                                  builder: (context, snapshot) {
-                                    switch (snapshot.connectionState) {
-                                      case ConnectionState.waiting:
-                                        return Center(
-                                            child: CircularProgressIndicator());
-                                      default:
-                                        if (snapshot.hasError) {
-                                          return buildText(
-                                              'Something went wrong, Try later');
-                                        } else {
-                                          final medications = snapshot.data;
-
-                                          final provider = Provider.of<MedicationProvider>(context);
-                                          provider.setMedications(medications);
-
-                                          return MedicationListWidget();
-                                        }
-                                    }
-                                  }
+                                fontSize: 24,
                               ),
-
                             ),
                           ),
                         ),
-                      )
-                  ),
 
-                ],
-              ),
-              Positioned(
-                bottom: 17,
-                right: 17,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              AddMedication() // Navigates to Task Page
-                      ),
-                    ).then((value) {
-                      setState(() {}); // Setting and Refreshing State
-                    });
-                  },
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        color: Color(0xFF1c374a),
-                        borderRadius: BorderRadius.circular(18)
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20,
+                              right: 20
+                          ),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Here you can manage your medications, click add a medication to create one and drag the medication to delete it",
+                              style: TextStyle(
+                                  fontFamily: 'Poppins-SemiBold',
+                                  fontSize: 13.0,
+                                  color: Color(0xFF3C707B)
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      ],
                     ),
-                    child: Image(
-                        image: AssetImage('images/add_icon.png') // Add icon
+
+                    Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 17,
+                              vertical: 0
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              // color: Color(0xFF57994D)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Container(
+
+                                child: StreamBuilder<List<Medication>>(
+                                    stream: MedicationFirebaseApi.readMedication(),
+                                    builder: (context, snapshot) {
+                                      switch (snapshot.connectionState) {
+                                        case ConnectionState.waiting:
+                                          return Center(
+                                              child: CircularProgressIndicator());
+                                        default:
+                                          if (snapshot.hasError) {
+                                            return buildText(
+                                                'Something went wrong, Try later');
+                                          } else {
+                                            final medications = snapshot.data;
+
+                                            final provider = Provider.of<MedicationProvider>(context);
+                                            provider.setMedications(medications);
+
+                                            return MedicationListWidget();
+                                          }
+                                      }
+                                    }
+                                ),
+
+                              ),
+                            ),
+                          ),
+                        )
+                    ),
+
+                  ],
+                ),
+                Positioned(
+                  bottom: 17,
+                  right: 17,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                AddMedication() // Navigates to Task Page
+                        ),
+                      ).then((value) {
+                        setState(() {}); // Setting and Refreshing State
+                      });
+                    },
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: Color(0xFF1c374a),
+                          borderRadius: BorderRadius.circular(18)
+                      ),
+                      child: Image(
+                          image: AssetImage('images/add_icon.png') // Add icon
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

@@ -188,25 +188,10 @@ class _LoginScreenState extends State<LoginScreen> {
     _googleSignIn.signOut();
   }
 
-  // creating an alert
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;
-
+    final node = FocusScope.of(context);
     return SafeArea(
       child: WillPopScope(
         onWillPop: () async => false,
@@ -272,10 +257,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     TextField(
+                      cursorColor: Colors.lightBlueAccent,
+                      onEditingComplete: () => {
+                        node.nextFocus(),
+                        _emailAddressTextFieldController.text = email,
+                      }, // Move focus to next
                       controller: _emailAddressTextFieldController,
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (value) {
-                        email = value;
+                        email = value.trim();
                       },
                       decoration: kTextFieldDecoration.copyWith(
                         hintText: "Enter your email",
@@ -286,10 +276,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     TextField(
+                      cursorColor: Colors.lightBlueAccent,
+                      onEditingComplete: () => {
+                        node.nextFocus(),
+                        _passwordTextFieldController.text = password,
+                      }, // Move focus to next
                       controller: _passwordTextFieldController,
                       obscureText: !visiblePassword,
                       onChanged: (value) {
-                        password = value;
+                        password = value.trim();
                       },
                       decoration: kTextFieldDecoration.copyWith(
                         hintText: "Enter your password",

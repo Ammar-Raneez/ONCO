@@ -6,10 +6,10 @@ class Recipe {
   final String duration;
 
   const Recipe({
-     this.title,
-     this.imageUrl,
-     this.ingredients,
-     this.steps,
-     this.duration,
+    this.title,
+    this.imageUrl,
+    this.ingredients,
+    this.steps,
+    this.duration,
   });
 }

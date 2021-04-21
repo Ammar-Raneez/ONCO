@@ -1,15 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/screens/current_screen.dart';
+import 'package:ui/screens/settings_screen.dart';
 
 class AlertWidget extends StatelessWidget {
   // Variables
   final String title;
   final String message;
   final int status;
+  ConfirmChange confirmChange;
+  String buttonMessage = "OK";
 
   // Constructor
-  AlertWidget({this.title, this.message, this.status});
+  AlertWidget(this.title, this.message, this.status);
+
+
+
+  AlertWidget.settings(this.title, this.message, this.status, this.confirmChange)
+  {
+    buttonMessage = "Update";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,19 +79,60 @@ class AlertWidget extends StatelessWidget {
             onPressed: () {
               if (status == 200) {
                 Navigator.pop(context); // pop the alert
-                // Navigator.pop(context); // pop on login / register screen
-                Navigator.pushNamed(context, CurrentScreen.id);
-              } else {
+                Navigator.push(context, MaterialPageRoute(builder:
+                    (_) => CurrentScreen()));
+              }
+              else if (confirmChange != null) {
+                confirmChange.setConfirmChange(true);
+                Navigator.pop(context);
+              }
+              else {
                 Navigator.pop(context);
               }
             },
-            child: Text(
-              "OK",
-              style: TextStyle(color: Colors.white),
+
+            child:  Text(
+              buttonMessage,
+              style: TextStyle(color: Colors.black54),
             ),
           ),
         ),
       ],
     );
+  }
+}
+
+createAlertDialog(BuildContext context, String title, String message, int status) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertWidget(title, message, status);
+    },
+  );
+}
+
+createConfirmDialog(BuildContext context, String title, String message, ConfirmChange confirmChange) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return AlertWidget.settings(title, message, 0, confirmChange);
+    },
+  );
+}
+
+class ConfirmChange
+{
+  bool confirmChange;
+
+  ConfirmChange({this.confirmChange});
+
+  void setConfirmChange(bool confirmChange)
+  {
+    this.confirmChange = confirmChange;
+  }
+
+  bool getConfirmChange()
+  {
+    return confirmChange;
   }
 }

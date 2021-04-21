@@ -7,22 +7,53 @@ import 'package:ui/screens/chatbot_screen.dart';
 import 'package:ui/screens/home_screen.dart';
 import 'package:ui/screens/mainCancer_screen.dart';
 import 'package:ui/components/custom_app_bar.dart';
+import 'package:ui/services/UserDetails.dart';
 
 class CurrentScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
   static String id = "navigationBottom";
+  String updatedUsername;
+
+  CurrentScreen();
+  CurrentScreen.settingsNavigatorPush(this.updatedUsername);
 
   @override
-  _CurrentScreenState createState() => _CurrentScreenState();
-}
+  _CurrentScreenState createState() {
 
-var username = "";
+    if (updatedUsername != null)
+
+      return _CurrentScreenState.settingsNavigatorPush(updatedUsername);
+
+    else return _CurrentScreenState();
+  }
+}
 
 class _CurrentScreenState extends State<CurrentScreen> {
   // Page controller is used to control the flow of the main pages
   // (HOME, CANCER AND CHATBOT PAGE/SCREEN)
   int currentIndex = 0;
   final _auth = FirebaseAuth.instance;
+  final user = FirebaseAuth.instance.currentUser;
+  String username;
+  List<Widget> swipeScreen;
+
+  _CurrentScreenState() {
+
+    // getting the current user details on loading of the screen
+    getCurrentUser();
+    print(username);
+    if(username == null)
+    {
+      username = UserDetails.getUserData()["username"];
+      print(username);
+      swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
+    }
+  }
+  _CurrentScreenState.settingsNavigatorPush(this.username)
+  {
+    swipeScreen = [HomeScreen.settingsNavigatorPush(username), MainCancerTypesScreen(), ChatBotScreen()];
+  }
+
 
   // using this User instance we can access the details of the logged user using
   // the normal email/pass auth method not the (Google Auth)
@@ -30,23 +61,14 @@ class _CurrentScreenState extends State<CurrentScreen> {
   final _firestore = FirebaseFirestore.instance;
   var loggedInUserGoogle = "";
 
-  @override
-  void initState() {
-    super.initState();
-    // getting the current user details on loading of the screen
-    getCurrentUser();
-  }
-
   // Getting the current user details
   void getCurrentUser() async {
-    print(loggedInUser.email);
     try {
       // getting the current user (email/pass auth)
       final user = _auth.currentUser;
       if (user != null) {
         // This will run when the user logs in using the normal username and password way
         print("(Email-Password login) User is Present!");
-        print(user.email);
       } else {
         loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
       }
@@ -57,14 +79,13 @@ class _CurrentScreenState extends State<CurrentScreen> {
           .doc(loggedInUser.email != null ? loggedInUser.email : loggedInUserGoogle)
           .get();
 
+
       setState(() {
-        username = userDocument.data()['username'];
+        username = userDocument["username"];
       });
     } catch (e) {
       print(e);
     }
-    print(username);
-
   }
 
   // pageController for the navigation bar
@@ -113,7 +134,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
               });
             },
             // List of the Main Swiping Screens
-            children: [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()],
+            children: swipeScreen,
           ),
 
           // Bottom bar navigation

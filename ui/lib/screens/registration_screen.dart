@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:ui/services/UserDetails.dart';
+import 'package:flutter/services.dart';
 
 // Firebase related variables
 final _firestore = FirebaseFirestore.instance;
@@ -57,26 +58,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     });
   }
 
-  // creating an alert
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // This variable is used to handle the screen widgets when the keyboard is opened
     double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;
-
+    final node = FocusScope.of(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -139,12 +125,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                     ),
                   TextField(
+                    cursorColor: Colors.lightBlueAccent,
+                    onEditingComplete: () => {
+                      node.nextFocus(),
+                      _usernameController.text = username,
+                    }, // Move focus to next
                     controller: _usernameController,
+                    maxLength: 30,
                     onChanged: (value) {
-                      username = value;
+                      username = value.trim();
                     },
+                    keyboardType: TextInputType.name,
                     decoration: kTextFieldDecoration.copyWith(
-                      hintText: "Enter Username",
+                      hintText: "Enter Full Name",
                       prefixIcon: Icon(
                         Icons.person,
                         color: Colors.lightBlueAccent,
@@ -152,10 +145,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ),
                   TextField(
+                    cursorColor: Colors.lightBlueAccent,
+                    onEditingComplete: () => {
+                      node.nextFocus(),
+                      _emailAddressController.text = email,
+                    }, // Move focus to next
+                    maxLength: 30,
                     controller: _emailAddressController,
                     keyboardType: TextInputType.emailAddress,
                     onChanged: (value) {
-                      email = value;
+                      email = value.trim();
                     },
                     decoration: kTextFieldDecoration.copyWith(
                       hintText: "Enter Email Address",
@@ -166,10 +165,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                   ),
                   TextField(
+                    cursorColor: Colors.lightBlueAccent,
+                    maxLength: 20,
+                    onEditingComplete: () => {
+                      node.nextFocus(),
+                      _passwordTextFieldController.text = password,
+                    }, /// Move focus to next
                     controller: _passwordTextFieldController,
                     obscureText: !visiblePassword,
                     onChanged: (value) {
-                      password = value;
+                      password = value.trim();
                     },
                     decoration: kTextFieldDecoration.copyWith(
                       hintText: "Enter Password",

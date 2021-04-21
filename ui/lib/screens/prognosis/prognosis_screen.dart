@@ -88,23 +88,6 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     return reply;
   }
 
-  /* This Method Creates a Custom AlertDialog with the AlertWidget we made
-   * and uses the showDialog method to show the Dialog on the main UI Thread
-   */
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
-
   void getPostsDataSkin() {
 
     for (String question in cancerPrognosisAttributes) {
@@ -338,7 +321,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         appBar: CustomAppBar.arrow(context),
         body: Container(
           height: size.height,
@@ -557,13 +540,13 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                             "age": textFieldControllers[0].text,
                             "gender": "female",
-                            "sunburn": skinCancerUserAnswersIndices[1],
+                            "sunburn": 0,
                             "complexion": skinCancerUserAnswersIndices[0],
                             "big-moles": 0,
                             "small-moles": skinCancerUserAnswersIndices[2],
                             "freckling": skinCancerUserAnswersIndices[3],
                             "damage": 0,
-                            "tan": 0
+                            "tan": skinCancerUserAnswersIndices[1]
                           };
 
                         print(prognosisBody);
@@ -602,18 +585,19 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             fontFamily: 'Poppins-SemiBold',
                           ));
 
-                      print(url);
                       // Showing the Progress Dialog and Dismissing it After the API Request is Received
-                     progressDialog.show();
+                      progressDialog.show();
 
-                     String reply = await apiRequest();
+                      String reply = await apiRequest();
 
-                     print(reply);
                      progressDialog.hide();
 
-                      // checking if the response is not null and displaying the result
+                     // checking if the response is not null and displaying the result
                       if (reply != null) {
+
                         final body = json.decode(reply);
+
+                        print(body);
 
                         var prognosisResult;
 
@@ -623,7 +607,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                         else
                         {
-                          prognosisResult = body["result_string"];
+                          prognosisResult = body['"result_string"'];
                         }
 
                         /* For Breast Cancer Prognosis the Result is either 'R'

@@ -1,51 +1,49 @@
 import 'dart:ui';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
+import 'dart:async';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:ui/services/UserDetails.dart';
 
 class BreastCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
   static String id = "breastCancerDiagnosisScreen";
 
   @override
-  _BreastCancerDiagnosisState createState() => _BreastCancerDiagnosisState();
+  BreastCancerDiagnosisState createState() => BreastCancerDiagnosisState();
 }
 
-class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
+class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   //  VARIABLES
   File imageFile;
   Dio dio = new Dio();
   bool showSpinner = false;
-
-  // CREATING AN ALERT
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
+  bool showHighlightedImage = false;
+  dynamic responseBody;
+   final _firestore = FirebaseFirestore.instance;
 
   // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
+    setState(() {
+      showSpinner = true;
+    });
+
     var selectedPicture =
+        // ignore: deprecated_member_use
         await ImagePicker.pickImage(source: ImageSource.gallery);
 
     // NOTE that 'selectedPicture' may also contain 'null' value, suppose user opens gallery and exits
     // without selecting a picture.
     setState(() {
       imageFile = selectedPicture;
+      showHighlightedImage = false;
+      showSpinner = false;
     });
   }
 
@@ -73,21 +71,40 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         print(formData);
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
-        Response response = await dio.post(
-          "http://192.168.1.3/predict",
-          data: formData,
-        );
-        print(response);
+        await getResponse(formData);
+
+        // RESPONSE RESULT FROM THE BACKEND
+        // responseBody = response.data[0];
+        String resultPrediction = responseBody['predition'];
+        String resultImageURL = responseBody['regular_image_url'];
+        String resultPercentage = responseBody['prediction_percentage'];
+
+        // Adding the response data into the database for report creation purpose
+         _firestore
+             .collection("users")
+             .doc(UserDetails.getUserData()["email"])
+             .collection("imageDetections")
+             .add({
+           "cancerType": "Breast",
+           "reportType": "diagnosis",
+           "result": resultPrediction,
+           "result_string": "$resultPrediction was detected",
+           "imageUrl": resultImageURL,
+           "percentage": resultPercentage,
+           'timestamp': Timestamp.now(),
+         });
 
         // Display the spinner to indicate that its loading
         setState(() {
           showSpinner = false;
+          showHighlightedImage = true;
         });
 
         // checking if the response is not null and displaying the result
-        if (response != null) {
+        if (responseBody != null) {
           // Displaying the alert dialog
-          createAlertDialog(context, "Diagnosis", response.toString(), 201);
+          createAlertDialog(context, "Diagnosis",
+              "Detection result: " + resultPrediction, 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -104,15 +121,37 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
     }
   }
 
+  // Getting the detection response
+  getResponse(FormData formData) async {
+    Response response = await dio.post(
+      "https://breastmodelsdgp.azurewebsites.net/api/breastmodelsdgp?model=breast",
+      data: formData,
+    );
+    responseBody = response.data[0];
+    print(responseBody);
+  }
+
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
   _openCamera() async {
+    setState(() {
+      showSpinner = true;
+    });
+
     var selectedPicture =
         await ImagePicker.pickImage(source: ImageSource.camera);
 
-    // NOTE that selectedPicture may also contain null value, suppose user opens the camera and exits
-    // without capturing a picture.
     setState(() {
       imageFile = selectedPicture;
+      showHighlightedImage = false;
+    });
+
+    // This delay is for building the image when clicked from camera cuz it takes some time to build
+    Future.delayed(const Duration(milliseconds: 5000), () {
+      // NOTE that selectedPicture may also contain null value, suppose user opens the camera and exits
+      // without capturing a picture.
+      setState(() {
+        showSpinner = false;
+      });
     });
   }
 
@@ -129,17 +168,15 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // HEADER WITH ONCO LOGO AND ICON BUTTON
                 // THE REST OF THE BODY CONTENT OF THE SCREEN
                 Expanded(
                   flex: 6,
                   child: Material(
-                    // PADDING WIDGET
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // LUNG CANCER DIAGNOSIS TEXT CONTENT
+                        // BREAST CANCER DIAGNOSIS TEXT CONTENT
                         Container(
                           alignment: Alignment.topLeft,
                           padding: EdgeInsets.only(left: 20),
@@ -157,25 +194,37 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                           padding: EdgeInsets.only(left: 20),
                           child: Text(
                             "Diagnosis",
-                            style:TextStyle(
+                            style: TextStyle(
                               fontFamily: 'Poppins-SemiBold',
                               fontSize: 27.0,
                               color: Color(0xFF565D5E),
                             ),
                           ),
                         ),
+
                         // DISPLAY THE UPLOADED IMAGE OR CAPTURED IMAGE BY THE USER
                         Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: imageFile == null
-                                ? Image.asset('images/uploadImageGrey1.png', scale: 15,)
-                                : Image.file(
-                                    imageFile,
-                                    width: 500,
-                                    height: 500,
+                          child: showHighlightedImage == false
+                              ? Padding(
+                                  padding: const EdgeInsets.all(22),
+                                  child: imageFile == null
+                                      ? Image.asset(
+                                          'images/uploadImageGrey1.png',
+                                          scale: 13,
+                                        )
+                                      : Image.file(
+                                          imageFile,
+                                          width: 500,
+                                          height: 500,
+                                        ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: FadeInImage.assetNetwork(
+                                    placeholder: 'images/loading.gif',
+                                    image: responseBody["regular_image_url"],
                                   ),
-                          ),
+                                ),
                         ),
 
                         // CAPTURE(FROM CAMERA) AND UPLOAD(FROM GALLERY) BUTTON
@@ -183,7 +232,7 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
-                              onTap:(){
+                              onTap: () {
                                 _openCamera();
                               },
                               child: Container(
@@ -193,17 +242,15 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 3,
                                       blurRadius: 7,
-                                      offset: Offset(0, 3), // changes position of shadow
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 50,
-                                    vertical: 15
-                                ),
-
+                                    horizontal: 50, vertical: 15),
                                 child: Icon(
                                   Icons.camera_alt_rounded,
                                   color: Colors.white,
@@ -214,7 +261,7 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                               width: 20.0,
                             ),
                             GestureDetector(
-                              onTap:(){
+                              onTap: () {
                                 _openGallery();
                               },
                               child: Container(
@@ -224,17 +271,15 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 3,
                                       blurRadius: 7,
-                                      offset: Offset(0, 3), // changes position of shadow
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 50,
-                                    vertical: 15
-                                ),
-
+                                    horizontal: 50, vertical: 15),
                                 child: Icon(
                                   Icons.photo,
                                   color: Colors.white,
@@ -255,7 +300,8 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                                 topLeft: Radius.circular(20.0)),
                           ),
                           width: double.infinity,
-                          padding: const EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
+                          padding: const EdgeInsets.only(
+                              top: 20, bottom: 20, left: 50, right: 50),
                           child: RawMaterialButton(
                             fillColor: Colors.black54,
                             child: Padding(
@@ -273,14 +319,15 @@ class _BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Poppins-Regular',
-                                        color: Colors.white
-                                    ),
+                                        color: Colors.white),
                                   ),
                                 ],
                               ),
                             ),
                             shape: const StadiumBorder(),
-                            onPressed: () {_detect();},
+                            onPressed: () {
+                              _detect();
+                            },
                           ),
                         ),
                       ],

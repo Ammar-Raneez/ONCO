@@ -20,21 +20,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool showSpinner = false;
 
-  // creating an alert
-  createAlertDialog(
-      BuildContext context, String title, String message, int status) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return AlertWidget(
-          title: title,
-          message: message,
-          status: status,
-        );
-      },
-    );
-  }
-
   // Performing forget password functionality using firebase for resetting password
   forgetPasswordFunctionality(BuildContext context) async {
     if (email == null || email == "") {
@@ -85,6 +70,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     double keyboardOpenVisibility = MediaQuery.of(context).viewInsets.bottom;
+    final node = FocusScope.of(context);
 
     return SafeArea(
       child: Scaffold(
@@ -148,6 +134,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       ),
                     ),
                   TextField(
+                    cursorColor: Colors.lightBlueAccent,
+                    onEditingComplete: () => {
+                      node.nextFocus(),
+                      _emailAddressTextFieldController.text = email,
+                    }, // Move focus to next
                     controller: _emailAddressTextFieldController,
                     keyboardType: TextInputType.emailAddress,
                     onChanged: (value) {

@@ -1,100 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
-
-class AlertWidget extends StatelessWidget {
-  // Variables
-  final String title;
-  final String message;
-  final int status;
-
-  // Constructor
-  AlertWidget({this.title, this.message, this.status});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: new RoundedRectangleBorder(
-        borderRadius: new BorderRadius.circular(20.0),
-      ),
-      title: Container(
-        decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(width: 1.0, color: Colors.grey),
-          ),
-        ),
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.notification_important,
-                  color: Colors.redAccent,
-                  size: 25,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  title,
-                  style: TextStyle(
-                      color: Colors.black54,
-                      fontFamily: 'Poppins-Regular',
-                      fontSize: 19,
-                      fontWeight: FontWeight.w900),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            )
-          ],
-        ),
-      ),
-      content: Text(
-        message,
-        style: TextStyle(color: Colors.black54),
-      ),
-      elevation: 2.0,
-      actions: [
-        Container(
-          margin: const EdgeInsets.only(right: 10.0, bottom: 5.0),
-          child: MaterialButton(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-            color: Color(0xff01CDFA),
-            shape: new RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(10.0),
-            ),
-            onPressed: () {
-
-            },
-            child: Text(
-              "Change",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-
-// creating an alert
-createAlertDialog(
-    BuildContext context, String title, String message, int status) {
-  return showDialog(
-    context: context,
-    builder: (context) {
-      return AlertWidget(
-        title: title,
-        message: message,
-        status: status,
-      );
-    },
-  );
-}
+import 'package:ui/screens/current_screen.dart';
+import 'package:ui/screens/home_screen.dart';
+import 'package:ui/services/GoogleUserSignInDetails.dart';
+import 'package:ui/services/UserDetails.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(MyApp());
 
@@ -119,32 +31,71 @@ class SettingsScreen extends StatefulWidget {
   }
 
   @override
-  _SettingsScreenState createState() => _SettingsScreenState(userName, email);
+  SettingsScreenState createState() => SettingsScreenState(userName, email);
 
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class SettingsScreenState extends State<SettingsScreen> {
 
   String _userName;
   String _email;
-  TextEditingController _userNameController = new TextEditingController();
-  TextEditingController _emailController = new TextEditingController();
-  TextEditingController _passwordController = new TextEditingController();
+  final _userNameController = TextEditingController();
+  final _emailController = new TextEditingController();
+  final _passwordController = new TextEditingController();
+  final user = FirebaseAuth.instance.currentUser;
 
-  _SettingsScreenState(String userName, String email)
+  SettingsScreenState(String userName, String email)
   {
     this._userName = userName;
     this._email = email;
+    _userNameController.text = userName;
+    _emailController.text = email;
+    
+  }
+
+  void _changeUserName(String newDisplayName) async {
+
+    var user = FirebaseAuth.instance.currentUser;
+    var loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
+
+    // Updating the Username in Firebase Authentication
+    user.updateProfile(displayName: newDisplayName).then((value){
+
+    }).catchError((e){
+
+      createAlertDialog(context, "Error", "There was an error updating profile", 404);
+      return;
+    });
+
+    var userDocument = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.email != null ? user.email : loggedInUserGoogle)
+        .get();
+
+    var updatedUser = {
+      "gender": "male",
+      "timestamp": userDocument.data()['timestamp'],
+      "userEmail": _email,
+      "username": newDisplayName
+    };
+
+
+    // Updating the username Field of the Document of a Specific User in Collections user
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user.email != null ? user.email : loggedInUserGoogle)
+        .set(updatedUser);
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: true,
           appBar: CustomAppBar.arrow(context),
-          body: Container(
-            child: Center(
+          body: ListView(
+            children: [
+              Center(
               child: Column(
                 children: [
                   Container(
@@ -160,63 +111,63 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child:
-                    Container(
-                      decoration: ShapeDecoration(
-                        gradient: LinearGradient(
-                          colors: [Color(0xFFC6E7EE), Color(0xFF637477)],
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                        ), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18),),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
-                      padding: EdgeInsets.only(left: 25),
-                      width: 322.0,
-                      height: 150,
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
+                      child:
+                      Container(
+                        decoration: ShapeDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xFFC6E7EE), Color(0xFF637477)],
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                          ), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18),),
+                        ),
+                        padding: EdgeInsets.all(5),
+                        width: 322.0,
+                        height: 150,
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
 
-                            child: Icon(
-                              Icons.account_box,
-                              color: Colors.white,
-                              size: 64,
+                              child: Icon(
+                                Icons.account_box,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                              flex: 1,
                             ),
-                            flex: 1,
-                          ),
-                          Expanded(
-                            child:  Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
+                            Expanded(
+                              child:  Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
                                   Text(
                                     _userName,
                                     style: TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
-                                      fontSize: 20.0,
+                                      fontSize: 16.0,
                                       color: Color(0xFFE1F6FD),
                                     ),
-                                ),
-                                 Text(
+                                  ),
+                                  Text(
                                     _email,
                                     style:TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
-                                      fontSize: 16.0,
+                                      fontSize: 14.0,
                                       color: Color(0xFF565D5E),
                                     ),
                                   ),
-                              ],
+                                ],
+                              ),
+                              flex: 2,
                             ),
-                            flex: 2,
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
                       )
-                    ),
+                  ),
                   Container(
-                    margin: EdgeInsets.only(left: 20, bottom: 20, top: 20),
+                    margin: EdgeInsets.all(20),
                     child: Column(
                       children: [
                         TextFormField(
@@ -233,11 +184,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: Color(0xFF565D5E),
                           ),
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: _userName,
                           decoration: InputDecoration(
+                            labelText: 'Username',
+                            labelStyle: TextStyle(
+                                color: Colors.blueAccent,
+                                fontSize: 15,
+                                fontFamily: 'Poppins-SemiBold'
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blueAccent),
+                            ),
                             suffixIcon: IconButton(
-                              onPressed: () {
+                              onPressed: () async {
 
+                                ConfirmChange confirmChange = new ConfirmChange(confirmChange: false);
+
+                                await createConfirmDialog(context,
+                                    "Confirmation", "Are you Sure you want to Change your Username ?\n\n(Click outside the Alert Box to Cancel)",
+                                    confirmChange);
+
+                                if (confirmChange.getConfirmChange())
+                                {
+                                  _changeUserName(_userNameController.text);
+
+                                  Navigator.push(context, MaterialPageRoute(builder:
+                                      (_) => CurrentScreen.settingsNavigatorPush(_userNameController.text)));
+                                }
                               },
                               icon: Icon(Icons.edit),
                             ),
@@ -247,7 +219,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                         TextFormField(
-                          controller: _passwordController,
                           style:TextStyle(
                             fontFamily: 'Poppins-SemiBold',
                             fontSize: 16.0,
@@ -255,8 +226,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                           obscureText: true,
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: 'Password',
                           decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle: TextStyle(
+                                color: Colors.blueAccent,
+                                fontSize: 15,
+                                fontFamily: 'Poppins-SemiBold'
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blueAccent),
+                            ),
                             suffixIcon: IconButton(
                               onPressed: () => {
 
@@ -269,7 +248,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                         TextFormField(
-                          controller: _emailController,
                           style:TextStyle(
                             fontFamily: 'Poppins-SemiBold',
                             fontSize: 16.0,
@@ -278,6 +256,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           cursorColor: Theme.of(context).cursorColor,
                           initialValue: _email,
                           decoration: InputDecoration(
+                            labelText: 'Email',
+                            labelStyle: TextStyle(
+                                color: Colors.blueAccent,
+                                fontSize: 15,
+                                fontFamily: 'Poppins-SemiBold'
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blueAccent),
+                            ),
                             suffixIcon: Icon(
                               Icons.edit,
                             ),
@@ -292,6 +279,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
             ),
+            ]
           ),
         )
     );
