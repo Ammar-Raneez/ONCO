@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:group_button/group_button.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
+import 'package:ui/constants.dart';
 import 'package:ui/screens/current_screen.dart';
 import 'package:group_button/group_button.dart';
+import 'package:ui/screens/forgetPassword_screen.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ui/services/UserDetails.dart';
@@ -45,6 +47,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final _emailController = new TextEditingController();
   final _passwordController = new TextEditingController();
   final user = FirebaseAuth.instance.currentUser;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   _SettingsScreenState(this._userName, this._email, this._gender)
   {
@@ -151,6 +154,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          key: _scaffoldKey,
           resizeToAvoidBottomInset: true,
           appBar: CustomAppBar.arrow(context),
           body: ListView(
@@ -205,7 +209,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     style: TextStyle(
                                       fontFamily: 'Poppins-SemiBold',
                                       fontSize: 16.0,
-                                      color: Color(0xFFE1F6FD),
+                                      color: Color(0xFF008B99),
                                     ),
                                   ),
                                   Text(
@@ -214,6 +218,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       fontFamily: 'Poppins-SemiBold',
                                       fontSize: 14.0,
                                       color: Color(0xFF565D5E),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+
+                                      FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
+                                      _scaffoldKey.currentState.showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Reset Password Email has been Sent !',
+                                              style: TextStyle(
+                                                color: Colors.black54,
+                                                fontFamily: "Poppins-SemiBold"
+                                              ),
+                                            ),
+                                            backgroundColor: Color(0xFFABD8E2),
+                                            duration: Duration(seconds: 2),
+                                      ));
+
+                                    },
+                                    child: Text(
+                                      "Reset Password?",
+                                      style: kTextStyle.copyWith(
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ),
                                 ],
