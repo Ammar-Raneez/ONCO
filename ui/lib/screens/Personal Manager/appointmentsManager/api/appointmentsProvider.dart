@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationFirebaseAPI.dart';
-import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
+import 'package:ui/screens/Personal%20Manager/appointmentsManager/api/appointmentsFirebaseAPI.dart';
+import 'package:ui/screens/Personal%20Manager/appointmentsManager/models/appointment_model.dart';
 
 class AppointmentsProvider extends ChangeNotifier {
-  List<Medication> _medications = [];
-  List<Medication> get medications => _medications.toList();
 
-  void setMedications(List<Medication> medications) =>
+  List<Appointment> _appointments = [];
+
+
+  List<Appointment> get appointments => _appointments;
+
+  void setMedications(List<Appointment> appointment) =>
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _medications = medications;
+        _appointments = appointment;
         notifyListeners();
       });
 
-  void addMedication(Medication medication) => MedicationFirebaseApi.createMedication(medication);
+  void addMedication(Appointment appointment) => AppointmentsFirebaseApi.createAppointment(appointment);
 
-  void removeMedication(Medication medication) => MedicationFirebaseApi.deleteMedication(medication);
-
-  void updateMedication(Medication medication, String medicationName, String dosage, String doseTime) {
-    medication.medicationName = medicationName;
-    medication.dosage = dosage;
-    medication.doseTime = doseTime;
-    MedicationFirebaseApi.updateMedication(medication);
-  }
+  void removeMedication(Appointment appointment) => AppointmentsFirebaseApi.deleteAppointment(appointment);
 }

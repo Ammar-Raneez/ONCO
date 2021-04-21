@@ -33,7 +33,7 @@ class AppointmentsFirebaseApi {
       .transform(Utils.transformer(Appointment.fromJson)
   );
 
-  static Future deleteMedication(Appointment appointment) async {
+  static Future deleteAppointment(Appointment appointment) async {
     final docAppointment = FirebaseFirestore.instance
         .collection('appointment')
         .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
