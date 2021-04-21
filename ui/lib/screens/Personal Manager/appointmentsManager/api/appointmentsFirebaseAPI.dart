@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
+import 'package:ui/screens/Personal%20Manager/appointmentsManager/models/appointment_model.dart';
 import 'package:ui/screens/Personal%20Manager/utils.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
 
@@ -13,43 +13,33 @@ var loggedInUserGoogle =  GoogleUserSignInDetails.googleSignInUserEmail;
 
 class AppointmentsFirebaseApi {
 
-  static Future<String> createMedication(Medication medication) async {
-    final docMedication = _firestore
-        .collection("medication")
+  static Future<String> createAppointment(Appointment appointment) async {
+    final docAppointment = _firestore
+        .collection("appointment")
         .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
-        .collection("medications")
+        .collection("appointments")
         .doc();
-    medication.id = docMedication.id;
-    await docMedication.set(medication.toJson());
-    return docMedication.id;
+
+    appointment.id = docAppointment.id;
+    await docAppointment.set(appointment.toJson());
+    return docAppointment.id;
   }
 
-  static Stream<List<Medication>> readMedication() => FirebaseFirestore.instance
-      .collection("medication")
+  static Stream<List<Appointment>> readAppointment() => FirebaseFirestore.instance
+      .collection("appointment")
       .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
-      .collection("medications")
+      .collection("appointments")
       .snapshots()
-      .transform(Utils.transformer(Medication.fromJson)
+      .transform(Utils.transformer(Appointment.fromJson)
   );
 
-
-  static Future updateMedication(Medication medication) async {
-    final docMedication = FirebaseFirestore.instance
-        .collection('medication')
+  static Future deleteMedication(Appointment appointment) async {
+    final docAppointment = FirebaseFirestore.instance
+        .collection('appointment')
         .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
-        .collection("medications")
-        .doc(medication.id);
+        .collection("appointments")
+        .doc(appointment.id);
 
-    await docMedication.update(medication.toJson());
-  }
-
-  static Future deleteMedication(Medication medication) async {
-    final docMedication = FirebaseFirestore.instance
-        .collection('medication')
-        .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
-        .collection("medications")
-        .doc(medication.id);
-
-    await docMedication.delete();
+    await docAppointment.delete();
   }
 }
