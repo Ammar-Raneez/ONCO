@@ -4,9 +4,8 @@ import 'package:group_button/group_button.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/screens/current_screen.dart';
-import 'package:ui/screens/home_screen.dart';
+import 'package:group_button/group_button.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
-import 'package:ui/services/UserDetails.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(MyApp());
@@ -40,6 +39,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   String _userName;
   String _email;
   String _gender;
+  String newGender;
   final _userNameController = TextEditingController();
   final _emailController = new TextEditingController();
   final _passwordController = new TextEditingController();
@@ -276,6 +276,71 @@ class SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                         ),
+
+                        Container(
+                          margin: EdgeInsets.only(top: 20),
+                            // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
+                            child: Padding(
+                                padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                                child: Container(
+                                  child: Container(
+                                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                                      margin: EdgeInsets.only(top: 0, bottom: 10),
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(18),
+                                        color: Color(0xFFABD8E2),
+                                      ),
+                                      child: Column(
+                                          children: <Widget>[
+                                            RawMaterialButton(
+                                              onPressed: () {  },
+                                              fillColor: Colors.white,
+                                                  child: Padding(
+                                                    padding: EdgeInsets.all(10.0),
+                                                    child: Row(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: const <Widget>[
+                                                        Text(
+                                                          "Update Gender",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Poppins-SemiBold',
+                                                            color: Colors.blueGrey,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                              shape: const StadiumBorder(),
+                                            ),
+
+                                            Container(
+                                              margin: EdgeInsets.only(top: 20),
+                                              child:GroupButton(
+                                                selectedTextStyle: TextStyle(color: Colors.white),
+                                                selectedColor: Colors.blueAccent,
+                                                spacing: 20,
+                                                onSelected: (index, isSelected) {
+
+                                                  if (index == 0)
+
+                                                    newGender = "male";
+
+                                                  else newGender = "female";
+                                                },
+                                                buttons: ["Male", "Female"],
+                                                selectedButtons: ["${_gender[0].toUpperCase()}${_gender.substring(1)}"],
+                                              )
+                                            )
+                                          ]
+                                      )
+                                  ),
+                                )
+                            )
+                        )
                       ],
                     ),
                   )
