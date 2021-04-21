@@ -86,13 +86,13 @@ class BreastDiagModule:# Predict using the model
         temp_io_bytes = io.BytesIO()
         superimposed_img.save(temp_io_bytes, format="jpeg")
 
-        # try:
-        blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=breastmodelsdgp;AccountKey=Z4feRa5pxvpxsD7MUwatkHD/977VCcUiT9g5OmqFVzp1nqmYER0wHwpLQfHxIAEF3pyntsTuB2ZWKY3YRQ8ojw==", container_name="superimposed-images", blob_name=filename)
-        cnt_settings = ContentSettings(content_type="image/jpeg")
+        try:
+            blob = BlobClient.from_connection_string(conn_str= "DefaultEndpointsProtocol=https;AccountName=breastmodelsdgp;AccountKey=Z4feRa5pxvpxsD7MUwatkHD/977VCcUiT9g5OmqFVzp1nqmYER0wHwpLQfHxIAEF3pyntsTuB2ZWKY3YRQ8ojw==", container_name="superimposed-images", blob_name=filename)
+            cnt_settings = ContentSettings(content_type="image/jpeg")
 
-        blob.upload_blob(temp_io_bytes.getvalue(), blob_type="BlockBlob", content_settings=cnt_settings)
-        # except:     
-        #     print("same image uploaded")
+            blob.upload_blob(temp_io_bytes.getvalue(), blob_type="BlockBlob", content_settings=cnt_settings)
+        except:     
+            print("same image uploaded")
 
         # getting download image URL
         image_url = f"https://breastmodelsdgp.blob.core.windows.net/superimposed-images/{filename}"
