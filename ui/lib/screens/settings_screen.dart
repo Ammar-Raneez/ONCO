@@ -30,11 +30,11 @@ class SettingsScreen extends StatefulWidget {
   SettingsScreen(this.userName, this.email, this.gender);
 
   @override
-  SettingsScreenState createState() => SettingsScreenState(userName, email, gender);
+  _SettingsScreenState createState() => _SettingsScreenState(userName, email, gender);
 
 }
 
-class SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends State<SettingsScreen> {
 
   String _userName;
   String _email;
@@ -45,13 +45,10 @@ class SettingsScreenState extends State<SettingsScreen> {
   final _passwordController = new TextEditingController();
   final user = FirebaseAuth.instance.currentUser;
 
-  SettingsScreenState(String userName, String email, String gender)
+  _SettingsScreenState(this._userName, this._email, this._gender)
   {
-    this._userName = userName;
-    this._email = email;
-    this._gender = gender;
-    _userNameController.text = userName;
-    _emailController.text = email;
+    _userNameController.text = _userName;
+    _emailController.text = _email;
     print(_gender);
   }
 
@@ -59,6 +56,7 @@ class SettingsScreenState extends State<SettingsScreen> {
 
     var user = FirebaseAuth.instance.currentUser;
     var loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
+    var error = false;
 
     // Updating the Username in Firebase Authentication
     user.updateProfile(displayName: newDisplayName).then((value){
@@ -66,27 +64,86 @@ class SettingsScreenState extends State<SettingsScreen> {
     }).catchError((e){
 
       createAlertDialog(context, "Error", "There was an error updating profile", 404);
-      return;
+      error = true;
     });
 
-    var userDocument = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(user.email != null ? user.email : loggedInUserGoogle)
-        .get();
+    if (error != true) {
 
-    var updatedUser = {
-      "gender": "male",
-      "timestamp": userDocument.data()['timestamp'],
-      "userEmail": _email,
-      "username": newDisplayName
-    };
+      print("im here");
+      var userDocument = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user.email != null ? user.email : loggedInUserGoogle)
+          .get();
+
+      var updatedUser = {
+        "gender": "male",
+        "timestamp": userDocument.data()['timestamp'],
+        "userEmail": _email,
+        "username": newDisplayName
+      };
 
 
-    // Updating the username Field of the Document of a Specific User in Collections user
-    FirebaseFirestore.instance
-        .collection("users")
-        .doc(user.email != null ? user.email : loggedInUserGoogle)
-        .set(updatedUser);
+      // Updating the username Field of the Document of a Specific User in Collections user
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(user.email != null ? user.email : loggedInUserGoogle)
+          .set(updatedUser);
+    }
+  }
+
+  void _changeEmail(String newEmail, String password) async {
+
+    var user = FirebaseAuth.instance.currentUser;
+    var loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
+    var error = false;
+
+    // Updating the Username in Firebase Authentication
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: _email, password: password)
+        .then((userCredential) {
+
+          userCredential.user.updateEmail(newEmail);
+        }).catchError((e) {
+
+          createAlertDialog(context, "Error", "There Password that you've Entered is Wrong", 404);
+          error = true;
+        });
+
+    if (! error) {
+
+      var userDocument = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user.email != null ? user.email : loggedInUserGoogle)
+          .get();
+
+      var updatedUser = {
+        "gender": "male",
+        "timestamp": userDocument.data()['timestamp'],
+        "userEmail": newEmail,
+        "username": _userName
+      };
+
+      print(updatedUser);
+
+      final firestore = FirebaseFirestore.instance;
+
+      // Updating the username Field of the Document of a Specific User in Collections user
+      firestore
+          .collection("users")
+          .doc(user.email != null ? user.email : loggedInUserGoogle)
+          .get()
+          .then((doc) {
+
+            if (doc.exists) {
+
+              // saves the data to 'name'
+              firestore.collection("users").doc(newEmail).set(updatedUser).then((value){
+                // deletes the old document
+              firestore.collection("users").doc(_email).delete();
+              });
+            }
+          });
+    }
   }
 
   @override
@@ -200,18 +257,20 @@ class SettingsScreenState extends State<SettingsScreen> {
                             suffixIcon: IconButton(
                               onPressed: () async {
 
-                                ConfirmChange confirmChange = new ConfirmChange(confirmChange: false);
+                                ConfirmChangePrimitiveWrapper confirmChangePrimitiveWrapper = new ConfirmChangePrimitiveWrapper(confirmChange: false);
 
                                 await createConfirmDialog(context,
                                     "Confirmation", "Are you Sure you want to Change your Username ?\n\n(Click outside the Alert Box to Cancel)",
-                                    confirmChange);
+                                    confirmChangePrimitiveWrapper);
 
-                                if (confirmChange.getConfirmChange())
+                                if (confirmChangePrimitiveWrapper.getConfirmChange())
                                 {
                                   _changeUserName(_userNameController.text);
 
+                                  print("ADADS " + _userNameController.text);
+
                                   Navigator.push(context, MaterialPageRoute(builder:
-                                      (_) => CurrentScreen.settingsNavigatorPush(_userNameController.text)));
+                                      (_) => CurrentScreen.settingsNavigatorPushUsername(_userNameController.text)));
                                 }
                               },
                               icon: Icon(Icons.edit),
@@ -251,13 +310,13 @@ class SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                         TextFormField(
+                          controller: _emailController,
                           style:TextStyle(
                             fontFamily: 'Poppins-SemiBold',
                             fontSize: 16.0,
                             color: Color(0xFF565D5E),
                           ),
                           cursorColor: Theme.of(context).cursorColor,
-                          initialValue: _email,
                           decoration: InputDecoration(
                             labelText: 'Email',
                             labelStyle: TextStyle(
@@ -268,8 +327,26 @@ class SettingsScreenState extends State<SettingsScreen> {
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.blueAccent),
                             ),
-                            suffixIcon: Icon(
-                              Icons.edit,
+                            suffixIcon: IconButton(
+                              onPressed: () async {
+
+                                TextPrimitiveWrapper textPrimitiveWrapper = new TextPrimitiveWrapper("");
+                                await createTextFieldDialog(context,
+                                    "Confirmation", "Are you Sure you want to Change your Email ?\n\n(Click outside the Alert Box to Cancel)",
+                                    textPrimitiveWrapper);
+
+                                // ignore: unrelated_type_equality_checks
+                                if (textPrimitiveWrapper != "")
+                                {
+                                  _changeEmail(_emailController.text, textPrimitiveWrapper.text);
+
+                                  print(_emailController.text + "    ASIOdjasiodasiodasioda");
+
+                                  Navigator.push(context, MaterialPageRoute(builder:
+                                      (_) => CurrentScreen.settingsNavigatorPushEmail(_emailController.text)));
+                                }
+                              },
+                              icon: Icon(Icons.edit),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xFF637477)),
@@ -304,12 +381,16 @@ class SettingsScreenState extends State<SettingsScreen> {
                                                       mainAxisSize: MainAxisSize.min,
                                                       children: const <Widget>[
                                                         Text(
-                                                          "Update Gender",
+                                                          "Update Gender  ",
                                                           style: TextStyle(
                                                             fontFamily: 'Poppins-SemiBold',
                                                             color: Colors.blueGrey,
                                                             fontSize: 16,
                                                           ),
+                                                        ),
+                                                        Icon(
+                                                          Icons.update,
+                                                          color: Colors.blueGrey,
                                                         ),
                                                       ],
                                                     ),

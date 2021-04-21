@@ -9,6 +9,7 @@ class AlertWidget extends StatelessWidget {
   final String _message;
   final int _status;
   var _content;
+  TextEditingController textEditingController = new TextEditingController();
   ConfirmChangePrimitiveWrapper confirmChangePrimitiveWrapper;
   TextPrimitiveWrapper textPrimitiveWrapper;
   String buttonMessage = "OK";
@@ -35,6 +36,7 @@ class AlertWidget extends StatelessWidget {
   {
     buttonMessage = "Verify";
     _content = TextFormField(
+      controller: textEditingController,
       style:TextStyle(
         fontFamily: 'Poppins-SemiBold',
         fontSize: 16.0,
@@ -111,6 +113,10 @@ class AlertWidget extends StatelessWidget {
               borderRadius: new BorderRadius.circular(10.0),
             ),
             onPressed: () {
+              if(_status == 404)
+
+                Navigator.pop(context); // pop the alert
+
               if (_status == 200) {
                 Navigator.pop(context); // pop the alert
                 Navigator.push(context, MaterialPageRoute(builder:
@@ -118,6 +124,11 @@ class AlertWidget extends StatelessWidget {
               }
               else if (confirmChangePrimitiveWrapper != null) {
                 confirmChangePrimitiveWrapper.setConfirmChange(true);
+                Navigator.pop(context);
+              }
+              else if (textPrimitiveWrapper != null)
+              {
+                textPrimitiveWrapper._text = textEditingController.text;
                 Navigator.pop(context);
               }
               else {
