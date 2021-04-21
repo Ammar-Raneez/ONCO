@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
-class Medication {
+class Appointment {
 
   String id;
-  String medicationName;
-  String dosage;
-  String doseTime;
+  String doctorName;
+  String notes;
+  String date;
+  String time;
 
-  Medication({
-    @required this.medicationName,
-    this.dosage = '',
-    this.doseTime='',
+  Appointment({
+    @required
+    this.doctorName,
+    this.notes = '',
+    this.date = '',
+    this.time = '',
     this.id,
   }); // Constructor
 
-  static Medication fromJson(Map<String, dynamic> json) => Medication(
-    medicationName: json['medicationName'],
-    dosage: json['dosage'],
-    doseTime: json['doseTime'],
+  static Appointment fromJson(Map<String, dynamic> json) => Appointment(
+    doctorName: json['doctorName'],
+    notes: json['notes'],
+    date: json['date'],
+    time: json['time'],
     id: json['id'],
   );
 
   Map<String, dynamic> toJson() => {
-    'medicationName': medicationName,
-    'dosage': dosage,
-    'doseTime': doseTime,
+    'doctorName': doctorName,
+    'notes': notes,
+    'date': date,
+    'time': time,
     'id': id,
   };
-
 }

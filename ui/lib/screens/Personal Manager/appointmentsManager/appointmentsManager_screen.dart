@@ -12,7 +12,7 @@ class AppointmentsManager extends StatefulWidget {
   @override
   _AppointmentsManagerState createState() => _AppointmentsManagerState();
 
-  Medication medication;
+  Appointment medication;
   AppointmentsManager(); // Constructor
 }
 
@@ -139,7 +139,7 @@ Widget buildText(String text) => Center(
   ),
 );
 
-void editMedication(BuildContext context, Medication medication) => Navigator.of(context).push(
+void editMedication(BuildContext context, Appointment medication) => Navigator.of(context).push(
   MaterialPageRoute(
     //builder: (context) => EditMedication(medication: medication),
   ),

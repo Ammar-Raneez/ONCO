@@ -20,8 +20,8 @@ class _AddAppointmentsState extends State<AddAppointments> {
   String _medicationName = "";
   String _medicationDose = "";
   String _medicationTime = "";
-  DateTime _appointmentDate = DateTime.now();
-  TimeOfDay _appointmentTime = TimeOfDay.fromDateTime(DateTime.now());
+  DateTime _appointmentDate;
+  TimeOfDay _appointmentTime;
 
   FocusNode _nameFocus;
   FocusNode _doseFocus;
@@ -192,6 +192,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                     GestureDetector(
                                       onTap: () async {
 
+                                        _appointmentDate = DateTime.now();
                                         final DateTime newDate = await showDatePicker(
                                           context: context,
                                           initialDate: _appointmentDate,
@@ -225,6 +226,8 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                     GestureDetector(
                                       onTap: () async {
 
+                                        _appointmentTime = TimeOfDay.fromDateTime(DateTime.now());
+
                                         await showTimePicker(
                                           context: context,
                                           initialTime: _appointmentTime,
@@ -256,7 +259,8 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                     ),
                                     GestureDetector(
                                       onTap: (){
-                                        if(_medicationName != "") {
+                                        if(_appointmentTime != null && _appointmentDate != null) {
+
                                           Medication _newMedication = Medication(
                                             medicationName: _medicationName,
                                             dosage: _medicationDose,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationFirebaseAPI.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
 
-class MedicationProvider extends ChangeNotifier {
+class AppointmentsProvider extends ChangeNotifier {
   List<Medication> _medications = [];
   List<Medication> get medications => _medications.toList();
 

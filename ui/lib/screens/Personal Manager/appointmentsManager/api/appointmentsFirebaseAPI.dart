@@ -11,7 +11,7 @@ final user = FirebaseAuth.instance.currentUser;
 var loggedInUserEP = user.email;
 var loggedInUserGoogle =  GoogleUserSignInDetails.googleSignInUserEmail;
 
-class MedicationFirebaseApi {
+class AppointmentsFirebaseApi {
 
   static Future<String> createMedication(Medication medication) async {
     final docMedication = _firestore
