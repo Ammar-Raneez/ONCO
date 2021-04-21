@@ -20,6 +20,8 @@ class _AddAppointmentsState extends State<AddAppointments> {
   String _medicationName = "";
   String _medicationDose = "";
   String _medicationTime = "";
+  DateTime _appointmentDate = DateTime.now();
+  TimeOfDay _appointmentTime = TimeOfDay.fromDateTime(DateTime.now());
 
   FocusNode _nameFocus;
   FocusNode _doseFocus;
@@ -191,11 +193,11 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                       onTap: () async {
 
                                         final DateTime newDate = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime.now(),
-                                        lastDate: DateTime(2022),
-                                        helpText: 'Select a date',);
+                                          context: context,
+                                          initialDate: _appointmentDate,
+                                          firstDate: DateTime.now(),
+                                          lastDate: DateTime(2022),
+                                          helpText: 'Select a date',);
                                         },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -225,7 +227,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
 
                                         await showTimePicker(
                                           context: context,
-                                          initialTime: TimeOfDay.fromDateTime(DateTime.now()),
+                                          initialTime: _appointmentTime,
                                         );
                                       },
                                       child: Container(
@@ -254,7 +256,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                     ),
                                     GestureDetector(
                                       onTap: (){
-                                        if(_medicationName !="") {
+                                        if(_medicationName != "") {
                                           Medication _newMedication = Medication(
                                             medicationName: _medicationName,
                                             dosage: _medicationDose,
