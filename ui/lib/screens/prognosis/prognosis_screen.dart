@@ -104,7 +104,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     List<Widget> listItems = [];
     responseList.forEach((post) {
 
-        if (count == 0) {
+      if (count == 0) {
 
         textFieldControllers.add(new TextEditingController());
         listItems.add(
@@ -174,7 +174,6 @@ class CancerPrognosisState extends State<CancerPrognosis> {
         int currentQuestion = 0;
         currentQuestion = count - 1;
 
-
         listItems.add(
             Container(
                 margin: EdgeInsets.only(bottom: 10),
@@ -210,15 +209,29 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                                 Column(
                                   children: <Widget>[
-
-                                    GroupButton(
-                                      selectedTextStyle: TextStyle(color: Colors.white),
-                                      selectedColor: Colors.redAccent,
-                                      spacing: 20,
-                                      onSelected: (index, isSelected) => skinCancerUserAnswers[currentQuestion] = skinCancerAnswers[currentQuestion][index],
-                                      buttons: List.from(skinCancerOptions),
-                                      selectedButtons: [],
+                                    new DropdownButton<String>(
+                                      items: skinCancerOptions.map((String value) {
+                                        return new DropdownMenuItem<String>(
+                                          value: value,
+                                          child: new Text(value),
+                                        );
+                                      }).toList(),
+                                      focusColor: Colors.lightBlueAccent,
+                                      // value: selectedOption[count],
+                                      hint: Text("Select Option"),
+                                      icon: const Icon(Icons.arrow_drop_down),
+                                      onChanged: (item) {
+                                        print(item);
+                                      },
                                     )
+                                    // GroupButton(
+                                    //   selectedTextStyle: TextStyle(color: Colors.white),
+                                    //   selectedColor: Colors.redAccent,
+                                    //   spacing: 20,
+                                    //   onSelected: (index, isSelected) => skinCancerUserAnswers[currentQuestion] = skinCancerAnswers[currentQuestion][index],
+                                    //   buttons: List.from(skinCancerOptions),
+                                    //   selectedButtons: [],
+                                    // )
                                   ],
                                 )
                               ]
@@ -590,9 +603,9 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                       String reply = await apiRequest();
 
-                     progressDialog.hide();
+                      progressDialog.hide();
 
-                     // checking if the response is not null and displaying the result
+                      // checking if the response is not null and displaying the result
                       if (reply != null) {
 
                         final body = json.decode(reply);
