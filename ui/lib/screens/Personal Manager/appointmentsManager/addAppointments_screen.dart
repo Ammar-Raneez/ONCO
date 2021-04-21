@@ -1,3 +1,4 @@
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
@@ -266,6 +267,16 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                           );
 
                                           AppointmentsFirebaseApi.createAppointment(newApplication);
+                                          
+                                          // add an event to systems default calendar
+                                          final Event event = Event(
+                                            title: _doctorName,
+                                            description: _notes,
+                                            timeZone: _appointmentDate.timeZoneName,
+                                            startDate: _appointmentDate,
+                                            endDate: _appointmentDate,
+                                          );
+                                          Add2Calendar.addEvent2Cal(event);
                                         }
                                         Navigator.pop(context);
                                       },
