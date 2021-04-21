@@ -35,17 +35,18 @@ class _CurrentScreenState extends State<CurrentScreen> {
   final _auth = FirebaseAuth.instance;
   final user = FirebaseAuth.instance.currentUser;
   String username;
+  String gender;
   List<Widget> swipeScreen;
 
   _CurrentScreenState() {
 
     // getting the current user details on loading of the screen
     getCurrentUser();
-    print(username);
+
     if(username == null)
     {
       username = UserDetails.getUserData()["username"];
-      print(username);
+      gender = UserDetails.getUserData()["gender"];
       swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
     }
   }
@@ -82,6 +83,8 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
       setState(() {
         username = userDocument["username"];
+        gender = userDocument["gender"];
+
       });
     } catch (e) {
       print(e);
@@ -121,7 +124,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
           return true;
         },
         child: Scaffold(
-          appBar: CustomAppBar.settings(username, loggedInUser.email, context),
+          appBar: CustomAppBar.settings(username, loggedInUser.email, gender, context),
 
           // under this body only the screen go into
           body: PageView(

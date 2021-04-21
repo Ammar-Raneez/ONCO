@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:group_button/group_button.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/screens/current_screen.dart';
@@ -10,11 +11,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(MyApp());
 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SettingsScreen("abc", "abc@gmail.com"),
+     // home: SettingsScreen("abc", "abc@gmail.com"),
     );
   }
 }
@@ -24,14 +26,12 @@ class SettingsScreen extends StatefulWidget {
   static String id = "settingsScreen";
   String userName;
   String email;
+  String gender;
 
-  SettingsScreen(String userName, String email) {
-    this.userName = userName;
-    this.email = email;
-  }
+  SettingsScreen(this.userName, this.email, this.gender);
 
   @override
-  SettingsScreenState createState() => SettingsScreenState(userName, email);
+  SettingsScreenState createState() => SettingsScreenState(userName, email, gender);
 
 }
 
@@ -39,18 +39,20 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   String _userName;
   String _email;
+  String _gender;
   final _userNameController = TextEditingController();
   final _emailController = new TextEditingController();
   final _passwordController = new TextEditingController();
   final user = FirebaseAuth.instance.currentUser;
 
-  SettingsScreenState(String userName, String email)
+  SettingsScreenState(String userName, String email, String gender)
   {
     this._userName = userName;
     this._email = email;
+    this._gender = gender;
     _userNameController.text = userName;
     _emailController.text = email;
-    
+    print(_gender);
   }
 
   void _changeUserName(String newDisplayName) async {
@@ -138,6 +140,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                               flex: 1,
                             ),
                             Expanded(
+
                               child:  Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
