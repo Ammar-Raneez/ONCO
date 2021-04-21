@@ -171,6 +171,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Card(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
@@ -183,9 +184,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             end: Alignment.topRight,
                           ), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18),),
                         ),
-                        padding: EdgeInsets.all(5),
-                        width: 322.0,
-                        height: 150,
+                        width: double.infinity,
+                        height: 100,
                         child: Row(
                           children: <Widget>[
                             Expanded(
