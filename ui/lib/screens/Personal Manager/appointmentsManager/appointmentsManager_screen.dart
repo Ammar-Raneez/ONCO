@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/medication_card.dart';
-import 'package:ui/components/widgets.dart';
 import 'addAppointments_screen.dart';
 import 'api/appointmentsFirebaseAPI.dart';
 import 'api/appointmentsProvider.dart';
 import 'models/appointment_model.dart';
+import 'package:ui/screens/Personal%20Manager/appointmentsManager/appointmentWidgets/AppointmentListWidget.dart';
 
 class AppointmentsManager extends StatefulWidget {
   @override
   _AppointmentsManagerState createState() => _AppointmentsManagerState();
 
-  Appointment medication;
+  Appointment appointment;
   AppointmentsManager(); // Constructor
 }
 
@@ -84,14 +83,34 @@ class _AppointmentsManagerState extends State<AppointmentsManager> {
                               padding: const EdgeInsets.symmetric(vertical: 8.0),
                               child: Container(
 
+                                child: StreamBuilder<List<Appointment>>(
+                                    stream: AppointmentsFirebaseApi.readAppointment(),
+                                    builder: (context, snapshot) {
+                                      switch (snapshot.connectionState) {
+                                        case ConnectionState.waiting:
+                                          return Center(
+                                              child: CircularProgressIndicator());
+                                        default:
+                                          if (snapshot.hasError) {
+                                            return buildText(
+                                                'Something went wrong, Try later');
+                                          } else {
+                                            final appointments = snapshot.data;
 
+                                            final provider = Provider.of<AppointmentsProvider>(context);
+                                            provider.setAppointments(appointments);
+
+                                            return AppointmentsListWidget();
+                                          }
+                                      }
+                                    }
                                 ),
 
                               ),
                             ),
                           ),
                         ),
-
+                    ),
                   ],
                 ),
                     Positioned(
@@ -136,11 +155,5 @@ Widget buildText(String text) => Center(
   child: Text(
     text,
     style: TextStyle(fontSize: 24, color: Colors.white),
-  ),
-);
-
-void editMedication(BuildContext context, Appointment medication) => Navigator.of(context).push(
-  MaterialPageRoute(
-    //builder: (context) => EditMedication(medication: medication),
   ),
 );

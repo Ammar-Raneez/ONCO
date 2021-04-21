@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ui/components/medication_card.dart';
 import 'package:ui/screens/Personal%20Manager/appointmentsManager/api/appointmentsProvider.dart';
-import 'package:ui/screens/Personal%20Manager/appointmentsManager/medicationWidgets/appointment_card.dart';
+import 'package:ui/screens/Personal%20Manager/appointmentsManager/appointmentWidgets/appointment_card.dart';
 
 class AppointmentsListWidget extends StatelessWidget {
   @override

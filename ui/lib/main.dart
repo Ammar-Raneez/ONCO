@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/screens/Meal%20Plan/all_meal_screen.dart';
 import 'package:ui/screens/Meal%20Plan/meal_detail_screen.dart';
+import 'package:ui/screens/Personal%20Manager/appointmentsManager/api/appointmentsProvider.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationsProvider.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/api/ReportProvider.dart';
 import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
