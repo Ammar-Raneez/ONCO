@@ -8,6 +8,7 @@ class ReportListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<ReportProvider>(context);
     final reports = provider.reports;
+    reports.sort((a,b) => b.reportDate.compareTo(a.reportDate));
 
     return reports.isEmpty
         ? Center(
@@ -21,13 +22,14 @@ class ReportListWidget extends StatelessWidget {
             ),
           )
         : ListView.separated(
-          physics: BouncingScrollPhysics(),
-          separatorBuilder: (context, index) => Container(height: 5),
-          itemCount: reports.length,
-          itemBuilder: (context, index) {
-          final report = reports[index];
-          return ReportCard(report: report);
-      },
-    );
+            physics: BouncingScrollPhysics(),
+            separatorBuilder: (context, index) => Container(height: 5),
+            itemCount: reports.length,
+            itemBuilder: (context, index) {
+              final report = reports[index];
+              print(report.reportDate);
+              return ReportCard(report: report);
+            },
+          );
   }
 }

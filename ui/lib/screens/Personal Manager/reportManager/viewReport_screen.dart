@@ -365,12 +365,12 @@ Widget cancerDetails(
                   child: CachedNetworkImage(
                     progressIndicatorBuilder:
                         (context, url, downloadProgress) => SizedBox(
-                      width: MediaQuery.of(context).size.width / 2,
-                      height: 100,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                            value: downloadProgress.progress),
-                      ),
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: 100,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                                value: downloadProgress.progress),
+                          ),
                     ),
                     imageUrl: imageUrl,
                     width: MediaQuery.of(context).size.width,
