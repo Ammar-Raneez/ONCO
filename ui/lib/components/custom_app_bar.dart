@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       );
   }
 
-  CustomAppBar.settings(String userName, String email, BuildContext context) {
+  CustomAppBar.settings(String userName, String email, String gender, BuildContext context) {
 
     this.iconButton = new IconButton(
       icon: Icon(Icons.settings,
@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context)=> SettingsScreen(userName, email)
+              builder: (context)=> SettingsScreen(userName, email, gender)
           ),
         );
       },

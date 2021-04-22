@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/homepage_card.dart';
 import 'package:ui/components/widgets.dart';
+import 'package:ui/screens/Exercise%20Plan/exerciseScreen.dart';
 import 'package:ui/screens/Meal%20Plan/all_meal_screen.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:ui/services/UserDetails.dart';
@@ -142,16 +143,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                       cardTitle: 'Personal Manager',
                                       cardColor: '0xFFdb5682',
                                       textColor: '0xFFFFFFFF',
+                                      cardImage: 'images/CardImages/personalManager.jpg',
                                     ),
                                   ),
                                 ),
                                 Container(
-                                  child: HomeCard(
-                                    cardTitle: 'Exercise Plan',
-                                    cardColor: '0xFFa4d44a',
-                                    textColor: '0xFFFFFFFF',
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context, MaterialPageRoute(builder: (context) => ExerciseScreen()),
+                                      );
+                                    },
+                                     child: HomeCard(
+                                      cardTitle: 'Exercise Plan',
+                                      cardColor: '0xFFa4d44a',
+                                      textColor: '0xFFFFFFFF',
+                                       cardImage: 'images/CardImages/exercisePlan.jpg',
+                                    ),
                                   ),
                                 ),
+
                                 Container(
                                   child: GestureDetector(
                                     onTap: () {
@@ -165,6 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       cardTitle: 'Meal Plan',
                                       cardColor: '0xFF4ad4b1',
                                       textColor: '0xFFFFFFFF',
+                                      cardImage: 'images/CardImages/mealPlan.jpg',
                                     ),
                                   ),
                                 ),
@@ -173,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 21,
+                      height: 50,
                     ),
                   ],
                 ),

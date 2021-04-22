@@ -27,42 +27,51 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       createAlertDialog(
           context, "Error", "Please enter an email to proceed", 404);
     } else {
-      // Since we have an email we can proceed
-      // If all the fields are filled and ready to proceed
-      setState(() {
-        showSpinner = true;
-      });
+      bool emailValid = RegExp(
+              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(email);
 
-      try {
-        _auth
-            .sendPasswordResetEmail(email: email)
-            .then(
-              (value) => {
-                createAlertDialog(
-                  context,
-                  "Success",
-                  "Please check your mail to reset password!",
-                  201,
-                ),
-                // stops displaying the spinner once the result comes back
-                setState(() {
-                  showSpinner = false;
-                })
-              },
-            )
-            .catchError((e) {
+      if (!emailValid) {
+        // Alerts invalid email
+        createAlertDialog(context, "Error", "Invalid email format", 404);
+      } else {
+        // Since we have an email we can proceed
+        // If all the fields are filled and ready to proceed
+        setState(() {
+          showSpinner = true;
+        });
+
+        try {
+          _auth
+              .sendPasswordResetEmail(email: email)
+              .then(
+                (value) => {
+                  createAlertDialog(
+                    context,
+                    "Success",
+                    "Please check your mail to reset password!",
+                    404,
+                  ),
+                  // stops displaying the spinner once the result comes back
+                  setState(() {
+                    showSpinner = false;
+                  })
+                },
+              )
+              .catchError((e) {
+            createAlertDialog(context, "Error", e.message, 404);
+            // stops displaying the spinner once the result comes back
+            setState(() {
+              showSpinner = false;
+            });
+          });
+        } catch (e) {
           createAlertDialog(context, "Error", e.message, 404);
           // stops displaying the spinner once the result comes back
           setState(() {
             showSpinner = false;
           });
-        });
-      } catch (e) {
-        createAlertDialog(context, "Error", e.message, 404);
-        // stops displaying the spinner once the result comes back
-        setState(() {
-          showSpinner = false;
-        });
+        }
       }
     }
   }
@@ -134,6 +143,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       ),
                     ),
                   TextField(
+                    autofillHints: [AutofillHints.email],
                     cursorColor: Colors.lightBlueAccent,
                     onEditingComplete: () => {
                       node.nextFocus(),

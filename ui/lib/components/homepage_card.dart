@@ -7,17 +7,32 @@ class HomeCard extends StatelessWidget {
   final String cardTitle;
   final String cardColor;
   final String textColor;
+  final String cardImage;
 
-  HomeCard({@required this.cardTitle, @required this.cardColor, @required this.textColor}); //constructor to init values
+  HomeCard({@required this.cardTitle, @required this.cardColor, @required this.textColor, @required this.cardImage}); //constructor to init values
 
   @override
   Widget build(BuildContext buildContext) => Padding(
-    padding: const EdgeInsets.fromLTRB(12,0,0,0),
-    child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
+    padding: const EdgeInsets.fromLTRB(22,15,0,35),
+    child: Container(
+        decoration: BoxDecoration(
+            color: Color(int.parse(cardColor)),
+            borderRadius: BorderRadius.circular(19),
+            image: DecorationImage(
+              image: AssetImage(
+                cardImage
+            ),
+              fit: BoxFit.cover,
+            ),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xFF7D7D7D).withOpacity(0.4),
+              spreadRadius: 3,
+              blurRadius: 16,
+              offset: Offset(4, 9), // changes position of shadow
+            ),
+          ],
         ),
-
         child: Container(
           width: 290.0,
           height: 480.0,
@@ -39,7 +54,6 @@ class HomeCard extends StatelessWidget {
           ),
         ),
 
-        color: Color(int.parse(cardColor)),
       ),
   );
 }

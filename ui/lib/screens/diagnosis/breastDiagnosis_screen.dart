@@ -9,6 +9,7 @@ import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'dart:async';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/services/UserDetails.dart';
 
 class BreastCancerDiagnosis extends StatefulWidget {
@@ -26,7 +27,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   bool showSpinner = false;
   bool showHighlightedImage = false;
   dynamic responseBody;
-   final _firestore = FirebaseFirestore.instance;
+  final _firestore = FirebaseFirestore.instance;
 
   // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
@@ -48,16 +49,14 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   }
 
   // DETECT THE CANCER METHOD (ASYNC TASK)
-  _detect() async {
+  _detect(ProgressDialog progressDialog) async {
     // If the user selects an image only we perform the API request else an alert will be displayed
     if (imageFile == null) {
       // ALERT USER TO SELECT OR CAPTURE IMAGE FIRST OFF
       createAlertDialog(
           context, "Error", "There is no image selected or captured!", 404);
     } else {
-      setState(() {
-        showSpinner = true;
-      });
+      progressDialog.show();
       try {
         // GETTING THE IMAGE NAME
         String fileName = imageFile.path.split('/').last;
@@ -80,23 +79,23 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         String resultPercentage = responseBody['prediction_percentage'];
 
         // Adding the response data into the database for report creation purpose
-         _firestore
-             .collection("users")
-             .doc(UserDetails.getUserData()["email"])
-             .collection("imageDetections")
-             .add({
-           "cancerType": "Breast",
-           "reportType": "diagnosis",
-           "result": resultPrediction,
-           "result_string": "$resultPrediction was detected",
-           "imageUrl": resultImageURL,
-           "percentage": resultPercentage,
-           'timestamp': Timestamp.now(),
-         });
+        _firestore
+            .collection("users")
+            .doc(UserDetails.getUserData()["email"])
+            .collection("imageDetections")
+            .add({
+          "cancerType": "Breast",
+          "reportType": "diagnosis",
+          "result": resultPrediction,
+          "result_string": "$resultPrediction was detected",
+          "imageUrl": resultImageURL,
+          "percentage": resultPercentage,
+          'timestamp': Timestamp.now(),
+        });
 
+        progressDialog.hide();
         // Display the spinner to indicate that its loading
         setState(() {
-          showSpinner = false;
           showHighlightedImage = true;
         });
 
@@ -112,11 +111,9 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         }
       } catch (e) {
         // Displaying alert to the user
-        createAlertDialog(context, "Error", e.message, 404);
+        createAlertDialog(context, "Error", e._message, 404);
 
-        setState(() {
-          showSpinner = false;
-        });
+        progressDialog.hide();
       }
     }
   }
@@ -157,6 +154,36 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
 
   @override
   Widget build(BuildContext context) {
+    // Progress Dialog that will run till API Request is received
+    final ProgressDialog progressDialog = ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: false, showLogs: true);
+
+    // Styling Progress Dialog
+    progressDialog.style(
+        message: '   Scanning\n   Image',
+        padding: EdgeInsets.all(20),
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: LinearProgressIndicator(
+          backgroundColor: Colors.lightBlueAccent,
+        ),
+        elevation: 10.0,
+        insetAnimCurve: Curves.easeInCubic,
+        progress: 0.0,
+        maxProgress: 100.0,
+        progressTextStyle: TextStyle(
+          color: Color(0xFF565D5E),
+          fontSize: 13.0,
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Poppins-SemiBold',
+        ),
+        messageTextStyle: TextStyle(
+          color: Color(0xFF565D5E),
+          fontSize: 19.0,
+          fontWeight: FontWeight.w600,
+          fontFamily: 'Poppins-SemiBold',
+        ));
+
     return SafeArea(
       child: ModalProgressHUD(
         // displaying the spinner for async tasks
@@ -326,7 +353,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                             ),
                             shape: const StadiumBorder(),
                             onPressed: () {
-                              _detect();
+                              _detect(progressDialog);
                             },
                           ),
                         ),

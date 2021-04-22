@@ -41,62 +41,72 @@ class _LoginScreenState extends State<LoginScreen> {
       createAlertDialog(
           context, "Error", "Please fill all the given fields to proceed", 404);
     } else {
-      // If all the fields are filled and ready to proceed
-      setState(() {
-        showSpinner = true;
-      });
+      bool emailValid = RegExp(
+              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(email);
 
-      try {
-        // getting the logged in user details as a USER object or type
-        final user = await _auth.signInWithEmailAndPassword(
-            email: email, password: password);
+      if (!emailValid) {
+        // Alerts invalid email
+        createAlertDialog(context, "Error", "Invalid email format", 404);
+      } else {
+        // If all the fields are filled and ready to proceed
+        setState(() {
+          showSpinner = true;
+        });
 
-        // displaying alerts according to the progress
-        if (user != null) {
-          //clear chat bot messages on login/register
-          _firestore
-              .collection("chatbot-messages")
-              .doc(email)
-              .collection("chatbot-messages")
-              .get()
-              .then((value) => {
-                    for (var msg in value.docs) {msg.reference.delete()}
-                  });
+        try {
+          // getting the logged in user details as a USER object or type
+          final user = await _auth.signInWithEmailAndPassword(
+              email: email, password: password);
 
-          // Displaying the alert dialog
+          // displaying alerts according to the progress
+          if (user != null) {
+            //clear chat bot messages on login/register
+            _firestore
+                .collection("chatbot-messages")
+                .doc(email)
+                .collection("chatbot-messages")
+                .get()
+                .then((value) => {
+                      for (var msg in value.docs) {msg.reference.delete()}
+                    });
+
+            // Displaying the alert dialog
+            setState(() {
+              email = "";
+              password = "";
+            });
+
+            // Getting a snapshot of the users (to get username of logged in user)
+            QuerySnapshot querySnapshot =
+                await _firestore.collection("users").get();
+            querySnapshot.docs.forEach((document) {
+              if (document.data()['userEmail'] == user.user.email) {
+                // setting the user name and its email to the global user details variable
+                UserDetails.setUserData(user.user.email,
+                    document.data()['username'], document.data()['gender']);
+              }
+            });
+
+            createAlertDialog(
+                context, "Success", "Successfully logged in!", 200);
+          } else {
+            // Displaying the alert dialog
+            createAlertDialog(context, "Error",
+                "Something went wrong, try again later!", 404);
+          }
+
+          // stops displaying the spinner once the result comes back
           setState(() {
-            email = "";
-            password = "";
+            showSpinner = false;
           });
-
-          // Getting a snapshot of the users (to get username of logged in user)
-          QuerySnapshot querySnapshot =
-              await _firestore.collection("users").get();
-          querySnapshot.docs.forEach((document) {
-            if (document.data()['userEmail'] == user.user.email) {
-              // setting the user name and its email to the global user details variable
-              UserDetails.setUserData(user.user.email,
-                  document.data()['username'], document.data()['gender']);
-            }
+        } catch (e) {
+          createAlertDialog(context, "Error", e.message, 404);
+          // stops displaying the spinner once the result comes back
+          setState(() {
+            showSpinner = false;
           });
-
-          createAlertDialog(context, "Success", "Successfully logged in!", 200);
-        } else {
-          // Displaying the alert dialog
-          createAlertDialog(
-              context, "Error", "Something went wrong, try again later!", 404);
         }
-
-        // stops displaying the spinner once the result comes back
-        setState(() {
-          showSpinner = false;
-        });
-      } catch (e) {
-        createAlertDialog(context, "Error", e.message, 404);
-        // stops displaying the spinner once the result comes back
-        setState(() {
-          showSpinner = false;
-        });
       }
     }
   }
@@ -257,6 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     TextField(
+                      autofillHints: [AutofillHints.email],
                       cursorColor: Colors.lightBlueAccent,
                       onEditingComplete: () => {
                         node.nextFocus(),

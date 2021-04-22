@@ -12,8 +12,11 @@ import tensorflow as tf
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from pyrebase import pyrebase
 
-from breastDiagModule import (calculatePredictionPercentBreast, model_predictBreast)
-from lungDiagModule import (calculatePredictionPercentLung, getImageUrlLung, model_predictLung, storeGradCamImageLung)
+from breastDiagModule import (calculatePredictionPercentBreast,
+                              getImageUrlBreast, model_predictBreast,
+                              storeGradCamImageBreast)
+from lungDiagModule import (calculatePredictionPercentLung, getImageUrlLung,
+                            model_predictLung, storeGradCamImageLung)
 from skinDiagModule import model_predict_skin, uploadSkinImg
 
 # Defining the flask app
@@ -41,7 +44,7 @@ BREAST_DIAGNOSIS_MODEL_PATH = "breast_model.h5"
 
 # Loading all the models
 lung_diag_model = tf.keras.models.load_model(LUNG_DIAGNOSIS_MODEL_PATH)
-skin_diag_model = tf.keras.models.load_model(SKIN_DIAGNOSIS_MODEL_PATH)
+# skin_diag_model = tf.keras.models.load_model(SKIN_DIAGNOSIS_MODEL_PATH)
 breast_diag_model = tf.keras.models.load_model(BREAST_DIAGNOSIS_MODEL_PATH)
 
 # Index route
@@ -123,17 +126,32 @@ def skinCancerDiagnosis():
 @app.route('/breast-cancer/diagnosis', methods=['GET', 'POST'])
 def breastCancerDiagnosis():
     if request.method == 'POST':
+        # Get the file from post request
         f = request.files['file']
+
+        # Save the file to ./uploads
         file_path = "uploads/" + str(uuid.uuid4()) + ".jpg"
         f.save(file_path)
 
+        # Storing the image into firebase
+        image_fileName = storeGradCamImageBreast(file_path, breast_diag_model, firebase_storage)
+
+        # Getting the prediction percentage value
         prediction_percentage = calculatePredictionPercentBreast(file_path, breast_diag_model)
-        image_download_Url = "https://www.gettingImageFromAzureStorage.com"
+
+        # Getting the superimposed image download URL link
+        image_download_Url = getImageUrlBreast(image_fileName, firebase, firebase_storage)
+
+        # Make prediction
         prediction = model_predictBreast(file_path, breast_diag_model)
 
+        # These are the prediction categories 
         CATEGORIES = ['CANCER', 'NORMAL']
+
+        # getting the prediction result from the categories
         output = CATEGORIES[int(prediction[0][0])]
-        
+
+        # returning the result
         return jsonify(
             result = output,
             imageUrl = image_download_Url,
