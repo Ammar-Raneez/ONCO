@@ -1,18 +1,18 @@
 import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/exercise_card.dart';
-import 'package:ui/components/widgets.dart';
 
 class ExerciseScreen extends StatefulWidget {
+  @override
+  _ExerciseScreenState createState() => _ExerciseScreenState();
   static var id = "exercisePlanScreen";
 
-  _ExerciseScreenState createState() => _ExerciseScreenState();
+
 }
 
 class _ExerciseScreenState extends State<ExerciseScreen> {
+
   final rand = new Random();
   static var exerciseNames = [
     "Bicycle Crunch",
@@ -27,9 +27,8 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     "Thigh Lunges"
   ];
   var selectedNames = [];
-
   String randomExercise() {
-    var ex = exerciseNames[rand.nextInt(exerciseNames.length)];
+    String ex = exerciseNames[rand.nextInt(exerciseNames.length)];
     while (selectedNames.contains(ex)) {
       ex = exerciseNames[rand.nextInt(exerciseNames.length)];
     }
@@ -39,96 +38,72 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: CustomAppBar.arrow(context),
-        body: Container(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Container(
-                   padding: const EdgeInsets.only(left: 10, bottom: 15),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            CustomAppBar.arrow(context),
+            Column(
+              children : [
+
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    bottom: 8,
+                  ),
+                  child: Align(
+
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Exercise Plan",
+                      style: TextStyle(
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 20,
+                      bottom: 14,
+                      right: 20
+                  ),
                   child: Align(
                     alignment: Alignment.topLeft,
-                    child: Container(
-                      child: Text(
-                        "Exercise Plan",
-                        style: TextStyle(
+                    child: Text(
+                      "Here you can manage your medications, view previous reports and save doctors appointment notes.",
+                      style: TextStyle(
                           fontFamily: 'Poppins-SemiBold',
-                          fontSize: 32,
-                          color: Color(0xFF373737),
+                          fontSize: 13.0,
+                          color: Color(0xFF3C707B)
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+                child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      Container(
+                        child: GestureDetector(
+                            onTap: (){
+                              var name = randomExercise();
+                              print(name.toString());
+                            },
+                            child: ExerciseCard(cardTitle: "Hello Maneesha", cardImage: "images/exerciseImages/calfraise.jpg",)
                         ),
                       ),
-                    ),
-                  ),
+                    ]
                 ),
-              ),
-              SizedBox(height: 5),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  padding: const EdgeInsets.only(left: 27, bottom: 15),
-                  child: Text(
-                    "Here you can find exercises specifically tailored for you",
-                    style: TextStyle(
-                      fontFamily: 'Poppins-SemiBold',
-                      fontSize: 12,
-                      color: Color(0xFF959595),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                    padding: const EdgeInsets.only(right: 10, bottom: 5),
-                    child: ScrollConfiguration(
-                      behavior: ScrollEffectBehaviour(),
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              child: GestureDetector(
-                                onTap: () {
-                                  var name = randomExercise();
-                                  print(name);
-                                  ExcerciseCard(
-                                      cardTitle: name,
-                                      cardImage:
-                                      name.replaceAll(' ', '').toLowerCase() +
-                                          ".jpg");
-                                },
-
-                                // child: ,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              child: GestureDetector(
-                                onTap: () {
-                                  var name = randomExercise();
-                                  ExcerciseCard(
-                                      cardTitle: name,
-                                      cardImage:
-                                      name.replaceAll(' ', '').toLowerCase() +
-                                          ".jpg");
-                                },
-
-                                // child: ,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+          ],
         ),
       ),
     );
