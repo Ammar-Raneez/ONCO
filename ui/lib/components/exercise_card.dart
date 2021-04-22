@@ -25,11 +25,11 @@ class ExerciseCard extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child:Padding(
-                    padding: const EdgeInsets.only(left: 12.0, top: 10.0),
+                    padding: const EdgeInsets.only(left: 20.0, top: 20.0),
                     child: Text(
                       cardTitle,
                       style: TextStyle(
-                        fontSize: 19.0,
+                        fontSize: 20,
                         color: Colors.black,
                         fontFamily: 'Poppins-SemiBold',
                       ),
@@ -40,11 +40,19 @@ class ExerciseCard extends StatelessWidget {
               decoration:BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("images/" + cardImage),
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.cover,
                   alignment: Alignment.topCenter
                 ),
                 borderRadius: BorderRadius.circular(22.0),
                 color: Colors.white,
+                  boxShadow: [
+                  BoxShadow(
+                  color: Color(0xFF7D7D7D).withOpacity(0.4),
+                  spreadRadius: 3,
+                  blurRadius: 16,
+                  offset: Offset(4, 9), // changes position of shadow
+                ),
+                 ],
               ),
           ),
       ),
