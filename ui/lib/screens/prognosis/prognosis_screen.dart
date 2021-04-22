@@ -679,7 +679,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                             // Displaying the alert dialog
                             createAlertDialog(
-                                context, "Prognosis", prognosisResult, 202);
+                                context, "Prognosis", prognosisResult, 203);
 
                             // Adding the response data into the database for report creation purpose
                             // initially, convert all inputs into strings for the report
