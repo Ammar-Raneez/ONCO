@@ -40,7 +40,7 @@ class ExerciseCard extends StatelessWidget {
               decoration:BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("images/" + cardImage),
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.cover,
                   alignment: Alignment.topCenter
                 ),
                 borderRadius: BorderRadius.circular(22.0),
