@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
           showSpinner = false;
         });
       } catch (e) {
-        createAlertDialog(context, "Error", e.message, 404);
+        createAlertDialog(context, "Error", e._message, 404);
         // stops displaying the spinner once the result comes back
         setState(() {
           showSpinner = false;
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // using GOOGLE Authentication to implement the login functionality
   googleAuthLogin(BuildContext context) async {
     try {
-      await _googleSignIn.signIn().catchError((e) => (print(e.message)));
+      await _googleSignIn.signIn().catchError((e) => (print(e._message)));
       print(_googleSignIn.currentUser);
 
       // Setting the user email to the global email variable to be used for

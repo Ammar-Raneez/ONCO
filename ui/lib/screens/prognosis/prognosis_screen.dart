@@ -209,29 +209,14 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                                 Column(
                                   children: <Widget>[
-                                    new DropdownButton<String>(
-                                      items: skinCancerOptions.map((String value) {
-                                        return new DropdownMenuItem<String>(
-                                          value: value,
-                                          child: new Text(value),
-                                        );
-                                      }).toList(),
-                                      focusColor: Colors.lightBlueAccent,
-                                      // value: selectedOption[count],
-                                      hint: Text("Select Option"),
-                                      icon: const Icon(Icons.arrow_drop_down),
-                                      onChanged: (item) {
-                                        print(item);
-                                      },
+                                    GroupButton(
+                                      selectedTextStyle: TextStyle(color: Colors.white),
+                                      selectedColor: Colors.redAccent,
+                                      spacing: 20,
+                                      onSelected: (index, isSelected) => skinCancerUserAnswers[currentQuestion] = skinCancerAnswers[currentQuestion][index],
+                                      buttons: List.from(skinCancerOptions),
+                                      selectedButtons: [],
                                     )
-                                    // GroupButton(
-                                    //   selectedTextStyle: TextStyle(color: Colors.white),
-                                    //   selectedColor: Colors.redAccent,
-                                    //   spacing: 20,
-                                    //   onSelected: (index, isSelected) => skinCancerUserAnswers[currentQuestion] = skinCancerAnswers[currentQuestion][index],
-                                    //   buttons: List.from(skinCancerOptions),
-                                    //   selectedButtons: [],
-                                    // )
                                   ],
                                 )
                               ]
@@ -620,7 +605,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                         else
                         {
-                          prognosisResult = body['"result_string"'];
+                          prognosisResult = body['result_string'];
                         }
 
                         /* For Breast Cancer Prognosis the Result is either 'R'

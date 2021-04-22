@@ -302,7 +302,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           _usernameController.clear();
                           _passwordTextFieldController.clear();
                         } catch (e) {
-                          createAlertDialog(context, "Error", e.message, 404);
+                          createAlertDialog(context, "Error", e._message, 404);
                           // stops displaying the spinner once the result comes back
                           setState(() {
                             showSpinner = false;

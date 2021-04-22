@@ -2,8 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:ui/screens/Exercise%20Plan/exercisePlan_screen.dart';
 import 'package:ui/screens/Meal%20Plan/all_meal_screen.dart';
 import 'package:ui/screens/Meal%20Plan/meal_detail_screen.dart';
+import 'package:ui/screens/Personal%20Manager/appointmentsManager/api/appointmentsProvider.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/api/medicationsProvider.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/api/ReportProvider.dart';
 import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
@@ -33,6 +35,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => ReportProvider()),
         ChangeNotifierProvider(create: (context) => MedicationProvider()),
+        ChangeNotifierProvider(create: (context) => AppointmentsProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -54,7 +57,8 @@ class MyApp extends StatelessWidget {
           BreastCancerDiagnosis.id: (context) => BreastCancerDiagnosis(),
           SkinCancerDiagnosis.id: (context) => SkinCancerDiagnosis(),
           AllMealScreen.id: (context) => AllMealScreen(),
-          MealDetailScreen.id: (context) => MealDetailScreen()
+          MealDetailScreen.id: (context) => MealDetailScreen(),
+          ExercisePlanScreen.id: (context) => ExercisePlanScreen(),
         }
       ),
   );

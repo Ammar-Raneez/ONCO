@@ -93,7 +93,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
         initialResponseText = response.toString();
       });
     } catch (e) {
-      createAlertDialog(context, "Error", e.message, 404);
+      createAlertDialog(context, "Error", e._message, 404);
     }
   }
 
@@ -139,7 +139,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       });
     } catch (e) {
       // Displaying alert to the user
-      createAlertDialog(context, "Error", e.message, 404);
+      createAlertDialog(context, "Error", e._message, 404);
     }
   }
 

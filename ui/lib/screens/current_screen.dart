@@ -13,16 +13,20 @@ class CurrentScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
   static String id = "navigationBottom";
   String updatedUsername;
+  String updatedEmail;
+  String updatedGender;
 
   CurrentScreen();
-  CurrentScreen.settingsNavigatorPush(this.updatedUsername);
+  CurrentScreen.settingsNavigatorPush(this.updatedUsername, this.updatedEmail, this.updatedGender);
+
 
   @override
   _CurrentScreenState createState() {
 
-    if (updatedUsername != null)
+    if (updatedUsername != null && updatedEmail != null && updatedGender != null )
 
-      return _CurrentScreenState.settingsNavigatorPush(updatedUsername);
+      return _CurrentScreenState.settingsNavigatorPush(updatedUsername, updatedEmail, updatedGender);
+
 
     else return _CurrentScreenState();
   }
@@ -35,6 +39,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
   final _auth = FirebaseAuth.instance;
   final user = FirebaseAuth.instance.currentUser;
   String username;
+  String email;
   String gender;
   List<Widget> swipeScreen;
 
@@ -43,18 +48,34 @@ class _CurrentScreenState extends State<CurrentScreen> {
     // getting the current user details on loading of the screen
     getCurrentUser();
 
-    if(username == null)
-    {
+    if (username == null)
+
       username = UserDetails.getUserData()["username"];
+
+    if (gender == null)
+
       gender = UserDetails.getUserData()["gender"];
-      swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
-    }
+
+    if (email == null)
+
+      email = UserDetails.getUserData()["email"];
+
+    swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
   }
-  _CurrentScreenState.settingsNavigatorPush(this.username)
+  _CurrentScreenState.settingsNavigatorPush(this.username, this.email, this.gender)
   {
     swipeScreen = [HomeScreen.settingsNavigatorPush(username), MainCancerTypesScreen(), ChatBotScreen()];
   }
 
+  _CurrentScreenState.settingsNavigatorPushEmail(this.email)
+  {
+    print(email + " HEREEEE");
+    swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
+  }
+  _CurrentScreenState.settingsNavigatorPushGender(this.gender)
+  {
+    swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
+  }
 
   // using this User instance we can access the details of the logged user using
   // the normal email/pass auth method not the (Google Auth)
@@ -83,8 +104,9 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
       setState(() {
         username = userDocument["username"];
+        email = userDocument["email"];
+        print(email + " ARE U THE ISSUE");
         gender = userDocument["gender"];
-
       });
     } catch (e) {
       print(e);
@@ -101,30 +123,11 @@ class _CurrentScreenState extends State<CurrentScreen> {
     return SafeArea(
       child: WillPopScope(
         onWillPop: () async {
-          // Google Sign Out and other login signOut
-          print( "YOU ARE QUITTING THE APPLICATION BY CLICK THE BACK ICON FROM THE PHONE DEFAULT");
-
-          // clearing the chatbot data from the database firestore
-          _firestore.collection('chatbot-messages').get().then((snapshot) {
-            for (DocumentSnapshot ds in snapshot.docs) ds.reference.delete();
-          });
-
-          // (Email-Pass) user gets signed out
-          _auth.signOut();
-
-          // Google Auth User gets signed out
-          GoogleUserSignInDetails.googleSignInUserEmail = null;
-
-          print("Signing out......");
-
-          // Future.delayed(const Duration(milliseconds: 200), () {
-          //   SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-          // });
-
+          print(email);
           return true;
         },
         child: Scaffold(
-          appBar: CustomAppBar.settings(username, loggedInUser.email, gender, context),
+          appBar: CustomAppBar.settings(username, email, gender, context),
 
           // under this body only the screen go into
           body: PageView(
