@@ -24,94 +24,97 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(
-                //* might need to change when adding top row and nav
-                left: 22,
-                right: 22,
-                bottom: 20),
-            child: Center(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5, bottom: 15),
-                    child: Text(
-                      'Prognosis & Diagnosis of Cancers',
-                      style: TextStyle(
-                        fontFamily: 'Poppins-SemiBold',
-                        fontSize: 24,
-                        color: Color(0xFF565D5E),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 52),
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(
+                  //* might need to change when adding top row and nav
+                  left: 22,
+                  right: 22,
+                  bottom: 20),
+              child: Center(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5, bottom: 15),
+                      child: Text(
+                        'Prognosis & Diagnosis of Cancers',
+                        style: TextStyle(
+                          fontFamily: 'Poppins-SemiBold',
+                          fontSize: 24,
+                          color: Color(0xFF565D5E),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 11,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(
-                              cancerType: 'Skin Cancer',
-                              diagnosisRoute: SkinCancerDiagnosis(),
-                              prognosisRoute: CancerPrognosis("Skin Cancer")),
-                        ),
-                      );
-                    },
-                    child: CancerCard(
-                        cardTitle: 'Skin Cancer',
-                        cardColor: '0xFFf7c077',
-                        cardColor2: '0xFFbf802e',
-                        textColor: '0xFFFFFFFF'),
-                  ),
-                  //generates a cancer card with text passed.
-                  SizedBox(
-                    height: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(
-                              cancerType: 'Lung Cancer',
-                              diagnosisRoute: LungCancerDiagnosis(),
-                              prognosisRoute: CancerPrognosis("Lung Cancer")),
-                        ),
-                      );
-                    },
-                    child: CancerCard(
-                      cardTitle: 'Lung Cancer',
-                      cardColor: '0xFF66b9ed',
-                      cardColor2:'0xFF2d81b5',
-                      textColor: '0xFFFFFFFF',
+                    SizedBox(
+                      height: 11,
                     ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SelectServiceScreen(
-                              cancerType: 'Breast Cancer',
-                              diagnosisRoute: BreastCancerDiagnosis(),
-                              prognosisRoute: CancerPrognosis("Breast Cancer")),
-                        ),
-                      );
-                    },
-                    child: CancerCard(
-                      cardTitle: 'Breast Cancer',
-                      cardColor: '0xFFf25ca2',
-                      cardColor2: '0xFFa62863',
-                      textColor: '0xFFFFFFFF',
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SelectServiceScreen(
+                                cancerType: 'Skin Cancer',
+                                diagnosisRoute: SkinCancerDiagnosis(),
+                                prognosisRoute: CancerPrognosis("Skin Cancer")),
+                          ),
+                        );
+                      },
+                      child: CancerCard(
+                          cardTitle: 'Skin Cancer',
+                          cardColor: '0xFFf7c077',
+                          cardColor2: '0xFFbf802e',
+                          textColor: '0xFFFFFFFF'),
                     ),
-                  ),
-                ],
+                    //generates a cancer card with text passed.
+                    SizedBox(
+                      height: 15,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SelectServiceScreen(
+                                cancerType: 'Lung Cancer',
+                                diagnosisRoute: LungCancerDiagnosis(),
+                                prognosisRoute: CancerPrognosis("Lung Cancer")),
+                          ),
+                        );
+                      },
+                      child: CancerCard(
+                        cardTitle: 'Lung Cancer',
+                        cardColor: '0xFF66b9ed',
+                        cardColor2:'0xFF2d81b5',
+                        textColor: '0xFFFFFFFF',
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SelectServiceScreen(
+                                cancerType: 'Breast Cancer',
+                                diagnosisRoute: BreastCancerDiagnosis(),
+                                prognosisRoute: CancerPrognosis("Breast Cancer")),
+                          ),
+                        );
+                      },
+                      child: CancerCard(
+                        cardTitle: 'Breast Cancer',
+                        cardColor: '0xFFf25ca2',
+                        cardColor2: '0xFFa62863',
+                        textColor: '0xFFFFFFFF',
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
