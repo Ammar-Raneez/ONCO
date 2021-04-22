@@ -15,7 +15,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
 
   final rand = new Random();
   static var exerciseNames = [
-    "Bicycle Crunch",
+    "Bicycle Crunches",
     "Calf Raises",
     "High Knees",
     "Jump Squats",
@@ -28,6 +28,9 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   ];
   var selectedNames = [];
   String randomExercise() {
+    if(selectedNames.length == exerciseNames.length) {
+      selectedNames = [];
+    }
     String ex = exerciseNames[rand.nextInt(exerciseNames.length)];
     while (selectedNames.contains(ex)) {
       ex = exerciseNames[rand.nextInt(exerciseNames.length)];
@@ -38,6 +41,10 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var name_1 = randomExercise();
+    var name_2 = randomExercise();
+    var name_3 = randomExercise();
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -73,7 +80,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Here you can manage your medications, view previous reports and save doctors appointment notes.",
+                      "Here you can find exercises specifically tailored for you",
                       style: TextStyle(
                           fontFamily: 'Poppins-SemiBold',
                           fontSize: 13.0,
@@ -91,10 +98,22 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       Container(
                         child: GestureDetector(
                             onTap: (){
-                              var name = randomExercise();
-                              print(name.toString());
                             },
-                            child: ExerciseCard(cardTitle: "Hello Maneesha", cardImage: "images/exerciseImages/calfraise.jpg",)
+                            child: ExerciseCard(cardTitle: name_1, cardImage: name_1.replaceAll(' ', '').toLowerCase() + ".jpg"),
+                        ),
+                      ),
+                      Container(
+                        child: GestureDetector(
+                          onTap: (){
+                          },
+                          child: ExerciseCard(cardTitle: name_2, cardImage: name_2.replaceAll(' ', '').toLowerCase() + ".jpg"),
+                        ),
+                      ),
+                      Container(
+                        child: GestureDetector(
+                          onTap: (){
+                          },
+                          child: ExerciseCard(cardTitle: name_3, cardImage: name_3.replaceAll(' ', '').toLowerCase() + ".jpg"),
                         ),
                       ),
                     ]
