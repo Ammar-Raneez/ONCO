@@ -534,6 +534,10 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                           for (String userAnswer in skinCancerUserAnswers)
                           {
                             answerInQuestionCount = 0;
+                            if (userAnswer == "") {
+                              skinCancerUserAnswersIndices.add(0);
+                              continue;
+                            }
                             for (String answer in skinCancerAnswers[questionCount]) {
                               if (userAnswer == answer) {
                                 skinCancerUserAnswersIndices.add(answerInQuestionCount);
@@ -543,6 +547,8 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             }
                             questionCount ++;
                           }
+
+                          print(skinCancerUserAnswersIndices);
 
                           if (UserDetails.getUserData()['gender'] == "male")
                             prognosisBody = {
