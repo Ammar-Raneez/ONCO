@@ -65,7 +65,7 @@ skin_cancer_prognosis_body = {
     "big-moles": 1,
     "small-moles": 0,
     "freckling": 0,
-    "damage": 2,
+    "damage": 1,
     "tan": 0
 }
 
