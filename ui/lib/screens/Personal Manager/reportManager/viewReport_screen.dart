@@ -362,13 +362,6 @@ Widget cancerDetails(
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
-//                 child: Image.network(
-//                    imageUrl,
-//                    width: (MediaQuery
-//                        .of(context)
-//                        .size
-//                        .width),
-//                  ),
                   child: CachedNetworkImage(
                     progressIndicatorBuilder:
                         (context, url, downloadProgress) => SizedBox(
