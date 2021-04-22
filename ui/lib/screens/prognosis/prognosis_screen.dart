@@ -137,6 +137,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                       ),
                                     )),
                                 TextField(
+                                  keyboardType: TextInputType.number,
                                   controller: textFieldControllers[count],
                                   decoration: InputDecoration(
                                       filled: true,
@@ -273,6 +274,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                   )),
                               TextField(
                                 controller: textFieldControllers[count],
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
