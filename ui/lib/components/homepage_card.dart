@@ -13,7 +13,7 @@ class HomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext buildContext) => Padding(
-    padding: const EdgeInsets.fromLTRB(20,0,0,35),
+    padding: const EdgeInsets.fromLTRB(22,15,0,35),
     child: Container(
         decoration: BoxDecoration(
             color: Color(int.parse(cardColor)),
@@ -26,10 +26,10 @@ class HomeCard extends StatelessWidget {
             ),
           boxShadow: [
             BoxShadow(
-              color: Color(0xFF447D89).withOpacity(0.5),
+              color: Color(0xFF7D7D7D).withOpacity(0.4),
               spreadRadius: 3,
-              blurRadius: 15,
-              offset: Offset(7, 9), // changes position of shadow
+              blurRadius: 16,
+              offset: Offset(4, 9), // changes position of shadow
             ),
           ],
         ),
