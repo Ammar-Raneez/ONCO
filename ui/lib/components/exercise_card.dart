@@ -17,13 +17,13 @@ class ExerciseCard extends StatelessWidget {
         padding: const EdgeInsets.only(
           left: 20,
           right: 20,
-          bottom: 150,
+          bottom: 80,
           top: 20,
         ),
         child: Container(
           child: Container(
-              height: 150.0,
-              width: 275.0,
+              height: 180.0,
+              width: 250.0,
                 child: Align(
                   alignment: Alignment.topLeft,
                   child:Padding(
@@ -47,9 +47,8 @@ class ExerciseCard extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(22.0),
                 color: Colors.white,
-              )
+              ),
           ),
-          // color: Color(int.parse(cardColor)),
       ),
     );
   }

@@ -84,7 +84,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       style: TextStyle(
                           fontFamily: 'Poppins-SemiBold',
                           fontSize: 13.0,
-                          color: Colors.white,
+                          color: Color(0xFF959595),
                       ),
                     ),
                   ),
@@ -119,8 +119,22 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                     ]
                 ),
             ),
-            SizedBox(
-              height: 20,
+            Align(
+              alignment: Alignment.center,
+               child: Padding(
+                 padding: const EdgeInsets.only(bottom: 50.0),
+                child: Container(
+                  child:  RaisedButton(
+                    child: Text("Start Workout."),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    onPressed: () {
+
+                    },
+                  ),
+                ),
+              ),
             ),
           ],
         ),
