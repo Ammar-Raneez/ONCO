@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:group_button/group_button.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/components/alert_widget.dart';
@@ -136,25 +137,28 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                         fontSize: 16,
                                       ),
                                     )),
-                                TextField(
-                                  keyboardType: TextInputType.number,
-                                  controller: textFieldControllers[count],
-                                  decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: new BorderSide(
-                                            color: Colors.white),
-                                        borderRadius: new BorderRadius.circular(
-                                            16),
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: new BorderSide(
-                                            color: Colors.white),
-                                        borderRadius: new BorderRadius.circular(
-                                            16),
-                                      ),
-                                      hintText: 'Enter the Value for the Input'),
+                                Form(
+                                  child: TextFormField(
+                                    inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                                    keyboardType: TextInputType.number,
+                                    controller: textFieldControllers[count],
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: new BorderSide(
+                                              color: Colors.white),
+                                          borderRadius: new BorderRadius.circular(
+                                              16),
+                                        ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: new BorderSide(
+                                              color: Colors.white),
+                                          borderRadius: new BorderRadius.circular(
+                                              16),
+                                        ),
+                                        hintText: 'Enter the Value for the Input'),
+                                  ),
                                 ),
                               ]
                           )
@@ -272,21 +276,24 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                       fontSize: 20,
                                     ),
                                   )),
-                              TextField(
-                                controller: textFieldControllers[count],
-                                keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: new BorderSide(color: Colors.white),
-                                      borderRadius: new BorderRadius.circular(16),
-                                    ),
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: new BorderSide(color: Colors.white),
-                                      borderRadius: new BorderRadius.circular(16),
-                                    ),
-                                    hintText: 'Enter the Value for the Input'),
+                              Form(
+                                child: TextFormField(
+                                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                                  controller: textFieldControllers[count],
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: new BorderSide(color: Colors.white),
+                                        borderRadius: new BorderRadius.circular(16),
+                                      ),
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: new BorderSide(color: Colors.white),
+                                        borderRadius: new BorderRadius.circular(16),
+                                      ),
+                                      hintText: 'Enter the Value for the Input'),
+                                ),
                               ),
                             ]
                         )
