@@ -290,7 +290,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             maxLength: 30,
                             controller: _userNameController,
                             validator: (value) {
-                              if (value == "null" || value.isEmpty) {
+                              if (value == null || value.isEmpty) {
                                 return 'Please enter some text';
                               }
                               return null;
@@ -348,7 +348,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             controller: _emailController,
                             validator: (value) {
 
-                              if (value == "null" || value.isEmpty) {
+                              if (value == null || value.isEmpty) {
 
                                 return 'Please enter some text';
                               }

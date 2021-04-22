@@ -57,6 +57,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   List<String> skinCancerUserAnswers= [];
   Map prognosisBody;
   final _firestore = FirebaseFirestore.instance;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   var cancerType;
   var cancerPrognosisAttributes;
   var skinCancerAnswers;
@@ -77,14 +78,10 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   Future<String> apiRequest() async {
     HttpClient httpClient = new HttpClient();
     HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
-    print(request);
     request.headers.set('content-type', 'application/json');
     request.add(utf8.encode(json.encode(prognosisBody)));
     HttpClientResponse response = await request.close();
-    print(response);
-    // todo - you should check the response.statusCode
     String reply = await response.transform(utf8.decoder).join();
-    print(reply);
     httpClient.close();
     return reply;
   }
@@ -95,11 +92,8 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
       if (question != "Age") {
         skinCancerUserAnswers.add("");
-        print(question);
       }
     }
-
-    print(skinCancerUserAnswers);
 
     List<dynamic> responseList = cancerPrognosisAttributes;
     List<Widget> listItems = [];
@@ -138,7 +132,20 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                       ),
                                     )),
                                 Form(
+                                  key: _formKey,
                                   child: TextFormField(
+                                    validator: (value) {
+
+                                      if (value == null || value.isEmpty) {
+
+                                        return 'Please enter some Input';
+                                      }
+                                      else if (int.parse(value) < 26 || int.parse(value) > 70)
+
+                                        return 'Please make sure User Input is between 25 and 70';
+
+                                      return null;
+                                    },
                                     inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                                     keyboardType: TextInputType.number,
                                     controller: textFieldControllers[count],
@@ -278,6 +285,15 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                   )),
                               Form(
                                 child: TextFormField(
+                                  validator: (value) {
+
+                                    if (value == null || value.isEmpty) {
+
+                                      return 'Please enter some Input';
+                                    }
+
+                                    return null;
+                                  },
                                   inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                                   controller: textFieldControllers[count],
                                   keyboardType: TextInputType.number,
@@ -406,261 +422,255 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                     shape: const StadiumBorder(),
                     onPressed: () async {
 
-                      /* If Else Conditions here to take each Input from the
-                       * textFieldControllers Array, and setting the Input to
-                       * each Attribute required by a Model in a Dictionary
-                       * the Number Controllers will match the number of Attributes
-                       * required by the Model
-                       */
-                      if (cancerType == "Lung Cancer") {
-
-                        prognosisBody = {
-                          "Age": textFieldControllers[0].text,
-                          "Gender": textFieldControllers[1].text,
-                          "AirPollution":
-                          ((int.parse(textFieldControllers[2].text) / 10) *
-                              8).toString(),
-                          "Alcoholuse":
-                          ((int.parse(textFieldControllers[3].text) / 10) *
-                              8).toString(),
-                          "DustAllergy":
-                          ((int.parse(textFieldControllers[4].text) / 10) *
-                              8).toString(),
-                          "OccuPationalHazards":
-                          ((int.parse(textFieldControllers[5].text) / 10) *
-                              8).toString(),
-                          "GeneticRisk":
-                          ((int.parse(textFieldControllers[6].text) / 10) *
-                              7).toString(),
-                          "chronicLungDisease":
-                          ((int.parse(textFieldControllers[7].text) / 10) *
-                              7).toString(),
-                          "BalancedDiet":
-                          ((int.parse(textFieldControllers[8].text) / 10) *
-                              7).toString(),
-                          "Obesity":
-                          ((int.parse(textFieldControllers[9].text) / 10) *
-                              7).toString(),
-                          "Smoking":
-                          ((int.parse(textFieldControllers[10].text) / 10) *
-                              8).toString(),
-                          "PassiveSmoker":
-                          ((int.parse(textFieldControllers[11].text) / 10) *
-                              8).toString(),
-                          "ChestPain":
-                          ((int.parse(textFieldControllers[12].text) / 10) *
-                              9).toString(),
-                          "CoughingofBlood":
-                          ((int.parse(textFieldControllers[13].text) / 10) *
-                              9).toString(),
-                          "Fatigue":
-                          ((int.parse(textFieldControllers[14].text) / 10) *
-                              9).toString(),
-                          "WeightLoss":
-                          ((int.parse(textFieldControllers[15].text) / 10) *
-                              8).toString(),
-                          "ShortnessofBreath":
-                          ((int.parse(textFieldControllers[16].text) / 10) *
-                              9).toString(),
-                          "Wheezing":
-                          ((int.parse(textFieldControllers[17].text) / 10) *
-                              8).toString(),
-                          "SwallowingDifficulty":
-                          ((int.parse(textFieldControllers[18].text) / 10) *
-                              8).toString(),
-                          "ClubbingofFingerNails":
-                          ((int.parse(textFieldControllers[19].text) / 10) *
-                              9).toString(),
-                          "FrequentCold":
-                          ((int.parse(textFieldControllers[20].text) / 10) *
-                              7).toString(),
-                          "DryCough":
-                          ((int.parse(textFieldControllers[21].text) / 10) *
-                              7).toString(),
-                          "Snoring":
-                          ((int.parse(textFieldControllers[22].text) / 10) *
-                              7).toString(),
-                        };
-                      } else if (cancerType == "Breast Cancer") {
-                        print("B");
-                        prognosisBody = {
-                          "radius_mean": textFieldControllers[0].text,
-                          "texture_mean": textFieldControllers[1].text,
-                          "perimeter_mean": textFieldControllers[2].text,
-                          "compactness_mean": textFieldControllers[3].text,
-                          "concavity_mean": textFieldControllers[4].text,
-                          "concave points_mean": textFieldControllers[5].text,
-                          "fractal_dimension_mean": textFieldControllers[6].text,
-                          "radius_se": textFieldControllers[7].text,
-                          "texture_se": textFieldControllers[8].text,
-                          "perimeter_se": textFieldControllers[9].text,
-                          "compactness_se": textFieldControllers[10].text,
-                          "concavity_se": textFieldControllers[11].text,
-                          "concave points_se": textFieldControllers[12].text,
-                          "symmetry_se": textFieldControllers[13].text,
-                          "fractal_dimension_se": textFieldControllers[14].text,
-                          "compactness_worst": textFieldControllers[15].text,
-                          "concavity_worst": textFieldControllers[16].text,
-                          "concave points_worst": textFieldControllers[17].text,
-                          "symmetry_worst": textFieldControllers[18].text,
-                          "fractal_dimension_worst": textFieldControllers[19].text,
-                          "tumor_size": textFieldControllers[20].text,
-                          "positive_axillary_lymph_node": textFieldControllers[21].text
-                        };
-                      }
-                      else if (cancerType == "Skin Cancer")
-                      {
-                        List<int> skinCancerUserAnswersIndices = [];
-
-                        int questionCount = 0;
-                        int answerInQuestionCount;
-                        for (String userAnswer in skinCancerUserAnswers)
-                        {
-                          answerInQuestionCount = 0;
-                          for (String answer in skinCancerAnswers[questionCount]) {
-                            if (userAnswer == answer) {
-                              skinCancerUserAnswersIndices.add(answerInQuestionCount);
-                              break;
-                            }
-                            answerInQuestionCount ++;
-                          }
-                          questionCount ++;
-                        }
-
-                        print(skinCancerUserAnswersIndices);
-
-                        if (UserDetails.getUserData()['gender'] == "male")
-                          prognosisBody = {
-
-                            "age": textFieldControllers[0].text,
-                            "gender": "male",
-                            "sunburn": skinCancerUserAnswersIndices[1],
-                            "complexion": skinCancerUserAnswersIndices[0],
-                            "big-moles": skinCancerUserAnswersIndices[2],
-                            "small-moles": skinCancerUserAnswersIndices[3],
-                            "freckling": skinCancerUserAnswersIndices[4],
-                            "damage": skinCancerUserAnswersIndices[5],
-                            "tan": 0
-                          };
-                        else if (UserDetails.getUserData()['gender'] == "female")
-                          prognosisBody = {
-
-                            "age": textFieldControllers[0].text,
-                            "gender": "female",
-                            "sunburn": 0,
-                            "complexion": skinCancerUserAnswersIndices[0],
-                            "big-moles": 0,
-                            "small-moles": skinCancerUserAnswersIndices[2],
-                            "freckling": skinCancerUserAnswersIndices[3],
-                            "damage": 0,
-                            "tan": skinCancerUserAnswersIndices[1]
-                          };
-
-                        print(prognosisBody);
-                      }
-
-                      // Progress Dialog that will run till API Request is received
-                      final ProgressDialog progressDialog = ProgressDialog(
-                          context,
-                          type: ProgressDialogType.Normal,
-                          isDismissible: false,
-                          showLogs: true);
-
-                      // Styling Progress Dialog
-                      progressDialog.style(
-                          message: '   Analyzing\n   Input',
-                          padding: EdgeInsets.all(20),
-                          borderRadius: 10.0,
-                          backgroundColor: Colors.white,
-                          progressWidget: LinearProgressIndicator(
-                            backgroundColor: Colors.lightBlueAccent,
-                          ),
-                          elevation: 10.0,
-                          insetAnimCurve: Curves.easeInCubic,
-                          progress: 0.0,
-                          maxProgress: 100.0,
-                          progressTextStyle: TextStyle(
-                            color: Color(0xFF565D5E),
-                            fontSize: 13.0,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Poppins-SemiBold',
-                          ),
-                          messageTextStyle: TextStyle(
-                            color: Color(0xFF565D5E),
-                            fontSize: 19.0,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Poppins-SemiBold',
-                          ));
-
-                      // Showing the Progress Dialog and Dismissing it After the API Request is Received
-                      progressDialog.show();
-
-                      String reply = await apiRequest();
-
-                      progressDialog.hide();
-
-                      // checking if the response is not null and displaying the result
-                      if (reply != null) {
-
-                        final body = json.decode(reply);
-
-                        print(body);
-
-                        var prognosisResult;
-
-                        if (cancerType != "Skin Cancer")
-
-                          prognosisResult = body["Prediction"];
-
-                        else
-                        {
-                          prognosisResult = body['result_string'];
-                        }
-
-                        /* For Breast Cancer Prognosis the Result is either 'R'
-                         * for Recurring and 'N' for Non-Recurring, so an If Condition
-                         * is used to set the Result to a more User Friendly
-                         * message
+                      if (_formKey.currentState.validate()) {
+                        /* If Else Conditions here to take each Input from the
+                         * textFieldControllers Array, and setting the Input to
+                         * each Attribute required by a Model in a Dictionary
+                         * the Number Controllers will match the number of Attributes
+                         * required by the Model
                          */
-                        if (prognosisResult == "N" &&
-                            cancerType == "Breast Cancer")
-                          prognosisResult = "Non-Recurring";
-                        else if (prognosisResult == "R" &&
-                            cancerType == "Breast Cancer")
-                          prognosisResult = "Recurring";
+                        if (cancerType == "Lung Cancer") {
 
-                        print(prognosisResult);
-                        // Displaying the alert dialog
-                        createAlertDialog(
-                            context, "Prognosis", prognosisResult, 201);
+                          prognosisBody = {
+                            "Age": textFieldControllers[0].text,
+                            "Gender": textFieldControllers[1].text,
+                            "AirPollution":
+                            ((int.parse(textFieldControllers[2].text) / 10) *
+                                8).toString(),
+                            "Alcoholuse":
+                            ((int.parse(textFieldControllers[3].text) / 10) *
+                                8).toString(),
+                            "DustAllergy":
+                            ((int.parse(textFieldControllers[4].text) / 10) *
+                                8).toString(),
+                            "OccuPationalHazards":
+                            ((int.parse(textFieldControllers[5].text) / 10) *
+                                8).toString(),
+                            "GeneticRisk":
+                            ((int.parse(textFieldControllers[6].text) / 10) *
+                                7).toString(),
+                            "chronicLungDisease":
+                            ((int.parse(textFieldControllers[7].text) / 10) *
+                                7).toString(),
+                            "BalancedDiet":
+                            ((int.parse(textFieldControllers[8].text) / 10) *
+                                7).toString(),
+                            "Obesity":
+                            ((int.parse(textFieldControllers[9].text) / 10) *
+                                7).toString(),
+                            "Smoking":
+                            ((int.parse(textFieldControllers[10].text) / 10) *
+                                8).toString(),
+                            "PassiveSmoker":
+                            ((int.parse(textFieldControllers[11].text) / 10) *
+                                8).toString(),
+                            "ChestPain":
+                            ((int.parse(textFieldControllers[12].text) / 10) *
+                                9).toString(),
+                            "CoughingofBlood":
+                            ((int.parse(textFieldControllers[13].text) / 10) *
+                                9).toString(),
+                            "Fatigue":
+                            ((int.parse(textFieldControllers[14].text) / 10) *
+                                9).toString(),
+                            "WeightLoss":
+                            ((int.parse(textFieldControllers[15].text) / 10) *
+                                8).toString(),
+                            "ShortnessofBreath":
+                            ((int.parse(textFieldControllers[16].text) / 10) *
+                                9).toString(),
+                            "Wheezing":
+                            ((int.parse(textFieldControllers[17].text) / 10) *
+                                8).toString(),
+                            "SwallowingDifficulty":
+                            ((int.parse(textFieldControllers[18].text) / 10) *
+                                8).toString(),
+                            "ClubbingofFingerNails":
+                            ((int.parse(textFieldControllers[19].text) / 10) *
+                                9).toString(),
+                            "FrequentCold":
+                            ((int.parse(textFieldControllers[20].text) / 10) *
+                                7).toString(),
+                            "DryCough":
+                            ((int.parse(textFieldControllers[21].text) / 10) *
+                                7).toString(),
+                            "Snoring":
+                            ((int.parse(textFieldControllers[22].text) / 10) *
+                                7).toString(),
+                          };
+                        } else if (cancerType == "Breast Cancer") {
 
-                        print("OK");
-                        // Adding the response data into the database for report creation purpose
-                        // initially, convert all inputs into strings for the report
-                        Map firebasePrognosisBody;
-                        setState(() {
-                          firebasePrognosisBody = prognosisBody;
+                          prognosisBody = {
+                            "radius_mean": textFieldControllers[0].text,
+                            "texture_mean": textFieldControllers[1].text,
+                            "perimeter_mean": textFieldControllers[2].text,
+                            "compactness_mean": textFieldControllers[3].text,
+                            "concavity_mean": textFieldControllers[4].text,
+                            "concave points_mean": textFieldControllers[5].text,
+                            "fractal_dimension_mean": textFieldControllers[6].text,
+                            "radius_se": textFieldControllers[7].text,
+                            "texture_se": textFieldControllers[8].text,
+                            "perimeter_se": textFieldControllers[9].text,
+                            "compactness_se": textFieldControllers[10].text,
+                            "concavity_se": textFieldControllers[11].text,
+                            "concave points_se": textFieldControllers[12].text,
+                            "symmetry_se": textFieldControllers[13].text,
+                            "fractal_dimension_se": textFieldControllers[14].text,
+                            "compactness_worst": textFieldControllers[15].text,
+                            "concavity_worst": textFieldControllers[16].text,
+                            "concave points_worst": textFieldControllers[17].text,
+                            "symmetry_worst": textFieldControllers[18].text,
+                            "fractal_dimension_worst": textFieldControllers[19].text,
+                            "tumor_size": textFieldControllers[20].text,
+                            "positive_axillary_lymph_node": textFieldControllers[21].text
+                          };
+                        }
+                        else if (cancerType == "Skin Cancer")
+                        {
+                          List<int> skinCancerUserAnswersIndices = [];
 
-                          for (var eachItem in firebasePrognosisBody.keys) {
-                            firebasePrognosisBody[eachItem] = firebasePrognosisBody[eachItem].toString();
+                          int questionCount = 0;
+                          int answerInQuestionCount;
+                          for (String userAnswer in skinCancerUserAnswers)
+                          {
+                            answerInQuestionCount = 0;
+                            for (String answer in skinCancerAnswers[questionCount]) {
+                              if (userAnswer == answer) {
+                                skinCancerUserAnswersIndices.add(answerInQuestionCount);
+                                break;
+                              }
+                              answerInQuestionCount ++;
+                            }
+                            questionCount ++;
                           }
-                        });
 
-                        _firestore
-                            .collection("users")
-                            .doc(UserDetails.getUserData()["email"])
-                            .collection("InputPrognosis")
-                            .add({
-                          "prognosisInputs": firebasePrognosisBody,
-                          "cancerType": cancerType,
-                          "reportType": "prognosis",
-                          "result": prognosisResult,
-                          'timestamp': Timestamp.now(),
-                        });
-                      } else {
-                        // Displaying the alert dialog
-                        createAlertDialog(context, "Error",
-                            "Oops something went wrong!", 404);
+                          if (UserDetails.getUserData()['gender'] == "male")
+                            prognosisBody = {
+
+                              "age": textFieldControllers[0].text,
+                              "gender": "male",
+                              "sunburn": skinCancerUserAnswersIndices[1],
+                              "complexion": skinCancerUserAnswersIndices[0],
+                              "big-moles": skinCancerUserAnswersIndices[2],
+                              "small-moles": skinCancerUserAnswersIndices[3],
+                              "freckling": skinCancerUserAnswersIndices[4],
+                              "damage": skinCancerUserAnswersIndices[5],
+                              "tan": 0
+                            };
+                          else if (UserDetails.getUserData()['gender'] == "female")
+                            prognosisBody = {
+
+                              "age": textFieldControllers[0].text,
+                              "gender": "female",
+                              "sunburn": 0,
+                              "complexion": skinCancerUserAnswersIndices[0],
+                              "big-moles": 0,
+                              "small-moles": skinCancerUserAnswersIndices[2],
+                              "freckling": skinCancerUserAnswersIndices[3],
+                              "damage": 0,
+                              "tan": skinCancerUserAnswersIndices[1]
+                            };
+                        }
+
+                        // Progress Dialog that will run till API Request is received
+                        final ProgressDialog progressDialog = ProgressDialog(
+                            context,
+                            type: ProgressDialogType.Normal,
+                            isDismissible: false,
+                            showLogs: true);
+
+                        // Styling Progress Dialog
+                        progressDialog.style(
+                            message: '   Analyzing\n   Input',
+                            padding: EdgeInsets.all(20),
+                            borderRadius: 10.0,
+                            backgroundColor: Colors.white,
+                            progressWidget: LinearProgressIndicator(
+                              backgroundColor: Colors.lightBlueAccent,
+                            ),
+                            elevation: 10.0,
+                            insetAnimCurve: Curves.easeInCubic,
+                            progress: 0.0,
+                            maxProgress: 100.0,
+                            progressTextStyle: TextStyle(
+                              color: Color(0xFF565D5E),
+                              fontSize: 13.0,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Poppins-SemiBold',
+                            ),
+                            messageTextStyle: TextStyle(
+                              color: Color(0xFF565D5E),
+                              fontSize: 19.0,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'Poppins-SemiBold',
+                            ));
+
+                        // Showing the Progress Dialog and Dismissing it After the API Request is Received
+                        progressDialog.show();
+
+                        String reply = await apiRequest();
+
+                        progressDialog.hide();
+
+                        // checking if the response is not null and displaying the result
+                        if (reply != null) {
+
+                          final body = json.decode(reply);
+
+                          var prognosisResult;
+
+                          if (cancerType != "Skin Cancer")
+
+                            prognosisResult = body["Prediction"];
+
+                          else
+                          {
+                            prognosisResult = body['result_string'];
+                          }
+
+                          /* For Breast Cancer Prognosis the Result is either 'R'
+                           * for Recurring and 'N' for Non-Recurring, so an If Condition
+                           * is used to set the Result to a more User Friendly
+                           * message
+                           */
+                          if (prognosisResult == "N" &&
+                              cancerType == "Breast Cancer")
+                            prognosisResult = "Non-Recurring";
+                          else if (prognosisResult == "R" &&
+                              cancerType == "Breast Cancer")
+                            prognosisResult = "Recurring";
+
+                          // Displaying the alert dialog
+                          createAlertDialog(
+                              context, "Prognosis", prognosisResult, 201);
+
+                          // Adding the response data into the database for report creation purpose
+                          // initially, convert all inputs into strings for the report
+                          Map firebasePrognosisBody;
+                          setState(() {
+                            firebasePrognosisBody = prognosisBody;
+
+                            for (var eachItem in firebasePrognosisBody.keys) {
+                              firebasePrognosisBody[eachItem] = firebasePrognosisBody[eachItem].toString();
+                            }
+                          });
+
+                          _firestore
+                              .collection("users")
+                              .doc(UserDetails.getUserData()["email"])
+                              .collection("InputPrognosis")
+                              .add({
+                            "prognosisInputs": firebasePrognosisBody,
+                            "cancerType": cancerType,
+                            "reportType": "prognosis",
+                            "result": prognosisResult,
+                            'timestamp': Timestamp.now(),
+                          });
+                        } else {
+                          // Displaying the alert dialog
+                          createAlertDialog(context, "Error",
+                              "Oops something went wrong!", 404);
+                        }
                       }
                     }
                 ),
