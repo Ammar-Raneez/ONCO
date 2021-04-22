@@ -23,17 +23,8 @@ class _AddAppointmentsState extends State<AddAppointments> {
   DateTime newDate;
   TimeOfDay newTime;
 
-  FocusNode _nameFocus;
-  FocusNode _doseFocus;
-  FocusNode _timeFocus;
-
   @override
   void initState() {
-
-    // initializing focus nodes
-    _nameFocus = FocusNode();
-    _doseFocus = FocusNode();
-    _timeFocus = FocusNode();
 
     super.initState();
   }
@@ -132,7 +123,6 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                                 setState(() {
                                                   _doctorName = value;
                                                 });
-                                                _doseFocus.requestFocus(); // to move focus to description node
                                               }
                                             },
                                             decoration: InputDecoration(
@@ -170,7 +160,6 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                               setState(() {
                                                 _notes = value;
                                               });
-                                              _timeFocus.requestFocus(); // to move focus to description node
                                             }
                                           },
                                           decoration: InputDecoration(
@@ -274,15 +263,6 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                           );
 
                                           AppointmentsFirebaseApi.createAppointment(newApplication);
-
-
-                                          print(_appointmentTime);
-                                          print("NONO");
-                                          print(_appointmentDate.timeZoneName);
-                                          print("LESGO");
-                                          print(new DateTime(
-                                              _appointmentDate.year, _appointmentDate.month, _appointmentDate.day,
-                                              _appointmentTime.hour, _appointmentTime.minute));
 
                                           // add an event to systems default calendar
                                           final Event event = Event(

@@ -8,10 +8,9 @@ import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ui/services/UserDetails.dart';
+import 'package:ui/services/endPoints.dart';
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:ui/services/endPoints.dart';
 
 class CancerPrognosis extends StatefulWidget {
   var cancerType;

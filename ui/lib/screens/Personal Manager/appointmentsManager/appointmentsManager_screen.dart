@@ -56,7 +56,8 @@ class _AppointmentsManagerState extends State<AppointmentsManager> {
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Here you can manage your Appointments, click add a medication to create one and drag the Appointment to delete it",
+                              "Here you can manage your Appointments, click on the bottom right '+' Icon to create one and click on the Trash Bin Icon"
+                                  "to delete an Appointment",
                               style: TextStyle(
                                   fontFamily: 'Poppins-SemiBold',
                                   fontSize: 13.0,
