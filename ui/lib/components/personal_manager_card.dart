@@ -48,6 +48,14 @@ class PersonalCard extends StatelessWidget {
                       begin: Alignment(1.2,1),
                       end: Alignment(0.8,-2),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color:  Color(int.parse(cardColor2)).withOpacity(0.5),
+                        spreadRadius: 3,
+                        blurRadius: 15,
+                        offset: Offset(7, 9), // changes position of shadow
+                      ),
+                    ],
                   )
               ),
               // color: Color(int.parse(cardColor)),
