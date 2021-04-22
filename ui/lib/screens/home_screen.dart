@@ -143,6 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       cardTitle: 'Personal Manager',
                                       cardColor: '0xFFdb5682',
                                       textColor: '0xFFFFFFFF',
+                                      cardImage: 'images/CardImages/personalManager.jpg',
                                     ),
                                   ),
                                 ),
@@ -157,9 +158,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       cardTitle: 'Exercise Plan',
                                       cardColor: '0xFFa4d44a',
                                       textColor: '0xFFFFFFFF',
+                                       cardImage: 'images/CardImages/exercisePlan.jpg',
                                     ),
                                   ),
                                 ),
+
                                 Container(
                                   child: GestureDetector(
                                     onTap: () {
@@ -173,6 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       cardTitle: 'Meal Plan',
                                       cardColor: '0xFF4ad4b1',
                                       textColor: '0xFFFFFFFF',
+                                      cardImage: 'images/CardImages/mealPlan.jpg',
                                     ),
                                   ),
                                 ),
