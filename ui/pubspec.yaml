@@ -50,6 +50,7 @@ flutter:
 
   assets:
     - images/
+    - images/CardImages/
     - images/ExerciseImages/
 
   fonts:
