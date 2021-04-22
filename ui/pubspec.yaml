@@ -1,6 +1,7 @@
 name: ui
 description: UI for ONCO
 
+
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -13,7 +14,6 @@ dependencies:
     sdk: flutter
   flutter_slidable:
   provider:
-  cached_network_image: ^2.5.1
   cupertino_icons: ^1.0.0
   animated_text_kit: ^3.1.0
   firebase_core:
@@ -32,7 +32,7 @@ dependencies:
   dio: ^3.0.10
   google_sign_in: ^4.5.9
   progress_dialog: ^1.2.4
-  grouped_buttons:
+  grouped_buttons: ^1.0.4
   group_button:
   search_page: ^1.3.0
   add_2_calendar: ^1.4.0
@@ -49,7 +49,6 @@ flutter:
 
   assets:
     - images/
-    - images/cardImages/
 
   fonts:
     - family: Poppins-Regular
