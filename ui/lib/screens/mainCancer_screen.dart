@@ -62,12 +62,13 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                         cardTitle: 'Skin Cancer',
-                        cardColor: '0xFFe0a75c',
+                        cardColor: '0xFFf7c077',
+                        cardColor2: '0xFFbf802e',
                         textColor: '0xFFFFFFFF'),
                   ),
                   //generates a cancer card with text passed.
                   SizedBox(
-                    height: 6,
+                    height: 15,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -83,12 +84,13 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                       cardTitle: 'Lung Cancer',
-                      cardColor: '0xFF5cade0',
+                      cardColor: '0xFF66b9ed',
+                      cardColor2:'0xFF2d81b5',
                       textColor: '0xFFFFFFFF',
                     ),
                   ),
                   SizedBox(
-                    height: 6,
+                    height: 15,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -104,7 +106,8 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                     },
                     child: CancerCard(
                       cardTitle: 'Breast Cancer',
-                      cardColor: '0xFFe34f94',
+                      cardColor: '0xFFf25ca2',
+                      cardColor2: '0xFFa62863',
                       textColor: '0xFFFFFFFF',
                     ),
                   ),
