@@ -49,16 +49,14 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   }
 
   // DETECT THE CANCER METHOD (ASYNC TASK)
-  _detect() async {
+  _detect(ProgressDialog progressDialog) async {
     // If the user selects an image only we perform the API request else an alert will be displayed
     if (imageFile == null) {
       // ALERT USER TO SELECT OR CAPTURE IMAGE FIRST OFF
       createAlertDialog(
           context, "Error", "There is no image selected or captured!", 404);
     } else {
-      setState(() {
-        showSpinner = true;
-      });
+      progressDialog.show();
       try {
         // GETTING THE IMAGE NAME
         String fileName = imageFile.path.split('/').last;
@@ -95,9 +93,9 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
           'timestamp': Timestamp.now(),
         });
 
+        progressDialog.hide();
         // Display the spinner to indicate that its loading
         setState(() {
-          showSpinner = false;
           showHighlightedImage = true;
         });
 
@@ -105,7 +103,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         if (responseBody != null) {
           // Displaying the alert dialog
           createAlertDialog(context, "Diagnosis",
-              "Detection result: " + resultPrediction, 201);
+              "Detection result: " + resultPrediction, 404);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -115,9 +113,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         // Displaying alert to the user
         createAlertDialog(context, "Error", e._message, 404);
 
-        setState(() {
-          showSpinner = false;
-        });
+        progressDialog.hide();
       }
     }
   }
@@ -158,6 +154,36 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
 
   @override
   Widget build(BuildContext context) {
+    // Progress Dialog that will run till API Request is received
+    final ProgressDialog progressDialog = ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: false, showLogs: true);
+
+    // Styling Progress Dialog
+    progressDialog.style(
+        message: '   Scanning\n   Image',
+        padding: EdgeInsets.all(20),
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: LinearProgressIndicator(
+          backgroundColor: Colors.lightBlueAccent,
+        ),
+        elevation: 10.0,
+        insetAnimCurve: Curves.easeInCubic,
+        progress: 0.0,
+        maxProgress: 100.0,
+        progressTextStyle: TextStyle(
+          color: Color(0xFF565D5E),
+          fontSize: 13.0,
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Poppins-SemiBold',
+        ),
+        messageTextStyle: TextStyle(
+          color: Color(0xFF565D5E),
+          fontSize: 19.0,
+          fontWeight: FontWeight.w600,
+          fontFamily: 'Poppins-SemiBold',
+        ));
+
     return SafeArea(
       child: ModalProgressHUD(
         // displaying the spinner for async tasks
@@ -327,7 +353,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                             ),
                             shape: const StadiumBorder(),
                             onPressed: () {
-                              _detect();
+                              _detect(progressDialog);
                             },
                           ),
                         ),
