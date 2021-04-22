@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/constants.dart';
 
@@ -49,8 +50,21 @@ class MealDetailScreen extends StatelessWidget {
                   title,
                   style: kTextStyle.copyWith(fontSize: 16, color: Colors.white),
                 ),
-                background: Image.network(
-                  imgUrl,
+//                background: Image.network(
+//                  imgUrl,
+//                  fit: BoxFit.cover,
+//                ),
+                background: CachedNetworkImage(
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 100,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                    ),
+                  ),
+                  imageUrl: imgUrl,
                   fit: BoxFit.cover,
                 ),
               ),
