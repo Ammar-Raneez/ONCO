@@ -81,7 +81,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                 children: [
                   SizedBox(
-                    height: 8.0,
+                    height: 100.0,
                   ),
                   Flexible(
                     child: Hero(
