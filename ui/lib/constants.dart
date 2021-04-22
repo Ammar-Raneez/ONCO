@@ -82,7 +82,6 @@ const SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_FEMALE = [
 
 const LUNG_CANCER_PROGNOSIS_QUESTIONS = [
   "Age",
-  "Gender",
   "Air Pollution",
   "Alcohol use",
   "Dust Allergy",
