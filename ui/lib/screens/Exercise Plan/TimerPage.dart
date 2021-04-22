@@ -30,7 +30,7 @@ class _TimerPageState extends State<TimerPage> {
         workout = "Please Take a Break";
       }
       setState(() {
-        greeting = "After Some time ${DateTime.now().second}";
+       workout = "After Some time ${DateTime.now().second}";
       });
       setState(() {
         time = "${DateTime
