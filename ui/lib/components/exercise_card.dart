@@ -14,39 +14,42 @@ class ExerciseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 7,
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          bottom: 150,
+          top: 20,
         ),
         child: Container(
-
           child: Container(
-              height: 130.0,
-              width: 200,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 18,
-                  left:21,),
-
+              height: 150.0,
+              width: 275.0,
                 child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child:Text(
-                    cardTitle,
-                    style: TextStyle(
-                      fontSize: 19.0,
-                      color: Colors.white,
-                      fontFamily: 'Poppins-SemiBold',
+                  alignment: Alignment.topLeft,
+                  child:Padding(
+                    padding: const EdgeInsets.only(left: 12.0, top: 10.0),
+                    child: Text(
+                      cardTitle,
+                      style: TextStyle(
+                        fontSize: 19.0,
+                        color: Colors.black,
+                        fontFamily: 'Poppins-SemiBold',
+                      ),
                     ),
                   ),
                 ),
               ),
               decoration:BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("images/ExerciseImages/" + cardImage),
+                  fit: BoxFit.fitHeight,
+                  alignment: Alignment.topCenter
+                ),
                 borderRadius: BorderRadius.circular(22.0),
-                color: Color(0xFFFFAA9090),
+                color: Colors.white,
               )
           ),
           // color: Color(int.parse(cardColor)),
-        ),
       ),
     );
   }

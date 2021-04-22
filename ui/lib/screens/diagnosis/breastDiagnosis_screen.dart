@@ -9,6 +9,7 @@ import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'dart:async';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/services/UserDetails.dart';
 
 class BreastCancerDiagnosis extends StatefulWidget {
@@ -26,7 +27,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   bool showSpinner = false;
   bool showHighlightedImage = false;
   dynamic responseBody;
-   final _firestore = FirebaseFirestore.instance;
+  final _firestore = FirebaseFirestore.instance;
 
   // OPEN GALLERY TO SELECT AN IMAGE METHOD (ASYNC TASK)
   _openGallery() async {
@@ -80,19 +81,19 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         String resultPercentage = responseBody['prediction_percentage'];
 
         // Adding the response data into the database for report creation purpose
-         _firestore
-             .collection("users")
-             .doc(UserDetails.getUserData()["email"])
-             .collection("imageDetections")
-             .add({
-           "cancerType": "Breast",
-           "reportType": "diagnosis",
-           "result": resultPrediction,
-           "result_string": "$resultPrediction was detected",
-           "imageUrl": resultImageURL,
-           "percentage": resultPercentage,
-           'timestamp': Timestamp.now(),
-         });
+        _firestore
+            .collection("users")
+            .doc(UserDetails.getUserData()["email"])
+            .collection("imageDetections")
+            .add({
+          "cancerType": "Breast",
+          "reportType": "diagnosis",
+          "result": resultPrediction,
+          "result_string": "$resultPrediction was detected",
+          "imageUrl": resultImageURL,
+          "percentage": resultPercentage,
+          'timestamp': Timestamp.now(),
+        });
 
         // Display the spinner to indicate that its loading
         setState(() {

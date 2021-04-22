@@ -65,6 +65,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final node = FocusScope.of(context);
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         body: ModalProgressHUD(
           inAsyncCall: showSpinner,
@@ -74,12 +75,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: 20.0,
                 horizontal: 20.0,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: ListView(
+
                 children: [
                   SizedBox(
                     height: 8.0,
