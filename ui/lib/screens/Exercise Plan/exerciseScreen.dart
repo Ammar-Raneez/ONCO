@@ -181,7 +181,6 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
             )
           ],
         ),
-        
       ),
     );
   }
