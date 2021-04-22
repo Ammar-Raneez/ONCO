@@ -126,57 +126,97 @@ class _CurrentScreenState extends State<CurrentScreen> {
           print(email);
           return true;
         },
-        child: Scaffold(
-          appBar: CustomAppBar.settings(username, email, gender, context),
+        child: Stack(
+          children: [
+            Scaffold(
+              appBar: CustomAppBar.settings(username, email, gender, context),
+              // under this body only the screen go into
+              body: PageView(
+                controller: _pageController,
 
-          // under this body only the screen go into
-          body: PageView(
-            controller: _pageController,
-
-            // when you swipe through the screen (HOME, CANCER, CHATBOT)
-            onPageChanged: (page) {
-              setState(() {
-                currentIndex = page;
-              });
-            },
-            // List of the Main Swiping Screens
-            children: swipeScreen,
-          ),
-
-          // Bottom bar navigation
-          bottomNavigationBar: CurvedNavigationBar(
-            height:52,
-            color: Color(0xff01CDFA),
-            backgroundColor: Colors.transparent,
-            index: currentIndex,
-
-            // Logic for the switching of MAIN SCREENS (HOME, CANCER, CHATBOT)
-            onTap: (index) {
-              setState(() {
-                currentIndex = index;
-                _pageController.jumpToPage(
-                  index,
-                );
-              });
-            },
-            items: [
-              Icon(
-                Icons.home,
-                size: 27,
-                color: Colors.white,
+                // when you swipe through the screen (HOME, CANCER, CHATBOT)
+                onPageChanged: (page) {
+                  setState(() {
+                    currentIndex = page;
+                  });
+                },
+                // List of the Main Swiping Screens
+                children: swipeScreen,
               ),
-              Icon(
-                Icons.widgets_outlined,
-                size: 27,
-                color: Colors.white,
-              ),
-              Icon(
-                Icons.chat,
-                size: 27,
-                color: Colors.white,
-              ),
-            ],
-          ),
+
+              // Bottom bar navigation
+              // bottomNavigationBar: CurvedNavigationBar(
+              //   height:52,
+              //   color: Color(0xff01CDFA),
+              //   backgroundColor: Colors.transparent,
+              //   index: currentIndex,
+              //
+              //   // Logic for the switching of MAIN SCREENS (HOME, CANCER, CHATBOT)
+              //   onTap: (index) {
+              //     setState(() {
+              //       currentIndex = index;
+              //       _pageController.jumpToPage(
+              //         index,
+              //       );
+              //     });
+              //   },
+              //   items: [
+              //     Icon(
+              //       Icons.home,
+              //       size: 27,
+              //       color: Colors.white,
+              //     ),
+              //     Icon(
+              //       Icons.widgets,
+              //       size: 27,
+              //       color: Colors.white,
+              //     ),
+              //     Icon(
+              //       Icons.chat,
+              //       size: 27,
+              //       color: Colors.white,
+              //     ),
+              //   ],
+              // ),
+            ),
+
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CurvedNavigationBar(
+                  height:52,
+                  color: Color(0xff01CDFA),
+                  backgroundColor: Colors.transparent,
+                  index: currentIndex,
+
+                  // Logic for the switching of MAIN SCREENS (HOME, CANCER, CHATBOT)
+                  onTap: (index) {
+                    setState(() {
+                      currentIndex = index;
+                      _pageController.jumpToPage(
+                        index,
+                      );
+                    });
+                  },
+                  items: [
+                    Icon(
+                      Icons.home,
+                      size: 27,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.widgets,
+                      size: 27,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.chat,
+                      size: 27,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+            ),
+          ],
         ),
       ),
     );

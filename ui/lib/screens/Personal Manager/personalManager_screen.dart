@@ -101,7 +101,10 @@ class _PersonalManagerState extends State<PersonalManager> {
                                 );
                               },
                               child: PersonalCard(cardTitle: 'Appointments', cardColor1: '0xFF7EC5C7', cardColor2:'0xFF145663', textColor: '0xFFFFFFFF', ))
-                      )
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                     ]
                 )
             ),

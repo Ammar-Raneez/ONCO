@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
@@ -136,11 +137,25 @@ class AllMealScreen extends StatelessWidget {
                                   children: [
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(20),
-                                      child: Image.network(
-                                        RECIPES[index].imageUrl,
-                                        fit: BoxFit.cover,
+                                      child: CachedNetworkImage(
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2,
+                                          height: 100,
+                                          child: Center(
+                                            child: CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress),
+                                          ),
+                                        ),
+                                        imageUrl: RECIPES[index].imageUrl,
                                         width: double.infinity,
                                         height: 180,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                     Positioned(

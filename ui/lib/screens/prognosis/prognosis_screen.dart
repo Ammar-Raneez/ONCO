@@ -137,6 +137,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                       ),
                                     )),
                                 TextField(
+                                  keyboardType: TextInputType.number,
                                   controller: textFieldControllers[count],
                                   decoration: InputDecoration(
                                       filled: true,
@@ -273,6 +274,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                                   )),
                               TextField(
                                 controller: textFieldControllers[count],
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
@@ -627,12 +629,22 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                         print("OK");
                         // Adding the response data into the database for report creation purpose
+                        // initially, convert all inputs into strings for the report
+                        Map firebasePrognosisBody;
+                        setState(() {
+                          firebasePrognosisBody = prognosisBody;
+
+                          for (var eachItem in firebasePrognosisBody.keys) {
+                            firebasePrognosisBody[eachItem] = firebasePrognosisBody[eachItem].toString();
+                          }
+                        });
+
                         _firestore
                             .collection("users")
                             .doc(UserDetails.getUserData()["email"])
                             .collection("InputPrognosis")
                             .add({
-                          "prognosisInputs": prognosisBody,
+                          "prognosisInputs": firebasePrognosisBody,
                           "cancerType": cancerType,
                           "reportType": "prognosis",
                           "result": prognosisResult,

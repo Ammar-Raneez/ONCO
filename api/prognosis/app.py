@@ -138,3 +138,4 @@ API.add_resource(SkinCancerPrognosis, '/prognosis_skin')
 # Running the Main Application
 if __name__ == "__main__":
     app.run(debug=False)
+    # app.run(port=5000, debug=True)

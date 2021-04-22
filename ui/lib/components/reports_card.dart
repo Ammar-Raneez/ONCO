@@ -63,7 +63,7 @@ class ReportCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        report.cancerType.toUpperCase() + " CANCER",
+                        report.cancerType.toUpperCase(),
                         style: TextStyle(
                             fontFamily: 'Poppins-SemiBold',
                             fontSize: 13,

@@ -138,7 +138,7 @@ class _ViewReportState extends State<ViewReport> {
               ),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(_reportResult.toUpperCase(),
+                child: Text(_reportResult.toString().toUpperCase(),
                   style: TextStyle(
                       fontFamily: 'Poppins-SemiBold',
                       fontSize: 14,
@@ -253,7 +253,7 @@ Widget percentageContainer(String percentages) {
   }
 }
 
-Widget cancerDetails(BuildContext context, String date, String reportType, String cancerType, String reportResult, String percentage, String Imageurl, Map prognosisBody, ScrollController controller, List<Widget> itemsData, Color color) {
+Widget cancerDetails(BuildContext context, String date, String reportType, String cancerType, String reportResult, String percentage, String imageUrl, Map prognosisBody, ScrollController controller, List<Widget> itemsData, Color color) {
 
   // DIAGNOSIS
   if (reportType.toLowerCase() == "diagnosis") {
@@ -386,7 +386,7 @@ Widget cancerDetails(BuildContext context, String date, String reportType, Strin
                       horizontal: 18
                   ),
                   child: Image.network(
-                    Imageurl,
+                    imageUrl,
                     width: (MediaQuery
                         .of(context)
                         .size

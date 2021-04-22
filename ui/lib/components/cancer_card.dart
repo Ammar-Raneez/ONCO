@@ -8,15 +8,32 @@ class CancerCard extends StatelessWidget {
   //properties that are passed in
   final String cardTitle;
   final String cardColor;
+  final String cardColor2;
   final String textColor;
 
-  CancerCard({@required this.cardTitle, @required this.cardColor, @required this.textColor}); //constructor to init values
+  CancerCard({@required this.cardTitle, @required this.cardColor,@required this.cardColor2, @required this.textColor}); //constructor to init values
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
+    return Container(
+      decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
+        gradient: LinearGradient(
+          colors: [
+            Color(int.parse(cardColor)),
+            Color(int.parse(cardColor2)),
+          ],
+          begin: Alignment(1.2,1),
+          end: Alignment(0.8,-2),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color:  Color(int.parse(cardColor)).withOpacity(0.5),
+            spreadRadius: 3,
+            blurRadius: 15,
+            offset: Offset(7, 9), // changes position of shadow
+          ),
+        ],
       ),
       child: Container(
         width: 400,
@@ -33,13 +50,6 @@ class CancerCard extends StatelessWidget {
           ),
         ),
       ),
-      color: Color(int.parse(cardColor)),
     );
-    // width: 320.0,
-    // height: 120.0,
-    // decoration: BoxDecoration(
-    //   borderRadius: BorderRadius.circular(30.0),
-    //   color: Color(0xFFd3e5e8),
-    // ),
   }
 }
