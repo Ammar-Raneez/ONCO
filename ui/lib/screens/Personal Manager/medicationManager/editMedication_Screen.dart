@@ -35,275 +35,277 @@ class _EditMedicationState extends State<EditMedication> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar.arrow(context),
-      body: SafeArea(
-        child: Container(
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20,
-                          bottom: 8,
-                        ),
-                        child: Align(
-
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Edit Medication",
-                            style: TextStyle(
-                              fontFamily: 'Poppins-SemiBold',
-                              fontSize: 24,
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(
+    return SafeArea(
+      child: Scaffold(
+        appBar: CustomAppBar.arrow(context),
+        body: SafeArea(
+          child: Container(
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
                             left: 20,
-                            right: 20
-                        ),
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Edit the details of the medication, Click on the delete icon to delete the medication",
-                            style: TextStyle(
+                            bottom: 8,
+                          ),
+                          child: Align(
+
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Edit Medication",
+                              style: TextStyle(
                                 fontFamily: 'Poppins-SemiBold',
-                                fontSize: 13.0,
-                                color: Color(0xFF3C707B)
+                                fontSize: 24,
+                              ),
                             ),
                           ),
                         ),
-                      ),
 
-                    ],
-                  ),
-
-                  Expanded(
-                      child:Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 17,
-                            vertical: 0
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18),
-                            // color: Color(0xFF57994D)
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20,
+                              right: 20
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical:8.0),
-                            child: Container(
-
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Edit the details of the medication, Click on the delete icon to delete the medication",
+                              style: TextStyle(
+                                  fontFamily: 'Poppins-SemiBold',
+                                  fontSize: 13.0,
+                                  color: Color(0xFF3C707B)
                               ),
-                              child: ListView(
-                                children: [
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Color(0xFFEEEEEE)
+                            ),
+                          ),
+                        ),
+
+                      ],
+                    ),
+
+                    Expanded(
+                        child:Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 17,
+                              vertical: 0
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              // color: Color(0xFF57994D)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical:8.0),
+                              child: Container(
+
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ListView(
+                                  children: [
+                                    SizedBox(
+                                      height: 15,
                                     ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left:18,
-                                          top:5,
-                                          bottom: 10,
-                                          right: 10
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Color(0xFFEEEEEE)
                                       ),
-                                      child: TextFormField(
-                                        initialValue: _medicationName,
-                                        maxLength: 20,
-                                          onChanged: (value) async{
-                                            final provider = Provider.of<MedicationProvider>(context, listen: false);
-                                            provider.removeMedication(widget.medication);
-                                          //Check if the field is not empty
-                                          if(value !="") {
-                                            setState(() {
-                                              _medicationName = value;
-                                            });
-
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "Name of Medication", // temporary text
-                                          border:InputBorder.none,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left:18,
+                                            top:5,
+                                            bottom: 10,
+                                            right: 10
                                         ),
-                                        style: TextStyle( // text style
-                                          fontSize: 15,
-                                          fontFamily: 'Poppins-Semibold',
-                                          color:Color(0xFF1F1F1F),
-                                        ),),
-                                    ),
-                                  ),
+                                        child: TextFormField(
+                                          initialValue: _medicationName,
+                                          maxLength: 20,
+                                            onChanged: (value) async{
+                                              final provider = Provider.of<MedicationProvider>(context, listen: false);
+                                              provider.removeMedication(widget.medication);
+                                            //Check if the field is not empty
+                                            if(value !="") {
+                                              setState(() {
+                                                _medicationName = value;
+                                              });
 
-                                  SizedBox(
-                                    height: 11,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Color(0xFFEEEEEE)
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left:18,
-                                          top:5,
-                                          bottom: 10,
-                                          right: 10
-                                      ),
-                                      child: TextFormField(
-                                        initialValue: _medicationDose,
-                                        maxLength: 15,
-                                        onChanged: (value) async{
-                                          //Check if the field is not empty
-                                          if(value !="") {
-                                            setState(() {
-                                              _medicationDose = value;
-                                            });
-
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "Dose - eg: 'Two tablets', '5 ml'", // temporary text
-                                          border:InputBorder.none,
-                                        ),
-                                        style: TextStyle( // text style
-                                          fontSize: 15,
-                                          fontFamily: 'Poppins-Semibold',
-                                          color:Color(0xFF1F1F1F),
-                                        ),),
-                                    ),
-                                  ),
-
-                                  SizedBox(
-                                    height: 11,
-                                  ),
-
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Color(0xFFEEEEEE)
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left:18,
-                                          top:5,
-                                          bottom: 10,
-                                          right: 10
-                                      ),
-                                      child: TextFormField(
-                                        initialValue: _medicationTime,
-                                        maxLength: 35,
-                                        onChanged: (value) async{
-                                          //Check if the field is not empty
-                                          if(value !="") {
-                                            setState(() {
-                                              _medicationTime = value;
-                                            });
-                                          }
-                                        },
-                                        decoration: InputDecoration(
-                                          hintText: "Time - eg: 'every 5 hours','after lunch'", // temporary text
-                                          border:InputBorder.none,
-                                        ),
-                                        style: TextStyle( // text style
-                                          fontSize: 15,
-                                          fontFamily: 'Poppins-Semibold',
-                                          color:Color(0xFF1F1F1F),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  GestureDetector(
-                                    onTap: (){
-
-                                      if(_medicationName !="") {
-                                        Medication medication = Medication(
-                                          medicationName: _medicationName,
-                                          dosage: _medicationDose,
-                                          doseTime: _medicationTime,
-                                        );
-                                        final provider = Provider.of<MedicationProvider>(context, listen: false);
-                                        provider.removeMedication(widget.medication);
-                                        MedicationFirebaseApi.createMedication(medication);
-                                      }
-                                      Navigator.pop(context);
-                                    },
-                                    child: Center(
-                                      child: Container(
-                                        width: 200,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFF1F1F1F),
-                                          borderRadius: BorderRadius.circular(18),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top:20,
-                                              bottom: 20
+                                            }
+                                          },
+                                          decoration: InputDecoration(
+                                            hintText: "Name of Medication", // temporary text
+                                            border:InputBorder.none,
                                           ),
-                                          child: Center(
-                                            child: Text(
-                                              "Save",
-                                              style: TextStyle( // text style
-                                                fontSize: 15,
-                                                fontFamily: 'Poppins-Semibold',
-                                                color:Colors.white,
+                                          style: TextStyle( // text style
+                                            fontSize: 15,
+                                            fontFamily: 'Poppins-Semibold',
+                                            color:Color(0xFF1F1F1F),
+                                          ),),
+                                      ),
+                                    ),
+
+                                    SizedBox(
+                                      height: 11,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Color(0xFFEEEEEE)
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left:18,
+                                            top:5,
+                                            bottom: 10,
+                                            right: 10
+                                        ),
+                                        child: TextFormField(
+                                          initialValue: _medicationDose,
+                                          maxLength: 15,
+                                          onChanged: (value) async{
+                                            //Check if the field is not empty
+                                            if(value !="") {
+                                              setState(() {
+                                                _medicationDose = value;
+                                              });
+
+                                            }
+                                          },
+                                          decoration: InputDecoration(
+                                            hintText: "Dose - eg: 'Two tablets', '5 ml'", // temporary text
+                                            border:InputBorder.none,
+                                          ),
+                                          style: TextStyle( // text style
+                                            fontSize: 15,
+                                            fontFamily: 'Poppins-Semibold',
+                                            color:Color(0xFF1F1F1F),
+                                          ),),
+                                      ),
+                                    ),
+
+                                    SizedBox(
+                                      height: 11,
+                                    ),
+
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Color(0xFFEEEEEE)
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left:18,
+                                            top:5,
+                                            bottom: 10,
+                                            right: 10
+                                        ),
+                                        child: TextFormField(
+                                          initialValue: _medicationTime,
+                                          maxLength: 35,
+                                          onChanged: (value) async{
+                                            //Check if the field is not empty
+                                            if(value !="") {
+                                              setState(() {
+                                                _medicationTime = value;
+                                              });
+                                            }
+                                          },
+                                          decoration: InputDecoration(
+                                            hintText: "Time - eg: 'every 5 hours','after lunch'", // temporary text
+                                            border:InputBorder.none,
+                                          ),
+                                          style: TextStyle( // text style
+                                            fontSize: 15,
+                                            fontFamily: 'Poppins-Semibold',
+                                            color:Color(0xFF1F1F1F),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    GestureDetector(
+                                      onTap: (){
+
+                                        if(_medicationName !="") {
+                                          Medication medication = Medication(
+                                            medicationName: _medicationName,
+                                            dosage: _medicationDose,
+                                            doseTime: _medicationTime,
+                                          );
+                                          final provider = Provider.of<MedicationProvider>(context, listen: false);
+                                          provider.removeMedication(widget.medication);
+                                          MedicationFirebaseApi.createMedication(medication);
+                                        }
+                                        Navigator.pop(context);
+                                      },
+                                      child: Center(
+                                        child: Container(
+                                          width: 200,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFF1F1F1F),
+                                            borderRadius: BorderRadius.circular(18),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                top:20,
+                                                bottom: 20
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                "Save",
+                                                style: TextStyle( // text style
+                                                  fontSize: 15,
+                                                  fontFamily: 'Poppins-Semibold',
+                                                  color:Colors.white,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                  ),
-                ],
-              ),
-
-              Positioned(
-                bottom: 17,
-                right: 17,
-                child: GestureDetector(
-                  onTap: () {
-                    final provider = Provider.of<MedicationProvider>(context, listen: false);
-                    provider.removeMedication(widget.medication);
-
-                    Navigator.pop(context);
-                    setState(() {}); // Setting and Refreshing State
-                  },
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFE84848),
-                        borderRadius: BorderRadius.circular(18)
+                        )
                     ),
-                    child: Icon(
-                      Icons.delete,
-                      color: Colors.white,
-                    )
+                  ],
+                ),
+
+                Positioned(
+                  bottom: 17,
+                  right: 17,
+                  child: GestureDetector(
+                    onTap: () {
+                      final provider = Provider.of<MedicationProvider>(context, listen: false);
+                      provider.removeMedication(widget.medication);
+
+                      Navigator.pop(context);
+                      setState(() {}); // Setting and Refreshing State
+                    },
+                    child: Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: Color(0xFFE84848),
+                          borderRadius: BorderRadius.circular(18)
+                      ),
+                      child: Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      )
+                    ),
                   ),
                 ),
-              ),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),
