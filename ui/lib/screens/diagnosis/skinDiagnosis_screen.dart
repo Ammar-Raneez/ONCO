@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -40,16 +41,14 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   }
 
   // DETECT THE CANCER METHOD (ASYNC TASK)
-  _detect() async {
+  _detect(ProgressDialog progressDialog) async {
     // If the user selects an image only we perform the API request else an alert will be displayed
     if (imageFile == null) {
       // ALERT USER TO SELECT OR CAPTURE IMAGE FIRST OFF
       createAlertDialog(
           context, "Error", "There is no image selected or captured!", 404);
     } else {
-      setState(() {
-        showSpinner = true;
-      });
+      progressDialog.show();
       try {
         // GETTING THE IMAGE NAME
         String fileName = imageFile.path.split('/').last;
@@ -75,25 +74,23 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .doc(UserDetails.getUserData()["email"])
             .collection("imageDetections")
             .add({
-                    "cancerType": "skin",
-                    "reportType": "diagnosis",
-                    "result": resultPrediction,
-                    "result_string": resultString,
-                    "imageUrl": resultImageURL,
-                    "percentage": resultPercentage,
-                    'timestamp': Timestamp.now(),
-                  });
+          "cancerType": "skin",
+          "reportType": "diagnosis",
+          "result": resultPrediction,
+          "result_string": resultString,
+          "imageUrl": resultImageURL,
+          "percentage": resultPercentage,
+          'timestamp': Timestamp.now(),
+        });
 
         // Display the spinner to indicate that its loading
-        setState(() {
-          showSpinner = false;
-        });
+        progressDialog.hide();
 
         // checking if the response is not null and displaying the result
         if (responseBody != null) {
           // Displaying the alert dialog
-          createAlertDialog(
-              context, "Diagnosis","Detection result: " +  resultPrediction, 201);
+          createAlertDialog(context, "Diagnosis",
+              "Detection result: " + resultPrediction, 404);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -103,16 +100,14 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         // Displaying alert to the user
         createAlertDialog(context, "Error", e._message, 404);
 
-        setState(() {
-          showSpinner = false;
-        });
+        progressDialog.hide();
       }
     }
   }
 
   // Getting the detection response
-  getResponse(FormData formData) async{
-    Response response =  await dio.post(
+  getResponse(FormData formData) async {
+    Response response = await dio.post(
       "https://skinmodelsdgp.azurewebsites.net/api/skinmodelsdgp?model=skin",
       data: formData,
     );
@@ -127,7 +122,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
     });
 
     var selectedPicture =
-    await ImagePicker.pickImage(source: ImageSource.camera);
+        await ImagePicker.pickImage(source: ImageSource.camera);
 
     setState(() {
       imageFile = selectedPicture;
@@ -145,6 +140,36 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
 
   @override
   Widget build(BuildContext context) {
+    // Progress Dialog that will run till API Request is received
+    final ProgressDialog progressDialog = ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: false, showLogs: true);
+
+    // Styling Progress Dialog
+    progressDialog.style(
+        message: '   Scanning\n   Image',
+        padding: EdgeInsets.all(20),
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: LinearProgressIndicator(
+          backgroundColor: Colors.lightBlueAccent,
+        ),
+        elevation: 10.0,
+        insetAnimCurve: Curves.easeInCubic,
+        progress: 0.0,
+        maxProgress: 100.0,
+        progressTextStyle: TextStyle(
+          color: Color(0xFF565D5E),
+          fontSize: 13.0,
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Poppins-SemiBold',
+        ),
+        messageTextStyle: TextStyle(
+          color: Color(0xFF565D5E),
+          fontSize: 19.0,
+          fontWeight: FontWeight.w600,
+          fontFamily: 'Poppins-SemiBold',
+        ));
+
     return SafeArea(
       child: ModalProgressHUD(
         // displaying the spinner for async tasks
@@ -194,7 +219,10 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: imageFile == null
-                                ? Image.asset('images/uploadImageGrey1.png', scale: 13,)
+                                ? Image.asset(
+                                    'images/uploadImageGrey1.png',
+                                    scale: 13,
+                                  )
                                 : Image.file(
                                     imageFile,
                                     width: 500,
@@ -208,7 +236,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
-                              onTap:(){
+                              onTap: () {
                                 _openCamera();
                               },
                               child: Container(
@@ -218,17 +246,15 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 3,
                                       blurRadius: 7,
-                                      offset: Offset(0, 3), // changes position of shadow
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 50,
-                                    vertical: 15
-                                ),
-
+                                    horizontal: 50, vertical: 15),
                                 child: Icon(
                                   Icons.camera_alt_rounded,
                                   color: Colors.white,
@@ -239,7 +265,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                               width: 20.0,
                             ),
                             GestureDetector(
-                              onTap:(){
+                              onTap: () {
                                 _openGallery();
                               },
                               child: Container(
@@ -249,17 +275,15 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 3,
                                       blurRadius: 7,
-                                      offset: Offset(0, 3), // changes position of shadow
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.lightBlueAccent,
                                 ),
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 50,
-                                    vertical: 15
-                                ),
-
+                                    horizontal: 50, vertical: 15),
                                 child: Icon(
                                   Icons.photo,
                                   color: Colors.white,
@@ -280,8 +304,8 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                 topLeft: Radius.circular(20.0)),
                           ),
                           width: double.infinity,
-
-                          padding: const EdgeInsets.only(top: 20, bottom: 20, left: 50, right: 50),
+                          padding: const EdgeInsets.only(
+                              top: 20, bottom: 20, left: 50, right: 50),
                           child: RawMaterialButton(
                             fillColor: Colors.black54,
                             child: Padding(
@@ -299,14 +323,15 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Poppins-Regular',
-                                        color: Colors.white
-                                    ),
+                                        color: Colors.white),
                                   ),
                                 ],
                               ),
                             ),
                             shape: const StadiumBorder(),
-                            onPressed: () {_detect();},
+                            onPressed: () {
+                              _detect(progressDialog);
+                            },
                           ),
                         ),
                       ],
