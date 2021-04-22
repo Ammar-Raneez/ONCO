@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +39,7 @@ class ExerciseCard extends StatelessWidget {
               ),
               decoration:BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("images/ExerciseImages/" + cardImage),
+                  image: AssetImage("images/ex_Images/" + cardImage),
                   fit: BoxFit.fitHeight,
                   alignment: Alignment.topCenter
                 ),
