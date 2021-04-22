@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
+import 'package:ui/components/exercise_card.dart';
+import 'package:ui/components/widgets.dart';
 
 
 class ExerciseScreen extends StatefulWidget {
@@ -10,6 +14,21 @@ class ExerciseScreen extends StatefulWidget {
 }
 
 class _ExerciseScreenState extends State<ExerciseScreen> {
+
+  final rand = new Random();
+  static var exerciseNames = ["Bicycle Crunch", "Calf Raises", "High Knees", "Jump Squats", "Jumping Jacks", "Planks", "Push Ups", "Sit Ups", "Squats", "Thigh Lunges"];
+  var selectedNames = [];
+
+  String randomExercise() {
+    var ex = exerciseNames[rand.nextInt(exerciseNames.length)];
+    while (selectedNames.contains(ex)) {
+      ex = exerciseNames[rand.nextInt(exerciseNames.length)];
+    }
+    selectedNames.add(ex);
+    return ex;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(child:
@@ -53,12 +72,52 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 ),
               ),
             ),
-            // Container(
-            //     child:
-            // ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10, bottom: 5),
+                  child: ScrollConfiguration(
+                    behavior: ScrollEffectBehaviour(),
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                          children: <Widget>[
+                             Container(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    var name = randomExercise();
+                                    ExcerciseCard(cardTitle: name, cardImage: name.replaceAll(' ', '').toLowerCase()+".jpg");
+                                  },
+                                // child: ,
+                             ),
+                            ),
+                            Container(
+                              child: GestureDetector(
+                                onTap: () {
+                                  var name = randomExercise();
+                                  ExcerciseCard(cardTitle: name, cardImage: name.replaceAll(' ', '').toLowerCase()+".jpg");
+                                },
+                                // child: ,
+                              ),
+                            ),
+                            Container(
+                              child: GestureDetector(
+                                onTap: () {
+                                  var name = randomExercise();
+                                  ExcerciseCard(cardTitle: name, cardImage: name.replaceAll(' ', '').toLowerCase()+".jpg");
+                                },
+                                // child: ,
+                              ),
+                            ),
+
           ],
         ),
         )
-    ),);
+    ),
+    ),
+    ],
+    ),
+    ),
+    ),
+    );
   }
+
 }
