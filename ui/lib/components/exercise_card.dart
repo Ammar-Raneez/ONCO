@@ -11,19 +11,20 @@ class ExcerciseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
       padding: const EdgeInsets.only(left: 12),
-    child: Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
-      ),
-      color: Color(0xFF00000029),
-      child: Container(
-        width: 230,
-        height: 284,
-
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: Text(
-            cardTitle,
+    child: Expanded(
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18),
+        ),
+        color: Color(0xFFFFAA9090),
+        child: Container(
+          width: 230.0,
+          height: 284.0,
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              cardTitle,
+            ),
           ),
         ),
       ),

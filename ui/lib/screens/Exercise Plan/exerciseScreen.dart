@@ -6,7 +6,6 @@ import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/exercise_card.dart';
 import 'package:ui/components/widgets.dart';
 
-
 class ExerciseScreen extends StatefulWidget {
   static var id = "exercisePlanScreen";
 
@@ -14,9 +13,19 @@ class ExerciseScreen extends StatefulWidget {
 }
 
 class _ExerciseScreenState extends State<ExerciseScreen> {
-
   final rand = new Random();
-  static var exerciseNames = ["Bicycle Crunch", "Calf Raises", "High Knees", "Jump Squats", "Jumping Jacks", "Planks", "Push Ups", "Sit Ups", "Squats", "Thigh Lunges"];
+  static var exerciseNames = [
+    "Bicycle Crunch",
+    "Calf Raises",
+    "High Knees",
+    "Jump Squats",
+    "Jumping Jacks",
+    "Planks",
+    "Push Ups",
+    "Sit Ups",
+    "Squats",
+    "Thigh Lunges"
+  ];
   var selectedNames = [];
 
   String randomExercise() {
@@ -28,20 +37,19 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     return ex;
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child:
-    Container(
+    return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: CustomAppBar.arrow(context),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Container(
-                  // padding: const EdgeInsets.only(left: 10, bottom: 15),
+        body: Container(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Container(
+                   padding: const EdgeInsets.only(left: 10, bottom: 15),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Container(
@@ -56,68 +64,73 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                     ),
                   ),
                 ),
-            ),
-            SizedBox(height: 5),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                padding: const EdgeInsets.only(left: 27, bottom: 15),
-                child: Text(
-                  "Here you can find exercises specifically tailored for you",
-                  style: TextStyle(
-                    fontFamily: 'Poppins-SemiBold',
-                    fontSize: 12,
-                    color: Color(0xFF959595),
+              ),
+              SizedBox(height: 5),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  padding: const EdgeInsets.only(left: 27, bottom: 15),
+                  child: Text(
+                    "Here you can find exercises specifically tailored for you",
+                    style: TextStyle(
+                      fontFamily: 'Poppins-SemiBold',
+                      fontSize: 12,
+                      color: Color(0xFF959595),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 10, bottom: 5),
-                  child: ScrollConfiguration(
-                    behavior: ScrollEffectBehaviour(),
+              Expanded(
+                child: Padding(
+                    padding: const EdgeInsets.only(right: 10, bottom: 5),
+                    child: ScrollConfiguration(
+                      behavior: ScrollEffectBehaviour(),
                       child: ListView(
                         scrollDirection: Axis.horizontal,
-                          children: <Widget>[
-                             Container(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    var name = randomExercise();
-                                    ExcerciseCard(cardTitle: name, cardImage: name.replaceAll(' ', '').toLowerCase()+".jpg");
-                                  },
-                                // child: ,
-                             ),
-                            ),
-                            Container(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
                               child: GestureDetector(
                                 onTap: () {
                                   var name = randomExercise();
-                                  ExcerciseCard(cardTitle: name, cardImage: name.replaceAll(' ', '').toLowerCase()+".jpg");
+                                  print(name);
+                                  ExcerciseCard(
+                                      cardTitle: name,
+                                      cardImage:
+                                      name.replaceAll(' ', '').toLowerCase() +
+                                          ".jpg");
                                 },
-                                // child: ,
-                              ),
-                            ),
-                            Container(
-                              child: GestureDetector(
-                                onTap: () {
-                                  var name = randomExercise();
-                                  ExcerciseCard(cardTitle: name, cardImage: name.replaceAll(' ', '').toLowerCase()+".jpg");
-                                },
-                                // child: ,
-                              ),
-                            ),
 
-          ],
+                                // child: ,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              child: GestureDetector(
+                                onTap: () {
+                                  var name = randomExercise();
+                                  ExcerciseCard(
+                                      cardTitle: name,
+                                      cardImage:
+                                      name.replaceAll(' ', '').toLowerCase() +
+                                          ".jpg");
+                                },
+
+                                // child: ,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
+              ),
+            ],
+          ),
         ),
-        )
-    ),
-    ),
-    ],
-    ),
-    ),
-    ),
+      ),
     );
   }
-
 }
