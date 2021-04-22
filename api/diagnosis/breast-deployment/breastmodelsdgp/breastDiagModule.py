@@ -102,5 +102,3 @@ class BreastDiagModule:# Predict using the model
         # getting download image URL
         image_url = f"https://breastmodelsdgp.blob.core.windows.net/superimposed-images/{filename}"
         return image_url
-
-
