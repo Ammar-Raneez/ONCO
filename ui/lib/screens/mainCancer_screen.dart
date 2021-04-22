@@ -87,7 +87,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                       child: CancerCard(
                         cardTitle: 'Lung Cancer',
                         cardColor: '0xFF66b9ed',
-                        cardColor2: '0xFF2d81b5',
+                        cardColor2:'0xFF2d81b5',
                         textColor: '0xFFFFFFFF',
                       ),
                     ),
@@ -102,8 +102,7 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                             builder: (context) => SelectServiceScreen(
                                 cancerType: 'Breast Cancer',
                                 diagnosisRoute: BreastCancerDiagnosis(),
-                                prognosisRoute:
-                                    CancerPrognosis("Breast Cancer")),
+                                prognosisRoute: CancerPrognosis("Breast Cancer")),
                           ),
                         );
                       },
