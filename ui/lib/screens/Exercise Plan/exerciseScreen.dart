@@ -118,24 +118,6 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                     ]
                 ),
             ),
-            Align(
-              alignment: Alignment.center,
-               child: Padding(
-                 padding: const EdgeInsets.only(bottom: 50.0),
-                  child:  RaisedButton(
-                    child: Text("Start Workout."),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TimerPage(name_1, name_2, name_3)),
-                      );
-                    },
-                  ),
-                ),
-              ),
           ],
         ),
       ),
