@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/exercise_card.dart';
+import 'package:ui/screens/Exercise%20Plan/TimerPage.dart';
 
 class ExerciseScreen extends StatefulWidget {
   @override
@@ -123,19 +124,20 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
               alignment: Alignment.center,
                child: Padding(
                  padding: const EdgeInsets.only(bottom: 50.0),
-                child: Container(
                   child:  RaisedButton(
                     child: Text("Start Workout."),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
                     onPressed: () {
-
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => TimerPage(name_1, name_2, name_3)),
+                      );
                     },
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),
