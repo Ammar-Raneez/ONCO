@@ -11,6 +11,7 @@ import 'dart:async';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/services/UserDetails.dart';
+import 'package:ui/services/endPoints.dart';
 
 class BreastCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -121,7 +122,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   // Getting the detection response
   getResponse(FormData formData) async {
     Response response = await dio.post(
-      "https://breastmodelsdgp.azurewebsites.net/api/breastmodelsdgp?model=breast",
+      postBreastCancerDetection_API,
       data: formData,
     );
     responseBody = response.data[0];

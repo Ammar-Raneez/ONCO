@@ -10,6 +10,7 @@ import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:ui/services/UserDetails.dart';
+import 'package:ui/services/endPoints.dart';
 
 class LungCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -115,7 +116,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   // Getting the detection response
   getResponse(FormData formData) async {
     Response response = await dio.post(
-      "https://lungmodelsdgp.azurewebsites.net/api/lungmodelsdgp?model=lung",
+      postLungCancerDetection_API,
       data: formData,
     );
     responseBody = response.data[0];

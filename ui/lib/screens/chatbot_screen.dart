@@ -8,6 +8,7 @@ import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/chatbot_message_bubble.dart';
 import 'package:ui/constants.dart';
+import 'package:ui/services/endPoints.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
@@ -121,7 +122,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     //send data to chat bot api and get back response
     try {
       Response response = await dio.post(
-          'https://chatbot-deployment.azurewebsites.net/api/chatbot-deployment',
+          postChatBotMessage_API,
           data: {'UserIn': messageText});
       setState(() {
         responseText = response.toString();

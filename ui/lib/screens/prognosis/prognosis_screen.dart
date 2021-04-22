@@ -11,9 +11,11 @@ import 'package:ui/services/UserDetails.dart';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ui/services/endPoints.dart';
+
 class CancerPrognosis extends StatefulWidget {
   var cancerType;
-  var url = "https://onco-prognosis-backend.herokuapp.com/";
+  var url;
   var cancerPrognosisAttributes;
   var skinCancerAnswers;
 
@@ -22,12 +24,12 @@ class CancerPrognosis extends StatefulWidget {
 
     if (cancerType == "Breast Cancer") {
       cancerPrognosisAttributes = BREAST_CANCER_PROGNOSIS_QUESTIONS;
-      url += "prognosis_breast";
+      url = postBreastCancerPrediction_API;
     } else if (cancerType == "Lung Cancer") {
       cancerPrognosisAttributes = LUNG_CANCER_PROGNOSIS_QUESTIONS;
-      url += "prognosis_lung";
+      url = postLungCancerPrediction_API;
     } else if (cancerType == "Skin Cancer") {
-      url += "prognosis_skin";
+      url = postSkinCancerPrediction_API;
 
       if (UserDetails.getUserData()['gender'] == "male") {
         cancerPrognosisAttributes = SKIN_CANCER_PROGNOSIS_QUESTIONS_MALE;
