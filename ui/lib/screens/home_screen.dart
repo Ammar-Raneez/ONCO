@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/homepage_card.dart';
 import 'package:ui/components/widgets.dart';
-import 'package:ui/screens/Exercise%20Plan/exercisePlan_screen.dart';
+import 'package:ui/screens/Exercise%20Plan/exerciseScreen.dart';
 import 'package:ui/screens/Meal%20Plan/all_meal_screen.dart';
 import 'package:ui/services/GoogleUserSignInDetails.dart';
 import 'package:ui/services/UserDetails.dart';
@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: GestureDetector(
                                     onTap: () {
                                       Navigator.push(
-                                          context, MaterialPageRoute(builder: (context) => ExercisePlanScreen()),
+                                          context, MaterialPageRoute(builder: (context) => ExerciseScreen()),
                                       );
                                     },
                                      child: HomeCard(
