@@ -26,6 +26,15 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     "Squats",
     "Thigh Lunges"
   ];
+
+  static var quotes = [
+  "Strength does not come from the physical capacity. It comes from an indomitable will. – Mahatma Gandhi",
+   "Training gives us an outlet for suppressed energies created by stress and thus tones the spirit just as exercise conditions the body. – Arnold Schwarzenegger",
+    "If you have a body, you are an athlete! – Bill Bowerman",
+    "Someone busier than you is working our right now.” – Unknown",
+    "You can either suffer the pain of discipline or the pain of regret. –Jim Rohn"
+  ];
+
   var selectedNames = [];
   String randomExercise() {
     if(selectedNames.length == exerciseNames.length) {
@@ -37,6 +46,10 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     }
     selectedNames.add(ex);
     return ex;
+  }
+
+  String randomQuote() {
+    return quotes[rand.nextInt(quotes.length)];
   }
 
   @override
@@ -152,40 +165,20 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                   ),
                 ),
             ),
-            Align(
-              alignment: Alignment.center,
-               child: Padding(
-                 padding: const EdgeInsets.only(top: 20.0, bottom: 30),
-                  child:  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>
-                            TimerPage(name_1, name_2, name_3)),
-                      );
-                    },
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Text(
-                          "Start Workout.",
-                          style: TextStyle(
-                              fontFamily: 'Poppins-SemiBold',
-                              fontSize: 20,
-                            color: Colors.white
-                          ),
-                        ),
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.black87
-                      ),
-                    ),
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30.0, left: 10.0, right: 10.0, top:10.0),
+              child: Container(
+                child: Text(
+                  randomQuote(), style: TextStyle(
+                  fontSize: 15.0,
+                  fontFamily: 'Poppins-SemiBold'
+                ),
                 ),
               ),
+            )
           ],
         ),
+        
       ),
     );
   }
