@@ -8,8 +8,6 @@ class ExerciseScreen extends StatefulWidget {
   @override
   _ExerciseScreenState createState() => _ExerciseScreenState();
   static var id = "exercisePlanScreen";
-
-
 }
 
 class _ExerciseScreenState extends State<ExerciseScreen> {
