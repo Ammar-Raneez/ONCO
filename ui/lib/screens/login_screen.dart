@@ -83,6 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
           createAlertDialog(context, "Success", "Successfully logged in!", 200);
         } else {
           // Displaying the alert dialog
+          print("Something went wrong, try again later!");
           createAlertDialog(
               context, "Error", "Something went wrong, try again later!", 404);
         }
@@ -92,7 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
           showSpinner = false;
         });
       } catch (e) {
-        createAlertDialog(context, "Error", e._message, 404);
+        print("Something went wrong, try again later!");
+        createAlertDialog(context, "Error", e.message, 404);
         // stops displaying the spinner once the result comes back
         setState(() {
           showSpinner = false;

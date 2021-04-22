@@ -113,9 +113,9 @@ class AlertWidget extends StatelessWidget {
               borderRadius: new BorderRadius.circular(10.0),
             ),
             onPressed: () {
-              if(_status == 404)
-
+              if(_status == 404){
                 Navigator.pop(context); // pop the alert
+              }
 
               if (_status == 200) {
                 Navigator.pop(context); // pop the alert
@@ -131,9 +131,9 @@ class AlertWidget extends StatelessWidget {
                 textPrimitiveWrapper._text = textEditingController.text;
                 Navigator.pop(context);
               }
-              else {
-                Navigator.pop(context);
-              }
+              // else {
+              //   Navigator.pop(context);
+              // }
             },
 
             child:  Text(

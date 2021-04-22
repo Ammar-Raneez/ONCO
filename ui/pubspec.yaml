@@ -1,7 +1,6 @@
 name: ui
 description: UI for ONCO
 
-
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -14,6 +13,7 @@ dependencies:
     sdk: flutter
   flutter_slidable:
   provider:
+  cached_network_image: ^2.5.1
   cupertino_icons: ^1.0.0
   animated_text_kit: ^3.1.0
   firebase_core:
