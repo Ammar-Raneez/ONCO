@@ -84,7 +84,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       style: TextStyle(
                           fontFamily: 'Poppins-SemiBold',
                           fontSize: 13.0,
-                          color: Color(0xFF3C707B)
+                          color: Colors.white,
                       ),
                     ),
                   ),
