@@ -14,8 +14,8 @@ class ExerciseCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(
           left: 20,
-          right: 20,
-          bottom: 80,
+          right: 0,
+          bottom: 20,
           top: 20,
         ),
         child: Container(
@@ -40,7 +40,7 @@ class ExerciseCard extends StatelessWidget {
               decoration:BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("images/" + cardImage),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitHeight,
                   alignment: Alignment.topCenter
                 ),
                 borderRadius: BorderRadius.circular(22.0),

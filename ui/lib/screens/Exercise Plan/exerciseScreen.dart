@@ -112,7 +112,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                   padding: const EdgeInsets.only(left: 20),
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(40), bottomLeft: Radius.circular(40)),
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(37), bottomLeft: Radius.circular(37)),
                       color: Color(0xFF91C77E),
                     ),
                     child: ListView(
@@ -153,11 +153,14 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                               child: ExerciseCard(cardTitle: name_5, cardImage: name_5.replaceAll(' ', '').toLowerCase() + ".jpg"),
                             ),
                           ),
-                          Container(
-                            child: GestureDetector(
-                              onTap: (){
-                              },
-                              child: ExerciseCard(cardTitle: name_6, cardImage: name_6.replaceAll(' ', '').toLowerCase() + ".jpg"),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: Container(
+                              child: GestureDetector(
+                                onTap: (){
+                                },
+                                child: ExerciseCard(cardTitle: name_6, cardImage: name_6.replaceAll(' ', '').toLowerCase() + ".jpg"),
+                              ),
                             ),
                           ),
                         ]
@@ -166,11 +169,11 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 30.0, left: 10.0, right: 10.0, top:10.0),
+              padding: const EdgeInsets.only(bottom: 30.0, left: 20, right: 20, top:20.0),
               child: Container(
                 child: Text(
                   randomQuote(), style: TextStyle(
-                  fontSize: 15.0,
+                  fontSize: 13.0,
                   fontFamily: 'Poppins-SemiBold'
                 ),
                 ),
