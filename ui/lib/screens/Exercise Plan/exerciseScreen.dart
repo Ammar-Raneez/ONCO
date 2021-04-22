@@ -23,8 +23,19 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     "Push Ups",
     "Sit Ups",
     "Squats",
-    "Thigh Lunges"
+    "Thigh Lunges",
+    "Leg Stretch",
+    "Jacks",
+    "Pullups",
+    "Deadlift"
   ];
+
+  static var quotes = [
+  "Strength does not come from the physical capacity. It comes from an indomitable will. – Mahatma Gandhi",
+   "Training gives us an outlet for suppressed energies created by stress and thus tones the spirit just as exercise conditions the body. – Arnold Schwarzenegger"
+    ""
+
+  ]
   var selectedNames = [];
   String randomExercise() {
     if(selectedNames.length == exerciseNames.length) {
