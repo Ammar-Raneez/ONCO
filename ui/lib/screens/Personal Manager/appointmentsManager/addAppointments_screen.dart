@@ -275,9 +275,10 @@ class _AddAppointmentsState extends State<AddAppointments> {
 
                                           AppointmentsFirebaseApi.createAppointment(newApplication);
 
+
                                           print(_appointmentTime);
                                           print("NONO");
-                                          print(_appointmentDate);
+                                          print(_appointmentDate.timeZoneName);
                                           print("LESGO");
                                           print(new DateTime(
                                               _appointmentDate.year, _appointmentDate.month, _appointmentDate.day,
@@ -287,8 +288,9 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                           final Event event = Event(
                                             title: _doctorName,
                                             description: _notes,
-                                            timeZone: _appointmentDate.timeZoneName,
-                                            startDate: _appointmentDate,
+                                            startDate: new DateTime(
+                                                _appointmentDate.year, _appointmentDate.month, _appointmentDate.day,
+                                                _appointmentTime.hour, _appointmentTime.minute),
                                             endDate: new DateTime(
                                                 _appointmentDate.year, _appointmentDate.month, _appointmentDate.day,
                                                 _appointmentTime.hour, _appointmentTime.minute),
