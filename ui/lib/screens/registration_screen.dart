@@ -87,7 +87,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     child: Hero(
                       tag: "logo",
                       child: Container(
-                        height: 20,
+                        height: 25,
                         child: Image.asset('images/officialLogo.png'),
                       ),
                     ),
@@ -123,6 +123,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         fontSize: 15,
                       ),
                     ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   TextField(
                     cursorColor: Colors.lightBlueAccent,
                     onEditingComplete: () => {
@@ -142,6 +145,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         color: Colors.lightBlueAccent,
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   TextField(
                     autofillHints: [AutofillHints.email],
@@ -163,6 +169,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         color: Colors.lightBlueAccent,
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   TextField(
                     cursorColor: Colors.lightBlueAccent,
