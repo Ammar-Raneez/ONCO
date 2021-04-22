@@ -137,7 +137,7 @@ class AlertWidget extends StatelessWidget {
               if (_status == 200) {
                 Navigator.pop(context); // pop the alert
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => PrognosisReports()));
+                    MaterialPageRoute(builder: (_) => CurrentScreen()));
               } else if (confirmChangePrimitiveWrapper != null) {
                 confirmChangePrimitiveWrapper.setConfirmChange(true);
                 Navigator.pop(context);

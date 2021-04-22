@@ -13,13 +13,11 @@ void main() {
   String expected;
 
   test("Testing lung cancer diagnosis (Healthy lung)", () async {
-
     // ACTUAL
     LungCancerDiagnosisState lungCancerDiagnosisState =
         new LungCancerDiagnosisState();
     FormData formData = new FormData.fromMap({
-      "file": await MultipartFile.fromFile(
-          "images/healthy-lung-test.jpeg",
+      "file": await MultipartFile.fromFile("images/healthy-lung-test.jpeg",
           filename: "testingImage"),
     });
 
@@ -31,17 +29,14 @@ void main() {
 
     // TEST
     expect(actual, expected);
-
   });
 
   test("Testing lung cancer diagnosis (Infected lung)", () async {
-
     // ACTUAL
     LungCancerDiagnosisState lungCancerDiagnosisState =
-    new LungCancerDiagnosisState();
+        new LungCancerDiagnosisState();
     FormData formData = new FormData.fromMap({
-      "file": await MultipartFile.fromFile(
-          "images/infected-lung-test.png",
+      "file": await MultipartFile.fromFile("images/infected-lung-test.png",
           filename: "testingImage"),
     });
 
@@ -53,17 +48,14 @@ void main() {
 
     // TEST
     expect(actual, expected);
-
   });
 
   test("Testing skin cancer diagnosis", () async {
-
     // ACTUAL
     SkinCancerDiagnosisState skinCancerDiagnosisState =
-    new SkinCancerDiagnosisState();
+        new SkinCancerDiagnosisState();
     FormData formData = new FormData.fromMap({
-      "file": await MultipartFile.fromFile(
-          "images/skin-infected-test.jpg",
+      "file": await MultipartFile.fromFile("images/skin-infected-test.jpg",
           filename: "testingImage"),
     });
 
@@ -75,17 +67,14 @@ void main() {
 
     // TEST
     expect(actual, expected);
-
   });
 
   test("Testing beast cancer diagnosis (Healthy Breast)", () async {
-
     // ACTUAL
     BreastCancerDiagnosisState breastCancerDiagnosisState =
-    new BreastCancerDiagnosisState();
+        new BreastCancerDiagnosisState();
     FormData formData = new FormData.fromMap({
-      "file": await MultipartFile.fromFile(
-          "images/normal-breast-test.png",
+      "file": await MultipartFile.fromFile("images/normal-breast-test.png",
           filename: "testingImage"),
     });
 
@@ -97,17 +86,14 @@ void main() {
 
     // TEST
     expect(actual, expected);
-
   });
 
   test("Testing beast cancer diagnosis (Infected Breast)", () async {
-
     // ACTUAL
     BreastCancerDiagnosisState breastCancerDiagnosisState =
-    new BreastCancerDiagnosisState();
+        new BreastCancerDiagnosisState();
     FormData formData = new FormData.fromMap({
-      "file": await MultipartFile.fromFile(
-          "images/infected-breast-test.png",
+      "file": await MultipartFile.fromFile("images/infected-breast-test.png",
           filename: "testingImage"),
     });
 
@@ -119,14 +105,15 @@ void main() {
 
     // TEST
     expect(actual, expected);
-
   });
 
   test("Testing lung cancer prognosis ", () async {
-
     // ACTUAL
-    CancerPrognosisState cancerPrognosisState = new CancerPrognosisState("Lung Cancer",LUNG_CANCER_PROGNOSIS_QUESTIONS, null,
-    "https://onco-prognosis-backend.herokuapp.com/prognosis_lung");
+    CancerPrognosisState cancerPrognosisState = new CancerPrognosisState(
+        "Lung Cancer",
+        LUNG_CANCER_PROGNOSIS_QUESTIONS,
+        null,
+        "https://onco-prognosis-backend.herokuapp.com/prognosis_lung");
     cancerPrognosisState.prognosisBody = {
       "Age": 44,
       "Gender": 1,
@@ -155,17 +142,50 @@ void main() {
     actual = await cancerPrognosisState.apiRequest();
 
     // EXPECTED
-    expected = '{"Prediction": "Medium"}\n''';
+    expected = '{"Prediction": "Medium"}\n' '';
 
     // TEST
     expect(actual, expected);
+  });
 
+  test("Testing skin cancer prognosis", () async {
+    // ACTUAL
+    CancerPrognosisState cancerPrognosisState = new CancerPrognosisState(
+        "Skin Cancer",
+        SKIN_CANCER_PROGNOSIS_QUESTIONS_MALE,
+        null,
+        "https://onco-prognosis-backend.herokuapp.com/prognosis_skin");
+
+    // EXPECTED
+    cancerPrognosisState.prognosisBody = {
+      "age": 30,
+      "gender": "male",
+      "sunburn": 1,
+      "complexion": 0,
+      "big-moles": 1,
+      "small-moles": 0,
+      "freckling": 0,
+      "damage": 1,
+      "tan": 0
+    };
+
+    // TEST
+    actual = await cancerPrognosisState.apiRequest();
+
+    // EXPECTED
+    expected =
+        '{"absolute_risk": "3.0%", "result_string": "A 3.0% estimated risk of developing melanoma over the next 5 years.", "gender": "male", "ratio": 0, "status": 200}\n';
+
+    // TEST
+    expect(actual, expected);
   });
 
   test("Testing breast cancer prognosis", () async {
-
     // ACTUAL
-    CancerPrognosisState cancerPrognosisState = new CancerPrognosisState("Breast Cancer",BREAST_CANCER_PROGNOSIS_QUESTIONS, null,
+    CancerPrognosisState cancerPrognosisState = new CancerPrognosisState(
+        "Breast Cancer",
+        BREAST_CANCER_PROGNOSIS_QUESTIONS,
+        null,
         "https://onco-prognosis-backend.herokuapp.com/prognosis_breast");
     cancerPrognosisState.prognosisBody = {
       "radius_mean": 2,
@@ -198,6 +218,5 @@ void main() {
 
     // TEST
     expect(actual, expected);
-
   });
 }
