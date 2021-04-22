@@ -96,11 +96,9 @@ class BreastDiagModule:# Predict using the model
             cnt_settings = ContentSettings(content_type="image/jpeg")
 
             blob.upload_blob(temp_io_bytes.getvalue(), blob_type="BlockBlob", content_settings=cnt_settings)
-        except:     
+        except Exception:   
             print("same image uploaded")
 
         # getting download image URL
         image_url = f"https://breastmodelsdgp.blob.core.windows.net/superimposed-images/{filename}"
         return image_url
-
-
