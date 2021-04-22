@@ -374,9 +374,22 @@ class CancerPrognosisState extends State<CancerPrognosis> {
               const SizedBox(
                 height: 10,
               ),
-              Expanded(
-                  child: Form(
-                    key: _formKey,
+              if(cancerType != "Skin Cancer")
+
+                  Expanded(
+                      child: Form(
+                        key: _formKey,
+                        child: ListView.builder(
+                            controller: controller,
+                            itemCount: itemsData.length,
+                            itemBuilder: (context, index) {
+                              return itemsData[index];
+                            }
+                        ),
+                      )
+                  ),
+              if (cancerType == "Skin Cancer")
+                Expanded(
                     child: ListView.builder(
                         controller: controller,
                         itemCount: itemsData.length,
@@ -384,9 +397,10 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                           return itemsData[index];
                         }
-                    ),
-                  )
-              ),
+                    )
+                ),
+
+
               Container(
                 decoration: BoxDecoration(
                   color: Colors.blueGrey,
@@ -669,7 +683,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                             // Displaying the alert dialog
                             createAlertDialog(
-                                context, "Prognosis", prognosisResult, 201);
+                                context, "Prognosis", prognosisResult, 200);
 
                             // Adding the response data into the database for report creation purpose
                             // initially, convert all inputs into strings for the report
