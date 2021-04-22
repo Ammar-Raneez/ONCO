@@ -87,7 +87,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     // message after some time can take a while
     try {
       Response response = await dio.post(
-          'fakeLink.com',
+          'https://chatbot-deployment.azurewebsites.net/api/chatbot-deployment',
           data: {'UserIn': "hello"});
       setState(() {
         initialResponseText = response.toString();

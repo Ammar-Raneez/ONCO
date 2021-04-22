@@ -627,12 +627,22 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                         print("OK");
                         // Adding the response data into the database for report creation purpose
+                        // initially, convert all inputs into strings for the report
+                        Map firebasePrognosisBody;
+                        setState(() {
+                          firebasePrognosisBody = prognosisBody;
+
+                          for (var eachItem in firebasePrognosisBody.keys) {
+                            firebasePrognosisBody[eachItem] = firebasePrognosisBody[eachItem].toString();
+                          }
+                        });
+
                         _firestore
                             .collection("users")
                             .doc(UserDetails.getUserData()["email"])
                             .collection("InputPrognosis")
                             .add({
-                          "prognosisInputs": prognosisBody,
+                          "prognosisInputs": firebasePrognosisBody,
                           "cancerType": cancerType,
                           "reportType": "prognosis",
                           "result": prognosisResult,
