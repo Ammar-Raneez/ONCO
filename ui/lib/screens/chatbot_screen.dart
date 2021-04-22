@@ -146,93 +146,96 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ModalProgressHUD(
-        inAsyncCall: showSpinner,
-        // if user is being fetched display a loading spinner
-        child: username == ""
-            ? Align(
-                child: CircularProgressIndicator(),
-                alignment: Alignment.center,
-              )
-            : Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(initialResponseText == null
-                          ? 'images/botGif5.gif'
-                          : 'images/bot.png'),
-                      fit: BoxFit.contain),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: initialResponseText == null
-                      ? [
-                          Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text(
-                                  "Hi ${username.substring(0, 1).toUpperCase() + username.substring(1, username.length)}, Chanco here!",
-                                  style: kTextStyle.copyWith(fontSize: 24),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 52),
+        child: ModalProgressHUD(
+          inAsyncCall: showSpinner,
+          // if user is being fetched display a loading spinner
+          child: username == ""
+              ? Align(
+                  child: CircularProgressIndicator(),
+                  alignment: Alignment.center,
+                )
+              : Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(initialResponseText == null
+                            ? 'images/botGif5.gif'
+                            : 'images/bot.png'),
+                        fit: BoxFit.contain),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: initialResponseText == null
+                        ? [
+                            Column(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Text(
-                                    "Please wait while I load all my necessary components...",
-                                    style: kTextStyle,
-                                    textAlign: TextAlign.center,
+                                    "Hi ${username.substring(0, 1).toUpperCase() + username.substring(1, username.length)}, Chanco here!",
+                                    style: kTextStyle.copyWith(fontSize: 24),
+                                    textAlign: TextAlign.left,
                                   ),
                                 ),
                               ],
                             ),
-                          )
-                        ]
-                      : [
-                          MessageStream(),
-                          Container(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 10.0,
-                                      right: 10.0,
-                                    ),
-                                    child: TextField(
-                                      onChanged: (value) {
-                                        messageText = value;
-                                      },
-                                      enabled: responseText == "empty"
-                                          ? false
-                                          : true,
-                                      controller: messageTextController,
-                                      decoration: kTextFieldDecoration.copyWith(
-                                          suffixIcon: IconButton(
-                                              icon: Icon(Icons.send),
-                                              onPressed: handleSendMessage,
-                                              color: Colors.lightBlueAccent),
-                                          hintText: 'Write a message'),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Text(
+                                      "Please wait while I load all my necessary components...",
+                                      style: kTextStyle,
+                                      textAlign: TextAlign.center,
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
+                            )
+                          ]
+                        : [
+                            MessageStream(),
+                            Container(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 10.0,
+                                        right: 10.0,
+                                      ),
+                                      child: TextField(
+                                        onChanged: (value) {
+                                          messageText = value;
+                                        },
+                                        enabled: responseText == "empty"
+                                            ? false
+                                            : true,
+                                        controller: messageTextController,
+                                        decoration: kTextFieldDecoration.copyWith(
+                                            suffixIcon: IconButton(
+                                                icon: Icon(Icons.send),
+                                                onPressed: handleSendMessage,
+                                                color: Colors.lightBlueAccent),
+                                            hintText: 'Write a message'),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                        ],
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                          ],
+                  ),
                 ),
-              ),
+        ),
       ),
     );
   }

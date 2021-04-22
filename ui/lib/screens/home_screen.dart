@@ -130,49 +130,61 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: ListView(
                               scrollDirection: Axis.horizontal,
                               children: <Widget>[
-                                Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => PersonalManager()),
-                                      );
-                                    },
-                                    child: HomeCard(
-                                      cardTitle: 'Personal Manager',
-                                      cardColor: '0xFFdb5682',
-                                      textColor: '0xFFFFFFFF',
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  child: Container(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PersonalManager()),
+                                        );
+                                      },
+                                      child: HomeCard(
+                                        cardTitle: 'Personal Manager',
+                                        cardColor: '0xFFdb5682',
+                                        textColor: '0xFFFFFFFF',
+                                        cardImage: 'images/cardImages/personalManager.jpg',
+                                      ),
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context, MaterialPageRoute(builder: (context) => ExercisePlanScreen()),
-                                      );
-                                    },
-                                     child: HomeCard(
-                                      cardTitle: 'Exercise Plan',
-                                      cardColor: '0xFFa4d44a',
-                                      textColor: '0xFFFFFFFF',
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  child: Container(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context, MaterialPageRoute(builder: (context) => ExercisePlanScreen()),
+                                        );
+                                      },
+                                       child: HomeCard(
+                                        cardTitle: 'Exercise Plan',
+                                        cardColor: '0xFFa4d44a',
+                                        textColor: '0xFFFFFFFF',
+                                         cardImage: 'images/cardImages/exercisePlan.jpg',
+                                      ),
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => AllMealScreen()),
-                                      );
-                                    },
-                                    child: HomeCard(
-                                      cardTitle: 'Meal Plan',
-                                      cardColor: '0xFF4ad4b1',
-                                      textColor: '0xFFFFFFFF',
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  child: Container(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => AllMealScreen()),
+                                        );
+                                      },
+                                      child: HomeCard(
+                                        cardTitle: 'Meal Plan',
+                                        cardColor: '0xFF4ad4b1',
+                                        textColor: '0xFFFFFFFF',
+                                        cardImage: 'images/cardImages/mealPlan.jpg',
+                                      ),
                                     ),
                                   ),
                                 ),
