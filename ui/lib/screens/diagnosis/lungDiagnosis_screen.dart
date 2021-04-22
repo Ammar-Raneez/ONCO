@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -43,16 +43,14 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   }
 
   // DETECT THE CANCER METHOD (ASYNC TASK)
-  _detect() async {
+  _detect(ProgressDialog progressDialog) async {
     // If the user selects an image only we perform the API request else an alert will be displayed
     if (imageFile == null) {
       // ALERT USER TO SELECT OR CAPTURE IMAGE FIRST OFF
       createAlertDialog(
           context, "Error", "There is no image selected or captured!", 404);
     } else {
-      setState(() {
-        showSpinner = true;
-      });
+      progressDialog.show();
       try {
         // GETTING THE IMAGE NAME
         String fileName = imageFile.path.split('/').last;
@@ -89,9 +87,9 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
           'timestamp': Timestamp.now(),
         });
 
+        progressDialog.hide();
         // Display the spinner to indicate that its loading
         setState(() {
-          showSpinner = false;
           showHighlightedImage = true;
         });
 
@@ -99,7 +97,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         if (responseBody != null) {
           // Displaying the alert dialog
           createAlertDialog(context, "Diagnosis",
-              "Detection result: " + resultPrediction, 201);
+              "Detection result: " + resultPrediction, 404);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -109,9 +107,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         // Displaying alert to the user
         createAlertDialog(context, "Error", e._message, 404);
 
-        setState(() {
-          showSpinner = false;
-        });
+        progressDialog.hide();
       }
     }
   }
@@ -132,7 +128,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     });
 
     var selectedPicture =
-    await ImagePicker.pickImage(source: ImageSource.camera);
+        await ImagePicker.pickImage(source: ImageSource.camera);
 
     setState(() {
       imageFile = selectedPicture;
@@ -151,6 +147,36 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 
   @override
   Widget build(BuildContext context) {
+    // Progress Dialog that will run till API Request is received
+    final ProgressDialog progressDialog = ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: false, showLogs: true);
+
+    // Styling Progress Dialog
+    progressDialog.style(
+        message: '   Scanning\n   Image',
+        padding: EdgeInsets.all(20),
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: LinearProgressIndicator(
+          backgroundColor: Colors.lightBlueAccent,
+        ),
+        elevation: 10.0,
+        insetAnimCurve: Curves.easeInCubic,
+        progress: 0.0,
+        maxProgress: 100.0,
+        progressTextStyle: TextStyle(
+          color: Color(0xFF565D5E),
+          fontSize: 13.0,
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Poppins-SemiBold',
+        ),
+        messageTextStyle: TextStyle(
+          color: Color(0xFF565D5E),
+          fontSize: 19.0,
+          fontWeight: FontWeight.w600,
+          fontFamily: 'Poppins-SemiBold',
+        ));
+
     return SafeArea(
       child: ModalProgressHUD(
         // displaying the spinner for async tasks
@@ -237,7 +263,8 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 3,
                                       blurRadius: 7,
-                                      offset: Offset(0, 3), // changes position of shadow
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
@@ -265,7 +292,8 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                       color: Colors.grey.withOpacity(0.5),
                                       spreadRadius: 3,
                                       blurRadius: 7,
-                                      offset: Offset(0, 3), // changes position of shadow
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(10),
@@ -318,8 +346,8 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               ),
                             ),
                             shape: const StadiumBorder(),
-                            onPressed: () {
-                              _detect();
+                            onPressed: ()  {
+                              _detect(progressDialog);
                             },
                           ),
                         ),
