@@ -284,6 +284,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     child: Column(
                       children: [
                         TextFormField(
+                          maxLength: 30,
                           controller: _userNameController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -332,6 +333,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                         TextFormField(
+                          maxLength: 30,
                           controller: _emailController,
                           style:TextStyle(
                             fontFamily: 'Poppins-SemiBold',
