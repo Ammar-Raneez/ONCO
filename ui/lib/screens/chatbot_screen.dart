@@ -147,7 +147,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 52),
+        padding: const EdgeInsets.only(bottom: 60),
         child: ModalProgressHUD(
           inAsyncCall: showSpinner,
           // if user is being fetched display a loading spinner
