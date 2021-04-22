@@ -578,6 +578,8 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             };
                         }
 
+                        print(prognosisBody);
+
                         // Progress Dialog that will run till API Request is received
                         final ProgressDialog progressDialog = ProgressDialog(
                             context,
@@ -618,6 +620,8 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                         progressDialog.hide();
 
+                        print(reply);
+
                         // checking if the response is not null and displaying the result
                         if (reply != null) {
 
@@ -625,53 +629,62 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                           var prognosisResult;
 
-                          if (cancerType != "Skin Cancer")
+                          if (body["message"] == "Internal Server Error")
 
-                            prognosisResult = body["Prediction"];
+                            // Displaying the alert dialog if Internal Server Error
+                            createAlertDialog(context, "Error",
+                                "Something's wrong on our end :( please try again !", 404);
 
-                          else
-                          {
-                            prognosisResult = body['result_string'];
-                          }
+                          else {
 
-                          /* For Breast Cancer Prognosis the Result is either 'R'
-                           * for Recurring and 'N' for Non-Recurring, so an If Condition
-                           * is used to set the Result to a more User Friendly
-                           * message
-                           */
-                          if (prognosisResult == "N" &&
-                              cancerType == "Breast Cancer")
-                            prognosisResult = "Non-Recurring";
-                          else if (prognosisResult == "R" &&
-                              cancerType == "Breast Cancer")
-                            prognosisResult = "Recurring";
+                            if (cancerType != "Skin Cancer")
 
-                          // Displaying the alert dialog
-                          createAlertDialog(
-                              context, "Prognosis", prognosisResult, 201);
+                              prognosisResult = body["Prediction"];
 
-                          // Adding the response data into the database for report creation purpose
-                          // initially, convert all inputs into strings for the report
-                          Map firebasePrognosisBody;
-                          setState(() {
-                            firebasePrognosisBody = prognosisBody;
-
-                            for (var eachItem in firebasePrognosisBody.keys) {
-                              firebasePrognosisBody[eachItem] = firebasePrognosisBody[eachItem].toString();
+                            else
+                            {
+                              prognosisResult = body['result_string'];
                             }
-                          });
 
-                          _firestore
-                              .collection("users")
-                              .doc(UserDetails.getUserData()["email"])
-                              .collection("InputPrognosis")
-                              .add({
-                            "prognosisInputs": firebasePrognosisBody,
-                            "cancerType": cancerType,
-                            "reportType": "prognosis",
-                            "result": prognosisResult,
-                            'timestamp': Timestamp.now(),
-                          });
+                            /* For Breast Cancer Prognosis the Result is either 'R'
+                             * for Recurring and 'N' for Non-Recurring, so an If Condition
+                             * is used to set the Result to a more User Friendly
+                             * message
+                             */
+                            if (prognosisResult == "N" &&
+                                cancerType == "Breast Cancer")
+                              prognosisResult = "Non-Recurring";
+                            else if (prognosisResult == "R" &&
+                                cancerType == "Breast Cancer")
+                              prognosisResult = "Recurring";
+
+                            // Displaying the alert dialog
+                            createAlertDialog(
+                                context, "Prognosis", prognosisResult, 201);
+
+                            // Adding the response data into the database for report creation purpose
+                            // initially, convert all inputs into strings for the report
+                            Map firebasePrognosisBody;
+                            setState(() {
+                              firebasePrognosisBody = prognosisBody;
+
+                              for (var eachItem in firebasePrognosisBody.keys) {
+                                firebasePrognosisBody[eachItem] = firebasePrognosisBody[eachItem].toString();
+                              }
+                            });
+
+                            _firestore
+                                .collection("users")
+                                .doc(UserDetails.getUserData()["email"])
+                                .collection("InputPrognosis")
+                                .add({
+                              "prognosisInputs": firebasePrognosisBody,
+                              "cancerType": cancerType,
+                              "reportType": "prognosis",
+                              "result": prognosisResult,
+                              'timestamp': Timestamp.now(),
+                            });
+                            }
                         } else {
                           // Displaying the alert dialog
                           createAlertDialog(context, "Error",
