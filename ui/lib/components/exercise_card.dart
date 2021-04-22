@@ -39,7 +39,7 @@ class ExerciseCard extends StatelessWidget {
               ),
               decoration:BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("images/ex_Images/" + cardImage),
+                  image: AssetImage("images/" + cardImage),
                   fit: BoxFit.fitHeight,
                   alignment: Alignment.topCenter
                 ),
