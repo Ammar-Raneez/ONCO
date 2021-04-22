@@ -82,9 +82,19 @@ class CancerPrognosisState extends State<CancerPrognosis> {
   }
 
   void getPostsDataSkin() {
-    for (String question in cancerPrognosisAttributes) {
-      if (question != "Age") {
-        skinCancerUserAnswers.add("");
+    // for (String question in cancerPrognosisAttributes) {
+    //   if (question != "Age") {
+    //     skinCancerUserAnswers.add("");
+    //   }
+    // }
+
+    if(UserDetails.getUserData()['gender'] == "male"){
+      for(List answer in SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_MALE){
+        skinCancerUserAnswers.add(answer[0]);
+      }
+    }else{
+      for(List answer in SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_FEMALE){
+        skinCancerUserAnswers.add(answer[0]);
       }
     }
 
