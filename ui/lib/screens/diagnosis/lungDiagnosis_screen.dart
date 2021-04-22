@@ -97,7 +97,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         if (responseBody != null) {
           // Displaying the alert dialog
           createAlertDialog(context, "Diagnosis",
-              "Detection result: " + resultPrediction, 404);
+              "Detection result: " + resultPrediction, 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
@@ -119,6 +119,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
       data: formData,
     );
     responseBody = response.data[0];
+    print(responseBody);
   }
 
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)
@@ -243,7 +244,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   child: FadeInImage.assetNetwork(
                                     placeholder: 'images/loading.gif',
                                     image:
-                                        responseBody["superimposed_image_url"],
+                                        responseBody["regular_image_url"],
                                   ),
                                 ),
                         ),

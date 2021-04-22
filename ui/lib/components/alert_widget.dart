@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ui/components/reports_card.dart';
+import 'package:ui/screens/Personal%20Manager/reportManager/diagnosis_reports_screen.dart';
+import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
 import 'package:ui/screens/current_screen.dart';
 import 'package:ui/screens/settings_screen.dart';
 
@@ -15,16 +18,15 @@ class AlertWidget extends StatelessWidget {
   String buttonMessage = "OK";
 
   // Constructor
-  AlertWidget(this.title, this._message, this._status)
-  {
+  AlertWidget(this.title, this._message, this._status) {
     _content = Text(
       _message,
       style: TextStyle(color: Colors.black54),
     );
   }
 
-  AlertWidget.settings(this.title, this._message, this._status, this.confirmChangePrimitiveWrapper)
-  {
+  AlertWidget.settings(this.title, this._message, this._status,
+      this.confirmChangePrimitiveWrapper) {
     buttonMessage = "Update";
     _content = Text(
       _message,
@@ -32,12 +34,12 @@ class AlertWidget extends StatelessWidget {
     );
   }
 
-  AlertWidget.textField(this.title, this._message, this._status, this.textPrimitiveWrapper)
-  {
+  AlertWidget.textField(
+      this.title, this._message, this._status, this.textPrimitiveWrapper) {
     buttonMessage = "Verify";
     _content = TextFormField(
       controller: textEditingController,
-      style:TextStyle(
+      style: TextStyle(
         fontFamily: 'Poppins-SemiBold',
         fontSize: 16.0,
         color: Color(0xFF565D5E),
@@ -46,10 +48,7 @@ class AlertWidget extends StatelessWidget {
       decoration: InputDecoration(
         labelText: 'Password',
         labelStyle: TextStyle(
-            color: Colors.red,
-            fontSize: 15,
-            fontFamily: 'Poppins-SemiBold'
-        ),
+            color: Colors.red, fontSize: 15, fontFamily: 'Poppins-SemiBold'),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.red),
         ),
@@ -113,21 +112,27 @@ class AlertWidget extends StatelessWidget {
               borderRadius: new BorderRadius.circular(10.0),
             ),
             onPressed: () {
-              if(_status == 404){
+              if (_status == 404) {
                 Navigator.pop(context); // pop the alert
+              }
+
+              if (_status == 201) {
+                // Remove the alert widget and direct to report list
+                Navigator.pop(context); // pop the alert
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DiagnosisReports()),
+                );
               }
 
               if (_status == 200) {
                 Navigator.pop(context); // pop the alert
-                Navigator.push(context, MaterialPageRoute(builder:
-                    (_) => CurrentScreen()));
-              }
-              else if (confirmChangePrimitiveWrapper != null) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => CurrentScreen()));
+              } else if (confirmChangePrimitiveWrapper != null) {
                 confirmChangePrimitiveWrapper.setConfirmChange(true);
                 Navigator.pop(context);
-              }
-              else if (textPrimitiveWrapper != null)
-              {
+              } else if (textPrimitiveWrapper != null) {
                 textPrimitiveWrapper._text = textEditingController.text;
                 Navigator.pop(context);
               }
@@ -135,8 +140,7 @@ class AlertWidget extends StatelessWidget {
               //   Navigator.pop(context);
               // }
             },
-
-            child:  Text(
+            child: Text(
               buttonMessage,
               style: TextStyle(color: Colors.black54),
             ),
@@ -147,7 +151,8 @@ class AlertWidget extends StatelessWidget {
   }
 }
 
-createAlertDialog(BuildContext context, String title, String message, int status) {
+createAlertDialog(
+    BuildContext context, String title, String message, int status) {
   return showDialog(
     context: context,
     builder: (context) {
@@ -156,7 +161,8 @@ createAlertDialog(BuildContext context, String title, String message, int status
   );
 }
 
-createConfirmDialog(BuildContext context, String title, String message, ConfirmChangePrimitiveWrapper confirmChange) {
+createConfirmDialog(BuildContext context, String title, String message,
+    ConfirmChangePrimitiveWrapper confirmChange) {
   return showDialog(
     context: context,
     builder: (context) {
@@ -165,7 +171,8 @@ createConfirmDialog(BuildContext context, String title, String message, ConfirmC
   );
 }
 
-createTextFieldDialog(BuildContext context, String title, String message, TextPrimitiveWrapper textPrimitiveWrapper) {
+createTextFieldDialog(BuildContext context, String title, String message,
+    TextPrimitiveWrapper textPrimitiveWrapper) {
   return showDialog(
     context: context,
     builder: (context) {
@@ -174,26 +181,21 @@ createTextFieldDialog(BuildContext context, String title, String message, TextPr
   );
 }
 
-
-class ConfirmChangePrimitiveWrapper
-{
+class ConfirmChangePrimitiveWrapper {
   bool confirmChange;
 
   ConfirmChangePrimitiveWrapper({this.confirmChange});
 
-  void setConfirmChange(bool confirmChange)
-  {
+  void setConfirmChange(bool confirmChange) {
     this.confirmChange = confirmChange;
   }
 
-  bool getConfirmChange()
-  {
+  bool getConfirmChange() {
     return confirmChange;
   }
 }
 
-class TextPrimitiveWrapper
-{
+class TextPrimitiveWrapper {
   String _text;
 
   TextPrimitiveWrapper(this._text);

@@ -90,7 +90,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
         if (responseBody != null) {
           // Displaying the alert dialog
           createAlertDialog(context, "Diagnosis",
-              "Detection result: " + resultPrediction, 404);
+              "Detection result: " + resultPrediction, 201);
         } else {
           // Displaying the alert dialog
           createAlertDialog(
