@@ -25,9 +25,9 @@ class ExerciseCard extends StatelessWidget {
               height: 150.0,
               width: 275.0,
                 child: Align(
-                  alignment: Alignment.bottomLeft,
+                  alignment: Alignment.topLeft,
                   child:Padding(
-                    padding: const EdgeInsets.only(left: 12.0, bottom: 5.0),
+                    padding: const EdgeInsets.only(left: 12.0, top: 10.0),
                     child: Text(
                       cardTitle,
                       style: TextStyle(
