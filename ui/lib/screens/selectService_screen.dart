@@ -15,17 +15,16 @@ class SelectServiceScreen extends StatefulWidget {
   final prognosisRoute;
   final String cancerType;
 
-  const SelectServiceScreen({@required this.diagnosisRoute, @required this.prognosisRoute, @required this.cancerType});
-
+  const SelectServiceScreen(
+      {@required this.diagnosisRoute,
+      @required this.prognosisRoute,
+      @required this.cancerType});
 
   @override
   _SelectServiceScreenState createState() => _SelectServiceScreenState();
-
-
 }
 
 class _SelectServiceScreenState extends State<SelectServiceScreen> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -71,7 +70,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                     child: TreatmentCard(cardTitle: 'Diagnosis'),
                   ),
                   SizedBox(
-                    height: 2,
+                    height: 5,
                   ),
                   Text(
                     "OR",
@@ -82,7 +81,7 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 2,
+                    height: 5,
                   ),
                   GestureDetector(
                     onTap: () {
@@ -100,14 +99,10 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(
-                          context
-                      );
+                      Navigator.pop(context);
                     },
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 20
-                      ),
+                      padding: const EdgeInsets.only(bottom: 20),
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30.0),
@@ -116,10 +111,11 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
+                                color: Colors.grey.withOpacity(0.7),
                                 spreadRadius: 1,
                                 blurRadius: 7,
-                                offset: Offset(0, 3), // changes position of shadow
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
                               ),
                             ],
                             borderRadius: BorderRadius.circular(18),
@@ -132,7 +128,10 @@ class _SelectServiceScreenState extends State<SelectServiceScreen> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: new Icon(Icons.arrow_back, color: Colors.white,),
+                                child: new Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.white,
+                                ),
                               ),
                               SizedBox(
                                 width: 10,
