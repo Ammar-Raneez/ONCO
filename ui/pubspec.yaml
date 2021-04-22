@@ -50,8 +50,7 @@ flutter:
 
   assets:
     - images/
-    - images/CardImages/
-    - images/exerciseImages/
+    - images/ExerciseImages/
 
   fonts:
     - family: Poppins-Regular
