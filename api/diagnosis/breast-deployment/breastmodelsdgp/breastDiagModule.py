@@ -13,6 +13,11 @@ class BreastDiagModule:# Predict using the model
         new_arr = cv2.resize(img, (IMG_SIZE, IMG_SIZE))
         new_arr = new_arr.reshape(-1, IMG_SIZE, IMG_SIZE, 1)
         return new_arr
+    
+    def model_predict_breast(self, img_array, model):
+        new_arr = self.get_img_array(img_array)
+        prediction = model.predict([new_arr])
+        return prediction
 
     def make_gradcam_heatmap(self, img_array, model, last_conv_layer_name, classifier_layer_names):
         last_conv_layer = model.get_layer(last_conv_layer_name)
@@ -98,7 +103,4 @@ class BreastDiagModule:# Predict using the model
         image_url = f"https://breastmodelsdgp.blob.core.windows.net/superimposed-images/{filename}"
         return image_url
 
-    def model_predict_breast(self, img_array, model):
-        new_arr = self.get_img_array(img_array)
-        prediction = model.predict([new_arr])
-        return prediction
+
