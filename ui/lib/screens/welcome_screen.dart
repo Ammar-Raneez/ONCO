@@ -50,11 +50,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     // Go to Login Screen after a given time duration
     Future.delayed(const Duration(milliseconds: 3500), () {
       Navigator.push(
-          context,
-          PageRouteBuilder(
-            transitionDuration: Duration(seconds: 5),
-            pageBuilder: (_, __, ___) => LoginScreen(),
-          ));
+        context,
+        PageRouteBuilder(
+          transitionDuration: Duration(seconds: 5),
+          pageBuilder: (_, __, ___) => LoginScreen(),
+        ),
+      );
     });
   }
 
