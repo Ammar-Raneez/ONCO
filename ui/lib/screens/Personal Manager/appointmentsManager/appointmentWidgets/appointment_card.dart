@@ -13,7 +13,6 @@ class AppointmentsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () => editMedication(context, appointment),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 0),
         child: Container(
@@ -50,6 +49,9 @@ class AppointmentsCard extends StatelessWidget {
                       color: Colors.red,
                       icon: Icon(Icons.delete),
                       onPressed: () {
+                        /* Connecting to Provider and using removeAppointment method to remove
+                         * the Appointment from Firebase
+                         */
                         final provider = Provider.of<AppointmentsProvider>(
                             context,
                             listen: false);

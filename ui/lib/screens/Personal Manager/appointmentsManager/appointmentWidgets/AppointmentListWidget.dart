@@ -9,6 +9,9 @@ class AppointmentsListWidget extends StatelessWidget {
     final provider = Provider.of<AppointmentsProvider>(context);
     final appointments = provider.appointments;
 
+    /* Returning Either a ListView with all Appointments from Firebase
+     * or either a Text with no Appointments if nothing has been added (isEmpty)
+     */
     return appointments.isEmpty
         ? Center(
             child: Text(

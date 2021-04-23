@@ -236,13 +236,17 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    // Making sure all Inputs are selected
                                     if (_appointmentTime != null &&
-                                        _appointmentDate != null) {
+                                        _appointmentDate != null &&
+                                        _doctorName != null &&
+                                        _notes != null) {
                                       setState(() {
                                         _appointmentTime = newTime;
                                         _appointmentDate = newDate;
                                       });
 
+                                      // Creating new Appointment Object to be stored to Firebase
                                       Appointment newApplication = Appointment(
                                         doctorName: _doctorName,
                                         notes: _notes,
