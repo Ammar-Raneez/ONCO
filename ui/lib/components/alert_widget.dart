@@ -124,8 +124,7 @@ class AlertWidget extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => DiagnosisReports()),
                 );
-              }
-              else if (_status == 203) {
+              } else if (_status == 203) {
                 // Remove the alert widget and direct to prognosis report list
                 Navigator.pop(context); // pop the alert
                 Navigator.push(

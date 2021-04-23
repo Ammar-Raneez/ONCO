@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class TreatmentCard extends StatelessWidget {
@@ -18,7 +17,10 @@ class TreatmentCard extends StatelessWidget {
             colors: [Color(0xFFC6E7EE), Color(0xFF637477)],
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
-          ), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18),),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+          ),
         ),
         padding: EdgeInsets.only(top: 100, left: 25),
         width: 322.0,

@@ -3,9 +3,7 @@ import 'package:ui/screens/Personal%20Manager/appointmentsManager/api/appointmen
 import 'package:ui/screens/Personal%20Manager/appointmentsManager/models/appointment_model.dart';
 
 class AppointmentsProvider extends ChangeNotifier {
-
   List<Appointment> _appointments = [];
-
 
   List<Appointment> get appointments => _appointments;
 
@@ -15,7 +13,9 @@ class AppointmentsProvider extends ChangeNotifier {
         notifyListeners();
       });
 
-  void addMedication(Appointment appointment) => AppointmentsFirebaseApi.createAppointment(appointment);
+  void addMedication(Appointment appointment) =>
+      AppointmentsFirebaseApi.createAppointment(appointment);
 
-  void removeAppointment(Appointment appointment) => AppointmentsFirebaseApi.deleteAppointment(appointment);
+  void removeAppointment(Appointment appointment) =>
+      AppointmentsFirebaseApi.deleteAppointment(appointment);
 }

@@ -78,7 +78,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 horizontal: 20.0,
               ),
               child: ListView(
-
                 children: [
                   SizedBox(
                     height: 100.0,
@@ -256,8 +255,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             username == "" ||
                             email == "" ||
                             password == "") {
-                          createAlertDialog(context, "Error",
-                              "Please fill all the given fields to proceed", 404);
+                          createAlertDialog(
+                              context,
+                              "Error",
+                              "Please fill all the given fields to proceed",
+                              404);
                         } else {
                           bool emailValid = RegExp(
                                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -303,7 +305,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               // displaying alerts according to the progress
                               if (newUser != null) {
                                 // Adding the new registered user details to the global variable
-                                UserDetails.setUserData(email, username, gender);
+                                UserDetails.setUserData(
+                                    email, username, gender);
 
                                 // Displaying the alert dialog
                                 createAlertDialog(context, "Success",
@@ -327,7 +330,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               _usernameController.clear();
                               _passwordTextFieldController.clear();
                             } catch (e) {
-                              createAlertDialog(context, "Error", e.message, 404);
+                              createAlertDialog(
+                                  context, "Error", e.message, 404);
                               // stops displaying the spinner once the result comes back
                               setState(() {
                                 showSpinner = false;

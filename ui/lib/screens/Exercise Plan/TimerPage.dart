@@ -25,17 +25,16 @@ class _TimerPageState extends State<TimerPage> {
     super.initState();
 
     Timer.periodic(Duration(seconds: 1), (timer) {
-      if(DateTime.now().second == 5){ //Stop if second equal to 5
+      if (DateTime.now().second == 5) {
+        //Stop if second equal to 5
         timer.cancel();
         workout = "Please Take a Break";
       }
       setState(() {
-       workout = "After Some time ${DateTime.now().second}";
+        workout = "After Some time ${DateTime.now().second}";
       });
       setState(() {
-        time = "${DateTime
-            .now()
-            .second}";
+        time = "${DateTime.now().second}";
       });
     });
   }
@@ -44,19 +43,20 @@ class _TimerPageState extends State<TimerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Column(
-            children: [
-              CustomAppBar.arrow(context),
-              Container(
-                child: Text(time, style: TextStyle(
-                  fontFamily: 'Poppins-SemiBold',
-                  fontSize: 24,
-                ),),
+      child: Column(
+        children: [
+          CustomAppBar.arrow(context),
+          Container(
+            child: Text(
+              time,
+              style: TextStyle(
+                fontFamily: 'Poppins-SemiBold',
+                fontSize: 24,
               ),
-            ],
+            ),
           ),
-        )
-    );
+        ],
+      ),
+    ));
   }
 }
-

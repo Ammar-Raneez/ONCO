@@ -7,24 +7,22 @@ import 'package:ui/services/GoogleUserSignInDetails.dart';
 final user = FirebaseAuth.instance.currentUser;
 
 var loggedInUserEP = user.email;
-var loggedInUserGoogle =  GoogleUserSignInDetails.googleSignInUserEmail;
+var loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
 
 class ReportFirebaseApi {
+  static Stream<List<Report>> readDiagnosisReports() =>
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
+          .collection("imageDetections")
+          .snapshots()
+          .transform(Utils.transformer(Report.fromDiagnosisJson));
 
-  static Stream<List<Report>> readDiagnosisReports() => FirebaseFirestore.instance
-      .collection("users")
-      .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
-      .collection("imageDetections")
-      .snapshots()
-      .transform(Utils.transformer(Report.fromDiagnosisJson)
-  );
-
-  static Stream<List<Report>> readPrognosisReports() => FirebaseFirestore.instance
-      .collection("users")
-      .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
-      .collection("InputPrognosis")
-      .snapshots()
-      .transform(Utils.transformer(Report.fromPrognosisJson)
-  );
-
+  static Stream<List<Report>> readPrognosisReports() =>
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
+          .collection("InputPrognosis")
+          .snapshots()
+          .transform(Utils.transformer(Report.fromPrognosisJson));
 }
