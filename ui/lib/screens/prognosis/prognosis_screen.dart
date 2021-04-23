@@ -331,6 +331,32 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                   ),
                   IconButton(
                     icon: Icon(Icons.help),
+                    onPressed: ()
+                    {
+                      String helpMessage;
+
+                      if (cancerType == "Breast Cancer")
+
+                        helpMessage = "Fine needle aspiration is a type of biopsy "
+                            "procedure. In fine needle aspiration, a thin needle "
+                            "is inserted into an area of abnormal-appearing tissue or body fluid";
+
+                      else if (cancerType == "Lung Cancer")
+
+                        helpMessage = "You need to enter values based on your own scale for all these inputs "
+                            "based on how much you think this factor is involved in your life. i.e for Alcohol Use "
+                            "you but a Higher number if you think you consume or are exposed to large amounts of alcohol";
+
+                      else if (cancerType == "Skin Cancer")
+
+                        helpMessage = "Simply Toggle a Button for each Question based on your Answer to calculate"
+                            " your Risk of Skin Cancer over the next 5 Years";
+
+                      // Displaying the alert dialog
+                      createAlertDialog(
+                          context, "Help", helpMessage, 404);
+
+                    },
                   )
                 ],
               ),
