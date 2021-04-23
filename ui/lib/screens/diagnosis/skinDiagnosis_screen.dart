@@ -75,7 +75,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .doc(UserDetails.getUserData()["email"])
             .collection("imageDetections")
             .add({
-          "cancerType": "skin",
+          "cancerType": "skin cancer",
           "reportType": "diagnosis",
           "result": resultPrediction,
           "result_string": resultString,

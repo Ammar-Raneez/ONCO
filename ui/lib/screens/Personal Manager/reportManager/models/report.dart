@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Report {
   String id;
   String cancerType;
+  String inputImageUrl;
   String imageUrl;
   String result;
   String resultString;
@@ -13,7 +14,7 @@ class Report {
 
   Report(
       {this.reportType = '',
-      this.reportDate,
+      this.reportDate,this.inputImageUrl = '',
       this.imageUrl = '',
       this.percentage = '',
       this.cancerType = '',
@@ -27,6 +28,7 @@ class Report {
       result: json['result'],
       resultString: json['result_string'],
       cancerType: json['cancerType'],
+      inputImageUrl: json['cancerType'] != "skin cancer" ? json['inputImageUrl'] : "",
       imageUrl: json['imageUrl'],
       percentage: json['percentage']);
 

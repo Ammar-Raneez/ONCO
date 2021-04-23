@@ -18,6 +18,7 @@ class _ViewReportState extends State<ViewReport> {
   String _cancerType;
   String _reportPercentage;
   String _reportResult;
+  String imageInputURL;
   String imageURL;
 
   var _reportDate;
@@ -38,6 +39,7 @@ class _ViewReportState extends State<ViewReport> {
         DateTime.fromMillisecondsSinceEpoch(_reportDate.millisecondsSinceEpoch);
     formattedDate = DateFormat.yMMMd().format(date);
     _reportPercentage = widget.report.percentage;
+    imageInputURL = widget.report.inputImageUrl;
     imageURL = widget.report.imageUrl;
     _cancerType = widget.report.cancerType;
     if (widget.report.result == "CANCER") {
@@ -185,6 +187,7 @@ class _ViewReportState extends State<ViewReport> {
                 _cancerType,
                 _reportResult,
                 _reportPercentage,
+                imageInputURL,
                 imageURL,
                 prognosisVariables,
                 controller,
@@ -249,6 +252,7 @@ Widget cancerDetails(
     String cancerType,
     String reportResult,
     String percentage,
+    String inputImageUrl,
     String imageUrl,
     Map prognosisBody,
     ScrollController controller,
@@ -270,7 +274,7 @@ Widget cancerDetails(
                   animation: true,
                   animationDuration: 1000,
                   percent: double.parse(percentage) / 100,
-                  center: new Text(percentage + "%"),
+                  center: new Text(double.parse(percentage).floor().toString() + "%"),
                   progressColor: color,
                 ),
               ),
@@ -360,7 +364,22 @@ Widget cancerDetails(
                     ),
                   ),
                 ),
-                Padding(
+                cancerType != "skin cancer" ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  child: CachedNetworkImage(
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => SizedBox(
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: 100,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                            value: downloadProgress.progress),
+                      ),
+                    ),
+                    imageUrl: inputImageUrl,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ) : Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: CachedNetworkImage(
                     progressIndicatorBuilder:
@@ -375,6 +394,43 @@ Widget cancerDetails(
                     imageUrl: imageUrl,
                     width: MediaQuery.of(context).size.width,
                   ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                cancerType != "skin cancer" ? Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "OUTPUTS OBTAINED",
+                      style: TextStyle(
+                          fontFamily: 'Poppins-SemiBold',
+                          fontSize: 18,
+                          color: Color(0xFF7CC2C4)),
+                    ),
+                  ),
+                ) : Container(height: 0,),
+                cancerType != "skin cancer" ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  child: CachedNetworkImage(
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => SizedBox(
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: 100,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                            value: downloadProgress.progress),
+                      ),
+                    ),
+                    imageUrl: imageUrl,
+                    height: 450,
+                    fit: BoxFit.fill,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ) : Container(height: 0,),
+                SizedBox(
+                  height: 30,
                 ),
               ],
             ),
