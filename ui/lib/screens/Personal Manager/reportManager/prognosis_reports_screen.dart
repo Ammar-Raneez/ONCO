@@ -23,91 +23,77 @@ class _PrognosisReportsState extends State<PrognosisReports> {
         body: SafeArea(
           child: Expanded(
             child: Container(
-                child:Column(
+                child: Column(
+              children: [
+                Column(
                   children: [
                     Column(
                       children: [
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 20,
-                                bottom: 8,
-                              ),
-                              child: Align(
-
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  "Prognosis Reports",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins-SemiBold',
-                                      fontSize: 32,
-                                      color: Color(0xFF00404E)
-                                  ),
-                                ),
-                              ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            bottom: 8,
+                          ),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Prognosis Reports",
+                              style: TextStyle(
+                                  fontFamily: 'Poppins-SemiBold',
+                                  fontSize: 32,
+                                  color: Color(0xFF00404E)),
                             ),
-
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20,
-                                  right: 20,
-                                  bottom:15
-                              ),
-                              child: Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  "Here you can view the reports created after a prognosis.",
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins-SemiBold',
-                                      fontSize: 13.0,
-                                      color: Color(0xFF3C707B)
-                                  ),
-                                ),
-                              ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 15),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Here you can view the reports created after a prognosis.",
+                              style: TextStyle(
+                                  fontFamily: 'Poppins-SemiBold',
+                                  fontSize: 13.0,
+                                  color: Color(0xFF3C707B)),
                             ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
-
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Container(
-
-                          child: StreamBuilder<List<Report>>(
-                              stream: ReportFirebaseApi.readPrognosisReports(),
-                              builder: (context, snapshot) {
-                                switch (snapshot.connectionState) {
-
-                                  case ConnectionState.waiting:
-
-                                    return Center(
-                                        child: CircularProgressIndicator());
-                                  default:
-
-                                    if (snapshot.hasError) {
-                                      return buildText(
-                                          'Something went wrong, Try later');
-                                    } else {
-                                      final reports = snapshot.data;
-
-                                      final provider = Provider.of<ReportProvider>(context);
-                                      provider.setReports(reports);
-
-                                      return ReportListWidget();
-                                    }
-                                }
-                              }
-                          ),
-                        ),
-                      ),
-                    ),
-
                   ],
-                )
-            ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Container(
+                      child: StreamBuilder<List<Report>>(
+                          stream: ReportFirebaseApi.readPrognosisReports(),
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              default:
+                                if (snapshot.hasError) {
+                                  return buildText(
+                                      'Something went wrong, Try later');
+                                } else {
+                                  final reports = snapshot.data;
+
+                                  final provider =
+                                      Provider.of<ReportProvider>(context);
+                                  provider.setReports(reports);
+
+                                  return ReportListWidget();
+                                }
+                            }
+                          }),
+                    ),
+                  ),
+                ),
+              ],
+            )),
           ),
         ),
       ),
@@ -116,8 +102,8 @@ class _PrognosisReportsState extends State<PrognosisReports> {
 }
 
 Widget buildText(String text) => Center(
-  child: Text(
-    text,
-    style: TextStyle(fontSize: 24, color: Colors.black),
-  ),
-);
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 24, color: Colors.black),
+      ),
+    );

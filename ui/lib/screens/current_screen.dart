@@ -17,18 +17,18 @@ class CurrentScreen extends StatefulWidget {
   String updatedGender;
 
   CurrentScreen();
-  CurrentScreen.settingsNavigatorPush(this.updatedUsername, this.updatedEmail, this.updatedGender);
-
+  CurrentScreen.settingsNavigatorPush(
+      this.updatedUsername, this.updatedEmail, this.updatedGender);
 
   @override
   _CurrentScreenState createState() {
-
-    if (updatedUsername != null && updatedEmail != null && updatedGender != null )
-
-      return _CurrentScreenState.settingsNavigatorPush(updatedUsername, updatedEmail, updatedGender);
-
-
-    else return _CurrentScreenState();
+    if (updatedUsername != null &&
+        updatedEmail != null &&
+        updatedGender != null)
+      return _CurrentScreenState.settingsNavigatorPush(
+          updatedUsername, updatedEmail, updatedGender);
+    else
+      return _CurrentScreenState();
   }
 }
 
@@ -44,36 +44,31 @@ class _CurrentScreenState extends State<CurrentScreen> {
   List<Widget> swipeScreen;
 
   _CurrentScreenState() {
-
     // getting the current user details on loading of the screen
     getCurrentUser();
 
-    if (username == null)
+    if (username == null) username = UserDetails.getUserData()["username"];
 
-      username = UserDetails.getUserData()["username"];
+    if (gender == null) gender = UserDetails.getUserData()["gender"];
 
-    if (gender == null)
-
-      gender = UserDetails.getUserData()["gender"];
-
-    if (email == null)
-
-      email = UserDetails.getUserData()["email"];
+    if (email == null) email = UserDetails.getUserData()["email"];
 
     swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
   }
-  _CurrentScreenState.settingsNavigatorPush(this.username, this.email, this.gender)
-  {
-    swipeScreen = [HomeScreen.settingsNavigatorPush(username), MainCancerTypesScreen(), ChatBotScreen()];
+  _CurrentScreenState.settingsNavigatorPush(
+      this.username, this.email, this.gender) {
+    swipeScreen = [
+      HomeScreen.settingsNavigatorPush(username),
+      MainCancerTypesScreen(),
+      ChatBotScreen()
+    ];
   }
 
-  _CurrentScreenState.settingsNavigatorPushEmail(this.email)
-  {
+  _CurrentScreenState.settingsNavigatorPushEmail(this.email) {
     print(email + " HEREEEE");
     swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
   }
-  _CurrentScreenState.settingsNavigatorPushGender(this.gender)
-  {
+  _CurrentScreenState.settingsNavigatorPushGender(this.gender) {
     swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
   }
 
@@ -98,9 +93,10 @@ class _CurrentScreenState extends State<CurrentScreen> {
       //fetch username
       var userDocument = await _firestore
           .collection("users")
-          .doc(loggedInUser.email != null ? loggedInUser.email : loggedInUserGoogle)
+          .doc(loggedInUser.email != null
+              ? loggedInUser.email
+              : loggedInUserGoogle)
           .get();
-
 
       setState(() {
         username = userDocument["username"];
@@ -179,42 +175,41 @@ class _CurrentScreenState extends State<CurrentScreen> {
               //   ],
               // ),
             ),
-
             Align(
               alignment: Alignment.bottomCenter,
               child: CurvedNavigationBar(
-                  height:52,
-                  color: Color(0xff01CDFA),
-                  backgroundColor: Colors.transparent,
-                  index: currentIndex,
+                height: 52,
+                color: Color(0xff01CDFA),
+                backgroundColor: Colors.transparent,
+                index: currentIndex,
 
-                  // Logic for the switching of MAIN SCREENS (HOME, CANCER, CHATBOT)
-                  onTap: (index) {
-                    setState(() {
-                      currentIndex = index;
-                      _pageController.jumpToPage(
-                        index,
-                      );
-                    });
-                  },
-                  items: [
-                    Icon(
-                      Icons.home,
-                      size: 27,
-                      color: Colors.white,
-                    ),
-                    Icon(
-                      Icons.widgets,
-                      size: 27,
-                      color: Colors.white,
-                    ),
-                    Icon(
-                      Icons.chat,
-                      size: 27,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
+                // Logic for the switching of MAIN SCREENS (HOME, CANCER, CHATBOT)
+                onTap: (index) {
+                  setState(() {
+                    currentIndex = index;
+                    _pageController.jumpToPage(
+                      index,
+                    );
+                  });
+                },
+                items: [
+                  Icon(
+                    Icons.home,
+                    size: 27,
+                    color: Colors.white,
+                  ),
+                  Icon(
+                    Icons.widgets,
+                    size: 27,
+                    color: Colors.white,
+                  ),
+                  Icon(
+                    Icons.chat,
+                    size: 27,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

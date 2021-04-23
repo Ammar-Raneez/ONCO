@@ -244,8 +244,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: FadeInImage.assetNetwork(
                                     placeholder: 'images/loading.gif',
-                                    image:
-                                        responseBody["regular_image_url"],
+                                    image: responseBody["regular_image_url"],
                                   ),
                                 ),
                         ),
@@ -348,7 +347,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               ),
                             ),
                             shape: const StadiumBorder(),
-                            onPressed: ()  {
+                            onPressed: () {
                               _detect(progressDialog);
                             },
                           ),

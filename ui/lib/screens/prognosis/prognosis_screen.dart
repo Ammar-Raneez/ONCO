@@ -86,12 +86,12 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     //   }
     // }
 
-    if(UserDetails.getUserData()['gender'] == "male"){
-      for(List answer in SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_MALE){
+    if (UserDetails.getUserData()['gender'] == "male") {
+      for (List answer in SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_MALE) {
         _skinCancerUserAnswers.add(answer[0]);
       }
-    }else{
-      for(List answer in SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_FEMALE){
+    } else {
+      for (List answer in SKIN_CANCER_PROGNOSIS_ANSWER_OPTIONS_FEMALE) {
         _skinCancerUserAnswers.add(answer[0]);
       }
     }
@@ -207,7 +207,8 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                               spacing: 20,
                               onSelected: (index, isSelected) =>
                                   _skinCancerUserAnswers[currentQuestion] =
-                                      _skinCancerAnswers[currentQuestion][index],
+                                      _skinCancerAnswers[currentQuestion]
+                                          [index],
                               buttons: List.from(skinCancerOptions),
                               selectedButtons: [],
                             )
@@ -330,32 +331,27 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                   ),
                   IconButton(
                     icon: Icon(Icons.help),
-                    onPressed: ()
-                    {
+                    onPressed: () {
                       // Setting the Help Message on the Alert Dialog based on the Cancer Type
                       String helpMessage;
 
                       if (_cancerType == "Breast Cancer")
-
-                        helpMessage = "Fine needle aspiration is a type of biopsy "
+                        helpMessage =
+                            "Fine needle aspiration is a type of biopsy "
                             "procedure. In fine needle aspiration, a thin needle "
                             "is inserted into an area of abnormal-appearing tissue or body fluid";
-
                       else if (_cancerType == "Lung Cancer")
-
-                        helpMessage = "You need to enter values based on your own scale for all these inputs "
+                        helpMessage =
+                            "You need to enter values based on your own scale for all these inputs "
                             "based on how much you think this factor is involved in your life. i.e for Alcohol Use "
                             "you but a Higher number if you think you consume or are exposed to large amounts of alcohol";
-
                       else if (_cancerType == "Skin Cancer")
-
-                        helpMessage = "Simply Toggle a Button for each Question based on your Answer to calculate"
+                        helpMessage =
+                            "Simply Toggle a Button for each Question based on your Answer to calculate"
                             " your Risk of Skin Cancer over the next 5 Years";
 
                       // Displaying the help alert dialog
-                      createAlertDialog(
-                          context, "Help", helpMessage, 404);
-
+                      createAlertDialog(context, "Help", helpMessage, 404);
                     },
                   )
                 ],
@@ -560,7 +556,8 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             "perimeter_mean": _textFieldControllers[2].text,
                             "compactness_mean": _textFieldControllers[3].text,
                             "concavity_mean": _textFieldControllers[4].text,
-                            "concave points_mean": _textFieldControllers[5].text,
+                            "concave points_mean":
+                                _textFieldControllers[5].text,
                             "fractal_dimension_mean":
                                 _textFieldControllers[6].text,
                             "radius_se": _textFieldControllers[7].text,
