@@ -378,11 +378,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.pushNamed(
                                   context, RegistrationScreen.id);
                             },
-                            child: Text("Sign Up",
-                                style: kTextStyle.copyWith(
-                                  color: Color(0xff01CDFA),
-                                  fontSize: 13,
-                                )),
+                            child: Text(
+                              "Sign Up",
+                              style: kTextStyle.copyWith(
+                                color: Color(0xff01CDFA),
+                                fontSize: 13,
+                              ),
+                            ),
                           ),
                         ],
                       ),
