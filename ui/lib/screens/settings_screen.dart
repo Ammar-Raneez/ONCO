@@ -168,27 +168,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      key: _scaffoldKey,
-      resizeToAvoidBottomInset: true,
-      appBar: CustomAppBar.arrow(context),
-      body: ListView(children: [
-        Center(
-          child: Column(
-            children: [
-              Container(
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(left: 20, bottom: 20),
-                child: Text(
-                  "Settings",
-                  style: TextStyle(
-                    fontFamily: 'Poppins-SemiBold',
-                    fontSize: 27,
-                    color: Color(0xFF637477),
+      child: Scaffold(
+        key: _scaffoldKey,
+        resizeToAvoidBottomInset: true,
+        appBar: CustomAppBar.arrow(context),
+        body: ListView(children: [
+          Center(
+            child: Column(
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.only(left: 20, bottom: 20),
+                  child: Text(
+                    "Settings",
+                    style: TextStyle(
+                      fontFamily: 'Poppins-SemiBold',
+                      fontSize: 27,
+                      color: Color(0xFF637477),
+                    ),
                   ),
                 ),
-              ),
-              Card(
+                Card(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
@@ -237,17 +237,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 onTap: () {
                                   FirebaseAuth.instance
                                       .sendPasswordResetEmail(email: _email);
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    content: Text(
-                                      'Reset Password Email has been Sent !',
-                                      style: TextStyle(
-                                          color: Colors.black54,
-                                          fontFamily: "Poppins-SemiBold"),
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Reset Password Email has been Sent !',
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontFamily: "Poppins-SemiBold"),
+                                      ),
+                                      backgroundColor: Color(0xFFABD8E2),
+                                      duration: Duration(seconds: 2),
                                     ),
-                                    backgroundColor: Color(0xFFABD8E2),
-                                    duration: Duration(seconds: 2),
-                                  ));
+                                  );
                                 },
                                 child: Text(
                                   "Reset Password?",
@@ -262,257 +263,271 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       ],
                     ),
-                  )),
-              Container(
-                margin: EdgeInsets.all(20),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        maxLength: 30,
-                        controller: _userNameController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                        style: TextStyle(
-                          fontFamily: 'Poppins-SemiBold',
-                          fontSize: 16.0,
-                          color: Color(0xFF565D5E),
-                        ),
-                        cursorColor: TextSelectionThemeData().cursorColor,
-                        decoration: InputDecoration(
-                          labelText: 'Username',
-                          labelStyle: TextStyle(
-                              color: Color(0xff00b3d9),
-                              fontSize: 15,
-                              fontFamily: 'Poppins-SemiBold'),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xff00b3d9),
-                            ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.all(20),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          maxLength: 30,
+                          controller: _userNameController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            }
+                            return null;
+                          },
+                          style: TextStyle(
+                            fontFamily: 'Poppins-SemiBold',
+                            fontSize: 16.0,
+                            color: Color(0xFF565D5E),
                           ),
-                          suffixIcon: IconButton(
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                ConfirmChangePrimitiveWrapper
-                                    confirmChangePrimitiveWrapper =
-                                    new ConfirmChangePrimitiveWrapper(
-                                        confirmChange: false);
+                          cursorColor: TextSelectionThemeData().cursorColor,
+                          decoration: InputDecoration(
+                            labelText: 'Username',
+                            labelStyle: TextStyle(
+                                color: Color(0xff00b3d9),
+                                fontSize: 15,
+                                fontFamily: 'Poppins-SemiBold'),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xff00b3d9),
+                              ),
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () async {
+                                if (_formKey.currentState.validate()) {
+                                  ConfirmChangePrimitiveWrapper
+                                      confirmChangePrimitiveWrapper =
+                                      new ConfirmChangePrimitiveWrapper(
+                                          confirmChange: false);
 
-                                await createConfirmDialog(
-                                    context,
-                                    "Confirmation",
-                                    "Are you Sure you want to Change your Username ?\n\n(Click outside the Alert Box to Cancel)",
-                                    confirmChangePrimitiveWrapper);
+                                  await createConfirmDialog(
+                                      context,
+                                      "Confirmation",
+                                      "Are you Sure you want to Change your Username ?\n\n(Click outside the Alert Box to Cancel)",
+                                      confirmChangePrimitiveWrapper);
 
-                                if (confirmChangePrimitiveWrapper
-                                    .getConfirmChange()) {
-                                  _changeUserName(_userNameController.text);
+                                  if (confirmChangePrimitiveWrapper
+                                      .getConfirmChange()) {
+                                    _changeUserName(_userNameController.text);
 
-                                  Navigator.push(
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => CurrentScreen
-                                              .settingsNavigatorPush(
-                                                  _userNameController.text,
-                                                  _email,
-                                                  _gender)));
+                                        builder: (_) =>
+                                            CurrentScreen.settingsNavigatorPush(
+                                                _userNameController.text,
+                                                _email,
+                                                _gender),
+                                      ),
+                                    );
+                                  }
                                 }
-                              }
-                            },
-                            icon: Icon(
-                              Icons.edit,
-                              color: Color(0xff00b3d9),
+                              },
+                              icon: Icon(
+                                Icons.edit,
+                                color: Color(0xff00b3d9),
+                              ),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFF637477),
+                              ),
                             ),
                           ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF637477)),
-                          ),
                         ),
-                      ),
-                      TextFormField(
-                        maxLength: 30,
-                        controller: _emailController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          } else if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$"
-                                      r"%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                  .hasMatch(_emailController.text) ==
-                              false) {
-                            return 'Please enter a Valid Email';
-                          }
-                          return null;
-                        },
-                        style: TextStyle(
-                          fontFamily: 'Poppins-SemiBold',
-                          fontSize: 16.0,
-                          color: Color(0xFF565D5E),
-                        ),
-                        cursorColor: TextSelectionThemeData().cursorColor,
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          labelStyle: TextStyle(
-                              color: Color(0xff00b3d9),
-                              fontSize: 15,
-                              fontFamily: 'Poppins-SemiBold'),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xff00b3d9)),
+                        TextFormField(
+                          maxLength: 30,
+                          controller: _emailController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some text';
+                            } else if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$"
+                                        r"%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(_emailController.text) ==
+                                false) {
+                              return 'Please enter a Valid Email';
+                            }
+                            return null;
+                          },
+                          style: TextStyle(
+                            fontFamily: 'Poppins-SemiBold',
+                            fontSize: 16.0,
+                            color: Color(0xFF565D5E),
                           ),
-                          suffixIcon: IconButton(
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                TextPrimitiveWrapper textPrimitiveWrapper =
-                                    new TextPrimitiveWrapper("");
-                                await createTextFieldDialog(
-                                    context,
-                                    "Confirmation",
-                                    "Are you Sure you want to Change your Email ?\n\n(Click outside the Alert Box to Cancel)",
-                                    textPrimitiveWrapper);
+                          cursorColor: TextSelectionThemeData().cursorColor,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            labelStyle: TextStyle(
+                                color: Color(0xff00b3d9),
+                                fontSize: 15,
+                                fontFamily: 'Poppins-SemiBold'),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xff00b3d9)),
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () async {
+                                if (_formKey.currentState.validate()) {
+                                  TextPrimitiveWrapper textPrimitiveWrapper =
+                                      new TextPrimitiveWrapper("");
+                                  await createTextFieldDialog(
+                                      context,
+                                      "Confirmation",
+                                      "Are you Sure you want to Change your Email ?\n\n(Click outside the Alert Box to Cancel)",
+                                      textPrimitiveWrapper);
 
-                                // ignore: unrelated_type_equality_checks
-                                if (textPrimitiveWrapper != "") {
-                                  _changeEmail(_emailController.text,
-                                      textPrimitiveWrapper.text);
+                                  // ignore: unrelated_type_equality_checks
+                                  if (textPrimitiveWrapper != "") {
+                                    _changeEmail(_emailController.text,
+                                        textPrimitiveWrapper.text);
 
-                                  Navigator.push(
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => CurrentScreen
-                                              .settingsNavigatorPush(
-                                                  _userName,
-                                                  _emailController.text,
-                                                  _gender)));
+                                        builder: (_) =>
+                                            CurrentScreen.settingsNavigatorPush(
+                                                _userName,
+                                                _emailController.text,
+                                                _gender),
+                                      ),
+                                    );
+                                  }
                                 }
-                              }
-                            },
-                            icon: Icon(
-                              Icons.edit,
-                              color: Color(0xff00b3d9),
+                              },
+                              icon: Icon(
+                                Icons.edit,
+                                color: Color(0xff00b3d9),
+                              ),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0xFF637477),
+                              ),
                             ),
                           ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color(0xFF637477)),
-                          ),
                         ),
-                      ),
-                      Container(
+                        Container(
                           margin: EdgeInsets.only(top: 20),
                           // margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(18)),
+                            borderRadius: BorderRadius.circular(18),
+                          ),
                           child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Container(
                               child: Container(
-                                child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 10),
-                                    margin: EdgeInsets.only(top: 0, bottom: 10),
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(18),
-                                      color: Color(0xFFABD8E2),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                margin: EdgeInsets.only(top: 0, bottom: 10),
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(18),
+                                  color: Color(0xFFABD8E2),
+                                ),
+                                child: Column(children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 12),
+                                    child: GroupButton(
+                                      unselectedTextStyle: TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontFamily: "Poppins-SemiBold"),
+                                      selectedTextStyle: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins-SemiBold"),
+                                      selectedColor: Color(0xff00b3d9),
+                                      spacing: 20,
+                                      onSelected: (index, isSelected) async {
+                                        if (index == 0)
+                                          newGender = "male";
+                                        else
+                                          newGender = "female";
+                                      },
+                                      buttons: ["Male", "Female"],
+                                      selectedButtons: [
+                                        "${_gender[0].toUpperCase()}${_gender.substring(1)}"
+                                      ],
                                     ),
-                                    child: Column(children: <Widget>[
-                                      Container(
-                                          margin: EdgeInsets.only(bottom: 12),
-                                          child: GroupButton(
-                                            unselectedTextStyle: TextStyle(
-                                                color: Colors.blueGrey,
-                                                fontFamily: "Poppins-SemiBold"),
-                                            selectedTextStyle: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: "Poppins-SemiBold"),
-                                            selectedColor: Color(0xff00b3d9),
-                                            spacing: 20,
-                                            onSelected:
-                                                (index, isSelected) async {
-                                              if (index == 0)
-                                                newGender = "male";
-                                              else
-                                                newGender = "female";
-                                            },
-                                            buttons: ["Male", "Female"],
-                                            selectedButtons: [
-                                              "${_gender[0].toUpperCase()}${_gender.substring(1)}"
-                                            ],
-                                          )),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 10),
-                                        child: RawMaterialButton(
-                                          onPressed: () async {
-                                            ConfirmChangePrimitiveWrapper
-                                                confirmChangePrimitiveWrapper =
-                                                new ConfirmChangePrimitiveWrapper(
-                                                    confirmChange: false);
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: RawMaterialButton(
+                                      onPressed: () async {
+                                        ConfirmChangePrimitiveWrapper
+                                            confirmChangePrimitiveWrapper =
+                                            new ConfirmChangePrimitiveWrapper(
+                                                confirmChange: false);
 
-                                            await createConfirmDialog(
-                                                context,
-                                                "Confirmation",
-                                                "Are you Sure you want to Change your Gender ?\n\n(Click outside the Alert Box to Cancel)",
-                                                confirmChangePrimitiveWrapper);
+                                        await createConfirmDialog(
+                                            context,
+                                            "Confirmation",
+                                            "Are you Sure you want to Change your Gender ?\n\n(Click outside the Alert Box to Cancel)",
+                                            confirmChangePrimitiveWrapper);
 
-                                            if (confirmChangePrimitiveWrapper
-                                                .getConfirmChange()) {
-                                              _changeGender(newGender);
+                                        if (confirmChangePrimitiveWrapper
+                                            .getConfirmChange()) {
+                                          _changeGender(newGender);
 
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (_) => CurrentScreen
-                                                          .settingsNavigatorPush(
-                                                              _userName,
-                                                              _email,
-                                                              newGender)));
-                                            }
-                                          },
-                                          fillColor: Colors.white,
-                                          child: Padding(
-                                            padding: EdgeInsets.all(10.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: const <Widget>[
-                                                Text(
-                                                  "Update Gender  ",
-                                                  style: TextStyle(
-                                                    fontFamily:
-                                                        'Poppins-SemiBold',
-                                                    color: Colors.blueGrey,
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                Icon(
-                                                  Icons.update,
-                                                  color: Colors.blueGrey,
-                                                ),
-                                              ],
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) => CurrentScreen
+                                                  .settingsNavigatorPush(
+                                                      _userName,
+                                                      _email,
+                                                      newGender),
                                             ),
-                                          ),
-                                          shape: const StadiumBorder(),
+                                          );
+                                        }
+                                      },
+                                      fillColor: Colors.white,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: const <Widget>[
+                                            Text(
+                                              "Update Gender  ",
+                                              style: TextStyle(
+                                                fontFamily: 'Poppins-SemiBold',
+                                                color: Colors.blueGrey,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Icon(
+                                              Icons.update,
+                                              color: Colors.blueGrey,
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ])),
-                              ))),
-                      RoundedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, LoginScreen.id);
-                        },
-                        colour: Colors.redAccent,
-                        title: 'Log Out',
-                      ),
-                    ],
+                                      shape: const StadiumBorder(),
+                                    ),
+                                  ),
+                                ]),
+                              ),
+                            ),
+                          ),
+                        ),
+                        RoundedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, LoginScreen.id);
+                          },
+                          colour: Colors.redAccent,
+                          title: 'Log Out',
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
-        ),
-      ]),
-    ));
+        ]),
+      ),
+    );
   }
 }
