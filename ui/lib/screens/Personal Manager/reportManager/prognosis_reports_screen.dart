@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
+import 'package:ui/screens/current_screen.dart';
 import 'api/ReportFirebaseApi.dart';
 import 'api/ReportProvider.dart';
 import 'models/report.dart';
@@ -89,6 +90,64 @@ class _PrognosisReportsState extends State<PrognosisReports> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 40,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CurrentScreen()),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 7,
+                              offset:
+                              Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(18),
+                          color: Colors.lightBlueAccent,
+                        ),
+                        padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                        width: 250.0,
+                        height: 65.0,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: new Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Back To Home Page",
+                              style: TextStyle(
+                                  fontSize: 17.0,
+                                  fontFamily: 'Poppins-Regular',
+                                  color: Colors.white),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
               ],
             )),
           ),
