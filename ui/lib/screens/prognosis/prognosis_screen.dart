@@ -12,6 +12,7 @@ import 'package:ui/services/endPoints.dart';
 import 'dart:convert';
 import 'dart:io';
 
+// ignore: must_be_immutable
 class CancerPrognosis extends StatefulWidget {
   var _cancerType;
   var _url;

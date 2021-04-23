@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class SettingsScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
   static String id = "settingsScreen";

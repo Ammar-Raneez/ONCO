@@ -9,6 +9,7 @@ import 'package:ui/screens/mainCancer_screen.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/services/UserDetails.dart';
 
+// ignore: must_be_immutable
 class CurrentScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
   static String id = "navigationBottom";

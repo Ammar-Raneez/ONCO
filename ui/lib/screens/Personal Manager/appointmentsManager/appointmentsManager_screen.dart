@@ -7,6 +7,7 @@ import 'api/appointmentsProvider.dart';
 import 'models/appointment_model.dart';
 import 'package:ui/screens/Personal%20Manager/appointmentsManager/appointmentWidgets/AppointmentListWidget.dart';
 
+// ignore: must_be_immutable
 class AppointmentsManager extends StatefulWidget {
   @override
   _AppointmentsManagerState createState() => _AppointmentsManagerState();

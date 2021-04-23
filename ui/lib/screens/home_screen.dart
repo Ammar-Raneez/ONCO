@@ -16,6 +16,7 @@ var username = "";
 var loggedInUserEP;
 var loggedInUserGoogle;
 
+// ignore: must_be_immutable
 class HomeScreen extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
   static String id = "homeScreen";

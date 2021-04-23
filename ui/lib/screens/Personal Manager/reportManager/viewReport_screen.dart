@@ -61,7 +61,7 @@ class _ViewReportState extends State<ViewReport> {
   }
 
   void getPostsData(Map prognosisBody) {
-    List<dynamic> responseList = new List();
+    List<dynamic> responseList = [];
     prognosisBody.forEach((k, v) => {responseList.add(k + " : " + v)});
 
     List<Widget> listItems = [];

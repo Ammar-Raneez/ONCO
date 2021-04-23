@@ -4,6 +4,7 @@ import 'package:ui/screens/Personal%20Manager/reportManager/diagnosis_reports_sc
 import 'package:ui/screens/Personal%20Manager/reportManager/prognosis_reports_screen.dart';
 import 'package:ui/screens/current_screen.dart';
 
+// ignore: must_be_immutable
 class AlertWidget extends StatelessWidget {
   // Variables
   final String title;
@@ -205,8 +206,10 @@ class TextPrimitiveWrapper {
 
   TextPrimitiveWrapper(this._text);
 
+  // ignore: unnecessary_getters_setters
   String get text => _text;
 
+  // ignore: unnecessary_getters_setters
   set text(String value) {
     _text = value;
   }
