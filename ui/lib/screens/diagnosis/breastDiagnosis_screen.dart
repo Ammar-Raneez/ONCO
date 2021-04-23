@@ -78,7 +78,9 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         String resultPrediction = responseBody['predition'];
         String inputImageURL = responseBody['regular_image_url'];
         String resultImageURL = responseBody['superimposed_image_url'];
-        String resultPercentage = (100 - double.parse(responseBody['prediction_percentage']).floor()).toString();
+        String resultPercentage =
+            (100 - double.parse(responseBody['prediction_percentage']).floor())
+                .toString();
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -326,8 +328,9 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                           decoration: BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20.0),
-                                topLeft: Radius.circular(20.0)),
+                              topRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                            ),
                           ),
                           width: double.infinity,
                           padding: const EdgeInsets.only(

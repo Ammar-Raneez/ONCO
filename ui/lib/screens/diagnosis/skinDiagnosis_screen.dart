@@ -301,8 +301,9 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                           decoration: BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20.0),
-                                topLeft: Radius.circular(20.0)),
+                              topRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                            ),
                           ),
                           width: double.infinity,
                           padding: const EdgeInsets.only(
