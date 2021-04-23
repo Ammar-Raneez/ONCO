@@ -101,138 +101,15 @@ class CancerPrognosisState extends State<CancerPrognosis> {
     List<Widget> listItems = [];
     responseList.forEach((post) {
       if (_count == 0) {
-        _textFieldControllers.add(new TextEditingController());
-        listItems.add(Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
+        _textFieldControllers.add(
+          new TextEditingController(),
+        );
+        listItems.add(
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+            ),
             child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                child: Container(
-                  child: Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      margin: EdgeInsets.only(top: 0, bottom: 10),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: Color(0xFFABD8E2),
-                      ),
-                      child: Column(children: <Widget>[
-                        Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: Text(
-                              post,
-                              style: TextStyle(
-                                fontFamily: 'Poppins-SemiBold',
-                                color: Colors.blueGrey,
-                                fontSize: 16,
-                              ),
-                            )),
-                        Form(
-                          key: _formKey,
-                          child: TextFormField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter some Input';
-                              } else if (int.parse(value) < 26 ||
-                                  int.parse(value) > 70)
-                                return 'Please make sure User Input is between 25 and 70';
-
-                              return null;
-                            },
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                            keyboardType: TextInputType.number,
-                            controller: _textFieldControllers[_count],
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      new BorderSide(color: Colors.white),
-                                  borderRadius: new BorderRadius.circular(16),
-                                ),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      new BorderSide(color: Colors.white),
-                                  borderRadius: new BorderRadius.circular(16),
-                                ),
-                                hintText: 'Enter the Value for the Input'),
-                          ),
-                        ),
-                      ])),
-                ))));
-      } else {
-        List<String> skinCancerOptions = [];
-
-        for (int i = 0; i < _skinCancerAnswers[_count - 1].length; i++)
-          skinCancerOptions.add(_skinCancerAnswers[_count - 1][i]);
-
-        int currentQuestion = 0;
-        currentQuestion = _count - 1;
-
-        listItems.add(Container(
-            margin: EdgeInsets.only(bottom: 10),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
-            child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                child: Container(
-                  child: Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      margin: EdgeInsets.only(top: 0, bottom: 10),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: Color(0xFFABD8E2),
-                      ),
-                      child: Column(children: <Widget>[
-                        Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: Text(
-                              post,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Poppins-SemiBold',
-                                color: Colors.blueGrey,
-                                fontSize: 16,
-                              ),
-                            )),
-                        Column(
-                          children: <Widget>[
-                            GroupButton(
-                              selectedTextStyle: TextStyle(color: Colors.white),
-                              selectedColor: Colors.redAccent,
-                              spacing: 20,
-                              onSelected: (index, isSelected) =>
-                                  _skinCancerUserAnswers[currentQuestion] =
-                                      _skinCancerAnswers[currentQuestion]
-                                          [index],
-                              buttons: List.from(skinCancerOptions),
-                              selectedButtons: [],
-                            )
-                          ],
-                        )
-                      ])),
-                ))));
-      }
-      if (_count != 7) _count++;
-    });
-    setState(() {
-      _itemsData = listItems;
-    });
-  }
-
-  void _getPostsData() {
-    List<dynamic> responseList = _cancerPrognosisAttributes;
-    List<Widget> listItems = [];
-    responseList.forEach((post) {
-      _textFieldControllers.add(new TextEditingController());
-      listItems.add(Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
-          child: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
               child: Container(
@@ -246,43 +123,181 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                     ),
                     child: Column(children: <Widget>[
                       Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          child: Text(
-                            post,
-                            style: TextStyle(
-                              fontFamily: 'Poppins-SemiBold',
-                              color: Colors.blueGrey,
-                              fontSize: 20,
-                            ),
-                          )),
-                      TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some Input';
-                          }
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          post,
+                          style: TextStyle(
+                            fontFamily: 'Poppins-SemiBold',
+                            color: Colors.blueGrey,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter some Input';
+                            } else if (int.parse(value) < 26 ||
+                                int.parse(value) > 70)
+                              return 'Please make sure User Input is between 25 and 70';
 
-                          return null;
-                        },
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        controller: _textFieldControllers[_count],
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(16),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.white),
-                              borderRadius: new BorderRadius.circular(16),
-                            ),
-                            hintText: 'Enter the Value for the Input'),
+                            return null;
+                          },
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          keyboardType: TextInputType.number,
+                          controller: _textFieldControllers[_count],
+                          decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: new BorderSide(color: Colors.white),
+                                borderRadius: new BorderRadius.circular(16),
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: new BorderSide(color: Colors.white),
+                                borderRadius: new BorderRadius.circular(16),
+                              ),
+                              hintText: 'Enter the Value for the Input'),
+                        ),
                       ),
                     ])),
-              ))));
+              ),
+            ),
+          ),
+        );
+      } else {
+        List<String> skinCancerOptions = [];
+
+        for (int i = 0; i < _skinCancerAnswers[_count - 1].length; i++)
+          skinCancerOptions.add(_skinCancerAnswers[_count - 1][i]);
+
+        int currentQuestion = 0;
+        currentQuestion = _count - 1;
+
+        listItems.add(
+          Container(
+            margin: EdgeInsets.only(bottom: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              child: Container(
+                child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    margin: EdgeInsets.only(top: 0, bottom: 10),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      color: Color(0xFFABD8E2),
+                    ),
+                    child: Column(children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        child: Text(
+                          post,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Poppins-SemiBold',
+                            color: Colors.blueGrey,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      Column(
+                        children: <Widget>[
+                          GroupButton(
+                            selectedTextStyle: TextStyle(color: Colors.white),
+                            selectedColor: Colors.redAccent,
+                            spacing: 20,
+                            onSelected: (index, isSelected) =>
+                                _skinCancerUserAnswers[currentQuestion] =
+                                    _skinCancerAnswers[currentQuestion][index],
+                            buttons: List.from(skinCancerOptions),
+                            selectedButtons: [],
+                          )
+                        ],
+                      )
+                    ])),
+              ),
+            ),
+          ),
+        );
+      }
+      if (_count != 7) _count++;
+    });
+    setState(() {
+      _itemsData = listItems;
+    });
+  }
+
+  void _getPostsData() {
+    List<dynamic> responseList = _cancerPrognosisAttributes;
+    List<Widget> listItems = [];
+    responseList.forEach((post) {
+      _textFieldControllers.add(new TextEditingController());
+      listItems.add(
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: Container(
+              child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  margin: EdgeInsets.only(top: 0, bottom: 10),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    color: Color(0xFFABD8E2),
+                  ),
+                  child: Column(children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10),
+                      child: Text(
+                        post,
+                        style: TextStyle(
+                          fontFamily: 'Poppins-SemiBold',
+                          color: Colors.blueGrey,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter some Input';
+                        }
+
+                        return null;
+                      },
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      controller: _textFieldControllers[_count],
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.white),
+                            borderRadius: new BorderRadius.circular(16),
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.white),
+                            borderRadius: new BorderRadius.circular(16),
+                          ),
+                          hintText: 'Enter the Value for the Input'),
+                    ),
+                  ])),
+            ),
+          ),
+        ),
+      );
 
       _count++;
     });
@@ -374,29 +389,32 @@ class CancerPrognosisState extends State<CancerPrognosis> {
               ),
               if (_cancerType != "Skin Cancer")
                 Expanded(
-                    child: Form(
-                  key: _formKey,
+                  child: Form(
+                    key: _formKey,
+                    child: ListView.builder(
+                        controller: _controller,
+                        itemCount: _itemsData.length,
+                        itemBuilder: (context, index) {
+                          return _itemsData[index];
+                        }),
+                  ),
+                ),
+              if (_cancerType == "Skin Cancer")
+                Expanded(
                   child: ListView.builder(
                       controller: _controller,
                       itemCount: _itemsData.length,
                       itemBuilder: (context, index) {
                         return _itemsData[index];
                       }),
-                )),
-              if (_cancerType == "Skin Cancer")
-                Expanded(
-                    child: ListView.builder(
-                        controller: _controller,
-                        itemCount: _itemsData.length,
-                        itemBuilder: (context, index) {
-                          return _itemsData[index];
-                        })),
+                ),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.blueGrey,
                   borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20.0),
-                      topLeft: Radius.circular(20.0)),
+                    topRight: Radius.circular(20.0),
+                    topLeft: Radius.circular(20.0),
+                  ),
                 ),
                 width: double.infinity,
                 padding: const EdgeInsets.only(
@@ -644,29 +662,30 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                         // Styling Progress Dialog
                         progressDialog.style(
-                            message: '   Analyzing\n   Input',
-                            padding: EdgeInsets.all(20),
-                            borderRadius: 10.0,
-                            backgroundColor: Colors.white,
-                            progressWidget: LinearProgressIndicator(
-                              backgroundColor: Colors.lightBlueAccent,
-                            ),
-                            elevation: 10.0,
-                            insetAnimCurve: Curves.easeInCubic,
-                            progress: 0.0,
-                            maxProgress: 100.0,
-                            progressTextStyle: TextStyle(
-                              color: Color(0xFF565D5E),
-                              fontSize: 13.0,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Poppins-SemiBold',
-                            ),
-                            messageTextStyle: TextStyle(
-                              color: Color(0xFF565D5E),
-                              fontSize: 19.0,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'Poppins-SemiBold',
-                            ));
+                          message: '   Analyzing\n   Input',
+                          padding: EdgeInsets.all(20),
+                          borderRadius: 10.0,
+                          backgroundColor: Colors.white,
+                          progressWidget: LinearProgressIndicator(
+                            backgroundColor: Colors.lightBlueAccent,
+                          ),
+                          elevation: 10.0,
+                          insetAnimCurve: Curves.easeInCubic,
+                          progress: 0.0,
+                          maxProgress: 100.0,
+                          progressTextStyle: TextStyle(
+                            color: Color(0xFF565D5E),
+                            fontSize: 13.0,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Poppins-SemiBold',
+                          ),
+                          messageTextStyle: TextStyle(
+                            color: Color(0xFF565D5E),
+                            fontSize: 19.0,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Poppins-SemiBold',
+                          ),
+                        );
 
                         // Showing the Progress Dialog and Dismissing it After the API Request is Received
                         progressDialog.show();
