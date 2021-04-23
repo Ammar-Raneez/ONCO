@@ -53,9 +53,10 @@ class _AppointmentsManagerState extends State<AppointmentsManager> {
                             "Here you can manage your Appointments, click on the bottom right '+' Icon to create one and click on the Trash Bin Icon"
                             "to delete an Appointment",
                             style: TextStyle(
-                                fontFamily: 'Poppins-SemiBold',
-                                fontSize: 13.0,
-                                color: Color(0xFF3C707B)),
+                              fontFamily: 'Poppins-SemiBold',
+                              fontSize: 13.0,
+                              color: Color(0xFF3C707B),
+                            ),
                           ),
                         ),
                       ),
@@ -80,7 +81,8 @@ class _AppointmentsManagerState extends State<AppointmentsManager> {
                                   switch (snapshot.connectionState) {
                                     case ConnectionState.waiting:
                                       return Center(
-                                          child: CircularProgressIndicator());
+                                        child: CircularProgressIndicator(),
+                                      );
                                     default:
                                       if (snapshot.hasError) {
                                         return buildText(
@@ -123,8 +125,9 @@ class _AppointmentsManagerState extends State<AppointmentsManager> {
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
-                        color: Color(0xFF1c374a),
-                        borderRadius: BorderRadius.circular(18)),
+                      color: Color(0xFF1c374a),
+                      borderRadius: BorderRadius.circular(18),
+                    ),
                     child: Image(
                         image: AssetImage('images/add_icon.png') // Add icon
                         ),
@@ -138,7 +141,6 @@ class _AppointmentsManagerState extends State<AppointmentsManager> {
     );
   }
 }
-// }
 
 Widget buildText(String text) => Center(
       child: Text(

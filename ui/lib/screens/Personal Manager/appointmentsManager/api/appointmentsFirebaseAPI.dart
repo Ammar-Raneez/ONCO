@@ -20,7 +20,9 @@ class AppointmentsFirebaseApi {
         .doc();
 
     appointment.id = docAppointment.id;
-    await docAppointment.set(appointment.toJson());
+    await docAppointment.set(
+      appointment.toJson(),
+    );
     return docAppointment.id;
   }
 
@@ -30,7 +32,9 @@ class AppointmentsFirebaseApi {
           .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
           .collection("appointments")
           .snapshots()
-          .transform(Utils.transformer(Appointment.fromJson));
+          .transform(
+            Utils.transformer(Appointment.fromJson),
+          );
 
   static Future deleteAppointment(Appointment appointment) async {
     final docAppointment = FirebaseFirestore.instance
