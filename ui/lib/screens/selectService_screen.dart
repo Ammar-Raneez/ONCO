@@ -1,14 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/treatment_card.dart';
-import 'package:ui/screens/diagnosis/breastDiagnosis_screen.dart';
-import 'package:ui/screens/diagnosis/lungDiagnosis_screen.dart';
-import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
-import 'package:ui/screens/home_screen.dart';
-import 'package:ui/screens/mainCancer_screen.dart';
-import 'diagnosis/skinDiagnosis_screen.dart';
 
 class SelectServiceScreen extends StatefulWidget {
   final diagnosisRoute;

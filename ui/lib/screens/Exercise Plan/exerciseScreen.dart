@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/exercise_card.dart';
-import 'package:ui/screens/Exercise%20Plan/TimerPage.dart';
 
 class ExerciseScreen extends StatefulWidget {
   @override

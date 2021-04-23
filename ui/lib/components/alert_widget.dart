@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/components/reports_card.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/diagnosis_reports_screen.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/prognosis_reports_screen.dart';
-import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
 import 'package:ui/screens/current_screen.dart';
-import 'package:ui/screens/settings_screen.dart';
 
 class AlertWidget extends StatelessWidget {
   // Variables

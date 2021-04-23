@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/reports_card.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
-
 import 'api/ReportFirebaseApi.dart';
 import 'api/ReportProvider.dart';
 import 'models/report.dart';
-import 'viewReport_screen.dart';
 
 class PrognosisReports extends StatefulWidget {
   @override

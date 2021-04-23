@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/components/medication_card.dart';
-import 'package:ui/components/widgets.dart';
 import 'addMedication_screen.dart';
 import 'api/medicationFirebaseAPI.dart';
 import 'api/medicationsProvider.dart';
