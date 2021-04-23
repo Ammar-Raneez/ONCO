@@ -61,44 +61,45 @@ class _MedicationManagerState extends State<MedicationManager> {
                     ],
                   ),
                   Expanded(
-                      child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 17, vertical: 0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        // color: Color(0xFF57994D)
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Container(
-                          child: StreamBuilder<List<Medication>>(
-                              stream: MedicationFirebaseApi.readMedication(),
-                              builder: (context, snapshot) {
-                                switch (snapshot.connectionState) {
-                                  case ConnectionState.waiting:
-                                    return Center(
-                                        child: CircularProgressIndicator());
-                                  default:
-                                    if (snapshot.hasError) {
-                                      return buildText(
-                                          'Something went wrong, Try later');
-                                    } else {
-                                      final medications = snapshot.data;
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 17, vertical: 0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          // color: Color(0xFF57994D)
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Container(
+                            child: StreamBuilder<List<Medication>>(
+                                stream: MedicationFirebaseApi.readMedication(),
+                                builder: (context, snapshot) {
+                                  switch (snapshot.connectionState) {
+                                    case ConnectionState.waiting:
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    default:
+                                      if (snapshot.hasError) {
+                                        return buildText(
+                                            'Something went wrong, Try later');
+                                      } else {
+                                        final medications = snapshot.data;
 
-                                      final provider =
-                                          Provider.of<MedicationProvider>(
-                                              context);
-                                      provider.setMedications(medications);
+                                        final provider =
+                                            Provider.of<MedicationProvider>(
+                                                context);
+                                        provider.setMedications(medications);
 
-                                      return MedicationListWidget();
-                                    }
-                                }
-                              }),
+                                        return MedicationListWidget();
+                                      }
+                                  }
+                                }),
+                          ),
                         ),
                       ),
                     ),
-                  )),
+                  ),
                 ],
               ),
               Positioned(
@@ -135,7 +136,6 @@ class _MedicationManagerState extends State<MedicationManager> {
     );
   }
 }
-// }
 
 Widget buildText(String text) => Center(
       child: Text(

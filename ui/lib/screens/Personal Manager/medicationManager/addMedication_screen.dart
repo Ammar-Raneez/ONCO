@@ -70,9 +70,10 @@ class _AddMedicationState extends State<AddMedication> {
                           child: Text(
                             "Enter the details of the medication",
                             style: TextStyle(
-                                fontFamily: 'Poppins-SemiBold',
-                                fontSize: 13.0,
-                                color: Color(0xFF3C707B)),
+                              fontFamily: 'Poppins-SemiBold',
+                              fontSize: 13.0,
+                              color: Color(0xFF3C707B),
+                            ),
                           ),
                         ),
                       ),
@@ -100,8 +101,9 @@ class _AddMedicationState extends State<AddMedication> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Color(0xFFEEEEEE)),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color(0xFFEEEEEE),
+                                ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 18, top: 5, bottom: 10, right: 10),
@@ -136,8 +138,9 @@ class _AddMedicationState extends State<AddMedication> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Color(0xFFEEEEEE)),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color(0xFFEEEEEE),
+                                ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 18, top: 5, bottom: 10, right: 10),
@@ -172,8 +175,9 @@ class _AddMedicationState extends State<AddMedication> {
                               ),
                               Container(
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Color(0xFFEEEEEE)),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color(0xFFEEEEEE),
+                                ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 18, top: 5, bottom: 10, right: 10),
