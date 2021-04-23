@@ -42,7 +42,8 @@ class _ReportManagerState extends State<ReportManager> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => DiagnosisReports()),
+                        builder: (context) => DiagnosisReports(),
+                      ),
                     );
                   },
                   child: Container(
@@ -76,7 +77,8 @@ class _ReportManagerState extends State<ReportManager> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PrognosisReports()),
+                        builder: (context) => PrognosisReports(),
+                      ),
                     );
                   },
                   child: Container(

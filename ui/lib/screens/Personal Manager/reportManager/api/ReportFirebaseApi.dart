@@ -16,7 +16,9 @@ class ReportFirebaseApi {
           .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
           .collection("imageDetections")
           .snapshots()
-          .transform(Utils.transformer(Report.fromDiagnosisJson));
+          .transform(
+            Utils.transformer(Report.fromDiagnosisJson),
+          );
 
   static Stream<List<Report>> readPrognosisReports() =>
       FirebaseFirestore.instance
@@ -24,5 +26,7 @@ class ReportFirebaseApi {
           .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
           .collection("InputPrognosis")
           .snapshots()
-          .transform(Utils.transformer(Report.fromPrognosisJson));
+          .transform(
+            Utils.transformer(Report.fromPrognosisJson),
+          );
 }
