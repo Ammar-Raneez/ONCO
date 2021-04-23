@@ -43,8 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
     getCurrentUser();
 
     if (username == null) username = UserDetails.getUserData()["username"];
-
-    print(UserDetails.getUserData()["username"]);
   }
   _HomeScreenState.settingsNavigatorPush(this.username);
 

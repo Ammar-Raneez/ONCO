@@ -49,10 +49,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   _SettingsScreenState(this._userName, this._email, this._gender) {
-    print(_email + " EMAIL");
     _userNameController.text = _userName;
     _emailController.text = _email;
-    print(_gender + " GENDER");
   }
 
   void _changeUserName(String newDisplayName) async {
@@ -71,7 +69,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
 
     if (error != true) {
-      print("im here");
       var userDocument = await FirebaseFirestore.instance
           .collection("users")
           .doc(user.email != null ? user.email : loggedInUserGoogle)
@@ -381,9 +378,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 if (textPrimitiveWrapper != "") {
                                   _changeEmail(_emailController.text,
                                       textPrimitiveWrapper.text);
-
-                                  print(_emailController.text +
-                                      "    ASIOdjasiodasiodasioda");
 
                                   Navigator.push(
                                       context,
