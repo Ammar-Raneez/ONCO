@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// select cancer screen card
 class TreatmentCard extends StatelessWidget {
   final String cardTitle;
 
