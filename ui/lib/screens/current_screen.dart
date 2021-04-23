@@ -64,14 +64,6 @@ class _CurrentScreenState extends State<CurrentScreen> {
     ];
   }
 
-  _CurrentScreenState.settingsNavigatorPushEmail(this.email) {
-    print(email + " HEREEEE");
-    swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
-  }
-  _CurrentScreenState.settingsNavigatorPushGender(this.gender) {
-    swipeScreen = [HomeScreen(), MainCancerTypesScreen(), ChatBotScreen()];
-  }
-
   // using this User instance we can access the details of the logged user using
   // the normal email/pass auth method not the (Google Auth)
   User loggedInUser = FirebaseAuth.instance.currentUser;

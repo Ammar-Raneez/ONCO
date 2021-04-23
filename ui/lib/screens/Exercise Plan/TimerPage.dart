@@ -18,7 +18,6 @@ class TimerPage extends StatefulWidget {
 class _TimerPageState extends State<TimerPage> {
   String time = "";
   String workout = "";
-  Timer _timer;
 
   @override
   void initState() {

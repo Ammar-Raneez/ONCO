@@ -41,7 +41,7 @@ class _ViewReportState extends State<ViewReport> {
     imageURL = widget.report.imageUrl;
     _cancerType = widget.report.cancerType;
     if (widget.report.result == "CANCER") {
-      _reportResult = widget.report.result_string;
+      _reportResult = widget.report.resultString;
     } else {
       _reportResult = widget.report.result;
     }

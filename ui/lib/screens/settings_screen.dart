@@ -43,7 +43,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String newGender;
   final _userNameController = TextEditingController();
   final _emailController = new TextEditingController();
-  final _passwordController = new TextEditingController();
   final user = FirebaseAuth.instance.currentUser;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -240,7 +239,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 onTap: () {
                                   FirebaseAuth.instance
                                       .sendPasswordResetEmail(email: _email);
-                                  _scaffoldKey.currentState
+                                  ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
                                     content: Text(
                                       'Reset Password Email has been Sent !',
@@ -286,7 +285,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           fontSize: 16.0,
                           color: Color(0xFF565D5E),
                         ),
-                        cursorColor: Theme.of(context).cursorColor,
+                        cursorColor: TextSelectionThemeData().cursorColor,
                         decoration: InputDecoration(
                           labelText: 'Username',
                           labelStyle: TextStyle(
@@ -356,7 +355,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           fontSize: 16.0,
                           color: Color(0xFF565D5E),
                         ),
-                        cursorColor: Theme.of(context).cursorColor,
+                        cursorColor: TextSelectionThemeData().cursorColor,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(

@@ -140,7 +140,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                               return null;
                             },
                             inputFormatters: [
-                              WhitelistingTextInputFormatter.digitsOnly
+                              FilteringTextInputFormatter.digitsOnly
                             ],
                             keyboardType: TextInputType.number,
                             controller: _textFieldControllers[_count],
@@ -263,7 +263,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                           return null;
                         },
                         inputFormatters: [
-                          WhitelistingTextInputFormatter.digitsOnly
+                          FilteringTextInputFormatter.digitsOnly
                         ],
                         controller: _textFieldControllers[_count],
                         keyboardType: TextInputType.number,

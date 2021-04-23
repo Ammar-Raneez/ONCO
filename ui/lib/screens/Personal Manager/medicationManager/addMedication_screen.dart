@@ -14,12 +14,10 @@ class AddMedication extends StatefulWidget {
 
 class _AddMedicationState extends State<AddMedication> {
   // Variables used within file
-  String _medicationId = "";
   String _medicationName = "";
   String _medicationDose = "";
   String _medicationTime = "";
 
-  FocusNode _nameFocus;
   FocusNode _doseFocus;
   FocusNode _timeFocus;
 
@@ -27,12 +25,10 @@ class _AddMedicationState extends State<AddMedication> {
   void initState() {
     if (widget.medication != null) {
       _medicationName = widget.medication.medicationName;
-      _medicationId = widget.medication.id;
       _medicationDose = widget.medication.dosage;
     }
 
     // initializing focus nodes
-    _nameFocus = FocusNode();
     _doseFocus = FocusNode();
     _timeFocus = FocusNode();
 
