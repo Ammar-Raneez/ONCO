@@ -5,7 +5,11 @@ import 'package:flutter/material.dart';
 
 class Utils {
   static void showSnackBar(BuildContext context, String text) =>
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(text),
+        ),
+      );
 
   static StreamTransformer transformer<T>(
           T Function(Map<String, dynamic> json) fromJson) =>

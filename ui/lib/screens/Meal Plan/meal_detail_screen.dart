@@ -50,10 +50,6 @@ class MealDetailScreen extends StatelessWidget {
                   title,
                   style: kTextStyle.copyWith(fontSize: 16, color: Colors.white),
                 ),
-//                background: Image.network(
-//                  imgUrl,
-//                  fit: BoxFit.cover,
-//                ),
                 background: CachedNetworkImage(
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
                       SizedBox(

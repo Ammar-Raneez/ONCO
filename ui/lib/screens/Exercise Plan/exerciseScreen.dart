@@ -105,8 +105,9 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(37),
-                        bottomLeft: Radius.circular(37)),
+                      topLeft: Radius.circular(37),
+                      bottomLeft: Radius.circular(37),
+                    ),
                     color: Color(0xFF91C77E),
                   ),
                   child: ListView(

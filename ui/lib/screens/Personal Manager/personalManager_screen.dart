@@ -44,24 +44,26 @@ class _PersonalManagerState extends State<PersonalManager> {
                     child: Text(
                       "Here you can manage your medications, view previous reports and save doctors appointment notes.",
                       style: TextStyle(
-                          fontFamily: 'Poppins-SemiBold',
-                          fontSize: 13.0,
-                          color: Color(0xFF3C707B)),
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 13.0,
+                        color: Color(0xFF3C707B),
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
             Expanded(
-                child:
-                    ListView(scrollDirection: Axis.vertical, children: <Widget>[
-              Container(
-                child: GestureDetector(
+              child:
+                  ListView(scrollDirection: Axis.vertical, children: <Widget>[
+                Container(
+                  child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MedicationManager()),
+                          builder: (context) => MedicationManager(),
+                        ),
                       );
                     },
                     child: PersonalCard(
@@ -69,15 +71,17 @@ class _PersonalManagerState extends State<PersonalManager> {
                       cardColor1: '0xFF91C77E',
                       cardColor2: '0xFF146314',
                       textColor: '0xFFFFFFFF',
-                    )),
-              ),
-              Container(
-                child: GestureDetector(
+                    ),
+                  ),
+                ),
+                Container(
+                  child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ReportManager()),
+                          builder: (context) => ReportManager(),
+                        ),
                       );
                     },
                     child: PersonalCard(
@@ -85,27 +89,32 @@ class _PersonalManagerState extends State<PersonalManager> {
                       cardColor1: '0xFF7EC794',
                       cardColor2: '0xFF0D886B',
                       textColor: '0xFFFFFFFF',
-                    )),
-              ),
-              Container(
+                    ),
+                  ),
+                ),
+                Container(
                   child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AppointmentsManager()),
-                        );
-                      },
-                      child: PersonalCard(
-                        cardTitle: 'Appointments',
-                        cardColor1: '0xFF7EC5C7',
-                        cardColor2: '0xFF145663',
-                        textColor: '0xFFFFFFFF',
-                      ))),
-              SizedBox(
-                height: 20,
-              ),
-            ])),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppointmentsManager(),
+                        ),
+                      );
+                    },
+                    child: PersonalCard(
+                      cardTitle: 'Appointments',
+                      cardColor1: '0xFF7EC5C7',
+                      cardColor2: '0xFF145663',
+                      textColor: '0xFFFFFFFF',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ]),
+            ),
           ],
         ),
       ),
