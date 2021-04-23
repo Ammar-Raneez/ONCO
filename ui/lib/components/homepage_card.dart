@@ -19,7 +19,9 @@ class HomeCard extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(22, 15, 0, 35),
         child: Container(
           decoration: BoxDecoration(
-            color: Color(int.parse(cardColor)),
+            color: Color(
+              int.parse(cardColor),
+            ),
             borderRadius: BorderRadius.circular(19),
             image: DecorationImage(
               image: AssetImage(cardImage),
@@ -45,7 +47,9 @@ class HomeCard extends StatelessWidget {
                   cardTitle,
                   style: TextStyle(
                     fontSize: 20.0,
-                    color: Color(int.parse(textColor)),
+                    color: Color(
+                      int.parse(textColor),
+                    ),
                     fontFamily: 'Poppins-SemiBold',
                   ),
                 ),

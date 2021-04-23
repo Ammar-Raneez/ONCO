@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// cards in exercise plan
 class ExerciseCard extends StatelessWidget {
   final String cardTitle;
   final String cardImage;

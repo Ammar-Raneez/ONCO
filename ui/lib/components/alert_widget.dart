@@ -52,7 +52,9 @@ class AlertWidget extends StatelessWidget {
           borderSide: BorderSide(color: Colors.red),
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFF637477)),
+          borderSide: BorderSide(
+            color: Color(0xFF637477),
+          ),
         ),
       ),
     );
@@ -120,21 +122,29 @@ class AlertWidget extends StatelessWidget {
                 Navigator.pop(context); // pop the alert
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DiagnosisReports()),
+                  MaterialPageRoute(
+                    builder: (context) => DiagnosisReports(),
+                  ),
                 );
               } else if (_status == 203) {
                 // Remove the alert widget and direct to prognosis report list
                 Navigator.pop(context); // pop the alert
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PrognosisReports()),
+                  MaterialPageRoute(
+                    builder: (context) => PrognosisReports(),
+                  ),
                 );
               }
 
               if (_status == 200) {
                 Navigator.pop(context); // pop the alert
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => CurrentScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CurrentScreen(),
+                  ),
+                );
               } else if (confirmChangePrimitiveWrapper != null) {
                 confirmChangePrimitiveWrapper.setConfirmChange(true);
                 Navigator.pop(context);

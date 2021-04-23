@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/editMedication_Screen.dart';
 import 'package:ui/screens/Personal%20Manager/medicationManager/models/medication_model.dart';
 
+// all medication cards
 class MedicationCard extends StatelessWidget {
   final Medication medication;
 
@@ -18,8 +19,9 @@ class MedicationCard extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Color(0xFFCDDDF6)),
+            borderRadius: BorderRadius.circular(12),
+            color: Color(0xFFCDDDF6),
+          ),
           child: Container(
             child: Padding(
               padding: const EdgeInsets.only(left: 14.0, top: 15, bottom: 15),
@@ -29,16 +31,18 @@ class MedicationCard extends StatelessWidget {
                   Text(
                     medication.medicationName,
                     style: TextStyle(
-                        fontFamily: 'Poppins-SemiBold',
-                        fontSize: 17,
-                        color: Color(0xFF3A6B8D)),
+                      fontFamily: 'Poppins-SemiBold',
+                      fontSize: 17,
+                      color: Color(0xFF3A6B8D),
+                    ),
                   ),
                   Text(
                     medication.dosage + " " + medication.doseTime,
                     style: TextStyle(
-                        fontFamily: 'Poppins-SemiBold',
-                        fontSize: 13,
-                        color: Color(0xFF5C87A4)),
+                      fontFamily: 'Poppins-SemiBold',
+                      fontSize: 13,
+                      color: Color(0xFF5C87A4),
+                    ),
                   )
                 ],
               ),

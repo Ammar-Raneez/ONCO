@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/constants.dart';
 
+// bot message bubbles
 class MessageBubble extends StatelessWidget {
   final String messageSender;
   final String messageText;

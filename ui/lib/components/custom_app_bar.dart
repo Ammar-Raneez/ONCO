@@ -30,7 +30,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => SettingsScreen(userName, email, gender)),
+            builder: (context) => SettingsScreen(userName, email, gender),
+          ),
         );
       },
     );
@@ -53,13 +54,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Container(
-                    child: iconButton,
-                    padding: EdgeInsets.only(left: 20, bottom: 30)),
+                  child: iconButton,
+                  padding: EdgeInsets.only(left: 20, bottom: 30),
+                ),
                 Container(
-                    child: Image(
-                        image: AssetImage('images/officialLogo.png'),
-                        width: 65),
-                    padding: EdgeInsets.only(right: 30, bottom: 30))
+                  child: Image(
+                      image: AssetImage('images/officialLogo.png'), width: 65),
+                  padding: EdgeInsets.only(right: 30, bottom: 30),
+                )
               ]),
         ),
       ),
