@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// the common rounded button
 class RoundedButton extends StatelessWidget {
   // Variable attributes related to the Rounded Button
   final Color colour;
@@ -23,7 +24,10 @@ class RoundedButton extends StatelessWidget {
           height: 20.0,
           child: Text(
             title,
-            style: TextStyle(color: Colors.white, fontSize: 15, fontFamily: "Poppins-SemiBold"),
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontFamily: "Poppins-SemiBold"),
           ),
         ),
       ),

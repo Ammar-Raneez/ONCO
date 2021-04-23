@@ -18,6 +18,7 @@ class _ViewReportState extends State<ViewReport> {
   String _cancerType;
   String _reportPercentage;
   String _reportResult;
+  String imageInputURL;
   String imageURL;
 
   var _reportDate;
@@ -38,10 +39,11 @@ class _ViewReportState extends State<ViewReport> {
         DateTime.fromMillisecondsSinceEpoch(_reportDate.millisecondsSinceEpoch);
     formattedDate = DateFormat.yMMMd().format(date);
     _reportPercentage = widget.report.percentage;
+    imageInputURL = widget.report.inputImageUrl;
     imageURL = widget.report.imageUrl;
     _cancerType = widget.report.cancerType;
     if (widget.report.result == "CANCER") {
-      _reportResult = widget.report.result_string;
+      _reportResult = widget.report.resultString;
     } else {
       _reportResult = widget.report.result;
     }
@@ -61,93 +63,100 @@ class _ViewReportState extends State<ViewReport> {
   }
 
   void getPostsData(Map prognosisBody) {
-    List<dynamic> responseList = new List();
+    List<dynamic> responseList = [];
     prognosisBody.forEach((k, v) => {responseList.add(k + " : " + v)});
 
     List<Widget> listItems = [];
-    listItems.add(Column(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 10,
-                left: 20,
-              ),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  formattedDate,
-                  style: TextStyle(
+    listItems.add(
+      Column(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 20,
+                ),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    formattedDate,
+                    style: TextStyle(
                       fontFamily: 'Poppins-SemiBold',
                       fontSize: 27,
-                      color: Color(0xFF00404E)),
+                      color: Color(0xFF00404E),
+                    ),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 15),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  _cancerType.toUpperCase() + " " + _reportType.toUpperCase(),
-                  style: TextStyle(
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 15),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    _cancerType.toUpperCase() + " " + _reportType.toUpperCase(),
+                    style: TextStyle(
                       fontFamily: 'Poppins-SemiBold',
                       fontSize: 19,
-                      color: Color(0xFF3C707B)),
+                      color: Color(0xFF3C707B),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              top: 15,
+            ),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Result :",
+                style: TextStyle(
+                  fontFamily: 'Poppins-SemiBold',
+                  fontSize: 18,
+                  color: Color(0xFF7CC2C4),
                 ),
               ),
             ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            top: 15,
           ),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "Result :",
-              style: TextStyle(
-                  fontFamily: 'Poppins-SemiBold',
-                  fontSize: 18,
-                  color: Color(0xFF7CC2C4)),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              top: 5,
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            top: 5,
-          ),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              _reportResult.toString().toUpperCase(),
-              style: TextStyle(
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                _reportResult.toString().toUpperCase(),
+                style: TextStyle(
                   fontFamily: 'Poppins-SemiBold',
                   fontSize: 14,
-                  color: Color(0xFF1F1F1F)),
+                  color: Color(0xFF1F1F1F),
+                ),
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "INPUTS PROVIDED",
-              style: TextStyle(
+          Padding(
+            padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "INPUTS PROVIDED",
+                style: TextStyle(
                   fontFamily: 'Poppins-SemiBold',
                   fontSize: 18,
-                  color: Color(0xFF7CC2C4)),
+                  color: Color(0xFF7CC2C4),
+                ),
+              ),
             ),
           ),
-        ),
-      ],
-    ));
+        ],
+      ),
+    );
 
     responseList.forEach((post) {
       listItems.add(
@@ -158,9 +167,10 @@ class _ViewReportState extends State<ViewReport> {
             child: Text(
               post.toString().toUpperCase(),
               style: TextStyle(
-                  fontFamily: 'Poppins-SemiBold',
-                  fontSize: 14,
-                  color: Color(0xFF1F1F1F)),
+                fontFamily: 'Poppins-SemiBold',
+                fontSize: 14,
+                color: Color(0xFF1F1F1F),
+              ),
             ),
           ),
         ),
@@ -185,6 +195,7 @@ class _ViewReportState extends State<ViewReport> {
                 _cancerType,
                 _reportResult,
                 _reportPercentage,
+                imageInputURL,
                 imageURL,
                 prognosisVariables,
                 controller,
@@ -211,9 +222,10 @@ Widget percentageContainer(String percentages) {
             child: Text(
               "Percentage : ",
               style: TextStyle(
-                  fontFamily: 'Poppins-SemiBold',
-                  fontSize: 18,
-                  color: Color(0xFF7CC2C4)),
+                fontFamily: 'Poppins-SemiBold',
+                fontSize: 18,
+                color: Color(0xFF7CC2C4),
+              ),
             ),
           ),
         ),
@@ -225,11 +237,12 @@ Widget percentageContainer(String percentages) {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              percentages,
+              double.parse(percentages).floor().toString(),
               style: TextStyle(
-                  fontFamily: 'Poppins-SemiBold',
-                  fontSize: 14,
-                  color: Color(0xFF1F1F1F)),
+                fontFamily: 'Poppins-SemiBold',
+                fontSize: 14,
+                color: Color(0xFF1F1F1F),
+              ),
             ),
           ),
         ),
@@ -249,6 +262,7 @@ Widget cancerDetails(
     String cancerType,
     String reportResult,
     String percentage,
+    String inputImageUrl,
     String imageUrl,
     Map prognosisBody,
     ScrollController controller,
@@ -270,7 +284,8 @@ Widget cancerDetails(
                   animation: true,
                   animationDuration: 1000,
                   percent: double.parse(percentage) / 100,
-                  center: new Text(percentage + "%"),
+                  center: new Text(
+                      double.parse(percentage).floor().toString() + "%"),
                   progressColor: color,
                 ),
               ),
@@ -290,9 +305,10 @@ Widget cancerDetails(
                         child: Text(
                           date,
                           style: TextStyle(
-                              fontFamily: 'Poppins-SemiBold',
-                              fontSize: 27,
-                              color: Color(0xFF00404E)),
+                            fontFamily: 'Poppins-SemiBold',
+                            fontSize: 27,
+                            color: Color(0xFF00404E),
+                          ),
                         ),
                       ),
                     ),
@@ -306,9 +322,10 @@ Widget cancerDetails(
                               " " +
                               reportType.toUpperCase(),
                           style: TextStyle(
-                              fontFamily: 'Poppins-SemiBold',
-                              fontSize: 19,
-                              color: Color(0xFF3C707B)),
+                            fontFamily: 'Poppins-SemiBold',
+                            fontSize: 19,
+                            color: Color(0xFF3C707B),
+                          ),
                         ),
                       ),
                     ),
@@ -325,9 +342,10 @@ Widget cancerDetails(
                     child: Text(
                       "Result :",
                       style: TextStyle(
-                          fontFamily: 'Poppins-SemiBold',
-                          fontSize: 18,
-                          color: Color(0xFF7CC2C4)),
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 18,
+                        color: Color(0xFF7CC2C4),
+                      ),
                     ),
                   ),
                 ),
@@ -341,9 +359,10 @@ Widget cancerDetails(
                     child: Text(
                       reportResult.toUpperCase(),
                       style: TextStyle(
-                          fontFamily: 'Poppins-SemiBold',
-                          fontSize: 14,
-                          color: Color(0xFF1F1F1F)),
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 14,
+                        color: Color(0xFF1F1F1F),
+                      ),
                     ),
                   ),
                 ),
@@ -354,27 +373,91 @@ Widget cancerDetails(
                     child: Text(
                       "INPUTS PROVIDED",
                       style: TextStyle(
-                          fontFamily: 'Poppins-SemiBold',
-                          fontSize: 18,
-                          color: Color(0xFF7CC2C4)),
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 18,
+                        color: Color(0xFF7CC2C4),
+                      ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18),
-                  child: CachedNetworkImage(
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => SizedBox(
-                          width: MediaQuery.of(context).size.width / 2,
-                          height: 100,
-                          child: Center(
-                            child: CircularProgressIndicator(
-                                value: downloadProgress.progress),
+                cancerType != "skin cancer"
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 18),
+                        child: CachedNetworkImage(
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => SizedBox(
+                            width: MediaQuery.of(context).size.width / 2,
+                            height: 100,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                            ),
                           ),
-                    ),
-                    imageUrl: imageUrl,
-                    width: MediaQuery.of(context).size.width,
-                  ),
+                          imageUrl: inputImageUrl,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 18),
+                        child: CachedNetworkImage(
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => SizedBox(
+                            width: MediaQuery.of(context).size.width / 2,
+                            height: 100,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                            ),
+                          ),
+                          imageUrl: imageUrl,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                      ),
+                SizedBox(
+                  height: 30,
+                ),
+                cancerType != "skin cancer"
+                    ? Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20, top: 20, bottom: 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "OUTPUTS OBTAINED",
+                            style: TextStyle(
+                                fontFamily: 'Poppins-SemiBold',
+                                fontSize: 18,
+                                color: Color(0xFF7CC2C4)),
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 0,
+                      ),
+                cancerType != "skin cancer"
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 18),
+                        child: CachedNetworkImage(
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => SizedBox(
+                            width: MediaQuery.of(context).size.width / 2,
+                            height: 100,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                  value: downloadProgress.progress),
+                            ),
+                          ),
+                          imageUrl: imageUrl,
+                          height: 450,
+                          fit: BoxFit.fill,
+                          width: MediaQuery.of(context).size.width,
+                        ),
+                      )
+                    : Container(
+                        height: 0,
+                      ),
+                SizedBox(
+                  height: 30,
                 ),
               ],
             ),

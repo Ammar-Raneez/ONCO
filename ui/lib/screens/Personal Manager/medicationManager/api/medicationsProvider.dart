@@ -12,11 +12,14 @@ class MedicationProvider extends ChangeNotifier {
         notifyListeners();
       });
 
-  void addMedication(Medication medication) => MedicationFirebaseApi.createMedication(medication);
+  void addMedication(Medication medication) =>
+      MedicationFirebaseApi.createMedication(medication);
 
-  void removeMedication(Medication medication) => MedicationFirebaseApi.deleteMedication(medication);
+  void removeMedication(Medication medication) =>
+      MedicationFirebaseApi.deleteMedication(medication);
 
-  void updateMedication(Medication medication, String medicationName, String dosage, String doseTime) {
+  void updateMedication(Medication medication, String medicationName,
+      String dosage, String doseTime) {
     medication.medicationName = medicationName;
     medication.dosage = dosage;
     medication.doseTime = doseTime;

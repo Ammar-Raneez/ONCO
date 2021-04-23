@@ -10,6 +10,7 @@ import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:ui/services/UserDetails.dart';
+import 'package:ui/services/endPoints.dart';
 
 class SkinCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -74,7 +75,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
             .doc(UserDetails.getUserData()["email"])
             .collection("imageDetections")
             .add({
-          "cancerType": "skin",
+          "cancerType": "skin cancer",
           "reportType": "diagnosis",
           "result": resultPrediction,
           "result_string": resultString,
@@ -108,7 +109,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
   // Getting the detection response
   getResponse(FormData formData) async {
     Response response = await dio.post(
-      "https://skinmodelsdgp.azurewebsites.net/api/skinmodelsdgp?model=skin",
+      postSkinCancerDetection_API,
       data: formData,
     );
     // RESPONSE DATA FROM THE BACKEND
@@ -300,8 +301,9 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
                           decoration: BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20.0),
-                                topLeft: Radius.circular(20.0)),
+                              topRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                            ),
                           ),
                           width: double.infinity,
                           padding: const EdgeInsets.only(

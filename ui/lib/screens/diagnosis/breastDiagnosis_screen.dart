@@ -11,6 +11,7 @@ import 'dart:async';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:ui/services/UserDetails.dart';
+import 'package:ui/services/endPoints.dart';
 
 class BreastCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -75,8 +76,11 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         // RESPONSE RESULT FROM THE BACKEND
         // responseBody = response.data[0];
         String resultPrediction = responseBody['predition'];
-        String resultImageURL = responseBody['regular_image_url'];
-        String resultPercentage = responseBody['prediction_percentage'];
+        String inputImageURL = responseBody['regular_image_url'];
+        String resultImageURL = responseBody['superimposed_image_url'];
+        String resultPercentage =
+            (100 - double.parse(responseBody['prediction_percentage']).floor())
+                .toString();
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -84,10 +88,11 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
             .doc(UserDetails.getUserData()["email"])
             .collection("imageDetections")
             .add({
-          "cancerType": "Breast",
+          "cancerType": "breast cancer",
           "reportType": "diagnosis",
           "result": resultPrediction,
           "result_string": "$resultPrediction was detected",
+          "inputImageUrl": inputImageURL,
           "imageUrl": resultImageURL,
           "percentage": resultPercentage,
           'timestamp': Timestamp.now(),
@@ -111,7 +116,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         }
       } catch (e) {
         // Displaying alert to the user
-        createAlertDialog(context, "Error", e._message, 404);
+        createAlertDialog(context, "Error", e.toString(), 404);
 
         progressDialog.hide();
       }
@@ -121,7 +126,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
   // Getting the detection response
   getResponse(FormData formData) async {
     Response response = await dio.post(
-      "https://breastmodelsdgp.azurewebsites.net/api/breastmodelsdgp?model=breast",
+      postBreastCancerDetection_API,
       data: formData,
     );
     responseBody = response.data[0];
@@ -323,8 +328,9 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
                           decoration: BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20.0),
-                                topLeft: Radius.circular(20.0)),
+                              topRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                            ),
                           ),
                           width: double.infinity,
                           padding: const EdgeInsets.only(

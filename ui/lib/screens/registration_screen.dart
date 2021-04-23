@@ -78,16 +78,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 horizontal: 20.0,
               ),
               child: ListView(
-
                 children: [
                   SizedBox(
-                    height: 8.0,
+                    height: 100.0,
                   ),
                   Flexible(
                     child: Hero(
                       tag: "logo",
                       child: Container(
-                        height: 20,
+                        height: 25,
                         child: Image.asset('images/officialLogo.png'),
                       ),
                     ),
@@ -123,6 +122,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         fontSize: 15,
                       ),
                     ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   TextField(
                     cursorColor: Colors.lightBlueAccent,
                     onEditingComplete: () => {
@@ -142,6 +144,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         color: Colors.lightBlueAccent,
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   TextField(
                     autofillHints: [AutofillHints.email],
@@ -163,6 +168,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         color: Colors.lightBlueAccent,
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   TextField(
                     cursorColor: Colors.lightBlueAccent,
@@ -237,96 +245,104 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                     ),
                   ),
-                  RoundedButton(
-                    onPressed: () async {
-                      if (username == null ||
-                          email == null ||
-                          password == null ||
-                          username == "" ||
-                          email == "" ||
-                          password == "") {
-                        createAlertDialog(context, "Error",
-                            "Please fill all the given fields to proceed", 404);
-                      } else {
-                        bool emailValid = RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(email);
-
-                        if (!emailValid) {
-                          // Alerts invalid email
+                  Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: RoundedButton(
+                      onPressed: () async {
+                        if (username == null ||
+                            email == null ||
+                            password == null ||
+                            username == "" ||
+                            email == "" ||
+                            password == "") {
                           createAlertDialog(
-                              context, "Error", "Invalid email format", 404);
+                              context,
+                              "Error",
+                              "Please fill all the given fields to proceed",
+                              404);
                         } else {
-                          // If details for all the fields are filled then proceed
-                          // Display the spinner
-                          setState(() {
-                            showSpinner = true;
-                          });
+                          bool emailValid = RegExp(
+                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(email);
 
-                          // register the user in firebase
-                          try {
-                            // created the user and returns a user once created
-                            final newUser =
-                                await _auth.createUserWithEmailAndPassword(
-                                    email: email, password: password);
-
-                            // Adding the user details to the cloud fire store
-                            _firestore.collection("users").doc(email).set({
-                              "userEmail": email,
-                              "username": username,
-                              "gender": gender,
-                              'timestamp': Timestamp.now(),
+                          if (!emailValid) {
+                            // Alerts invalid email
+                            createAlertDialog(
+                                context, "Error", "Invalid email format", 404);
+                          } else {
+                            // If details for all the fields are filled then proceed
+                            // Display the spinner
+                            setState(() {
+                              showSpinner = true;
                             });
 
-                            //clear chat bot messages on login/register
-                            _firestore
-                                .collection("chatbot-messages")
-                                .doc(email)
-                                .collection("chatbot-messages")
-                                .get()
-                                .then((value) => {
-                                      for (var msg in value.docs)
-                                        {msg.reference.delete()}
-                                    });
+                            // register the user in firebase
+                            try {
+                              // created the user and returns a user once created
+                              final newUser =
+                                  await _auth.createUserWithEmailAndPassword(
+                                      email: email, password: password);
 
-                            // displaying alerts according to the progress
-                            if (newUser != null) {
-                              // Adding the new registered user details to the global variable
-                              UserDetails.setUserData(email, username, gender);
+                              // Adding the user details to the cloud fire store
+                              _firestore.collection("users").doc(email).set({
+                                "userEmail": email,
+                                "username": username,
+                                "gender": gender,
+                                'timestamp': Timestamp.now(),
+                              });
 
-                              // Displaying the alert dialog
-                              createAlertDialog(context, "Success",
-                                  "Account Registered Successfully!", 200);
-                            } else {
-                              // Displaying the alert dialog
+                              //clear chat bot messages on login/register
+                              _firestore
+                                  .collection("chatbot-messages")
+                                  .doc(email)
+                                  .collection("chatbot-messages")
+                                  .get()
+                                  .then((value) => {
+                                        for (var msg in value.docs)
+                                          {msg.reference.delete()}
+                                      });
+
+                              // displaying alerts according to the progress
+                              if (newUser != null) {
+                                // Adding the new registered user details to the global variable
+                                UserDetails.setUserData(
+                                    email, username, gender);
+
+                                // Displaying the alert dialog
+                                createAlertDialog(context, "Success",
+                                    "Account Registered Successfully!", 200);
+                              } else {
+                                // Displaying the alert dialog
+                                createAlertDialog(
+                                    context,
+                                    "Error",
+                                    "Something went wrong, try again later!",
+                                    404);
+                              }
+
+                              // stops displaying the spinner once the result comes back
+                              setState(() {
+                                showSpinner = false;
+                              });
+
+                              // clearing the content of the field once submitted
+                              _emailAddressController.clear();
+                              _usernameController.clear();
+                              _passwordTextFieldController.clear();
+                            } catch (e) {
                               createAlertDialog(
-                                  context,
-                                  "Error",
-                                  "Something went wrong, try again later!",
-                                  404);
+                                  context, "Error", e.message, 404);
+                              // stops displaying the spinner once the result comes back
+                              setState(() {
+                                showSpinner = false;
+                              });
                             }
-
-                            // stops displaying the spinner once the result comes back
-                            setState(() {
-                              showSpinner = false;
-                            });
-
-                            // clearing the content of the field once submitted
-                            _emailAddressController.clear();
-                            _usernameController.clear();
-                            _passwordTextFieldController.clear();
-                          } catch (e) {
-                            createAlertDialog(context, "Error", e.message, 404);
-                            // stops displaying the spinner once the result comes back
-                            setState(() {
-                              showSpinner = false;
-                            });
                           }
                         }
-                      }
-                    },
-                    colour: Colors.lightBlueAccent,
-                    title: 'REGISTER ACCOUNT',
+                      },
+                      colour: Colors.lightBlueAccent,
+                      title: 'REGISTER ACCOUNT',
+                    ),
                   ),
                   SizedBox(
                     height: 8.0,

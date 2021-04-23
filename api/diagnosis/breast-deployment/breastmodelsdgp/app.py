@@ -2,14 +2,14 @@ import os
 import numpy as np
 import tensorflow as tf
 from .breastDiagModule import BreastDiagModule
-
+import logging
 breastDiagModule = BreastDiagModule()
 
 scriptpath = os.path.abspath(__file__)
 scriptdir = os.path.dirname(scriptpath)
 BREAST_MODEL_PATH = os.path.join(scriptdir, 'breast_model.h5')
 
-# Calculate Prediction Percentage of result (cancer / normal percentage)
+# Calculate Prediction Percentage of result cancer
 def calculate_prediction_percent_breast(prediction, result):
     return str(np.amax(prediction[0][0] * 100))
 

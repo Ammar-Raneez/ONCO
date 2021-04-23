@@ -9,10 +9,9 @@ final _firestore = FirebaseFirestore.instance;
 final user = FirebaseAuth.instance.currentUser;
 
 var loggedInUserEP = user.email;
-var loggedInUserGoogle =  GoogleUserSignInDetails.googleSignInUserEmail;
+var loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
 
 class AppointmentsFirebaseApi {
-
   static Future<String> createAppointment(Appointment appointment) async {
     final docAppointment = _firestore
         .collection("appointment")
@@ -21,17 +20,21 @@ class AppointmentsFirebaseApi {
         .doc();
 
     appointment.id = docAppointment.id;
-    await docAppointment.set(appointment.toJson());
+    await docAppointment.set(
+      appointment.toJson(),
+    );
     return docAppointment.id;
   }
 
-  static Stream<List<Appointment>> readAppointment() => FirebaseFirestore.instance
-      .collection("appointment")
-      .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
-      .collection("appointments")
-      .snapshots()
-      .transform(Utils.transformer(Appointment.fromJson)
-  );
+  static Stream<List<Appointment>> readAppointment() =>
+      FirebaseFirestore.instance
+          .collection("appointment")
+          .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
+          .collection("appointments")
+          .snapshots()
+          .transform(
+            Utils.transformer(Appointment.fromJson),
+          );
 
   static Future deleteAppointment(Appointment appointment) async {
     final docAppointment = FirebaseFirestore.instance

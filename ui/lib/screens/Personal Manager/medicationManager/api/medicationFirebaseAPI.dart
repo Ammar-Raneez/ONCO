@@ -9,10 +9,9 @@ final _firestore = FirebaseFirestore.instance;
 final user = FirebaseAuth.instance.currentUser;
 
 var loggedInUserEP = user.email;
-var loggedInUserGoogle =  GoogleUserSignInDetails.googleSignInUserEmail;
+var loggedInUserGoogle = GoogleUserSignInDetails.googleSignInUserEmail;
 
 class MedicationFirebaseApi {
-
   static Future<String> createMedication(Medication medication) async {
     final docMedication = _firestore
         .collection("medication")
@@ -20,7 +19,9 @@ class MedicationFirebaseApi {
         .collection("medications")
         .doc();
     medication.id = docMedication.id;
-    await docMedication.set(medication.toJson());
+    await docMedication.set(
+      medication.toJson(),
+    );
     return docMedication.id;
   }
 
@@ -29,9 +30,9 @@ class MedicationFirebaseApi {
       .doc(loggedInUserEP != null ? loggedInUserEP : loggedInUserGoogle)
       .collection("medications")
       .snapshots()
-      .transform(Utils.transformer(Medication.fromJson)
-  );
-
+      .transform(
+        Utils.transformer(Medication.fromJson),
+      );
 
   static Future updateMedication(Medication medication) async {
     final docMedication = FirebaseFirestore.instance
@@ -40,7 +41,9 @@ class MedicationFirebaseApi {
         .collection("medications")
         .doc(medication.id);
 
-    await docMedication.update(medication.toJson());
+    await docMedication.update(
+      medication.toJson(),
+    );
   }
 
   static Future deleteMedication(Medication medication) async {

@@ -10,6 +10,7 @@ import 'package:ui/components/alert_widget.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:ui/services/UserDetails.dart';
+import 'package:ui/services/endPoints.dart';
 
 class LungCancerDiagnosis extends StatefulWidget {
   // static 'id' variable for the naming convention for the routes
@@ -69,6 +70,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         // RESPONSE RESULT FROM THE BACKEND
         // responseBody = response.data[0];
         String resultPrediction = responseBody['predition'];
+        String inputImageURL = responseBody['regular_image_url'];
         String resultImageURL = responseBody['superimposed_image_url'];
         String resultPercentage = responseBody['prediction_percentage'];
 
@@ -78,10 +80,11 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
             .doc(UserDetails.getUserData()["email"])
             .collection("imageDetections")
             .add({
-          "cancerType": "lung",
+          "cancerType": "lung cancer",
           "reportType": "diagnosis",
           "result": resultPrediction,
           "result_string": "$resultPrediction was detected",
+          "inputImageUrl": inputImageURL,
           "imageUrl": resultImageURL,
           "percentage": resultPercentage,
           'timestamp': Timestamp.now(),
@@ -115,7 +118,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
   // Getting the detection response
   getResponse(FormData formData) async {
     Response response = await dio.post(
-      "https://lungmodelsdgp.azurewebsites.net/api/lungmodelsdgp?model=lung",
+      postLungCancerDetection_API,
       data: formData,
     );
     responseBody = response.data[0];
@@ -154,29 +157,30 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
 
     // Styling Progress Dialog
     progressDialog.style(
-        message: '   Scanning\n   Image',
-        padding: EdgeInsets.all(20),
-        borderRadius: 10.0,
-        backgroundColor: Colors.white,
-        progressWidget: LinearProgressIndicator(
-          backgroundColor: Colors.lightBlueAccent,
-        ),
-        elevation: 10.0,
-        insetAnimCurve: Curves.easeInCubic,
-        progress: 0.0,
-        maxProgress: 100.0,
-        progressTextStyle: TextStyle(
-          color: Color(0xFF565D5E),
-          fontSize: 13.0,
-          fontWeight: FontWeight.w400,
-          fontFamily: 'Poppins-SemiBold',
-        ),
-        messageTextStyle: TextStyle(
-          color: Color(0xFF565D5E),
-          fontSize: 19.0,
-          fontWeight: FontWeight.w600,
-          fontFamily: 'Poppins-SemiBold',
-        ));
+      message: '   Scanning\n   Image',
+      padding: EdgeInsets.all(20),
+      borderRadius: 10.0,
+      backgroundColor: Colors.white,
+      progressWidget: LinearProgressIndicator(
+        backgroundColor: Colors.lightBlueAccent,
+      ),
+      elevation: 10.0,
+      insetAnimCurve: Curves.easeInCubic,
+      progress: 0.0,
+      maxProgress: 100.0,
+      progressTextStyle: TextStyle(
+        color: Color(0xFF565D5E),
+        fontSize: 13.0,
+        fontWeight: FontWeight.w400,
+        fontFamily: 'Poppins-SemiBold',
+      ),
+      messageTextStyle: TextStyle(
+        color: Color(0xFF565D5E),
+        fontSize: 19.0,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'Poppins-SemiBold',
+      ),
+    );
 
     return SafeArea(
       child: ModalProgressHUD(
@@ -243,8 +247,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: FadeInImage.assetNetwork(
                                     placeholder: 'images/loading.gif',
-                                    image:
-                                        responseBody["regular_image_url"],
+                                    image: responseBody["regular_image_url"],
                                   ),
                                 ),
                         ),
@@ -318,8 +321,9 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                           decoration: BoxDecoration(
                             color: Colors.blueGrey,
                             borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20.0),
-                                topLeft: Radius.circular(20.0)),
+                              topRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0),
+                            ),
                           ),
                           width: double.infinity,
                           padding: const EdgeInsets.only(
@@ -347,7 +351,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
                               ),
                             ),
                             shape: const StadiumBorder(),
-                            onPressed: ()  {
+                            onPressed: () {
                               _detect(progressDialog);
                             },
                           ),
@@ -364,12 +368,3 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
     );
   }
 }
-
-// IMPORTANT REFERENCE USED TO CONNECT FLUTTER AND FLASK FOR (MOBILE PHONE)
-// https://medium.com/@podcoder/connecting-flutter-application-to-localhost-a1022df63130
-// MAKE SURE THE python script is running on this:
-// app.run(host="0.0.0.0", port=80)
-// 192.168.1.4 <--- this is the ip address in my machine
-// to get your ip address go to cmd and hit ipconfig to get ur LAN ip
-// Remember to connect to the same Wifi else ip will a problem
-// (NOTE: Nazhim 192.168.1.4 this was the ip for ur SLT wifi)

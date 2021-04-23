@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/models/report.dart';
 import 'package:intl/intl.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/viewReport_screen.dart';
 
+// all report cards
 class ReportCard extends StatelessWidget {
   final Report report;
 
@@ -31,8 +31,9 @@ class ReportCard extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: Color(0xFF034D5D)),
+            borderRadius: BorderRadius.circular(15),
+            color: Color(0xFF034D5D),
+          ),
           child: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,16 +46,18 @@ class ReportCard extends StatelessWidget {
                       Text(
                         formattedDate,
                         style: TextStyle(
-                            fontFamily: 'Poppins-SemiBold',
-                            fontSize: 17,
-                            color: Color(0xFFECECEC)),
+                          fontFamily: 'Poppins-SemiBold',
+                          fontSize: 17,
+                          color: Color(0xFFECECEC),
+                        ),
                       ),
                       Text(
                         report.cancerType.toUpperCase(),
                         style: TextStyle(
-                            fontFamily: 'Poppins-SemiBold',
-                            fontSize: 13,
-                            color: Color(0xFFA6D6F7)),
+                          fontFamily: 'Poppins-SemiBold',
+                          fontSize: 13,
+                          color: Color(0xFFA6D6F7),
+                        ),
                       )
                     ],
                   ),
@@ -66,9 +69,10 @@ class ReportCard extends StatelessWidget {
                     child: Text(
                       "View",
                       style: TextStyle(
-                          fontFamily: 'Poppins-SemiBold',
-                          fontSize: 17,
-                          color: Color(0xFFA6D6F7)),
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 17,
+                        color: Color(0xFFA6D6F7),
+                      ),
                     ),
                   ),
                 ),

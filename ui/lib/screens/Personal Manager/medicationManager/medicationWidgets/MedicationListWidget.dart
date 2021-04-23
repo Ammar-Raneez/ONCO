@@ -11,24 +11,24 @@ class MedicationListWidget extends StatelessWidget {
 
     return medications.isEmpty
         ? Center(
-          child: Text(
-            'No Medications.',
-            style: TextStyle(
-              color: Color(0xffaaaaaa),
-              fontFamily: 'Poppins-SemiBold',
-              fontSize: 17,
+            child: Text(
+              'No Medications.',
+              style: TextStyle(
+                color: Color(0xffaaaaaa),
+                fontFamily: 'Poppins-SemiBold',
+                fontSize: 17,
+              ),
             ),
-          ),
-        )
+          )
         : ListView.separated(
-          physics: BouncingScrollPhysics(),
-          separatorBuilder: (context, index) => Container(height: 5),
-          itemCount: medications.length,
-          itemBuilder: (context, index) {
-          final medication = medications[index];
+            physics: BouncingScrollPhysics(),
+            separatorBuilder: (context, index) => Container(height: 5),
+            itemCount: medications.length,
+            itemBuilder: (context, index) {
+              final medication = medications[index];
 
-          return MedicationCard(medication: medication);
-      },
-    );
+              return MedicationCard(medication: medication);
+            },
+          );
   }
 }

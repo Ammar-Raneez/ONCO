@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/components/reports_card.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/diagnosis_reports_screen.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/prognosis_reports_screen.dart';
-import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
 import 'package:ui/screens/current_screen.dart';
-import 'package:ui/screens/settings_screen.dart';
 
+// ignore: must_be_immutable
 class AlertWidget extends StatelessWidget {
   // Variables
   final String title;
@@ -54,7 +52,9 @@ class AlertWidget extends StatelessWidget {
           borderSide: BorderSide(color: Colors.red),
         ),
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFF637477)),
+          borderSide: BorderSide(
+            color: Color(0xFF637477),
+          ),
         ),
       ),
     );
@@ -122,22 +122,29 @@ class AlertWidget extends StatelessWidget {
                 Navigator.pop(context); // pop the alert
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DiagnosisReports()),
+                  MaterialPageRoute(
+                    builder: (context) => DiagnosisReports(),
+                  ),
                 );
-              }
-              else if (_status == 202) {
+              } else if (_status == 203) {
                 // Remove the alert widget and direct to prognosis report list
                 Navigator.pop(context); // pop the alert
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PrognosisReports()),
+                  MaterialPageRoute(
+                    builder: (context) => PrognosisReports(),
+                  ),
                 );
               }
 
               if (_status == 200) {
                 Navigator.pop(context); // pop the alert
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => PrognosisReports()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CurrentScreen(),
+                  ),
+                );
               } else if (confirmChangePrimitiveWrapper != null) {
                 confirmChangePrimitiveWrapper.setConfirmChange(true);
                 Navigator.pop(context);
@@ -209,8 +216,10 @@ class TextPrimitiveWrapper {
 
   TextPrimitiveWrapper(this._text);
 
+  // ignore: unnecessary_getters_setters
   String get text => _text;
 
+  // ignore: unnecessary_getters_setters
   set text(String value) {
     _text = value;
   }

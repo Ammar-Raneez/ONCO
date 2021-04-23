@@ -340,21 +340,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       colour: Colors.lightBlueAccent,
                       title: 'LOG IN',
                     ),
-                    Text(
-                      "Or connect using",
-                      textAlign: TextAlign.center,
-                      style: kTextStyle.copyWith(
-                        fontSize: 12,
-                      ),
-                    ),
-                    RoundedButton(
-                      onPressed: () {
-                        //Implement login functionality using google auth
-                        googleAuthLogin(context);
-                      },
-                      colour: Colors.redAccent,
-                      title: 'GOOGLE',
-                    ),
+//                    Text(
+//                      "Or connect using",
+//                      textAlign: TextAlign.center,
+//                      style: kTextStyle.copyWith(
+//                        fontSize: 12,
+//                      ),
+//                    ),
+//                    RoundedButton(
+//                      onPressed: () {
+//                        //Implement login functionality using google auth
+//                        googleAuthLogin(context);
+//                      },
+//                      colour: Colors.redAccent,
+//                      title: 'GOOGLE',
+//                    ),
                     Padding(
                       padding:
                           EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
@@ -378,11 +378,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.pushNamed(
                                   context, RegistrationScreen.id);
                             },
-                            child: Text("Sign Up",
-                                style: kTextStyle.copyWith(
-                                  color: Color(0xff01CDFA),
-                                  fontSize: 13,
-                                )),
+                            child: Text(
+                              "Sign Up",
+                              style: kTextStyle.copyWith(
+                                color: Color(0xff01CDFA),
+                                fontSize: 13,
+                              ),
+                            ),
                           ),
                         ],
                       ),

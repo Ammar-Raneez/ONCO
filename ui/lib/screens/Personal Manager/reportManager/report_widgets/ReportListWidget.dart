@@ -8,7 +8,9 @@ class ReportListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<ReportProvider>(context);
     final reports = provider.reports;
-    reports.sort((a,b) => b.reportDate.compareTo(a.reportDate));
+    reports.sort(
+      (a, b) => b.reportDate.compareTo(a.reportDate),
+    );
 
     return reports.isEmpty
         ? Center(

@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/components/exercise_card.dart';
@@ -7,12 +8,9 @@ class ExerciseScreen extends StatefulWidget {
   @override
   _ExerciseScreenState createState() => _ExerciseScreenState();
   static var id = "exercisePlanScreen";
-
-
 }
 
 class _ExerciseScreenState extends State<ExerciseScreen> {
-
   final rand = new Random();
   static var exerciseNames = [
     "Bicycle Crunches",
@@ -26,9 +24,18 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     "Squats",
     "Thigh Lunges"
   ];
+
+  static var quotes = [
+    "Strength does not come from the physical capacity. It comes from an indomitable will. – Mahatma Gandhi",
+    "Training gives us an outlet for suppressed energies created by stress and thus tones the spirit just as exercise conditions the body. – Arnold Schwarzenegger",
+    "If you have a body, you are an athlete! – Bill Bowerman",
+    "Someone busier than you is working our right now.” – Unknown",
+    "You can either suffer the pain of discipline or the pain of regret. –Jim Rohn"
+  ];
+
   var selectedNames = [];
   String randomExercise() {
-    if(selectedNames.length == exerciseNames.length) {
+    if (selectedNames.length == exerciseNames.length) {
       selectedNames = [];
     }
     String ex = exerciseNames[rand.nextInt(exerciseNames.length)];
@@ -39,11 +46,18 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     return ex;
   }
 
+  String randomQuote() {
+    return quotes[rand.nextInt(quotes.length)];
+  }
+
   @override
   Widget build(BuildContext context) {
     var name_1 = randomExercise();
     var name_2 = randomExercise();
     var name_3 = randomExercise();
+    var name_4 = randomExercise();
+    var name_5 = randomExercise();
+    var name_6 = randomExercise();
 
     return Scaffold(
       body: SafeArea(
@@ -51,15 +65,13 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
           children: [
             CustomAppBar.arrow(context),
             Column(
-              children : [
-
+              children: [
                 Padding(
                   padding: const EdgeInsets.only(
                     left: 20,
                     bottom: 8,
                   ),
                   child: Align(
-
                     alignment: Alignment.topLeft,
                     child: Text(
                       "Exercise Plan",
@@ -70,21 +82,17 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                     ),
                   ),
                 ),
-
                 Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20,
-                      bottom: 14,
-                      right: 20
-                  ),
+                  padding:
+                      const EdgeInsets.only(left: 20, bottom: 14, right: 20),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
                       "Here you can find exercises specifically tailored for you",
                       style: TextStyle(
-                          fontFamily: 'Poppins-SemiBold',
-                          fontSize: 13.0,
-                          color: Color(0xFF959595),
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 15,
+                        color: Color(0xFF959595),
                       ),
                     ),
                   ),
@@ -92,50 +100,97 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
               ],
             ),
             Expanded(
-                child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      Container(
-                        child: GestureDetector(
-                            onTap: (){
-                            },
-                            child: ExerciseCard(cardTitle: name_1, cardImage: name_1.replaceAll(' ', '').toLowerCase() + ".jpg"),
-                        ),
-                      ),
-                      Container(
-                        child: GestureDetector(
-                          onTap: (){
-                          },
-                          child: ExerciseCard(cardTitle: name_2, cardImage: name_2.replaceAll(' ', '').toLowerCase() + ".jpg"),
-                        ),
-                      ),
-                      Container(
-                        child: GestureDetector(
-                          onTap: (){
-                          },
-                          child: ExerciseCard(cardTitle: name_3, cardImage: name_3.replaceAll(' ', '').toLowerCase() + ".jpg"),
-                        ),
-                      ),
-                    ]
-                ),
-            ),
-            Align(
-              alignment: Alignment.center,
-               child: Padding(
-                 padding: const EdgeInsets.only(bottom: 50.0),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20),
                 child: Container(
-                  child:  RaisedButton(
-                    child: Text("Start Workout."),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(37),
+                      bottomLeft: Radius.circular(37),
                     ),
-                    onPressed: () {
-
-                    },
+                    color: Color(0xFF91C77E),
                   ),
+                  child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        Container(
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: ExerciseCard(
+                                cardTitle: name_1,
+                                cardImage:
+                                    name_1.replaceAll(' ', '').toLowerCase() +
+                                        ".jpg"),
+                          ),
+                        ),
+                        Container(
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: ExerciseCard(
+                                cardTitle: name_2,
+                                cardImage:
+                                    name_2.replaceAll(' ', '').toLowerCase() +
+                                        ".jpg"),
+                          ),
+                        ),
+                        Container(
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: ExerciseCard(
+                                cardTitle: name_3,
+                                cardImage:
+                                    name_3.replaceAll(' ', '').toLowerCase() +
+                                        ".jpg"),
+                          ),
+                        ),
+                        Container(
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: ExerciseCard(
+                                cardTitle: name_4,
+                                cardImage:
+                                    name_4.replaceAll(' ', '').toLowerCase() +
+                                        ".jpg"),
+                          ),
+                        ),
+                        Container(
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: ExerciseCard(
+                                cardTitle: name_5,
+                                cardImage:
+                                    name_5.replaceAll(' ', '').toLowerCase() +
+                                        ".jpg"),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: Container(
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: ExerciseCard(
+                                  cardTitle: name_6,
+                                  cardImage:
+                                      name_6.replaceAll(' ', '').toLowerCase() +
+                                          ".jpg"),
+                            ),
+                          ),
+                        ),
+                      ]),
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  bottom: 30.0, left: 20, right: 20, top: 20.0),
+              child: Container(
+                child: Text(
+                  randomQuote(),
+                  style:
+                      TextStyle(fontSize: 13.0, fontFamily: 'Poppins-SemiBold'),
+                ),
+              ),
+            )
           ],
         ),
       ),

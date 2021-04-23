@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-//TODO - need to add functionality for passing colors into card, add font and finishing touches.
-
 // This is the Cancer Card generator that accepts parameters to build a custom card for each cancer
 
 class CancerCard extends StatelessWidget {
@@ -11,7 +9,11 @@ class CancerCard extends StatelessWidget {
   final String cardColor2;
   final String textColor;
 
-  CancerCard({@required this.cardTitle, @required this.cardColor,@required this.cardColor2, @required this.textColor}); //constructor to init values
+  CancerCard(
+      {@required this.cardTitle,
+      @required this.cardColor,
+      @required this.cardColor2,
+      @required this.textColor}); //constructor to init values
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +22,21 @@ class CancerCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         gradient: LinearGradient(
           colors: [
-            Color(int.parse(cardColor)),
-            Color(int.parse(cardColor2)),
+            Color(
+              int.parse(cardColor),
+            ),
+            Color(
+              int.parse(cardColor2),
+            ),
           ],
-          begin: Alignment(1.2,1),
-          end: Alignment(0.8,-2),
+          begin: Alignment(1.2, 1),
+          end: Alignment(0.8, -2),
         ),
         boxShadow: [
           BoxShadow(
-            color:  Color(int.parse(cardColor)).withOpacity(0.5),
+            color: Color(
+              int.parse(cardColor),
+            ).withOpacity(0.5),
             spreadRadius: 3,
             blurRadius: 15,
             offset: Offset(7, 9), // changes position of shadow
