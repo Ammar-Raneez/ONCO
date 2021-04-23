@@ -6,8 +6,6 @@ import 'package:ui/screens/diagnosis/skinDiagnosis_screen.dart';
 import 'package:ui/screens/prognosis/prognosis_screen.dart';
 import 'package:ui/screens/selectService_screen.dart';
 
-//TODO - Add nav to bottom also add passing colors into card. Might need to adjust padding after(Appbar done only for nav)
-
 /* This is the Cancer Page that displays an appbar with a gradient and a logo, three cards that allow the user to click on a
  certain cancer and be redirected to that page and the nav at the bottom. */
 
@@ -56,9 +54,10 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => SelectServiceScreen(
-                                cancerType: 'Skin Cancer',
-                                diagnosisRoute: SkinCancerDiagnosis(),
-                                prognosisRoute: CancerPrognosis("Skin Cancer")),
+                              cancerType: 'Skin Cancer',
+                              diagnosisRoute: SkinCancerDiagnosis(),
+                              prognosisRoute: CancerPrognosis("Skin Cancer"),
+                            ),
                           ),
                         );
                       },
@@ -78,9 +77,10 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => SelectServiceScreen(
-                                cancerType: 'Lung Cancer',
-                                diagnosisRoute: LungCancerDiagnosis(),
-                                prognosisRoute: CancerPrognosis("Lung Cancer")),
+                              cancerType: 'Lung Cancer',
+                              diagnosisRoute: LungCancerDiagnosis(),
+                              prognosisRoute: CancerPrognosis("Lung Cancer"),
+                            ),
                           ),
                         );
                       },
@@ -100,10 +100,10 @@ class _MainCancerTypesScreenState extends State<MainCancerTypesScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => SelectServiceScreen(
-                                cancerType: 'Breast Cancer',
-                                diagnosisRoute: BreastCancerDiagnosis(),
-                                prognosisRoute:
-                                    CancerPrognosis("Breast Cancer")),
+                              cancerType: 'Breast Cancer',
+                              diagnosisRoute: BreastCancerDiagnosis(),
+                              prognosisRoute: CancerPrognosis("Breast Cancer"),
+                            ),
                           ),
                         );
                       },
