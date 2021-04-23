@@ -78,7 +78,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         String resultPrediction = responseBody['predition'];
         String inputImageURL = responseBody['regular_image_url'];
         String resultImageURL = responseBody['superimposed_image_url'];
-        String resultPercentage = responseBody['prediction_percentage'];
+        String resultPercentage = (100 - double.parse(responseBody['prediction_percentage']).floor()).toString();
 
         // Adding the response data into the database for report creation purpose
         _firestore
@@ -114,7 +114,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
         }
       } catch (e) {
         // Displaying alert to the user
-        createAlertDialog(context, "Error", e._message, 404);
+        createAlertDialog(context, "Error", e.toString(), 404);
 
         progressDialog.hide();
       }
