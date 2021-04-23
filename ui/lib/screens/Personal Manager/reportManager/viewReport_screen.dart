@@ -228,7 +228,7 @@ Widget percentageContainer(String percentages) {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              percentages,
+              double.parse(percentages).floor().toString(),
               style: TextStyle(
                   fontFamily: 'Poppins-SemiBold',
                   fontSize: 14,
