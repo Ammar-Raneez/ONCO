@@ -340,21 +340,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       colour: Colors.lightBlueAccent,
                       title: 'LOG IN',
                     ),
-                    Text(
-                      "Or connect using",
-                      textAlign: TextAlign.center,
-                      style: kTextStyle.copyWith(
-                        fontSize: 12,
-                      ),
-                    ),
-                    RoundedButton(
-                      onPressed: () {
-                        //Implement login functionality using google auth
-                        googleAuthLogin(context);
-                      },
-                      colour: Colors.redAccent,
-                      title: 'GOOGLE',
-                    ),
+//                    Text(
+//                      "Or connect using",
+//                      textAlign: TextAlign.center,
+//                      style: kTextStyle.copyWith(
+//                        fontSize: 12,
+//                      ),
+//                    ),
+//                    RoundedButton(
+//                      onPressed: () {
+//                        //Implement login functionality using google auth
+//                        googleAuthLogin(context);
+//                      },
+//                      colour: Colors.redAccent,
+//                      title: 'GOOGLE',
+//                    ),
                     Padding(
                       padding:
                           EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
