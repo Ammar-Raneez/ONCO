@@ -70,6 +70,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
         // RESPONSE RESULT FROM THE BACKEND
         // responseBody = response.data[0];
         String resultPrediction = responseBody['predition'];
+        String inputImageURL = responseBody['regular_image_url'];
         String resultImageURL = responseBody['superimposed_image_url'];
         String resultPercentage = responseBody['prediction_percentage'];
 
@@ -83,6 +84,7 @@ class LungCancerDiagnosisState extends State<LungCancerDiagnosis> {
           "reportType": "diagnosis",
           "result": resultPrediction,
           "result_string": "$resultPrediction was detected",
+          "inputImageUrl": inputImageURL,
           "imageUrl": resultImageURL,
           "percentage": resultPercentage,
           'timestamp': Timestamp.now(),
