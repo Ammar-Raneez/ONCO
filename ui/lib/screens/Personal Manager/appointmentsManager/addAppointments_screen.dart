@@ -138,7 +138,7 @@ class _AddAppointmentsState extends State<AddAppointments> {
                                         bottom: 10,
                                         right: 10),
                                     child: TextField(
-                                      maxLength: 15,
+                                      maxLength: 30,
                                       onChanged: (value) async {
                                         //Check if the field is not empty
                                         if (value != "") {
