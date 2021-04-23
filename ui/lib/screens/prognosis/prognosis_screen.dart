@@ -314,17 +314,25 @@ class CancerPrognosisState extends State<CancerPrognosis> {
           height: size.height,
           child: Column(
             children: <Widget>[
-              Container(
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(left: 20),
-                child: Text(
-                  cancerType,
-                  style: TextStyle(
-                    fontFamily: 'Poppins-SemiBold',
-                    fontSize: 27,
-                    color: Color(0xFF93ACB1),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    alignment: Alignment.topLeft,
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text(
+                      cancerType,
+                      style: TextStyle(
+                        fontFamily: 'Poppins-SemiBold',
+                        fontSize: 27,
+                        color: Color(0xFF93ACB1),
+                      ),
+                    ),
                   ),
-                ),
+                  IconButton(
+                    icon: Icon(Icons.help),
+                  )
+                ],
               ),
               Container(
                 alignment: Alignment.topLeft,
