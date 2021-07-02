@@ -93,7 +93,7 @@ class _DiagnosisReportsState extends State<DiagnosisReports> {
                     ),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   GestureDetector(
                     onTap: () {

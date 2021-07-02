@@ -95,7 +95,7 @@ class _ViewReportState extends State<ViewReport> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    _cancerType.toUpperCase() + " " + _reportType.toUpperCase(),
+                    _cancerType.toUpperCase() + "\n" + _reportType.toUpperCase(),
                     style: TextStyle(
                       fontFamily: 'Poppins-SemiBold',
                       fontSize: 19,
@@ -215,7 +215,7 @@ Widget percentageContainer(String percentages) {
         Padding(
           padding: const EdgeInsets.only(
             left: 20,
-            top: 15,
+            top: 10,
           ),
           child: Align(
             alignment: Alignment.centerLeft,
@@ -275,7 +275,7 @@ Widget cancerDetails(
         Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30, right: 20),
+              padding: const EdgeInsets.only(top: 90, right: 23),
               child: Align(
                 alignment: Alignment.topRight,
                 child: CircularPercentIndicator(
