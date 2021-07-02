@@ -104,7 +104,7 @@ class _PrognosisReportsState extends State<PrognosisReports> {
                     ),
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   GestureDetector(
                     onTap: () {
