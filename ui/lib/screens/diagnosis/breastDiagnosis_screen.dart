@@ -61,14 +61,14 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
       try {
         // GETTING THE IMAGE NAME
         String fileName = imageFile.path.split('/').last;
-        print(fileName);
+//        print(fileName);
 
         // CREATING THE FORM DATA TO BE SENT TO THE BACKEND
         FormData formData = new FormData.fromMap({
           "file":
               await MultipartFile.fromFile(imageFile.path, filename: fileName),
         });
-        print(formData);
+//        print(formData);
 
         // CREATING THE RESPONSE OBJECT TO GET THE RESULT FROM THE SERVER
         await getResponse(formData);
@@ -130,7 +130,7 @@ class BreastCancerDiagnosisState extends State<BreastCancerDiagnosis> {
       data: formData,
     );
     responseBody = response.data[0];
-    print(responseBody);
+//    print(responseBody);
   }
 
   // OPEN CAMERA METHOD TO CAPTURE IMAGE FOR DETECTION PURPOSE (ASYNC TASK)

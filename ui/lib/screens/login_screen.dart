@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
   googleAuthLogin(BuildContext context) async {
     try {
       await _googleSignIn.signIn().catchError((e) => (print(e.message)));
-      print(_googleSignIn.currentUser);
+//      print(_googleSignIn.currentUser);
 
       // Setting the user email to the global email variable to be used for
       // fire store use cases
@@ -128,11 +128,11 @@ class _LoginScreenState extends State<LoginScreen> {
         // setting the email for google sign in users
         GoogleUserSignInDetails.googleSignInUserEmail =
             _googleSignIn.currentUser.email;
-        print("User is not null");
+//        print("User is not null");
 
         // Now we sign out of this account once we get the email address
         _googleSignIn.signOut();
-        print("Google Signing out...");
+//        print("Google Signing out...");
 
         bool emailDoesExist = false;
 
@@ -181,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       } else {
         GoogleUserSignInDetails.googleSignInUserEmail = null;
-        print("User is null");
+//        print("User is null");
       }
     } catch (e) {
       createAlertDialog(
@@ -373,7 +373,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              print("U tapped the sign up button");
+//                              print("U tapped the sign up button");
                               // GO TO THE SIGN IN SCREEN
                               Navigator.pushNamed(
                                   context, RegistrationScreen.id);

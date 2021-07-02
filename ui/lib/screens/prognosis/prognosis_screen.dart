@@ -456,7 +456,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                         if (UserDetails.getUserData()['gender'] == "female")
                           genderIndex = 1;
 
-                        print(genderIndex);
+//                        print(genderIndex);
 
                         if (_cancerType == "Lung Cancer") {
                           prognosisBody = {
@@ -622,7 +622,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             questionCount++;
                           }
 
-                          print(skinCancerUserAnswersIndices);
+//                          print(skinCancerUserAnswersIndices);
 
                           if (UserDetails.getUserData()['gender'] == "male")
                             prognosisBody = {
@@ -651,7 +651,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
                             };
                         }
 
-                        print(prognosisBody);
+//                        print(prognosisBody);
 
                         // Progress Dialog that will run till API Request is received
                         final ProgressDialog progressDialog = ProgressDialog(
@@ -694,7 +694,7 @@ class CancerPrognosisState extends State<CancerPrognosis> {
 
                         progressDialog.hide();
 
-                        print(reply);
+//                        print(reply);
 
                         // checking if the response is not null and displaying the result
                         if (reply != null) {

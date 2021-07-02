@@ -53,7 +53,7 @@ class SkinCancerDiagnosisState extends State<SkinCancerDiagnosis> {
       try {
         // GETTING THE IMAGE NAME
         String fileName = imageFile.path.split('/').last;
-        print(fileName);
+//        print(fileName);
 
         // CREATING THE FORM DATA TO BE SENT TO THE BACKEND
         FormData formData = new FormData.fromMap({

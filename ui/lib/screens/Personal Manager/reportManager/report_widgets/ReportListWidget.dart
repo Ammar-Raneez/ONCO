@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:ui/components/reports_card.dart';
-import 'package:ui/screens/Personal%20Manager/reportManager/api/ReportProvider.dart';
 
 class ReportListWidget extends StatelessWidget {
+  final reports;
+
+  ReportListWidget({this.reports});
+
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ReportProvider>(context);
-    final reports = provider.reports;
-    reports.sort(
-      (a, b) => b.reportDate.compareTo(a.reportDate),
-    );
-
     return reports.isEmpty
         ? Center(
             child: Text(
@@ -29,8 +25,17 @@ class ReportListWidget extends StatelessWidget {
             itemCount: reports.length,
             itemBuilder: (context, index) {
               final report = reports[index];
-              print(report.reportDate);
-              return ReportCard(report: report);
+
+              return ReportCard(
+                  cancerType: report["cancerType"],
+                  inputImageUrl: report["inputImageUrl"],
+                  imageUrl: report["imageUrl"],
+                  result: report["result"],
+                  resultString: report["result_string"],
+                  percentage: report["percentage"],
+                  reportType: report["reportType"],
+                  reportDate: report["timestamp"],
+                  prognosisInputs: report["prognosisInputs"]);
             },
           );
   }

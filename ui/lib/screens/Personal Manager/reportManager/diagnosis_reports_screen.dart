@@ -1,11 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:ui/components/custom_app_bar.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/report_widgets/ReportListWidget.dart';
 import 'package:ui/screens/current_screen.dart';
-import 'api/ReportFirebaseApi.dart';
-import 'api/ReportProvider.dart';
-import 'models/report.dart';
+
+final _firestore = FirebaseFirestore.instance;
 
 class DiagnosisReports extends StatefulWidget {
   @override
@@ -13,6 +13,34 @@ class DiagnosisReports extends StatefulWidget {
 }
 
 class _DiagnosisReportsState extends State<DiagnosisReports> {
+  User user = FirebaseAuth.instance.currentUser;
+
+  var diagnosisReports = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getDiagnosisData();
+  }
+
+  getDiagnosisData() async {
+    var tempDiagReport = [];
+    await _firestore
+        .collection("users")
+        .doc(user.email)
+        .collection("imageDetections")
+        .get()
+        .then((value) => {
+              value.docs.forEach((element) {
+                tempDiagReport.add(element.data());
+              })
+            });
+
+    setState(() {
+      diagnosisReports = tempDiagReport;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -65,31 +93,11 @@ class _DiagnosisReportsState extends State<DiagnosisReports> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: Container(
-                        child: StreamBuilder<List<Report>>(
-                            stream: ReportFirebaseApi.readDiagnosisReports(),
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                default:
-                                  if (snapshot.hasError) {
-                                    return buildText(
-                                        'Something went wrong, Try later');
-                                  } else {
-                                    final reports = snapshot.data;
-
-                                    final provider =
-                                        Provider.of<ReportProvider>(context);
-                                    provider.setReports(reports);
-
-                                    return ReportListWidget();
-                                  }
-                              }
-                            }),
-                      ),
+                      child: diagnosisReports.length != 0
+                          ? ReportListWidget(
+                              reports: diagnosisReports,
+                            )
+                          : Text("rendering..."),
                     ),
                   ),
                   SizedBox(

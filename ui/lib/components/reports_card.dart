@@ -1,19 +1,36 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ui/screens/Personal%20Manager/reportManager/models/report.dart';
 import 'package:intl/intl.dart';
 import 'package:ui/screens/Personal%20Manager/reportManager/viewReport_screen.dart';
 
 // all report cards
 class ReportCard extends StatelessWidget {
-  final Report report;
+  final String cancerType;
+  final String inputImageUrl;
+  final String imageUrl;
+  final String result;
+  final String resultString;
+  final String percentage;
+  final String reportType;
+  final Timestamp reportDate;
+  final Map prognosisInputs;
 
-  ReportCard({@required this.report});
+  ReportCard(
+      {this.cancerType,
+      this.inputImageUrl,
+      this.imageUrl,
+      this.result,
+      this.resultString,
+      this.percentage,
+      this.reportType,
+      this.reportDate,
+      this.prognosisInputs});
 
   @override
   Widget build(BuildContext context) {
     var timestamp;
     var formattedDate = "";
-    timestamp = report.reportDate;
+    timestamp = reportDate;
     var date =
         DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
     formattedDate = DateFormat.yMMMd().format(date); // Apr 8, 2020
@@ -22,8 +39,18 @@ class ReportCard extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              ViewReport(context, report), // Navigates to Task Page
+          builder: (context) => ViewReport(
+            context,
+              this.cancerType,
+              this.inputImageUrl,
+              this.imageUrl,
+              this.result,
+              this.resultString,
+              this.percentage,
+              this.reportType,
+              this.reportDate,
+              this.prognosisInputs
+          ), // Navigates to Task Page
         ),
       ),
       child: Padding(
@@ -52,7 +79,7 @@ class ReportCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        report.cancerType.toUpperCase(),
+                        cancerType.toUpperCase(),
                         style: TextStyle(
                           fontFamily: 'Poppins-SemiBold',
                           fontSize: 13,

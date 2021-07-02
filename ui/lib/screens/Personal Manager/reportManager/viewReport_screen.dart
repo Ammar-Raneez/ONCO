@@ -2,30 +2,40 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ui/components/custom_app_bar.dart';
-import 'package:ui/screens/Personal%20Manager/reportManager/models/report.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ViewReport extends StatefulWidget {
-  final Report report;
-  ViewReport(context, this.report);
+  String cancerType;
+  String inputImageUrl;
+  String imageUrl;
+  String result;
+  String resultString;
+  String percentage;
+  String reportType;
+  var reportDate;
+  Map prognosisInputs;
+
+  ViewReport(
+      context,
+      this.cancerType,
+      this.inputImageUrl,
+      this.imageUrl,
+      this.result,
+      this.resultString,
+      this.percentage,
+      this.reportType,
+      this.reportDate,
+      this.prognosisInputs);
 
   @override
   _ViewReportState createState() => _ViewReportState();
 }
 
 class _ViewReportState extends State<ViewReport> {
-  String _reportType;
-  String _cancerType;
-  String _reportPercentage;
-  String _reportResult;
-  String imageInputURL;
-  String imageURL;
-
-  var _reportDate;
-  var timestamp;
-  var formattedDate = "";
+  String formattedDate;
   Color indicatorColor;
   Map prognosisVariables;
+  var _reportResult;
 
   List<Widget> itemsData = [];
   ScrollController controller = ScrollController();
@@ -33,30 +43,27 @@ class _ViewReportState extends State<ViewReport> {
   @override
   void initState() {
     super.initState();
-    _reportType = widget.report.reportType;
-    _reportDate = widget.report.reportDate;
     var date =
-        DateTime.fromMillisecondsSinceEpoch(_reportDate.millisecondsSinceEpoch);
+        DateTime.fromMillisecondsSinceEpoch(widget.reportDate.millisecondsSinceEpoch);
     formattedDate = DateFormat.yMMMd().format(date);
-    _reportPercentage = widget.report.percentage;
-    imageInputURL = widget.report.inputImageUrl;
-    imageURL = widget.report.imageUrl;
-    _cancerType = widget.report.cancerType;
-    if (widget.report.result == "CANCER") {
-      _reportResult = widget.report.resultString;
-    } else {
-      _reportResult = widget.report.result;
-    }
-    prognosisVariables = widget.report.prognosisInputs;
 
-    if (_reportType == "prognosis") {
+    print(widget.cancerType);
+
+    if (widget.result == "CANCER") {
+      _reportResult = widget.resultString;
+    } else {
+      _reportResult = widget.result;
+    }
+    prognosisVariables = widget.prognosisInputs;
+
+    if (widget.reportType == "prognosis") {
       getPostsData(prognosisVariables);
     } else {
-      if (double.parse(_reportPercentage) > 70.0) {
+      if (double.parse(widget.percentage) > 70.0) {
         indicatorColor = Color(0XFFeb4034);
-      } else if (double.parse(_reportPercentage) > 40.0) {
+      } else if (double.parse(widget.percentage) > 40.0) {
         indicatorColor = Color(0XFFf5cd3d);
-      } else if (double.parse(_reportPercentage) < 40.0) {
+      } else if (double.parse(widget.percentage) < 40.0) {
         indicatorColor = Color(0XFF7bd130);
       }
     }
@@ -95,7 +102,7 @@ class _ViewReportState extends State<ViewReport> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    _cancerType.toUpperCase() + " " + _reportType.toUpperCase(),
+                    widget.cancerType.toUpperCase() + " " + widget.reportType.toUpperCase(),
                     style: TextStyle(
                       fontFamily: 'Poppins-SemiBold',
                       fontSize: 19,
@@ -191,12 +198,12 @@ class _ViewReportState extends State<ViewReport> {
             child: cancerDetails(
                 context,
                 formattedDate,
-                _reportType,
-                _cancerType,
+                widget.reportType,
+                widget.cancerType,
                 _reportResult,
-                _reportPercentage,
-                imageInputURL,
-                imageURL,
+                widget.percentage,
+                widget.inputImageUrl,
+                widget.imageUrl,
                 prognosisVariables,
                 controller,
                 itemsData,
@@ -466,7 +473,6 @@ Widget cancerDetails(
       ],
     );
   } else {
-    print(percentage);
     // PROGNOSIS
     return ListView.builder(
         controller: controller,
