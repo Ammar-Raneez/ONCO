@@ -1,15 +1,9 @@
 # This is a local tester for the diagnosis applications
 
 # Import Libraries
-import glob
-import os
-import re
-import sys
 import uuid
-
-import cv2
 import tensorflow as tf
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask import Flask, jsonify, request
 from pyrebase import pyrebase
 
 from breastDiagModule import (calculatePredictionPercentBreast,

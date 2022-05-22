@@ -1,9 +1,4 @@
-import glob
-import os
-import re
-import sys
 import uuid
-
 import cv2
 import matplotlib.cm as cm
 import numpy as np
