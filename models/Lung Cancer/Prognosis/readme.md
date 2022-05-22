@@ -1,1 +1,0 @@
-# Lung Cancer Prognosis

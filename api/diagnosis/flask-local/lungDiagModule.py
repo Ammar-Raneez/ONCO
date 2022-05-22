@@ -1,7 +1,3 @@
-import glob
-import os
-import re
-import sys
 import uuid
 
 import cv2
