@@ -26,7 +26,7 @@ Upon differentiating between the obtained evaluations it was determinded that th
 ![](https://user-images.githubusercontent.com/54928498/169689380-51450eb9-3519-430e-a34f-5c2b2b27a543.png)
 ![](https://user-images.githubusercontent.com/54928498/169689397-b8884c8a-fe2c-4f9b-94ce-2e01954d7f3b.png)
 
-The confusion matrix is used as an evaluation metric, since solely accuracy is not reliable. 
+The "Precision" & "Recall" metrics obtained by the confusion matrix along with the accuracy are used as evaluation metrics, since solely accuracy is not reliable. ([Read more on these metrics](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy/))
 
 To finish off the model implementation, the trained model is saved, so that it can be used in backend implementations, without the need to perform the training process again.
 ![](https://user-images.githubusercontent.com/54928498/169689422-2d03586a-b071-454d-9d7c-af079c8e2388.png)
