@@ -28,7 +28,7 @@ We are using [git](https://git-scm.com/doc) as version control and [GitHub](http
 
 * A dev branch is created from master
 * Feature branches are created from dev
-* When a feature is complete it is merged into the deev branch
+* When a feature is complete it is merged into the dev branch
 * If an issue in master is detected a hotfix branch is created from master
 * Once the hotfix is complete it is merged to both dev and master
 
