@@ -20,11 +20,11 @@ To get started, have a look at the [Learn.md](./Learn.md) file, which describes 
 Flutter and Python are required to run this project and test it out.
 
 # Contributors
-[Ammar Raneez](https://github.com/Ammar-Raneez) - Owner & Maintainer
-[Nazhim Kalam](https://github.com/nazhimkalam) - Contributor
-[Luqman Rumaiz](https://github.com/luqmanrumaiz) - Contributor
-[Hammadh Arquil](https://github.com/hammvdh) - Contributor
-[Maneesha Walisundara](https://github.com/maneesha14w) - Contributor
-[Sabiq Sabry](https://github.com/sabiqsabry48) - Contributor
+* [Ammar Raneez](https://github.com/Ammar-Raneez) - Owner & Maintainer
+* [Nazhim Kalam](https://github.com/nazhimkalam) - Contributor
+* [Luqman Rumaiz](https://github.com/luqmanrumaiz) - Contributor
+* Hammadh Arquil](https://github.com/hammvdh) - Contributor
+* [Maneesha Walisundara](https://github.com/maneesha14w) - Contributor
+* [Sabiq Sabry](https://github.com/sabiqsabry48) - Contributor
 
 Anyone is free to contribute 😁, please feel free to request a review from me and ensure that you follow the [Contributing Guideleines](./CONTRIBUTING.md) and adhere to the [COC](./CODE_OF_CONDUCT.md)
