@@ -23,7 +23,7 @@ Flutter and Python are required to run this project and test it out.
 * [Ammar Raneez](https://github.com/Ammar-Raneez) - Owner & Maintainer
 * [Nazhim Kalam](https://github.com/nazhimkalam) - Contributor
 * [Luqman Rumaiz](https://github.com/luqmanrumaiz) - Contributor
-* Hammadh Arquil](https://github.com/hammvdh) - Contributor
+* [Hammadh Arquil](https://github.com/hammvdh) - Contributor
 * [Maneesha Walisundara](https://github.com/maneesha14w) - Contributor
 * [Sabiq Sabry](https://github.com/sabiqsabry48) - Contributor
 
